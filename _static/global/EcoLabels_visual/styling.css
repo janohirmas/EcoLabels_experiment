@@ -1,5 +1,13 @@
+/* CSS STYLESHEET FOR ECOLABELS EXPERIMENT */
+ 
+/* GLOBAL STYLING */
+
     * {
         box-sizing: border-box
+    }
+
+    body {
+        height: 100vh;
     }
 
     h1 {
@@ -7,15 +15,21 @@
     }
 
     h2 {
-        text-align: center;
+        font-size: 1.5em;
+        text-align: left;
+        padding-top: 30px;
+        padding-left: 100px;
     }
 
-    /* INTRODUCTION */
+/* INTRODUCTION */
 
+    /* Intro text */
+    .intro_text {
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
 
-    /* INSTRUCTIONS */
-
-
+/* INSTRUCTIONS */
 
     /* Slideshow container */
     .slideshow-container {
@@ -23,8 +37,7 @@
         height: 300px;
         border: 1px solid black;
         position: relative;
-        margin: auto; 
-              
+        margin: auto;              
     }
 
     /* Hide the images by default */
@@ -33,7 +46,6 @@
     }
 
     /* Instruction text */
-
     .instruction {
         width: 75%;
         height: 100%;
@@ -41,7 +53,9 @@
         margin-right: 100px;
         margin-top: 50px;
     }
-
+    .questions_inst {
+        list-style: none;
+    }
 
     /* Next & previous buttons */
     .prev,
@@ -52,12 +66,13 @@
         width: auto;
         margin-top: -22px;
         padding: 16px;
-        color: white;
+        color: blue;
         font-weight: bold;
         font-size: 18px;
         transition: 0.6s ease;
         border-radius: 0 3px 3px 0;
         user-select: none;
+        text-decoration: none;
     }
 
     /* Position the "next button" to the right */
@@ -69,7 +84,7 @@
     /* On hover, add a black background color with a little bit see-through */
     .prev:hover,
     .next:hover {
-        background-color: rgba(0, 0, 0, 0.8);
+        background-color: #bbb;
     }
 
     /* Caption text */
@@ -93,6 +108,10 @@
     }
 
     /* The dots/bullets/indicators */
+    .dot_row {
+        text-align: center;
+    }
+
     .dot {
         cursor: pointer;
         height: 15px;
@@ -107,32 +126,4 @@
     .active,
     .dot:hover {
         background-color: #717171;
-    }
-
-    /* Fading animation */
-    .fade {
-        -webkit-animation-name: fade;
-        -webkit-animation-duration: 1.5s;
-        animation-name: fade;
-        animation-duration: 1.5s;
-    }
-
-    @-webkit-keyframes fade {
-        from {
-            opacity: .4
-        }
-
-        to {
-            opacity: 1
-        }
-    }
-
-    @keyframes fade {
-        from {
-            opacity: .4
-        }
-
-        to {
-            opacity: 1
-        }
     }
