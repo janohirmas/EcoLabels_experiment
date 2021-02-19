@@ -1,0 +1,23 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+
+Trust Game: Your choice
+
+{% endblock %}
+
+{% block content %}
+
+<p>
+    <p>
+        You are Participant B. Participant A sent you {{group.sent_amount}}
+        and you received {{tripled_amount}}.
+    </p>
+
+</p>
+
+{% formfields %}
+{% next_button %}
+
+{% endblock %}
