@@ -8,7 +8,7 @@ Your app description
 
 class Constants(BaseConstants):
     name_in_url = 'EcoLabels'
-    players_per_group = 1
+    players_per_group = None
     num_rounds = 1
     
 
@@ -36,3 +36,4 @@ class Results(Page):
 
 
 page_sequence = [Introduction, Instructions, Results]
+

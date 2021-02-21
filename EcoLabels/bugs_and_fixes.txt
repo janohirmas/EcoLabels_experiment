@@ -1,0 +1,18 @@
+// THIS TEXT FILE IS FOR KEEPING RECORD OF CURRENT BUGS AND PENDING IMPROVEMENTS  //
+-----------------------------------------------------------------------------
+
+** IMPROVEMENTS **
+
+> Get rid off debug mode on oTree
+
+> Slides
+    - Change sizing to em/rem/vh
+    - make prettier (fonts, colors etc.)
+
+> Questions Slide:
+    - make the layout prettier 
+    - make questions functional + add prompts
+
+------------------------------------------------------------------------------
+
+** BUGS **

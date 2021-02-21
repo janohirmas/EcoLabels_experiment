@@ -1,7 +1,7 @@
 <!-- INSTRUCTION PAGE -->
 
 <!-- LINK TO STYLESHEET-->
-<link rel="stylesheet" href="{% static 'global/EcoLabels_visual/styling.css' %}">
+<link rel="stylesheet" href="{% static 'global/EcoLabels_visual/styling2.css' %}">
 
 <!-- OTREE TEMPLATES -->
 {% load otree static %}
@@ -16,7 +16,7 @@
 
         <!-- Slide 1-->
         <div class="mySlides">
-            <div class="instruction">
+            <div class="instruction_1">
                 <p> 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Vivamus hendrerit elementum tortor a semper.
                     Cras vitae bibendum dolor. Vivamus sed est placerat,
@@ -28,11 +28,9 @@
                     lorem arcu condimentum neque, sit amet aliquet sapien justo at erat.
                     Ut a enim feugiat arcu vehicula tristique. Aliquam elementum pulvinar ipsum, at
                     consectetur arcu. Praesent consectetur tellus risus,
-                    non auctor quam ullamcorper eget. In sit amet ullamcorper felis.
-                    Donec egestas, felis sit amet consequat condimentum,
-                    lorem arcu condimentum neque, sit amet aliquet sapien justo at erat.
-                    Ut a enim feugiat arcu vehicula tristique.</p>
+                    non auctor quam ullamcorper eget.</p>
             </div>
+            <img class="img_instructions" src="{% static 'global/EcoLabels_visual/testpic.JPG' %}">
         </div>
 
         <!-- Slide 2-->
@@ -70,27 +68,70 @@
         <!-- Slide 4 -->
         <div class="mySlides">
             <h2> Please answer the following questions: </h2>
-            <div class="instruction">
-                <ul class="questions_inst">
+            <div class="questions_inst">
+                <ul>
                     <li>
-                        <p><strong> Question 1: </strong> What is your favorite color? </p>
+                        <p>
+                            <strong> Question 1: </strong> What is your favorite color?
+                            <br>
+                        <form id="answer_Q1">
+                            <textarea name="answer" rows="1" cols="30"></textarea>
+                            <input type="submit" value="Submit">
+                        </form>
+                        </p>
                     </li>
                     <li>
-                        <p><strong> Question 2: </strong> Did you find these instructions useful? </p>
+                        <p>
+                            <strong> Question 2: </strong> Did you find these instructions useful?
+                        <form id="answer_Q2">
+                            <select name="Q2" id="Q2">
+                                <option> --Please Select-- </option>
+                                <option> Yes </option>
+                                <option> No </option>
+                                <option> I don't know </option>
+                            </select>
+                            <input type="submit" value="Submit">
+                        </form>
+                        </p>
                     </li>
                     <li>
-                        <p><strong> Question 3: </strong> How well did you understand the instructions?</p>
+                        <p>
+                            <strong> Question 3: </strong> How well did you understand the instructions?
+                        <ul class="likert">
+                            <li class="likert"> Not at all 
+                                <input id="radQ3_answerStart" type="radio" name="Q3_answer" value="1" />
+                            <li class="likert">
+                                <input type="radio" name="Q3_answer" value="2" />
+                            <li class="likert">
+                                <input type="radio" name="Q3_answer" value="3" />
+                            <li class="likert">
+                                <input type="radio" name="Q3_answer" value="4" />
+                            <li class="likert">
+                                <input id="radQ3_answerEnd" type="radio" name="Q3_answer" value="5" /> All clear
+                        </ul>
+                        </p>
                     </li>
+                    <br><br>
                     <li>
-                        <p><strong> Question 4: </strong> What is your age? </p>
+                        <p>
+                            <strong> Question 4: </strong> Are you sure?
+                        <div class="Yes_No">
+                            <p>
+                                <input type="radio" name="yes_no" checked>Yes</input>
+                            </p>
+                            <p>
+                                <input type="radio" name="yes_no">No</input>
+                            </p>
+                        </div>
+                        </p>
                     </li>
                 </ul>
             </div>
         </div>
 
         <!-- Next and previous buttons -->
-        <a id = "leftArrow" class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a id = "rightArrow" class="next" onclick="plusSlides(1)">&#10095;</a>
+        <a id="leftArrow" class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a id="rightArrow" class="next" onclick="plusSlides(1)">&#10095;</a>
 
     </div>
 
@@ -104,11 +145,12 @@
         <span class="dot" onclick="currentSlide(4)"></span>
     </div>
 
-    <!-- OTREE TEMPLATES -->
-    {% next_button %}
-    {% endblock %}
-
 </body>
+
+<!-- OTREE TEMPLATES -->
+{% next_button %}
+{% endblock %}
+
 
 <!-- JAVASCRIPT -->
 
@@ -147,26 +189,21 @@
         }
         slides[slideIndex - 1].style.display = "block";
         dots[slideIndex - 1].className += " active";
-        
+
         if (n === 1) {
-            arrowLeft.style.display = "none"
+            arrowLeft.style.display = "none" // make left arrow invisible on 1st slide
         } else if (n > 1) {
             arrowLeft.style.display = "block"
         }
 
         if (n === 4) {
-            arrowRight.style.display = "none"
+            arrowRight.style.display = "none" // make right arrow invisible on 4th slide
         } else if (n < 4) {
             arrowRight.style.display = "block"
         }
     }
 
-    // POTENTIAL SOLUTION FOR THE 1ST AND 4TH SLIDE ARROWS? TO STOP THE "CAROUSEL" FUNCTION //
-    // DOESN'T WORK YET!!! //
-
-
-    
-        
-  
+    // QUESTIONS SLIDE //
+    // Add functionalities of the answers here //
 
 </script>
