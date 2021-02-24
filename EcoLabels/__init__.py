@@ -21,7 +21,8 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    pass
+    Q1 = models.StringField(label="Question 1:")
+    Q2 = models.StringField(label="Question 2:")
 
 
 # PAGES
@@ -29,7 +30,8 @@ class Introduction(Page):
     pass
 
 class Instructions(Page):
-    pass
+    form_model = 'player'
+    form_fields = ['Q1', 'Q2']
 
 class Results(Page):
     pass

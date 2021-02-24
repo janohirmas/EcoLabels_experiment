@@ -1,7 +1,7 @@
 <!-- INSTRUCTION PAGE -->
 
 <!-- LINK TO STYLESHEET-->
-<link rel="stylesheet" href="{% static 'global/EcoLabels_visual/styling2.css' %}">
+<link rel="stylesheet" href="{% static 'global/EcoLabels_visual/styling3.css' %}">
 
 <!-- OTREE TEMPLATES -->
 {% load otree static %}
@@ -11,127 +11,112 @@
 
     <h1> INSTRUCTIONS </h1>
 
-    <!-- Slideshow container -->
-    <div class="slideshow-container">
+    <div class="flex-container">
 
         <!-- Slide 1-->
         <div class="mySlides">
-            <div class="instruction_1">
-                <p> 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Vivamus hendrerit elementum tortor a semper.
-                    Cras vitae bibendum dolor. Vivamus sed est placerat,
-                    laoreet nulla sit amet, lobortis libero.
-                    Aliquam elementum pulvinar ipsum, at
-                    consectetur arcu. Praesent consectetur tellus risus,
-                    non auctor quam ullamcorper eget. In sit amet ullamcorper felis.
-                    Donec egestas, felis sit amet consequat condimentum,
-                    lorem arcu condimentum neque, sit amet aliquet sapien justo at erat.
-                    Ut a enim feugiat arcu vehicula tristique. Aliquam elementum pulvinar ipsum, at
-                    consectetur arcu. Praesent consectetur tellus risus,
-                    non auctor quam ullamcorper eget.</p>
+            <div class="slide-item">
+                <p>
+                    Thank you for participating in our experiment on how people react to different trials. The overall
+                    duration of the
+                    study should be about 20-25 minutes. This experiment uses Experimental Currency Units (ECU). Each
+                    ECU is equivalent
+                    to 2.5p (0.025 Pounds). You have received an initial <u>Bonus Payment</u> of 40 ECUs. This amount
+                    can <i>increase
+                        (or decrease)</i> depending on your decisions of this experiment. This <u>bonus payment</u> is
+                    additional to
+                    your participation fee.
+                </p>
             </div>
-            <img class="img_instructions" src="{% static 'global/EcoLabels_visual/testpic.JPG' %}">
         </div>
 
         <!-- Slide 2-->
         <div class="mySlides">
-            <div class="instruction">
-                <p> 2. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Vivamus hendrerit elementum tortor a semper.
-                    Cras vitae bibendum dolor. Vivamus sed est placerat,
-                    laoreet nulla sit amet, lobortis libero.
-                    Aliquam elementum pulvinar ipsum, at
-                    consectetur arcu. Praesent consectetur tellus risus,
-                    non auctor quam ullamcorper eget. In sit amet ullamcorper felis.
-                    Donec egestas, felis sit amet consequat condimentum,
-                    lorem arcu condimentum neque, sit amet aliquet sapien justo at erat.
-                    Ut a enim feugiat arcu vehicula tristique.</p>
+            <div class="slide-item">
+                <p>
+                    In this study, you will be shown 44 different lotteries and will be asked to make decisions about
+                    whether you wish to
+                    accept each lottery or not. The lotteries, that you will see, offer a <i>positive</i> (<i>Gain</i>)
+                    and a
+                    <i>negative</i> (<i>Loss</i>) outcome with equal probability (fifty-fifty, same as a coin toss).
+                    <i>Gain</i> and
+                    <i>Loss</i> amounts will change for each new trial, so consider each lottery carefully before you
+                    make a decision. At
+                    the end of the experiment, <u>one of the 44 lotteries will be selected at random</u>
+                </p>
+                <p>
+                    If you <b>reject</b> the selected lottery, nothing will happen. If you <b>accept</b> it, one of the
+                    outcomes will be
+                    played out via a virtual coin flip. If the good state occurs (e.g., heads), the <i>Gains</i> will be
+                    <i>added</i> to
+                    your initial bonus payment. If the bad state occurs (e.g., tails), the <i>Losses</i> will be
+                    <i>subtracted</i> from
+                    your bonus payment. Therefore, your decisions in the experiment together with the outcome of the
+                    coin flip will determine your bonus payment.
+                </p>
             </div>
         </div>
 
         <!-- Slide 3-->
         <div class="mySlides">
-            <div class="instruction">
-                <p> 3. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Vivamus hendrerit elementum tortor a semper.
-                    Cras vitae bibendum dolor. Vivamus sed est placerat,
-                    laoreet nulla sit amet, lobortis libero.
-                    Aliquam elementum pulvinar ipsum, at
-                    consectetur arcu. Praesent consectetur tellus risus,
-                    non auctor quam ullamcorper eget. In sit amet ullamcorper felis.
-                    Donec egestas, felis sit amet consequat condimentum,
-                    lorem arcu condimentum neque, sit amet aliquet sapien justo at erat.
-                    Ut a enim feugiat arcu vehicula tristique.</p>
+            <div class="slide-item">
+                <p><b>For example:</b></p>
+                <p>Let's say in the selected lottery (one of the 44), the possible outcomes are 32 (heads) and -20
+                    (tails).</p>
+                <p>If you decide to <b>reject</b>, then, your bonus payment will remain unchanged.</p>
+                <p>If you decide to <b>accept</b>, then a random outcome is determined.</p>
+                <ul>
+                    <li>If the random outcome is heads, 32 will be <i>added</i> to your bonus payment.</li>
+                    <li>If the random outcome is tails, 20 will be <i>subtract</i> from your bonus payment.</li>
+                </ul>
             </div>
         </div>
 
         <!-- Slide 4 -->
         <div class="mySlides">
-            <h2> Please answer the following questions: </h2>
-            <div class="questions_inst">
-                <ul>
-                    <li>
+            <div class="flex-questions">
+                <li>
+                   {% formfield 'Q1' %}
+                </li>
+                <li>
+                  {% formfield 'Q2' %}
+                </li>
+                <li>
+                    <p>
+                        <strong> Question 3: </strong> How well did you understand the instructions?
+                    <ul class="likert">
+                        <li class="likert"> Not at all
+                            <input id="radQ3_answerStart" type="radio" name="Q3_answer" value="1" />
+                        <li class="likert">
+                            <input type="radio" name="Q3_answer" value="2" />
+                        <li class="likert">
+                            <input type="radio" name="Q3_answer" value="3" />
+                        <li class="likert">
+                            <input type="radio" name="Q3_answer" value="4" />
+                        <li class="likert">
+                            <input id="radQ3_answerEnd" type="radio" name="Q3_answer" value="5" /> All clear
+                    </ul>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <strong> Question 4: </strong> Are you sure?
+                    <div class="Yes_No">
                         <p>
-                            <strong> Question 1: </strong> What is your favorite color?
-                            <br>
-                        <form id="answer_Q1">
-                            <textarea name="answer" rows="1" cols="30"></textarea>
-                            <input type="submit" value="Submit">
-                        </form>
+                            <input type="radio" name="yes_no" checked>Yes</input>
                         </p>
-                    </li>
-                    <li>
                         <p>
-                            <strong> Question 2: </strong> Did you find these instructions useful?
-                        <form id="answer_Q2">
-                            <select name="Q2" id="Q2">
-                                <option> --Please Select-- </option>
-                                <option> Yes </option>
-                                <option> No </option>
-                                <option> I don't know </option>
-                            </select>
-                            <input type="submit" value="Submit">
-                        </form>
+                            <input type="radio" name="yes_no">No</input>
                         </p>
-                    </li>
-                    <li>
-                        <p>
-                            <strong> Question 3: </strong> How well did you understand the instructions?
-                        <ul class="likert">
-                            <li class="likert"> Not at all 
-                                <input id="radQ3_answerStart" type="radio" name="Q3_answer" value="1" />
-                            <li class="likert">
-                                <input type="radio" name="Q3_answer" value="2" />
-                            <li class="likert">
-                                <input type="radio" name="Q3_answer" value="3" />
-                            <li class="likert">
-                                <input type="radio" name="Q3_answer" value="4" />
-                            <li class="likert">
-                                <input id="radQ3_answerEnd" type="radio" name="Q3_answer" value="5" /> All clear
-                        </ul>
-                        </p>
-                    </li>
-                    <br><br>
-                    <li>
-                        <p>
-                            <strong> Question 4: </strong> Are you sure?
-                        <div class="Yes_No">
-                            <p>
-                                <input type="radio" name="yes_no" checked>Yes</input>
-                            </p>
-                            <p>
-                                <input type="radio" name="yes_no">No</input>
-                            </p>
-                        </div>
-                        </p>
-                    </li>
-                </ul>
+                    </div>
+                    </p>
+                </li>
             </div>
         </div>
 
-        <!-- Next and previous buttons -->
-        <a id="leftArrow" class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a id="rightArrow" class="next" onclick="plusSlides(1)">&#10095;</a>
+            <!-- Next and previous buttons -->
+            <a id="leftArrow" class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a id="rightArrow" class="next" onclick="plusSlides(1)">&#10095;</a>
 
     </div>
 

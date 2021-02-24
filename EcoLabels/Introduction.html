@@ -1,30 +1,31 @@
 <!-- INTRODUCTION PAGE -->
 
 <!-- LINK TO STYLESHEET-->
-<link rel="stylesheet" href="{% static 'global/EcoLabels_visual/styling.css' %}">
+<link rel="stylesheet" href="{% static 'global/EcoLabels_visual/styling3.css' %}">
 
 <!-- OTREE TEMPLATE -->
 {% load otree static %}
 {% block content %}
 
+
 <!-- title -->
 <h1> INTRODUCTION EXPERIMENT </h1>
 
-<!-- Intro text -->
-<div class="intro_text">
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Vivamus hendrerit elementum tortor a semper.
-        Cras vitae bibendum dolor. Vivamus sed est placerat,
-        laoreet nulla sit amet, lobortis libero.
-        Aliquam elementum pulvinar ipsum, at
-        consectetur arcu. Praesent consectetur tellus risus,
-        non auctor quam ullamcorper eget. In sit amet ullamcorper felis.
-        Donec egestas, felis sit amet consequat condimentum,
-        lorem arcu condimentum neque, sit amet aliquet sapien justo at erat.
-        Ut a enim feugiat
-        arcu vehicula tristique </p>
+<div class="flex-container">
+
+    <!-- Intro text -->
+    <div class="slide-item">
+        <p>Welcome! You are participating in a study funded by the University of Amsterdam. In this study you will have to make a
+            series of decisions about purchasing different products. Depending on your answers you can get a bonus payment.
+            <br><br>
+            <b>Expected duration: </b>The overall study should last about 20 minutes.
+            <br><br>
+            <b>Requirements: </b> You need to be 18 or older and be able to speak and read English.
+        </p>
+    </div>
 </div>
 
 <!-- OTREE TEMPLATE -->
 {% next_button %}
 {% endblock %}
+
