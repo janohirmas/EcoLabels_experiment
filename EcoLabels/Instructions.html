@@ -9,9 +9,9 @@
 
 <body>
 
-    <h1> INSTRUCTIONS </h1>
-
     <div class="flex-container">
+
+        <h1> INSTRUCTIONS </h1>
 
         <!-- Slide 1-->
         <div class="mySlides">
@@ -76,10 +76,11 @@
         <div class="mySlides">
             <div class="flex-questions">
                 <li>
-                   {% formfield 'Q1' %}
+                    {% formfield 'Q1' %}
+                    <p> hint </p>
                 </li>
                 <li>
-                  {% formfield 'Q2' %}
+                    {% formfield 'Q2' %}
                 </li>
                 <li>
                     <p>
@@ -109,31 +110,31 @@
                             <input type="radio" name="yes_no">No</input>
                         </p>
                     </div>
-                    </p>
+                    </p>-->
+                </li>
+                <li>
+                    {% next_button %}
                 </li>
             </div>
         </div>
 
-            <!-- Next and previous buttons -->
-            <a id="leftArrow" class="prev" onclick="plusSlides(-1)">&#10094;</a>
-            <a id="rightArrow" class="next" onclick="plusSlides(1)">&#10095;</a>
+        <!-- Next and previous buttons -->
+        <a id="leftArrow" class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a id="rightArrow" class="next" onclick="plusSlides(1)">&#10095;</a>
 
-    </div>
+        <!-- The dots/circles -->
+        <div class="dot_row">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+        </div>
 
-    <br>
-
-    <!-- The dots/circles -->
-    <div class="dot_row">
-        <span class="dot" onclick="currentSlide(1)"></span>
-        <span class="dot" onclick="currentSlide(2)"></span>
-        <span class="dot" onclick="currentSlide(3)"></span>
-        <span class="dot" onclick="currentSlide(4)"></span>
     </div>
 
 </body>
 
 <!-- OTREE TEMPLATES -->
-{% next_button %}
 {% endblock %}
 
 
@@ -155,6 +156,17 @@
     function currentSlide(n) {
         showSlides(slideIndex = n);
     }
+
+    // arrow key controls //
+    document.addEventListener('keydown', (event) => {
+        let keypress = event.key;
+        if (keypress === 'ArrowLeft') {
+            plusSlides(-1);
+        } else if (keypress === 'ArrowRight') {
+            plusSlides(1);
+        }
+    });
+
 
     // Slide switch function //
     function showSlides(n) {

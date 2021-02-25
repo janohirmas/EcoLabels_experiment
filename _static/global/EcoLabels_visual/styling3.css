@@ -2,34 +2,61 @@
  
 /* GLOBAL STYLING */
 
+    /* set oTree default margins/padding off, define viewport */
+    .otree-body {
+       height: 100vh;
+       width: 100vw; 
+       margin: 0;
+       padding: 0;
+       font-family: sans-serif;
+    }
+
+    .debug-info {
+        display:none;
+    }
+    
+    /* next button */
+    .otree-btn-next {
+        margin-left: 61vw;
+        margin-top: -4vh;
+        background: rgb(51, 165, 51);
+        position: absolute;
+        width: 10vw;
+        height: 8vh;
+    }
+
     * {
         box-sizing: border-box
     }
 
+    /* Titles */
     h1 {
+        font-size: 7vh;
+        margin-top: -10vh;
         text-align: center;
-        padding: 20px;
+        position:absolute;
     }
 
     h2 {
-        font-size: 1.2em;
-        text-align: left;;
+        
     }
 
 /* INTRODUCTION & INSTRUCTIONS */
 
+    /* Content container */
     .flex-container {
         display: flex;
         flex-flow: row wrap;
-        height: 500px;
-        width: 1000px;
+        height: 70vh;
+        width: 80vw;
         padding: 0;
-        margin-bottom: 20px;
+        margin-top: 10vh;
+        margin-left: 10vw;
+        margin-bottom: 2vh;
         background-color:rgb(233, 232, 232);
         justify-content: center;
         align-content: center;
     }
-
 
     /* Hide the slide content by default */
     .mySlides {  
@@ -38,30 +65,33 @@
 
     /* Slides*/
     .slide-item {
-        height: 450px;
-        width: 950px;
-        padding: 30px;
+        height: 65vh;
+        width: 77vw;
+        padding: 5vh;
         background-color: white;
-        font-size: 1.3em;
+        font-size: 3vh;
     }
 
-    /* flex-questions*/
+    /* Container for questions slide */
 
     .flex-questions {
         display: flex;
         flex-direction: column;
-        height: 450px;
-        width: 950px;
-        margin: 30px 30px;
-        padding-top: 10px;
+        height: 65vh;
+        width: 77vw;
+        padding-top: 3vh;
         background-color: white;
-        font-size: 1.2em;
+        font-size: 2.5vh;
     }
 
+    /* questions */
     .flex-questions li {
-        padding-left: 50px;
-        padding-top: 10px;
+        padding-left: 3vw;
+        padding-top: 0;
         list-style: none;
+        display: flex;
+        flex-direction: row;
+        border:1px solid blanchedalmond ;
     }
 
     .likert ul  {
@@ -87,25 +117,26 @@
     .next {
         cursor: pointer;
         position: absolute;
-        top: 370px;
+        top: 50%;
         width: auto;
-        margin-top: -22px;
-        padding: 16px;
+        margin-top: -5vh;
+        padding: 2vh;
         color: black;
-        font-size: 3em;
+        font-size: 8vh;
         transition: 0.6s ease;
         border-radius: 0 3px 3px 0;
         user-select: none;
         text-decoration: none;
+        text-align: center;
     }
 
     /* Position the "next button" to the right */
     .next {
-        right: 30px;
+        right: 3vw;
     }
 
     .prev {
-        left: 80px;
+        left: 4vw;
     }
 
     /* On hover, add a black background color with a little bit see-through */
@@ -117,13 +148,15 @@
     
     /* The dots/bullets/indicators */
     .dot_row {
+        position: absolute;
+        margin-top: 60vh;
         text-align: center;
     }
 
     .dot {
         cursor: pointer;
-        height: 15px;
-        width: 15px;
+        height: 2.5vh;
+        width: 2.5vh;
         margin: 0 2px;
         background-color: #bbb;
         border-radius: 50%;
