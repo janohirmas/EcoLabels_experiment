@@ -76,44 +76,33 @@
         <div class="mySlides">
             <div class="flex-questions">
                 <li>
-                    {% formfield 'Q1' %}
-                    <p> hint </p>
+                    <input type = "text" name="Q1" id="Q1"/>
+                    <a class = "hintButton" onClick ="giveHint1()"> Hint </a>
+                    <div class="hint" id = "hint1"> See slide 1 </div>
+                    <div style= "display:none;" id = "errorMessage"> Wrong answer. Try again. 
+                    </div>
+
                 </li>
                 <li>
                     {% formfield 'Q2' %}
+                    <a class="hintButton" onClick="giveHint2()"> Hint </a>
+                    <div class="hint" id="hint2">
+                        See slide 2
+                        <div>
                 </li>
                 <li>
-                    <p>
-                        <strong> Question 3: </strong> How well did you understand the instructions?
-                    <ul class="likert">
-                        <li class="likert"> Not at all
-                            <input id="radQ3_answerStart" type="radio" name="Q3_answer" value="1" />
-                        <li class="likert">
-                            <input type="radio" name="Q3_answer" value="2" />
-                        <li class="likert">
-                            <input type="radio" name="Q3_answer" value="3" />
-                        <li class="likert">
-                            <input type="radio" name="Q3_answer" value="4" />
-                        <li class="likert">
-                            <input id="radQ3_answerEnd" type="radio" name="Q3_answer" value="5" /> All clear
-                    </ul>
-                    </p>
+                    {% formfield 'Q3' %}
+                <a class="hintButton" onClick="giveHint3()"> Hint </a>
+                <div class="hint" id="hint3">
+                    See slide 3
+                    <div>
                 </li>
                 <li>
-                    <p>
-                        <strong> Question 4: </strong> Are you sure?
-                    <div class="Yes_No">
-                        <p>
-                            <input type="radio" name="yes_no" checked>Yes</input>
-                        </p>
-                        <p>
-                            <input type="radio" name="yes_no">No</input>
-                        </p>
-                    </div>
-                    </p>-->
-                </li>
-                <li>
-                    {% next_button %}
+                    {% formfield 'Q4' %}
+                    <a class="hintButton" onClick="giveHint4()"> Hint </a>
+                    <div class="hint" id="hint4">
+                        See slide 4
+                        <div>
                 </li>
             </div>
         </div>
@@ -135,6 +124,7 @@
 </body>
 
 <!-- OTREE TEMPLATES -->
+{% next_button %}
 {% endblock %}
 
 
@@ -157,7 +147,7 @@
         showSlides(slideIndex = n);
     }
 
-    // arrow key controls //
+    // Next/previous keypress controls //
     document.addEventListener('keydown', (event) => {
         let keypress = event.key;
         if (keypress === 'ArrowLeft') {
@@ -201,6 +191,47 @@
     }
 
     // QUESTIONS SLIDE //
-    // Add functionalities of the answers here //
+
+    // Hint buttons //
+    function giveHint1() {
+        let hint1 = document.getElementById("hint1");
+        if (hint1.style.display === "block") {
+            hint1.style.display = "none";
+        } else {
+            hint1.style.display = "block";
+        }
+    }
+    function giveHint2() {
+        let hint2 = document.getElementById("hint2");
+        if (hint2.style.display === "block") {
+            hint2.style.display = "none";
+        } else {
+            hint2.style.display = "block";
+        }
+    }
+    function giveHint3() {
+            let hint3 = document.getElementById("hint3");
+            if (hint3.style.display === "block") {
+                hint3.style.display = "none";
+            } else {
+                hint3.style.display = "block";
+            }
+        }
+    function giveHint4() {
+            let hint4 = document.getElementById("hint4");
+            if (hint4.style.display === "block") {
+                hint4.style.display = "none";
+            } else {
+                hint4.style.display = "block";
+            }
+        }
+
+    function giveError() {
+        let answer1 = document.getElementById("Q1");
+        let errormsg = document.getElementById("errorMessage");
+        if (answer1 != 50) {
+            errormsg.style.display = "block"; 
+        } 
+    }
 
 </script>

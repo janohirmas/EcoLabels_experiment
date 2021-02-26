@@ -15,12 +15,16 @@
         display:none;
     }
     
+    .btn {
+        position: absolute;
+        display:inline-block;
+        margin-left: 70vw;
+    }
+
     /* next button */
     .otree-btn-next {
-        margin-left: 61vw;
-        margin-top: -4vh;
-        background: rgb(51, 165, 51);
-        position: absolute;
+        background: green;
+        border-color: green;
         width: 10vw;
         height: 8vh;
     }
@@ -79,8 +83,8 @@
         flex-direction: column;
         height: 65vh;
         width: 77vw;
-        padding-top: 3vh;
         background-color: white;
+        padding-top: 1vh;
         font-size: 2.5vh;
     }
 
@@ -91,25 +95,31 @@
         list-style: none;
         display: flex;
         flex-direction: row;
-        border:1px solid blanchedalmond ;
+        border-bottom:1px solid rgb(233, 232, 232);
     }
 
-    .likert ul  {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
+    /* Hints */
+    .hintButton {
+        text-decoration: none;
+        color: blue;
+        text-align: right;
+        padding-left: 1vw;
+        padding-top: 0.5vh;
     }
 
-    .likert li  {
-        float: left;
-        text-align: left;
-        list-style-type: none;
-        padding-right: 20px;
+    .hintButton:hover {
+        cursor: pointer;
+        color:black;
     }
 
-    .Yes_No p {
-        float: left;
-        padding-right: 10px;
+    .hint {
+        display: none;
+        padding-top: 0.5vh;
+        padding-left: 1vw;
+        background-color: rgb(233, 232, 232); ;
+        height: 4vh;
+        width: 8vw;
+        margin-left: 1vh;
     }
 
     /* Next & previous buttons */
