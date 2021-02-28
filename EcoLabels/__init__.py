@@ -21,11 +21,8 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    Q1 = models.IntegerField(label="Question 1: How many trials are there?")
-    Q2 = models.BooleanField(label="Question 2: Are you a wizard?", choices= [
-    [1, 'Yes'],
-    [2, 'No'],
-    ])
+    Q1 = models.IntegerField()
+    Q2 = models.StringField()
     Q3 = models.StringField(label="Question 3: Which object is shown in the ecolabel?", choices= ["leaf", "tree", "flower"])
     Q4 = models.IntegerField(label = "Question 4: How well did you understand the       instructions? ", widget=widgets.RadioSelectHorizontal, choices=[1,2,3,4,5])
 
@@ -40,7 +37,7 @@ class Instructions(Page):
 
 
     def error_message(player, values):
-        if (values['Q1'] != 50) or (values['Q2'] != 1) or (values['Q3'] != "leaf") or (values['Q4'] != 1):
+        if (values['Q1'] != 50) or (values['Q2'] != "Yes") or (values['Q3'] != "leaf") or (values['Q4'] != 1):
             return 'Error message'
 
 class Results(Page):

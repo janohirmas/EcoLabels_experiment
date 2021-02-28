@@ -84,18 +84,46 @@
         height: 65vh;
         width: 77vw;
         background-color: white;
-        padding-top: 1vh;
+        padding-top: 2vh;
         font-size: 2.5vh;
     }
 
     /* questions */
     .flex-questions li {
+        height: 12vh;
         padding-left: 3vw;
-        padding-top: 0;
+        padding-top: 1vw;
         list-style: none;
         display: flex;
         flex-direction: row;
         border-bottom:1px solid rgb(233, 232, 232);
+    }
+
+    .inst-question {
+        padding-right: 2vw;
+    }
+
+    .inst-input {
+        height: 5vh;
+    }    
+
+    .radio {
+        color:black;
+        margin-right: 2vw;
+    }
+
+    .dropdown {
+        height: 5vh;
+    }
+
+    .inst-button {
+        height: 5vh;
+        background-color: green;
+        color: white;
+    }
+
+    .errorMessage {
+        padding-left: 1vw;
     }
 
     /* Hints */
@@ -109,17 +137,17 @@
 
     .hintButton:hover {
         cursor: pointer;
-        color:black;
+        color:rgb(141, 198, 252);
     }
 
     .hint {
         display: none;
         padding-top: 0.5vh;
-        padding-left: 1vw;
         background-color: rgb(233, 232, 232); ;
         height: 4vh;
         width: 8vw;
         margin-left: 1vh;
+        text-align: center;
     }
 
     /* Next & previous buttons */

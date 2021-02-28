@@ -1,7 +1,7 @@
 <!-- INSTRUCTION PAGE -->
 
 <!-- LINK TO STYLESHEET-->
-<link rel="stylesheet" href="{% static 'global/EcoLabels_visual/styling3.css' %}">
+<link rel="stylesheet" href="{% static 'global/EcoLabels_visual/styling6.css' %}">
 
 <!-- OTREE TEMPLATES -->
 {% load otree static %}
@@ -76,29 +76,66 @@
         <div class="mySlides">
             <div class="flex-questions">
                 <li>
-                    <input type = "text" name="Q1" id="Q1"/>
-                    <a class = "hintButton" onClick ="giveHint1()"> Hint </a>
-                    <div class="hint" id = "hint1"> See slide 1 </div>
-                    <div style= "display:none;" id = "errorMessage"> Wrong answer. Try again. 
-                    </div>
-
+                    <!--Question 1-->
+                    <label class="inst-question" for="Q1">How many decisions do you have to make?</label>
+                    <input type="text" name="Q1" id="Q1" class="inst-input">
+                    <button type="button" class="inst-button" onclick="InputCheck1()">Check</button>
+                    <p id="errorMessage1" class="errorMessage"></p>
+                    <a class="hintButton" onClick="giveHint1()"> Hint </a>
+                    <div class="hint" id="hint1"> See slide 1 </div>
                 </li>
                 <li>
-                    {% formfield 'Q2' %}
+                    <!--Question 2-->
+                    <label class="inst-question" for="Q2"> Are you a Wizard?
+                    </label>
+                    <label class="radio"> Yes
+                        <input type="radio" name="Q2" id="Q2" value="Yes">
+                    </label>
+                    <label class="radio"> No
+                        <input type="radio" name="Q2" id="Q2" value="No">
+                    </label>
+                    <button type="button" class="inst-button" onclick="InputCheck2()">Check</button>
+                    <p id="errorMessage2" class="errorMessage"></p>
                     <a class="hintButton" onClick="giveHint2()"> Hint </a>
-                    <div class="hint" id="hint2">
-                        See slide 2
+                    <div class="hint" id="hint2"> See slide 2 <div>
+                </li>
+                <li>
+                    <!--Question 3-->
+                    <label class="inst-question" for="Q3">Which object represents the eco-label?</label>
+                    <select name="Q3" id="Q3" class="dropdown">
+                        <option value="nothing">--Select--</option>
+                        <option value="leaf">Leaf</option>
+                        <option value="tree">Tree</option>
+                        <option value="flower">Flower</option>
+                    </select>
+                    <button type="button" class="inst-button" onclick="InputCheck3()">Check</button>
+                    <p id="errorMessage3" class="errorMessage"></p>
+                    <a class="hintButton" onClick="giveHint3()"> Hint </a>
+                    <div class="hint" id="hint3">
+                        See slide 3
                         <div>
                 </li>
                 <li>
-                    {% formfield 'Q3' %}
-                <a class="hintButton" onClick="giveHint3()"> Hint </a>
-                <div class="hint" id="hint3">
-                    See slide 3
-                    <div>
-                </li>
-                <li>
-                    {% formfield 'Q4' %}
+                    <!--Question 4-->
+                    <label class="inst-question" for="Q4"> How well did you understand the instructions?
+                    </label>
+                    <label class="radio"> Not at all
+                        <input type="radio" name="Q4" id="Q4" value=1>
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="Q4" id="Q4" value=2>
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="Q4" id="Q4" value=3>
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="Q4" id="Q4" value=4>
+                    </label>
+                    <label class="radio"> All clear
+                        <input type="radio" name="Q4" id="Q4" value=5>
+                    </label>
+                    <button type="button" class="inst-button" onclick="InputCheck4()">Check</button>
+                    <p id="errorMessage4" class="errorMessage"></p>
                     <a class="hintButton" onClick="giveHint4()"> Hint </a>
                     <div class="hint" id="hint4">
                         See slide 4
@@ -210,28 +247,69 @@
         }
     }
     function giveHint3() {
-            let hint3 = document.getElementById("hint3");
-            if (hint3.style.display === "block") {
-                hint3.style.display = "none";
-            } else {
-                hint3.style.display = "block";
-            }
+        let hint3 = document.getElementById("hint3");
+        if (hint3.style.display === "block") {
+            hint3.style.display = "none";
+        } else {
+            hint3.style.display = "block";
         }
+    }
     function giveHint4() {
-            let hint4 = document.getElementById("hint4");
-            if (hint4.style.display === "block") {
-                hint4.style.display = "none";
-            } else {
-                hint4.style.display = "block";
-            }
+        let hint4 = document.getElementById("hint4");
+        if (hint4.style.display === "block") {
+            hint4.style.display = "none";
+        } else {
+            hint4.style.display = "block";
         }
-
-    function giveError() {
-        let answer1 = document.getElementById("Q1");
-        let errormsg = document.getElementById("errorMessage");
-        if (answer1 != 50) {
-            errormsg.style.display = "block"; 
-        } 
     }
 
+    // Input validation (message)
+    function InputCheck1() {
+        var answer1, text;
+
+        answer1 = document.getElementById("Q1").value;
+        if (answer1 == 50) {
+            text = "Input OK";
+        } else {
+            text = "Invalid input";
+        }
+        document.getElementById("errorMessage1").innerHTML = text;
+    }
+
+    function InputCheck2() {
+        var answer2, text2;
+
+        answer2 = document.querySelector('input[name="Q2"]:checked').value;
+        if (answer2 == "Yes") {
+            text2 = "Input OK";
+        } else {
+            text2 = "Invalid input";
+        }
+        document.getElementById("errorMessage2").innerHTML = text2;
+    }
+
+    function InputCheck3() {
+        var answer3, text3;
+
+        answer3 = document.getElementById('Q3').value;
+        if (answer3 == "leaf") {
+            text3 = "Input OK";
+        } else {
+            text3 = "Invalid input";
+        }
+        document.getElementById("errorMessage3").innerHTML = text3;
+    }
+
+    function InputCheck4() {
+        var answer4, text4;
+
+        answer4 = document.querySelector('input[name="Q4"]:checked').value;
+        console.log(answer4);
+        if (answer4 == 1) {
+            text4 = "Input OK";
+        } else {
+            text4 = "Invalid input";
+        }
+        document.getElementById("errorMessage4").innerHTML = text4;
+    }
 </script>
