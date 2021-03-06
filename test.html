@@ -1,0 +1,64 @@
+   def js_vars(player):
+
+        answers = [50, "No", "leaf", 1]
+        solutions = [50, "Yes", "leaf", 1]
+
+        error_mes = []
+        correct_ans = 0
+
+        for i, answer in enumerate(answers):
+            solution = solutions[i]
+            if answer != solution:
+                error_mes.append("True")
+            else:
+                error_mes.append("False")
+                correct_ans = correct_ans + 1
+
+        return dict(
+            error_mes = error_mes,
+            correct_ans = correct_ans
+        )
+
+        function validateAnswers() {
+        let hints = document.getElementsByClassName("hint");
+        let amount_correct = js_vars.correct_ans;
+        let errors = js_vars.error_mes;
+        
+        if (amount_correct !== 4){ // Hardcoded; Use here length(amount of questions)
+        
+        }
+        }
+
+        def Q1_error_message(player, value):
+        if value != 50:
+        return 'sdf'
+        
+        def Q2_error_message(player, value):
+        if value != "Yes":
+        return 'dfsdf'
+        
+        def Q3_error_message(player, value):
+        if value != "leaf":
+        return 'df'
+        
+        def Q4_error_message(player, value):
+        if value != 1:
+        return 'hkjbj'
+
+        let hints = document.getElementsByClassName("hint");
+        let ansCorrect = 0;
+
+        let answer1 = document.getElementById("Q1").value;
+        let answer2 = document.querySelector('input[name="Q2"]:checked').value;
+        let answer3 = document.getElementById('Q3').value;
+        let answer4 = document.querySelector('input[name="Q4"]:checked').value;
+
+        let answerList = [5, 5, 4, 5];
+        let solutions = [50, "Yes", "leaf", 1];
+
+        let i;
+        for (i = 0; i < lenght.answerList; i++) {
+            if (answerList[i] !== solutions[i]) {
+                alert("wrong answer");
+            } 
+        }
