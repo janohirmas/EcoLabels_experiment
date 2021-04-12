@@ -1,0 +1,131 @@
+
+{% load otree static %}
+
+{% block title %}
+<p style="text-align: center;">Almost done!</p>
+<p style="font: 16px Arial;">Before we show you how much you have won, please, answer these questions.</p>
+{% endblock %}
+
+{% block content %}
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font: 16px Arial;
+        }
+
+        /*the container must be positioned relative:*/
+        .autocomplete {
+            position: relative;
+            display: inline-block;
+        }
+
+        input {
+            border: 1px solid transparent;
+            background-color: #f1f1f1;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        input[type=text] {
+            background-color: #f1f1f1;
+            width: 100%;
+        }
+
+        input[type=submit] {
+            background-color: DodgerBlue;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .autocomplete-items {
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            border-bottom: none;
+            border-top: none;
+            z-index: 99;
+            /*position the autocomplete items to be the same width as the container:*/
+            top: 100%;
+            left: 0;
+            right: 0;
+        }
+
+        .autocomplete-items div {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #fff;
+            border-bottom: 1px solid #d4d4d4;
+        }
+
+        /*when hovering an item:*/
+        .autocomplete-items div:hover {
+            background-color: #e9e9e9;
+        }
+
+        /*when navigating through the items using the arrow keys:*/
+        .autocomplete-active {
+            background-color: DodgerBlue !important;
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <!--Make sure the form has the autocomplete function switched off:-->
+
+    <!--{% formfield player.QT1 %}-->
+    <!--{% formfield player.QT2 %}-->
+    <!--{% formfield player.QT3 %}-->
+    <!--{% formfield player.QT4 %}-->
+    <!--{% formfield player.QT5 %}-->
+    <!--{% formfield player.QT6 %}-->
+    <!--{% formfield player.QT7 %}-->
+    <!--{% formfield player.QT8 %}-->
+    <!--{% formfield player.QT9 %}-->
+    <!--{% formfield player.QT10 %}-->
+    <!--{% formfield player.QT11 %}-->
+    <!--{% formfield player.QT12 %}-->
+    <!--{% formfield player.QT13 %}-->
+    <!--{% formfield player.QT14 %}-->
+    <!--{% formfield player.QT15 %}-->
+    <!--{% formfield player.QT_check %}-->
+    <!--{% formfield player.QT16 %}-->
+    <!--{% formfield player.QT17 %}-->
+    <!--{% formfield player.QT18 %}-->
+    <!--{% formfield player.QT19 %}-->
+    <!--{% formfield player.QT20 %}-->
+    <!--{% formfield player.QT21 %}-->
+    <!--{% formfield player.QT22 %}-->
+    <!--{% formfield player.QT23 %}-->
+    <!--{% formfield player.QT24 %}-->
+    <!--{% formfield player.QT25 %}-->
+    <!--{% formfield player.QT26 %}-->
+    <!--{% formfield player.QT27 %}-->
+    <!--{% formfield player.QT28 %}-->
+    <!--{% formfield player.QT29 %}-->
+    <!--{% formfield player.QT30 %}-->
+    <table class="table">
+        {% for field in form %}
+        <tr>
+            <th>{{ field.label }}</th>
+            {% for choice in field %}
+            <td>{{ choice }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+
+
+    <button class="next_button btn btn-primary btn-large" id="Button">Next</button>
+
+</body>
+{% endblock %}

@@ -38,6 +38,6 @@ class Results(Page):
     pass
 
 
-page_sequence = [Introduction, Instructions, Results]
+page_sequence = [Introduction, Instructions, Demographics, Questionnaire, Results]
 
 

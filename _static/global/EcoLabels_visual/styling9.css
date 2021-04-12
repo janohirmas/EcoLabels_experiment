@@ -92,10 +92,12 @@
     .flex-questions li {
         height: 12vh;
         padding-left: 3vw;
+        padding-right: 3vw;
         padding-top: 1vw;
         list-style: none;
         display: flex;
         flex-direction: row;
+        justify-content: space-between;
         border-bottom:1px solid rgb(233, 232, 232);
     }
 
@@ -104,11 +106,11 @@
     }
 
     .inst-question {
-        padding-right: 2vw;
+        flex-basis: 27vw;
     }
 
-    .inst-input {
-        height: 5vh;
+    .answer-field {
+        flex-basis: 27vw;
     }    
 
     .radio {
@@ -123,10 +125,12 @@
     /* Hints */
     .hint {
         visibility: hidden;
+        flex-grow: 1;
         padding-top: 0.5vh;
-        background-color: rgb(224, 110, 110); ;
-        color: white;
-        height: 4vh;
+        border: 1.5px solid red;
+        border-radius: 2px;
+        color:red;
+        height: 4.5vh;
         width: 8vw;
         margin-left: 1vh;
         text-align: center;
@@ -140,6 +144,7 @@
         border: none;
         height: 6vh;
         width: 7vw;
+        border-radius: 2px;
     }
 
     .submitButton:hover{
