@@ -26,6 +26,9 @@ class Player(BasePlayer):
     Q3 = models.StringField()
     Q4 = models.IntegerField()
 
+    D1 = models.IntegerField()
+
+
     # variables for Questionnaire
     QT1 = models.IntegerField(label=' I plan tasks carefully.',
                               choices=[[1, 'Rarely/Never'], [2, 'Occasionally'], [3, 'Often'],
@@ -131,7 +134,8 @@ class Instructions(Page):
     form_fields = ['Q1', 'Q2', 'Q3', 'Q4']
 
 class Demographics(Page):
-    pass
+    form_model = 'player'
+    form_fields = ['D1']
 
 class Questionnaire(Page):
     form_model = 'player'

@@ -89,13 +89,18 @@
     <a id="next" class="button" onclick= showNextSlide()> Next</a>
     <a id="submit" class = "button" onclick= showResults()>Submit</a>
 
-</body>
+    <input type="hidden" name="D1" id="D1">
 
+
+</body>
+{% next_button %}
 {% endblock %}
 
 <!-- JAVASCRIPT -->
 
 <script>
+
+    document.getElementById('D1').value = 42;
 
     (function () {
         // Functions
@@ -153,6 +158,7 @@
                 const userAnswer = (answerContainer.querySelector(selector) || {}).value;
 
                 
+
 
                 // if answer is correct
                 if (userAnswer === currentQuestion.correctAnswer) {
