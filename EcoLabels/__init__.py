@@ -26,8 +26,9 @@ class Player(BasePlayer):
     Q3 = models.StringField()
     Q4 = models.IntegerField()
 
-    D1 = models.IntegerField()
-
+    D0 = models.StringField()
+    D1 = models.StringField()
+    D2 = models.StringField()
 
     # variables for Questionnaire
     QT1 = models.IntegerField(label=' I plan tasks carefully.',
@@ -135,7 +136,7 @@ class Instructions(Page):
 
 class Demographics(Page):
     form_model = 'player'
-    form_fields = ['D1']
+    form_fields = ['D0','D1','D2']
 
 class Questionnaire(Page):
     form_model = 'player'
