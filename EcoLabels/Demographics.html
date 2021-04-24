@@ -87,7 +87,7 @@
     </div>
     <a id="previous" class="button" onclick=showPreviousSlide()>Previous</a>
     <a id="next" class="button" onclick=showNextSlide()> Next</a>
-    <a id="submit" class="button" onclick=showResults()>Submit</a>
+    <button id="submit" class="button" onclick=showResults()>Submit</button>
 
     <div id="otreeData"></div>
 
@@ -129,7 +129,7 @@
                     } else {
                         answers.push(
                             `<label>
-                      <input type="text" name="question${questionNumber}">
+                      <input class="dem-textbox" type="text" name="question${questionNumber}">
                     </label>`
                         );
                     }
@@ -212,29 +212,44 @@
         const submitButton = document.getElementById('submit');
         const myQuestions = [
             {
-                question: "Reducing water consumption is necessary for sustainable development.",
-                type: "radio",
-                answers: {
-                    a: "Disagree",
-                    b: "Neutral",
-                    c: "Agree"
-                },
-            },
-            {
-                question: "What is your gender",
+                question: "What is your age?",
                 type: "text",
-
             },
             {
-                question: "Which tool can you use to ensure code quality?",
+                question: "Which gender do you identify the most with?",
                 type: "radio",
                 answers: {
-                    a: "Disagree",
-                    b: "Neutral",
-                    c: "Agree",
+                    a: "Female",
+                    b: "Male",
+                    c: "Other",
+                    d: "Prefer not to say"
                 },
-
-            }
+            },
+            {
+                question: "What country do you live in?",
+                type: "text",
+            },
+            {
+                question: "What is your nationality?",
+                type: "text",
+            },
+             {
+                question: "Have you ever participated in an incentivized economic experiment (such as this one) before?",
+                type: "radio",
+                answers: {
+                    a: "Yes",
+                    b: "No",
+                    c: "Not sure / don't remember"
+                }
+            },
+            {
+                question: "What do you think is the purpose of this study? Describe shortly in your own words.",
+                type: "text",
+            },
+            {
+                question: "During the experiment, did you use any specific strategy or rule of thumb when deciding which of the two products to purchase? If so, describe it shortly.",
+                type: "text",
+            },
         ];
 
         // Kick things off
