@@ -76,6 +76,11 @@
         height: 200px;
         margin-top: 40px;
     }
+
+    .demo-textbox {
+        font-size: 0.8em;
+    }
+
 </style>
 
 <body>
@@ -94,7 +99,6 @@
 
 </body>
 {% next_button %}
-{% endblock %}
 
 <!-- JAVASCRIPT -->
 
@@ -129,12 +133,11 @@
                     } else {
                         answers.push(
                             `<label>
-                      <input class="dem-textbox" type="text" name="question${questionNumber}">
+                      <textarea class="demo-textbox" type="text" name="question${questionNumber}" rows="4" cols= "50"></textarea>
                     </label>`
                         );
                     }
-
-
+                    
                     // add this question and its answers to the output
                     output.push(
                         `<div class="slide">
@@ -165,7 +168,7 @@
                     selector = `input[name=question${questionNumber}]:checked`;
                     userAnswer = (answerContainer.querySelector(selector) || {}).value;
                 } else {
-                    selector = `input[name=question${questionNumber}]`;
+                    selector = `textarea[name=question${questionNumber}]`;
                     userAnswer = (answerContainer.querySelector(selector)).value;
                 }
                 // save the user answers on oTree by creating hidden html with name that matches names in init
