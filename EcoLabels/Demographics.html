@@ -85,9 +85,9 @@
     <div class="quiz-container">
         <div id="quiz"></div>
     </div>
-    <a id="previous" class = "button" onclick= showPreviousSlide()>Previous</a>
-    <a id="next" class="button" onclick= showNextSlide()> Next</a>
-    <a id="submit" class = "button" onclick= showResults()>Submit</a>
+    <a id="previous" class="button" onclick=showPreviousSlide()>Previous</a>
+    <a id="next" class="button" onclick=showNextSlide()> Next</a>
+    <a id="submit" class="button" onclick=showResults()>Submit</a>
 
     <div id="otreeData"></div>
 
@@ -114,23 +114,33 @@
                     const answers = [];
 
                     // and for each available answer...
-                    for (letter in currentQuestion.answers) {
+                    if (currentQuestion.type === "radio") {
 
-                        // ...add an HTML radio button
+                        for (letter in currentQuestion.answers) {
+
+                            // ...add an HTML radio button
+                            answers.push(
+                                `<label>
+                      <input type="radio" name="question${questionNumber}" value="${letter}">             
+                      ${currentQuestion.answers[letter]}
+                    </label>`
+                            );
+                        }
+                    } else {
                         answers.push(
                             `<label>
-              <input type="radio" name="question${questionNumber}" value="${letter}">             
-              ${currentQuestion.answers[letter]}
-            </label>`
+                      <input type="text" name="question${questionNumber}">
+                    </label>`
                         );
                     }
+
 
                     // add this question and its answers to the output
                     output.push(
                         `<div class="slide">
-            <div class="question"> ${currentQuestion.question} </div>
-            <div class="answers"> ${answers.join("")} </div>
-          </div>`
+                    <div class="question"> ${currentQuestion.question} </div>
+                    <div class="answers"> ${answers.join("")} </div>
+                  </div>`
                     );
                 }
             );
@@ -144,42 +154,27 @@
             // gather answer containers from our quiz
             const answerContainers = quizContainer.querySelectorAll('.answers');
 
-            // keep track of user's answers
-            let numCorrect = 0;
-
             // for each question...
             myQuestions.forEach((currentQuestion, questionNumber) => {
 
                 // find selected answer
                 const answerContainer = answerContainers[questionNumber];
-                const selector = `input[name=question${questionNumber}]:checked`;
-                const userAnswer = (answerContainer.querySelector(selector) || {}).value;
-
-                //
+                let selector = '';
+                let userAnswer = '';
+                if (currentQuestion.type === "radio") {
+                    selector = `input[name=question${questionNumber}]:checked`;
+                    userAnswer = (answerContainer.querySelector(selector) || {}).value;
+                } else {
+                    selector = `input[name=question${questionNumber}]`;
+                    userAnswer = (answerContainer.querySelector(selector)).value;
+                }
+                // save the user answers on oTree by creating hidden html with name that matches names in init
                 let saveOtree = document.getElementById('otreeData');
-                recordAnswer.push(`<label>
-              <input type="hidden" name="D${questionNumber}" value="${userAnswer}">
-            </label>`);
-
+                recordAnswer.push(
+                    `<input type="hidden" name="D${questionNumber}" value="${userAnswer}">`
+                    );
                 saveOtree.innerHTML = recordAnswer.join('');
-
-                // if answer is correct
-                if (userAnswer === currentQuestion.correctAnswer) {
-                    // add to the number of correct answers
-                    numCorrect++;
-
-                    // color the answers green
-                    answerContainers[questionNumber].style.color = 'lightgreen';
-                }
-                // if answer is wrong or blank
-                else {
-                    // color the answers red
-                    answerContainers[questionNumber].style.color = 'red';
-                }
             });
-
-            // show number of correct answers out of total
-            resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
         }
 
         // Question slides: show one by one
@@ -217,31 +212,28 @@
         const submitButton = document.getElementById('submit');
         const myQuestions = [
             {
-                question: "What is your age?",
+                question: "Reducing water consumption is necessary for sustainable development.",
+                type: "radio",
                 answers: {
-                    a: "18 - 30",
-                    b: "31 - 45 ",
-                    c: "46 - 65"
+                    a: "Disagree",
+                    b: "Neutral",
+                    c: "Agree"
                 },
             },
             {
                 question: "What is your gender",
-                answers: {
-                    a: "Node.js",
-                    b: "TypeScript",
-                    c: "npm"
-                },
-                correctAnswer: "c"
+                type: "text",
+
             },
             {
                 question: "Which tool can you use to ensure code quality?",
+                type: "radio",
                 answers: {
-                    a: "Angular",
-                    b: "jQuery",
-                    c: "RequireJS",
-                    d: "ESLint"
+                    a: "Disagree",
+                    b: "Neutral",
+                    c: "Agree",
                 },
-                correctAnswer: "d"
+
             }
         ];
 
@@ -262,10 +254,11 @@
         previousButton.addEventListener("click", showPreviousSlide);
         nextButton.addEventListener("click", showNextSlide);
 
+        // array for saving the html with correct 
         let recordAnswer = []
-
+        console.log(recordAnswer);
     })();
 
-   
+
 
 </script>

@@ -136,7 +136,7 @@ class Instructions(Page):
 
 class Demographics(Page):
     form_model = 'player'
-    form_fields = ['D0','D1','D2']
+    form_fields = ['D0', 'D1', 'D2']
 
 class Questionnaire(Page):
     form_model = 'player'
@@ -149,6 +149,6 @@ class Results(Page):
     pass
 
 
-page_sequence = [Introduction, Instructions, Demographics, Questionnaire, Results]
+page_sequence = [Demographics, Questionnaire, Introduction, Instructions, Results]
 
 
