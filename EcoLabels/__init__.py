@@ -36,9 +36,13 @@ class Player(BasePlayer):
     D6 = models.StringField()
 
     # variables for Questionnaire
-    QT0 = models.StringField()
     QT1 = models.StringField()
     QT2 = models.StringField()
+    QT3 = models.StringField()
+    QT4 = models.StringField()
+    QT5 = models.StringField()
+    QT6 = models.StringField()
+    QT7 = models.StringField()
 
 # PAGES
 class Introduction(Page):
@@ -54,7 +58,7 @@ class Demographics(Page):
 
 class Questionnaire(Page):
     form_model = 'player'
-    form_fields = ['QT0', 'QT1', 'QT2']
+    form_fields = ['QT1', 'QT2', 'QT3','QT4', 'QT5', 'QT6', 'QT7']
 
     def is_displayed(self):
         return True

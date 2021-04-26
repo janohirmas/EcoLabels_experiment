@@ -5,7 +5,6 @@
     @import url(https://fonts.googleapis.com/css?family=Work+Sans:300,600);
 
     body {
-        font-size: 20px;
         font-family: 'Work Sans', sans-serif;
         color: #333;
         font-weight: 300;
@@ -14,23 +13,27 @@
     }
 
     h1 {
-        font-weight: 300;
-        margin: 0px;
-        padding: 10px;
-        font-size: 20px;
-        background-color: #444;
-        color: #fff;
+        font-size: 1.3em;
+        text-align: left;
+        padding: 4vh;
+        background-color: rgba(59, 121, 139, 0.678);
+        color: white;
     }
 
     .question {
-        font-size: 30px;
-        margin-bottom: 10px;
+        font-size: 1.4em;
+        height: 10vh;
+        margin-bottom: 4vh;
+        padding: 3vh;
     }
 
     .answers {
-        margin-bottom: 20px;
+        font-size: 1.1em;
+        margin-top: 3vh;
+        margin-bottom: 10vh;
         text-align: left;
         display: inline-block;
+        height: 20vh;
     }
 
     .answers label {
@@ -40,14 +43,15 @@
 
     .button {
         font-family: 'Work Sans', sans-serif;
-        font-size: 22px;
+        font-size: 1.2em;
+        font-style: bold;
         background-color: rgb(33, 202, 132);
         color: #fff;
         border: 0px;
         border-radius: 3px;
         padding: 4vh;
         cursor: pointer;
-        margin-top: 5vh;
+        margin-top: 15vh;
         text-decoration: none;
     }
 
@@ -72,14 +76,24 @@
     }
 
     .quiz-container {
-        position: relative;
-        height: 200px;
-        margin-top: 40px;
+       position: relative;
+        height: 40vh;
+        margin-top: 5vh;
     }
 
     .demo-textbox {
         font-size: 0.8em;
     }
+
+    .progress-bar {
+        display: inline-block;
+        width: 20vw;
+        opacity: 0.7;
+        text-align: center;
+        -webkit-appearance: none;
+        appearance: none;
+    }
+
 
 </style>
 
@@ -98,7 +112,7 @@
 
 
 </body>
-{% next_button %}
+{% endblock %}
 
 <!-- JAVASCRIPT -->
 
@@ -143,6 +157,10 @@
                         `<div class="slide">
                     <div class="question"> ${currentQuestion.question} </div>
                     <div class="answers"> ${answers.join("")} </div>
+                    <br>
+                    <label> 0% </label>
+                        <progress class="progress-bar" min="1" max="7" value="${questionNumber}"></progress>
+                        <label> 100% </label>
                   </div>`
                     );
                 }
@@ -216,10 +234,12 @@
         const myQuestions = [
             {
                 question: "What is your age?",
+                name: "D1",
                 type: "text",
             },
             {
                 question: "Which gender do you identify the most with?",
+                name: "D2",
                 type: "radio",
                 answers: {
                     a: "Female",
@@ -230,14 +250,17 @@
             },
             {
                 question: "What country do you live in?",
+                name: "D3",
                 type: "text",
             },
             {
                 question: "What is your nationality?",
+                name: "D4",
                 type: "text",
             },
              {
                 question: "Have you ever participated in an incentivized economic experiment (such as this one) before?",
+                name: "D5",
                 type: "radio",
                 answers: {
                     a: "Yes",
