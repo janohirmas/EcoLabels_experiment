@@ -24,7 +24,7 @@
         font-size: 1.3em;
         font-style: italic;
         height: 8vh;
-        margin-bottom: 6vh;
+        margin-bottom: 8vh;
         padding: 3vh;
     }
 
@@ -86,6 +86,7 @@
         width: 10vw;
         text-align: center;
     }
+
     .progress-bar {
         display: inline-block;
         width: 20vw;
@@ -94,14 +95,12 @@
         -webkit-appearance: none;
         appearance: none;
     }
-
-
-
 </style>
 
 <body>
 
-    <h1><strong>Questionnaire:</strong> Please indicate your agreement or disagreement with the following sentences by choosing one of the answer options.</h1>
+    <h1><strong>Questionnaire:</strong> Please indicate your agreement or disagreement with the following sentences by
+        choosing one of the answer options.</h1>
 
     <div class="quiz-container">
         <div id="quiz"></div>
@@ -134,9 +133,9 @@
                     // variable to store the list of possible answers
                     const answers = [];
 
-                        // ...add an HTML radio buttons with answer options. "Value" is the one that is going to be saved on oTree. 
-                        answers.push(
-                            `<div>
+                    // ...add an HTML radio buttons with answer options. "Value" is the one that is going to be saved on oTree. 
+                    answers.push(
+                        `<div>
                       <label><input type="radio" class="QT-radio" name="question${questionNumber}" value="1"/> Strongly disagree
                       </label><label>                  
                       <input type="radio" class="QT-radio" name="question${questionNumber}" value="2"/> Disagree
@@ -147,7 +146,7 @@
                       </label><label>
                       <input type="radio" class="QT-radio" name="question${questionNumber}" value="5"/> Strongly agree            
                     </label></div>`
-                        );
+                    );
 
                     // add this question and its answers to the output + progress bar with current amount of progress. Remember to change the "max" value of progress bar to the amount of questions you have. 
                     output.push(
@@ -212,9 +211,9 @@
         }
 
         // slide counters
-        function showNextSlide() {
+        /*function showNextSlide() {
             showSlide(currentSlide + 1);
-        }
+        }*/
 
         function showPreviousSlide() {
             showSlide(currentSlide - 1);
@@ -357,8 +356,31 @@
         nextButton.addEventListener("click", showNextSlide);
 
         // array for saving the html with correct 
-        let recordAnswer = []
-        console.log(recordAnswer);
+        let recordAnswer = [];
+
+        let count = 0;
+
+        function showNextSlide() {
+            count = count + 1;
+
+            if (count < myQuestions.length) {
+            let counter = count - 1;
+            const answerSelector = quizContainer.querySelectorAll('.answers');
+            // for each question...
+                let answerContainer2 = answerSelector[counter];
+                // find selected answer
+                let selection = answerContainer2.querySelector(`input[name=question${counter}]:checked`);
+                console.log(selection);
+                console.log(count);
+                console.log(answerSelector);
+                if (selection !== null) {
+                    showSlide(currentSlide + 1);
+                } else {
+                    count = count - 1;
+                }
+
+            }
+        };
     })();
 
 

@@ -28,7 +28,7 @@
     }
 
     .answers {
-        font-size: 1.1em;
+        font-size: 1.2em;
         margin-top: 3vh;
         margin-bottom: 10vh;
         text-align: left;
@@ -76,7 +76,7 @@
     }
 
     .quiz-container {
-       position: relative;
+        position: relative;
         height: 40vh;
         margin-top: 5vh;
     }
@@ -93,8 +93,6 @@
         -webkit-appearance: none;
         appearance: none;
     }
-
-
 </style>
 
 <body>
@@ -117,13 +115,14 @@
 <!-- JAVASCRIPT -->
 
 <script>
-
+    //<script type="text/javascript" src="{% static 'questionnaire.json' %}">// 
     (function () {
         // Functions
         function buildQuiz() {
             // variable to store the HTML output
             const output = [];
-
+            // variable to define the length of the progress bar
+            const progressLimit = myQuestions.length;
             // for each question...
             myQuestions.forEach(
                 (currentQuestion, questionNumber) => {
@@ -136,7 +135,7 @@
 
                         for (letter in currentQuestion.answers) {
 
-                            // ...add an HTML radio button
+                            // ...add an HTML radio button 
                             answers.push(
                                 `<label>
                       <input type="radio" name="question${questionNumber}" value="${letter}">             
@@ -144,14 +143,20 @@
                     </label>`
                             );
                         }
+                    } else if (currentQuestion.type === "longopen") {
+                        answers.push(
+                            `<label>
+                      <textarea class="demo-textbox" type="text" name="question${questionNumber}" rows="5" cols= "50"></textarea>
+                    </label>`
+                        );
                     } else {
                         answers.push(
                             `<label>
-                      <textarea class="demo-textbox" type="text" name="question${questionNumber}" rows="4" cols= "50"></textarea>
+                      <textarea class="demo-textbox" type="text" name="question${questionNumber}" rows="1" cols= "50"></textarea>
                     </label>`
                         );
                     }
-                    
+
                     // add this question and its answers to the output
                     output.push(
                         `<div class="slide">
@@ -159,7 +164,7 @@
                     <div class="answers"> ${answers.join("")} </div>
                     <br>
                     <label> 0% </label>
-                        <progress class="progress-bar" min="1" max="7" value="${questionNumber}"></progress>
+                        <progress class="progress-bar" min="1" max="${progressLimit}" value="${questionNumber + 1}"></progress>
                         <label> 100% </label>
                   </div>`
                     );
@@ -192,8 +197,8 @@
                 // save the user answers on oTree by creating hidden html with name that matches names in init
                 let saveOtree = document.getElementById('otreeData');
                 recordAnswer.push(
-                    `<input type="hidden" name="D${questionNumber}" value="${userAnswer}">`
-                    );
+                    `<input type="hidden" name="${currentQuestion.name}" value="${userAnswer}">`
+                );
                 saveOtree.innerHTML = recordAnswer.join('');
             });
         }
@@ -231,11 +236,12 @@
         const quizContainer = document.getElementById('quiz');
         const resultsContainer = document.getElementById('results');
         const submitButton = document.getElementById('submit');
+        //const myQuestions = JSON.parse(questionnaire);//
         const myQuestions = [
             {
                 question: "What is your age?",
                 name: "D1",
-                type: "text",
+                type: "open",
             },
             {
                 question: "Which gender do you identify the most with?",
@@ -251,14 +257,14 @@
             {
                 question: "What country do you live in?",
                 name: "D3",
-                type: "text",
+                type: "open",
             },
             {
                 question: "What is your nationality?",
                 name: "D4",
-                type: "text",
+                type: "open",
             },
-             {
+            {
                 question: "Have you ever participated in an incentivized economic experiment (such as this one) before?",
                 name: "D5",
                 type: "radio",
@@ -270,11 +276,13 @@
             },
             {
                 question: "What do you think is the purpose of this study? Describe shortly in your own words.",
-                type: "text",
+                name: "D6",
+                type: "longopen",
             },
             {
                 question: "During the experiment, did you use any specific strategy or rule of thumb when deciding which of the two products to purchase? If so, describe it shortly.",
-                type: "text",
+                name: "D7",
+                type: "longopen",
             },
         ];
 
@@ -297,7 +305,17 @@
 
         // array for saving the html with correct 
         let recordAnswer = []
-        console.log(recordAnswer);
+
+        // Keypress controls next/previous slide
+        document.addEventListener('keydown', (event) => {
+            let keypress = event.key;
+            if (keypress === 'Enter') { // click 'Enter' = next slide
+                showNextSlide();
+            } else if (keypress === 'Backspace') { // click 'backspace' = previous slide
+                showPreviousSlide();
+            }
+        });
+
     })();
 
 
