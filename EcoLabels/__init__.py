@@ -21,6 +21,8 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+
+    # variables for instructions
     Q1 = models.IntegerField()
     Q2 = models.StringField()
     Q3 = models.StringField()
@@ -72,21 +74,20 @@ class Instructions(Page):
     form_model = 'player'
     form_fields = ['Q1', 'Q2', 'Q3', 'Q4']
 
-class Demographics(Page):
-    form_model = 'player'
-    form_fields = ['D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7']
-
 class Questionnaire(Page):
     form_model = 'player'
-    form_fields = ['QT1', 'QT2', 'QT3','QT4', 'QT5', 'QT6', 'QT7','QT8', 'QT9', 'QT10', 'QT11', 'QT12', 'QT13', 'QT14', 'QT15','QT16', 'QT17', 'QT18','QT19', 'QT20', 'QT21', 'QT22','QT23', 'QT24', 'QT25','QT26', 'QT27']
+    form_fields = ['D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'QT1', 'QT2', 'QT3','QT4', 'QT5', 'QT6', 'QT7','QT8', 'QT9', 'QT10', 'QT11', 'QT12', 'QT13', 'QT14', 'QT15','QT16', 'QT17', 'QT18','QT19', 'QT20', 'QT21', 'QT22','QT23', 'QT24', 'QT25','QT26', 'QT27']
 
     def is_displayed(self):
         return True
+
+class old_Questionnaire(Page):
+    pass
 
 class Results(Page):
     pass
 
 
-page_sequence = [Demographics, Questionnaire, Introduction, Instructions, Results]
+page_sequence = [Questionnaire, Instructions, old_Questionnaire,  Introduction, Results]
 
 

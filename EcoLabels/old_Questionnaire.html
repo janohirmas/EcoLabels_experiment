@@ -21,34 +21,17 @@
     }
 
     .question {
-        font-size: 1.4em;
-        height: 10vh;
-        margin-bottom: 4vh;
+        font-size: 1.3em;
+        font-style: italic;
+        height: 8vh;
+        margin-bottom: 8vh;
         padding: 3vh;
     }
 
     .answers {
-        font-size: 1.2em;
+        font-size: 1em;
         margin-top: 3vh;
         margin-bottom: 10vh;
-        text-align: left;
-        display: inline-block;
-        height: 20vh;
-    }
-
-    .Demo-label {
-        display: block;
-        margin-bottom: 10px;
-    }
-
-    .QT-radio {
-        display: block;
-        margin: 0 auto;
-    }
-
-    .QT-label {
-        display: inline-block;
-        width: 10vw;
         text-align: center;
     }
 
@@ -88,12 +71,20 @@
 
     .quiz-container {
         position: relative;
-        height: 40vh;
+        height: 30vh;
         margin-top: 5vh;
+        background-color: white;
     }
 
-    .demo-textbox {
-        font-size: 0.8em;
+    input[type=radio] {
+        display: block;
+        margin: 0 auto;
+    }
+
+    label {
+        display: inline-block;
+        width: 10vw;
+        text-align: center;
     }
 
     .progress-bar {
@@ -108,7 +99,8 @@
 
 <body>
 
-    <h1>That was the end of the experiment. Next, we would like you to answer a few questions.</h1>
+    <h1><strong>Questionnaire:</strong> Please indicate your agreement or disagreement with the following sentences by
+        choosing one of the answer options.</h1>
 
     <div class="quiz-container">
         <div id="quiz"></div>
@@ -126,14 +118,14 @@
 <!-- JAVASCRIPT -->
 
 <script>
-    //<script type="text/javascript" src="{% static 'questionnaire.json' %}">// 
+
+    // This function creates the questionnaire. The object containing the questions, answers etc. can be found with the name "myQuestions". The function takes the labels and values from the object under certain question and creates slides one by one. 
     (function () {
         // Functions
         function buildQuiz() {
             // variable to store the HTML output
             const output = [];
-            // variable to define the length of the progress bar
-            const progressLimit = myQuestions.length;
+
             // for each question...
             myQuestions.forEach(
                 (currentQuestion, questionNumber) => {
@@ -141,65 +133,40 @@
                     // variable to store the list of possible answers
                     const answers = [];
 
-                    // and for each available answer...
-                    if (currentQuestion.type === "radio") {
-
-                        for (letter in currentQuestion.answers) {
-
-                            // ...add an HTML radio button 
-                            answers.push(
-                                `<label class="Demo-label">
-                      <input type="radio" name="question${questionNumber}" value="${letter}">             
-                      ${currentQuestion.answers[letter]}
-                    </label>`
-                            );
-                        }
-                    } else if (currentQuestion.type === "radioHorizontal") {
-                        answers.push(
-                            `<div>
-                      <label class="QT-label"><input type="radio" class="QT-radio" name="question${questionNumber}" value="1"/> Strongly disagree
-                      </label><label class="QT-label">                  
+                    // ...add an HTML radio buttons with answer options. "Value" is the one that is going to be saved on oTree. 
+                    answers.push(
+                        `<div>
+                      <label><input type="radio" class="QT-radio" name="question${questionNumber}" value="1"/> Strongly disagree
+                      </label><label>                  
                       <input type="radio" class="QT-radio" name="question${questionNumber}" value="2"/> Disagree
-                      </label><label class="QT-label">
+                      </label><label>
                       <input type="radio" class="QT-radio" name="question${questionNumber}" value="3"/> Neutral
-                      </label><label class="QT-label">
+                      </label><label>
                       <input type="radio" class="QT-radio" name="question${questionNumber}" value="4"/> Agree
-                      </label><label class="QT-label">
+                      </label><label>
                       <input type="radio" class="QT-radio" name="question${questionNumber}" value="5"/> Strongly agree            
                     </label></div>`
-                        );
-                    } else if (currentQuestion.type === "longOpen") {
-                        answers.push(
-                            `<label class="Demo-label">
-                      <textarea class="demo-textbox" type="text" id = "question${questionNumber}" name="question${questionNumber}" rows="5" cols= "50"></textarea>
-                    </label>`
-                        );
-                    } else {
-                        answers.push(
-                            `<label class="Demo-label">
-                      <textarea class="demo-textbox" type="text" id = "question${questionNumber}" name="question${questionNumber}" rows="1" cols= "50"></textarea>
-                    </label>`
-                        );
-                    }
+                    );
 
-                    // add this question and its answers to the output
+                    // add this question and its answers to the output + progress bar with current amount of progress. Remember to change the "max" value of progress bar to the amount of questions you have. 
                     output.push(
                         `<div class="slide">
                     <div class="question"> ${currentQuestion.question} </div>
                     <div class="answers"> ${answers.join("")} </div>
                     <br>
                     <label> 0% </label>
-                        <progress class="progress-bar" min="1" max="${progressLimit}" value="${questionNumber + 1}"></progress>
+                        <progress class="progress-bar" min="1" max="27" value="${questionNumber}"></progress>
                         <label> 100% </label>
-                  </div>`
+                    </div>`
                     );
                 }
             );
 
-            // finally combine our output list into one string of HTML and put it on the page
+            // finally combine the output list into one string of HTML and put it on the page
             quizContainer.innerHTML = output.join('');
         }
 
+        // the name of this function is a little bit misleading, but what it does is it collects the given responses from the questionnaire and creates hidden HTML code on the page which is used to record to answers to oTree. 
         function showResults() {
 
             // gather answer containers from our quiz
@@ -210,16 +177,10 @@
 
                 // find selected answer
                 const answerContainer = answerContainers[questionNumber];
-                let selector = '';
-                let userAnswer = '';
-                if (currentQuestion.type === "radio" || currentQuestion.type === "radioHorizontal") {
-                    selector = `input[name=question${questionNumber}]:checked`;
-                    userAnswer = (answerContainer.querySelector(selector) || {}).value;
-                } else {
-                    selector = `textarea[name=question${questionNumber}]`;
-                    userAnswer = (answerContainer.querySelector(selector)).value;
-                }
-                // save the user answers on oTree by creating hidden html with name that matches names in init
+                const selector = `input[name=question${questionNumber}]:checked`;
+                const userAnswer = (answerContainer.querySelector(selector) || {}).value;
+
+                // save the user answers on oTree by creating hidden html with name that matches names in init.py
                 let saveOtree = document.getElementById('otreeData');
                 recordAnswer.push(
                     `<input type="hidden" name="${currentQuestion.name}" value="${userAnswer}">`
@@ -228,7 +189,7 @@
             });
         }
 
-        // Question slides: show one by one
+        // This function shows the question slides one by one and shows the submit button on the last page
         function showSlide(n) {
             slides[currentSlide].classList.remove('active-slide');
             slides[n].classList.add('active-slide');
@@ -249,201 +210,131 @@
             }
         }
 
+        // slide counters
+        /*function showNextSlide() {
+            showSlide(currentSlide + 1);
+        }*/
+
         function showPreviousSlide() {
             showSlide(currentSlide - 1);
         }
 
         // Variables
+
+        // get questionnaire
         const quizContainer = document.getElementById('quiz');
-        const resultsContainer = document.getElementById('results');
+        // get submit button
         const submitButton = document.getElementById('submit');
-
-        // array for saving the html with correct 
-        let recordAnswer = []
-
 
         // object containing questions + names. Name needs to match the name given in init.py under class Questionnaire(Page) form_fields!
         const myQuestions = [
             {
-                question: "What is your age?",
-                name: "D1",
-                type: "open",
-            },
-            {
-                question: "Which gender do you identify the most with?",
-                name: "D2",
-                type: "radio",
-                answers: {
-                    1: "Female",
-                    2: "Male",
-                    3: "Other",
-                    4: "Prefer not to say"
-                },
-            },
-            {
-                question: "What country do you live in?",
-                name: "D3",
-                type: "open",
-            },
-            {
-                question: "What is your nationality?",
-                name: "D4",
-                type: "open",
-            },
-            {
-                question: "Have you ever participated in an incentivized economic experiment (such as this one) before?",
-                name: "D5",
-                type: "radio",
-                answers: {
-                    1: "Yes",
-                    2: "No",
-                    3: "Not sure / don't remember"
-                }
-            },
-            {
-                question: "What do you think is the purpose of this study? Describe shortly in your own words.",
-                name: "D6",
-                type: "longOpen",
-            },
-            {
-                question: "During the experiment, did you use any specific strategy or rule of thumb when deciding which of the two products to purchase? If so, describe it shortly.",
-                name: "D7",
-                type: "longOpen",
-            },
-            {
                 question: "Reducing water consumption is necessary for sustainable development.",
                 name: "QT1",
-                type: "radioHorizontal",
             },
             {
                 question: "Preserving the variety of living creatures is necessary for sustainable development (preserving biological diversity).",
                 name: "QT2",
-                type: "radioHorizontal",
             },
             {
                 question: "For sustainable development, people need to be educated in how to protect themselves against natural disasters.",
                 name: "QT3",
-                type: "radioHorizontal",
             },
             {
                 question: "A culture where conflicts are resolved peacefully through discussion is necessary for sustainable development.",
                 name: "QT4",
-                type: "radioHorizontal",
             },
             {
                 question: "Respecting human rights is necessary for sustainable development.",
                 name: "QT5",
-                type: "radioHorizontal",
             },
             {
                 question: "To achieve sustainable development, all the people in the world must have access to good education.",
                 name: "QT6",
-                type: "radioHorizontal",
             },
             {
                 question: "Sustainable development requires that companies act responsibly towards their employees, customers and suppliers.",
                 name: "QT7",
-                type: "radioHorizontal",
             },
             {
                 question: "Sustainable development requires a fair distribution of goods and services among people in the world.",
                 name: "QT8",
-                type: "radioHorizontal",
             },
             {
                 question: "Wiping out poverty in the world is necessary for sustainable development.",
                 name: "QT9",
-                type: "radioHorizontal",
             },
             {
                 question: "I think that using more natural resources than we need does not threaten the health and well‐being of people in the future.",
                 name: "QT10",
-                type: "radioHorizontal",
             },
             {
                 question: "I think that we need stricter laws and regulations to protect the environment.",
                 name: "QT11",
-                type: "radioHorizontal",
             },
             {
                 question: "I think that it is important to take measures against problems which have to do with climate change.",
                 name: "QT12",
-                type: "radioHorizontal",
             },
             {
                 question: "I think that everyone ought to be given the opportunity to acquire the knowledge, values and skills that are necessary to live sustainably.",
                 name: "QT13",
-                type: "radioHorizontal",
             },
             {
                 question: "I think that we who are living now should make sure that people in the future enjoy the same quality of life as we do today.",
                 name: "QT14",
-                type: "radioHorizontal",
             },
             {
                 question: "I think that women and men throughout the world must be given the same opportunities for education and employment.",
                 name: "QT15",
-                type: "radioHorizontal",
             },
             {
                 question: "I think that companies have a responsibility to reduce the use of packaging and disposable articles.",
                 name: "QT16",
-                type: "radioHorizontal",
             },
             {
                 question: "I think it is important to reduce poverty.",
                 name: "QT17",
-                type: "radioHorizontal",
             },
             {
                 question: "I think that companies in rich countries should give employees in poor nations the same conditions as in rich countries.",
                 name: "QT18",
-                type: "radioHorizontal",
             },
             {
                 question: "I recycle as much as I can.",
                 name: "QT19",
-                type: "radioHorizontal",
             },
             {
                 question: "I always separate food waste before putting out the rubbish when I have the chance.",
                 name: "QT20",
-                type: "radioHorizontal",
             },
             {
                 question: "I have changed my personal lifestyle in order to reduce waste (e.g., throwing away less food or not wasting materials).",
                 name: "QT21",
-                type: "radioHorizontal",
             },
             {
                 question: "When I use a computer or mobile to chat, to text, to play games and so on, I always treat others as respectfully as I would in real life.",
                 name: "QT22",
-                type: "radioHorizontal",
             },
             {
                 question: "I support an aid organization or environmental group.",
                 name: "QT23",
-                type: "radioHorizontal",
             },
             {
                 question: "I show the same respect to men and women, boys and girls.",
                 name: "QT24",
-                type: "radioHorizontal",
             },
             {
                 question: "	I do things which help poor people.",
                 name: "QT25",
-                type: "radioHorizontal",
             },
             {
                 question: "I often purchase second‐hand goods over the internet or in a shop",
                 name: "QT26",
-                type: "radioHorizontal",
             },
             {
                 question: "I avoid buying goods from companies with a bad reputation for looking after their employees and the environment.",
                 name: "QT27",
-                type: "radioHorizontal",
             },
         ];
 
@@ -464,59 +355,34 @@
         previousButton.addEventListener("click", showPreviousSlide);
         nextButton.addEventListener("click", showNextSlide);
 
-        // Keypress controls next/previous slide
-        document.addEventListener('keydown', (event) => {
-            let keypress = event.key;
-            if (keypress === 'Enter') { // click 'Enter' = next slide
-                showNextSlide();
-            } else if (keypress === 'Backspace') { // click 'backspace' = previous slide
-                showPreviousSlide();
-            }
-        });
-
-        $(document).ready(function () {
-            $(window).keydown(function (event) {
-                if (event.keyCode == 13) {
-                    event.preventDefault();
-                    return false;
-                }
-            });
-        });
+        // array for saving the html with correct 
+        let recordAnswer = [];
 
         let count = 0;
 
         function showNextSlide() {
             count = count + 1;
 
-            let questionTypes = [];
-            myQuestions.forEach(Question => {
-                questionTypes.push(Question.type)
-            });
-
             if (count < myQuestions.length) {
-                let counter = count - 1;
-                const answerSelector = quizContainer.querySelectorAll('.answers');
+            let counter = count - 1;
+            const answerSelector = quizContainer.querySelectorAll('.answers');
+            // for each question...
                 let answerContainer2 = answerSelector[counter];
-                let selection = '';
-                let checkAnswer = '';
-        
-                if (questionTypes[counter] === "open" || questionTypes[counter] === "longOpen") {
-                    selection = `textarea[name=question${counter}]`;
-                    checkAnswer = (answerContainer2.querySelector(selection)).value;
-                } else {
-                    checkAnswer = answerContainer2.querySelector(`input[name=question${counter}]:checked`);
-                }
-                console.log(checkAnswer);
-
-                if (checkAnswer == null || checkAnswer == "") {
-                    count = count - 1;
-                } else {
+                // find selected answer
+                let selection = answerContainer2.querySelector(`input[name=question${counter}]:checked`);
+                console.log(selection);
+                console.log(count);
+                console.log(answerContainer2);
+                if (selection !== null) {
                     showSlide(currentSlide + 1);
+                } else {
+                    count = count - 1;
                 }
 
             }
         };
-
     })();
+
+
 
 </script>
