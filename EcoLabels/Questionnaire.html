@@ -47,6 +47,7 @@
     }
 
     .QT-label {
+        font-size: 1em;
         display: inline-block;
         width: 10vw;
         text-align: center;
@@ -474,6 +475,7 @@
             }
         });
 
+        // prevent submitting the questionnaire if user click "Enter"
         $(document).ready(function () {
             $(window).keydown(function (event) {
                 if (event.keyCode == 13) {
@@ -483,33 +485,43 @@
             });
         });
 
-        let count = 0;
+        //initialize slide count for showNextSlide()
+        let slideCount = 0;
 
+        // This function runs if user click "Next" (or "Enter"). It lets the user go to the next question (slide) only if answer was given to the current questions. The user cannot leave answer fields empty. 
         function showNextSlide() {
-            count = count + 1;
+            slideCount = slideCount + 1; // increase slide count by one
 
-            let questionTypes = [];
-            myQuestions.forEach(Question => {
+            // create variable to store question type
+            let questionTypes = []; 
+            // for each question, get question type and store in variable
+            myQuestions.forEach(Question => { 
                 questionTypes.push(Question.type)
             });
 
-            if (count < myQuestions.length) {
-                let counter = count - 1;
+            // run this code until all questions have been checked
+            if (slideCount < myQuestions.length) {
+                // initialize counter to index current question/answer from arrays
+                let counter = slideCount - 1;
+                // get all answers and save in container
                 const answerSelector = quizContainer.querySelectorAll('.answers');
+                // select current answer container
                 let answerContainer2 = answerSelector[counter];
+                // create variables to save current answer
                 let selection = '';
                 let checkAnswer = '';
-        
+                
+                // based on question type (open, longOpen, radio, radioHorizontal), get current answer
                 if (questionTypes[counter] === "open" || questionTypes[counter] === "longOpen") {
                     selection = `textarea[name=question${counter}]`;
                     checkAnswer = (answerContainer2.querySelector(selection)).value;
                 } else {
                     checkAnswer = answerContainer2.querySelector(`input[name=question${counter}]:checked`);
                 }
-                console.log(checkAnswer);
 
+                // if answer container is empty, return slide count back to where it was. If answer container was not empty, move to next question.
                 if (checkAnswer == null || checkAnswer == "") {
-                    count = count - 1;
+                    slideCount = slideCount - 1;
                 } else {
                     showSlide(currentSlide + 1);
                 }
