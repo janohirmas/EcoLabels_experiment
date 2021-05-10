@@ -1,123 +1,24 @@
+<!-- QUESTIONNAIRE -->
+
+<!-- LINK TO STYLESHEET -->
+<link rel="stylesheet" href="{% static 'global/EcoLabels_visual/styling10.css' %}">
+
 {% load otree static %}
 {% block content %}
 
-<style>
-    @import url(https://fonts.googleapis.com/css?family=Work+Sans:300,600);
-
-    body {
-        font-family: 'Work Sans', sans-serif;
-        color: #333;
-        font-weight: 300;
-        text-align: center;
-        background-color: #f8f6f0;
-    }
-
-    h1 {
-        font-size: 1.3em;
-        text-align: left;
-        padding: 4vh;
-        background-color: rgba(59, 121, 139, 0.678);
-        color: white;
-    }
-
-    .question {
-        font-size: 1.4em;
-        height: 10vh;
-        margin-bottom: 4vh;
-        padding: 3vh;
-    }
-
-    .answers {
-        font-size: 1.2em;
-        margin-top: 3vh;
-        margin-bottom: 10vh;
-        text-align: left;
-        display: inline-block;
-        height: 20vh;
-    }
-
-    .Demo-label {
-        display: block;
-        margin-bottom: 10px;
-    }
-
-    .QT-radio {
-        display: block;
-        margin: 0 auto;
-    }
-
-    .QT-label {
-        font-size: 1em;
-        display: inline-block;
-        width: 10vw;
-        text-align: center;
-    }
-
-    .button {
-        font-family: 'Work Sans', sans-serif;
-        font-size: 1.2em;
-        font-style: bold;
-        background-color: rgb(33, 202, 132);
-        color: #fff;
-        border: 0px;
-        border-radius: 3px;
-        padding: 4vh;
-        cursor: pointer;
-        margin-top: 15vh;
-        text-decoration: none;
-    }
-
-    .button:hover {
-        background-color: rgb(39, 221, 145);
-        color: #fff;
-    }
-
-    .slide {
-        position: absolute;
-        left: 0px;
-        top: 0px;
-        width: 100%;
-        z-index: 1;
-        opacity: 0;
-        transition: opacity 0.5s;
-    }
-
-    .active-slide {
-        opacity: 1;
-        z-index: 2;
-    }
-
-    .quiz-container {
-        position: relative;
-        height: 40vh;
-        margin-top: 5vh;
-    }
-
-    .demo-textbox {
-        font-size: 0.8em;
-    }
-
-    .progress-bar {
-        display: inline-block;
-        width: 20vw;
-        opacity: 0.7;
-        text-align: center;
-        -webkit-appearance: none;
-        appearance: none;
-    }
-</style>
-
 <body>
 
-    <h1>That was the end of the experiment. Next, we would like you to answer a few questions.</h1>
-
-    <div class="quiz-container">
-        <div id="quiz"></div>
+    <div class="questionnaire">
+        <h1>Questionnaire</h1>
+        <div class="element-container">
+            <div class="quiz-container">
+                <div id="quiz"></div>
+            </div>
+            <a id="previous" class="button" onclick=showPreviousSlide()>Previous</a>
+            <a id="next" class="button" onclick=showNextSlide()> Next</a>
+            <button id="submit" class="button" onclick=showResults()>Submit</button>
+        </div>
     </div>
-    <a id="previous" class="button" onclick=showPreviousSlide()>Previous</a>
-    <a id="next" class="button" onclick=showNextSlide()> Next</a>
-    <button id="submit" class="button" onclick=showResults()>Submit</button>
-
     <div id="otreeData"></div>
 
 
@@ -127,7 +28,7 @@
 <!-- JAVASCRIPT -->
 
 <script>
-    //<script type="text/javascript" src="{% static 'questionnaire.json' %}">// 
+
     (function () {
         // Functions
         function buildQuiz() {
@@ -175,13 +76,18 @@
                       <textarea class="demo-textbox" type="text" id = "question${questionNumber}" name="question${questionNumber}" rows="5" cols= "50"></textarea>
                     </label>`
                         );
-                    } else {
+                    } else if (currentQuestion.type === "open") {
                         answers.push(
                             `<label class="Demo-label">
                       <textarea class="demo-textbox" type="text" id = "question${questionNumber}" name="question${questionNumber}" rows="1" cols= "50"></textarea>
                     </label>`
                         );
+                    } else {
+                        answers.push(
+                            `<p class="QT-inst"> ${currentQuestion.answer}</p>`
+                        )
                     }
+
 
                     // add this question and its answers to the output
                     output.push(
@@ -216,16 +122,20 @@
                 if (currentQuestion.type === "radio" || currentQuestion.type === "radioHorizontal") {
                     selector = `input[name=question${questionNumber}]:checked`;
                     userAnswer = (answerContainer.querySelector(selector) || {}).value;
-                } else {
+                } else if (currentQuestion.type === "open" || currentQuestion.type === "longOpen") {
                     selector = `textarea[name=question${questionNumber}]`;
                     userAnswer = (answerContainer.querySelector(selector)).value;
+                } else {
+                    userAnswer = "notAnAnswer"
                 }
                 // save the user answers on oTree by creating hidden html with name that matches names in init
                 let saveOtree = document.getElementById('otreeData');
-                recordAnswer.push(
-                    `<input type="hidden" name="${currentQuestion.name}" value="${userAnswer}">`
-                );
-                saveOtree.innerHTML = recordAnswer.join('');
+                if (userAnswer !== "notAnAnswer") {
+                    recordAnswer.push(
+                        `<input type="hidden" name="${currentQuestion.name}" value="${userAnswer}">`
+                    );
+                    saveOtree.innerHTML = recordAnswer.join('');
+                }
             });
         }
 
@@ -238,7 +148,7 @@
                 previousButton.style.display = 'none';
             }
             else {
-                previousButton.style.display = 'inline-block';
+                previousButton.style.display = 'none'; // change this to inline-block if you want to enable previous button.
             }
             if (currentSlide === slides.length - 1) {
                 nextButton.style.display = 'none';
@@ -250,13 +160,19 @@
             }
         }
 
+        /* this page does not include a previous button anymore but here is the piece of code if you want to make one. NOTE that this button does not work well together with the showNextSlide() (one that checks if answer was given). You can change showNextSlide() back to: 
+
+        function showNextSlide() {
+        showSlide(currentSlide + 1);
+        }
+        
         function showPreviousSlide() {
             showSlide(currentSlide - 1);
         }
+        */
 
         // Variables
         const quizContainer = document.getElementById('quiz');
-        const resultsContainer = document.getElementById('results');
         const submitButton = document.getElementById('submit');
 
         // array for saving the html with correct 
@@ -264,7 +180,13 @@
 
 
         // object containing questions + names. Name needs to match the name given in init.py under class Questionnaire(Page) form_fields!
+
         const myQuestions = [
+            {
+                question: "",
+                type: "instruction",
+                answer: "That was the end of the experiment. Next, we would like you to answer a few questions about yourself. All answers will be treated confidentially. Note that you can only move to the next question after you have given your answer. There is no possibility to go back in your answers!",
+            },
             {
                 question: "What is your age?",
                 name: "D1",
@@ -310,6 +232,11 @@
                 question: "During the experiment, did you use any specific strategy or rule of thumb when deciding which of the two products to purchase? If so, describe it shortly.",
                 name: "D7",
                 type: "longOpen",
+            },
+            {
+                question: "",
+                type: "instruction",
+                answer: "In the next part, you will be presented with 27 statements about sustainability. Please indicate your agreement or disagreement with these statements by choosing one of the answer options. You can move to the next stament by clicking 'Next' or 'Enter'",
             },
             {
                 question: "Reducing water consumption is necessary for sustainable development.",
@@ -462,7 +389,7 @@
 
         // Event listeners
         submitButton.addEventListener('click', showResults);
-        previousButton.addEventListener("click", showPreviousSlide);
+        //previousButton.addEventListener("click", showPreviousSlide);
         nextButton.addEventListener("click", showNextSlide);
 
         // Keypress controls next/previous slide
@@ -493,9 +420,9 @@
             slideCount = slideCount + 1; // increase slide count by one
 
             // create variable to store question type
-            let questionTypes = []; 
+            let questionTypes = [];
             // for each question, get question type and store in variable
-            myQuestions.forEach(Question => { 
+            myQuestions.forEach(Question => {
                 questionTypes.push(Question.type)
             });
 
@@ -510,13 +437,15 @@
                 // create variables to save current answer
                 let selection = '';
                 let checkAnswer = '';
-                
+
                 // based on question type (open, longOpen, radio, radioHorizontal), get current answer
                 if (questionTypes[counter] === "open" || questionTypes[counter] === "longOpen") {
                     selection = `textarea[name=question${counter}]`;
                     checkAnswer = (answerContainer2.querySelector(selection)).value;
-                } else {
+                } else if (questionTypes[counter] === "radio" || questionTypes[counter] === "radioHorizontal") {
                     checkAnswer = answerContainer2.querySelector(`input[name=question${counter}]:checked`);
+                } else {
+                    checkAnswer = 1;
                 }
 
                 // if answer container is empty, return slide count back to where it was. If answer container was not empty, move to next question.

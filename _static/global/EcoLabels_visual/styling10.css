@@ -1,3 +1,4 @@
+
 /* CSS STYLESHEET FOR ECOLABELS EXPERIMENT */
  
 /* GLOBAL STYLING */
@@ -41,15 +42,19 @@
     body {
        font-family: 'Work Sans', sans-serif;
        color: #333;
-       background-color: #f8f6f0;  
+       background-color: #f8f6f0;
+       text-align: center;  
     }
 
     /* Titles */
     h1 {
-        font-size: 7vh;
+        font-size: 2.5em;
         margin-top: -10vh;
         text-align: center;
-        position:absolute;
+        padding: 4vh;
+        background-color: rgba(59, 121, 139, 0.678);
+        color: white;
+        width: 80vw;
     }
 
 /* INTRODUCTION & INSTRUCTIONS */
@@ -64,6 +69,7 @@
         margin-top: 10vh;
         margin-left: 10vw;
         margin-bottom: 2vh;
+        text-align: justify;
         justify-content: center;
         align-content: center;
     }
@@ -76,10 +82,16 @@
     /* Slides*/
     .slide-item {
         height: 65vh;
-        width: 77vw;
+        width: 80vw;
         padding: 5vh;
         background-color: white;
         font-size: 3vh;
+    }
+
+    /* Slide title*/
+    .title {
+        font-weight: bold;
+        text-align: center;
     }
 
     /* Container for questions slide */
@@ -88,7 +100,7 @@
         display: flex;
         flex-direction: column;
         height: 65vh;
-        width: 77vw;
+        width: 80vw;
         background-color: white;
         padding-top: 2vh;
         font-size: 2.5vh;
@@ -222,4 +234,128 @@
     .active,
     .dot:hover {
         background-color: #717171;
+    }
+
+/* INFOGRAPHIC */
+
+    .infograph-container {
+        height: 60vh;
+        width: 80vw;
+        padding: 0;
+        margin-left: 10vw;
+        margin-bottom: 2vh;
+    }
+
+    .info-img {
+        width: 100%
+    }
+
+/* QUESTIONNAIRE */
+    
+    .questionnaire {
+        margin-top: 10vh;
+        text-align: center; 
+        margin-left: 10vw;
+        margin-bottom: 2vh;  
+        width: 80vw;
+        padding-bottom: 3vh;    
+    }
+
+    .element-container {
+        background-color: white;
+        height: 70vh;
+        width: 80vw;
+    }
+
+    .question {
+        font-size: 1.4em;
+        height: 10vh;
+        margin-bottom: 4vh;
+        padding: 3vh;
+    }
+
+    .answers {
+        font-size: 1.2em;
+        margin-top: 3vh;
+        margin-bottom: 10vh;
+        text-align: left;
+        display: inline-block;
+        height: 20vh;
+    }
+
+    .Demo-label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .QT-radio {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .QT-label {
+        font-size: 1em;
+        display: inline-block;
+        width: 12vw;
+        text-align: center;
+    }
+
+    .QT-inst {
+        font-size: 1.2em;
+        text-align: center;
+        padding-top: 0;
+        padding-left: 3vw;
+        padding-right: 3vw;
+    }
+
+    .button {
+        font-family: 'Work Sans', sans-serif;
+        font-size: 1.2em;
+        font-style: bold;
+        background-color: rgb(33, 202, 132);
+        color: #fff;
+        border: 0px;
+        border-radius: 3px;
+        padding: 4vh;
+        cursor: pointer;
+        margin-top: 15vh;
+        text-decoration: none;       
+    }
+
+    .button:hover {
+        background-color: rgb(39, 221, 145);
+        color: #fff;
+    }
+
+    .slide {
+        position: absolute;
+        height: 50vh;
+        width: 80vw;
+        z-index: 1;
+        opacity: 0;
+        transition: opacity 0.5s;
+    }
+
+    .active-slide {
+        opacity: 1;
+        z-index: 2;
+    }
+
+    .quiz-container {
+        position: relative;
+        height: 40vh;
+        margin-top: 1vh;
+    }
+
+    .demo-textbox {
+        font-size: 0.8em;
+    }
+
+    .progress-bar {
+        display: inline-block;
+        width: 20vw;
+        opacity: 0.7;
+        text-align: center;
+        -webkit-appearance: none;
+        appearance: none;
     }
