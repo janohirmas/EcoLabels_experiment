@@ -18,13 +18,12 @@
 
         <!-- Slide 2-->
         <div class="mySlides">
-            
-            </div>
+            <img class="info-img" src="{% static 'global/EcoLabels_visual/quality.png' %}" />
         </div>
 
         <!-- Slide 3-->
         <div class="mySlides">
-            
+            <img class="info-img" src="{% static 'global/EcoLabels_visual/sus_linear.png' %}" />
         </div>
 
 
@@ -32,16 +31,10 @@
         <a id="leftArrow" class="prev" onclick="plusSlides(-1)">&#10094;</a>
         <a id="rightArrow" class="next" onclick="plusSlides(1)">&#10095;</a>
 
-        <!-- The dots/circles -->
-        <div class="dot_row">
-            <span class="dot" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
-            <span class="dot" onclick="currentSlide(3)"></span>
-        </div>
-
     </div>
 
-    <div id="nextButton"> {% next_button %} </div>
+{% next_button %}
+
 </body>
 
 <!-- OTREE TEMPLATES -->

@@ -88,6 +88,6 @@ class Results(Page):
     pass
 
 
-page_sequence = [Questionnaire, Instructions, Infographics, Introduction, Results]
+page_sequence = [Infographics, Questionnaire, Instructions,  Introduction, Results]
 
 
