@@ -239,16 +239,40 @@
 /* INFOGRAPHIC */
 
     .infograph-container {
-        height: 60vh;
+        height: 80vh;
         width: 80vw;
         padding: 0;
         margin-left: 10vw;
         margin-bottom: 2vh;
+        text-align: center;
     }
 
     .info-img {
-        max-width: 90%;
-        height: auto;
+        height: 80vh;
+        width: 80vw;
+        object-fit:contain;
+    }
+
+    .info-dotrow {
+        position: inline-block;
+        text-align: center;
+        margin: -5vh;
+    }
+
+    .info-button {
+        display: absolute;
+        display: inline-block;
+        font-family: 'Work Sans', sans-serif;
+        font-size: 1.2em;
+        font-style: bold;
+        background-color: rgb(33, 202, 132);
+        color: #fff;
+        border: 0px;
+        border-radius: 3px;
+        padding: 4vh;
+        cursor: pointer;
+        text-decoration: none;  
+        margin: 10vh; 
     }
 
 /* QUESTIONNAIRE */

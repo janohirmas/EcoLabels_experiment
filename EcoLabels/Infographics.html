@@ -13,7 +13,7 @@
 
         <!-- Slide 1-->
         <div class="mySlides">
-            <img class= "info-img" src="{% static 'global/EcoLabels_visual/instruction.png' %}" />
+            <img class="info-img" src="{% static 'global/EcoLabels_visual/instruction.png' %}" />
         </div>
 
         <!-- Slide 2-->
@@ -31,10 +31,14 @@
         <a id="leftArrow" class="prev" onclick="plusSlides(-1)">&#10094;</a>
         <a id="rightArrow" class="next" onclick="plusSlides(1)">&#10095;</a>
 
+        <div class="info-dotrow">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+        <button id="submit" class="info-button">Next</button>
     </div>
-
-{% next_button %}
-
+    
 </body>
 
 <!-- OTREE TEMPLATES -->
