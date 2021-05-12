@@ -22,6 +22,15 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
 
+    condition = models.StringField()
+
+    def creating_session(subsession):
+    # randomize to treatments
+        for player in subsession.get_players():
+            player.condition = random.choice(['linear', 'nonlinear'])
+            print('set player.credibility to', player.condition)
+
+
     # variables for instructions
     Q1 = models.IntegerField()
     Q2 = models.StringField()
@@ -75,7 +84,38 @@ class Instructions(Page):
     form_fields = ['Q1', 'Q2', 'Q3', 'Q4']
 
 class Infographics(Page):
-    pass
+
+    @staticmethod
+    def vars_for_template(player):
+        condition = 2
+        quality = 'global/EcoLabels_visual/quality.png'
+        cred_linear = 'global/EcoLabels_visual/sus_linear.png'
+        cred_nonlinear_high = 'global/EcoLabels_visual/sus_nonlin_high.png'
+        cred_nonlinear_low = 'global/EcoLabels_visual/sus_nonlin_low.png'
+
+        import random
+         
+        if condition == 1:
+            pick_image1 = random.choice([quality, cred_linear])
+            if  pick_image1 == quality:
+                pick_image2 = cred_linear
+            else:
+                pick_image2 = quality
+        else:
+            pick_nonlinear = random.choice([cred_nonlinear_high, cred_nonlinear_low])
+            pick_image1 = random.choice([quality, pick_nonlinear])
+            if pick_image1 == quality:
+                pick_image2 = pick_nonlinear
+            else:
+                pick_image2 = quality
+
+        return dict(
+            slide_1_img = 'global/EcoLabels_visual/instruction.png',
+            slide_2_img = pick_image1,
+            slide_3_img = pick_image2,
+        )
+
+
 
 class Questionnaire(Page):
     form_model = 'player'

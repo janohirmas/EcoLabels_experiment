@@ -173,13 +173,30 @@
         border: none;
     }
 
-    /* Hide Next button */ 
+    .intro-button {
+        display: inline-block;
+        position:absolute;
+        font-family: 'Work Sans', sans-serif;
+        font-size: 1.2em;
+        font-style: bold;
+        background-color: rgb(33, 202, 132);
+        color: #fff;
+        border: 0px;
+        border-radius: 3px;
+        padding: 4vh;
+        cursor: pointer;
+        margin: 55vh;
+        text-decoration: none;  
+    }
+
+
+
+    /* Hide Next(page) button */ 
     .hideButton {
         visibility: hidden;
     }
 
-
-    /* Next & previous buttons */
+    /* Next & previous buttons (arrows) */
     .prev,
     .next {
         cursor: pointer;
@@ -272,7 +289,7 @@
         padding: 4vh;
         cursor: pointer;
         text-decoration: none;  
-        margin: 10vh; 
+        margin: 10vh;
     }
 
 /* QUESTIONNAIRE */

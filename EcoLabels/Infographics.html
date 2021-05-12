@@ -13,17 +13,17 @@
 
         <!-- Slide 1-->
         <div class="mySlides">
-            <img class="info-img" src="{% static 'global/EcoLabels_visual/instruction.png' %}" />
+            <img class="info-img" src="{% static slide_1_img %}" />
         </div>
 
         <!-- Slide 2-->
         <div class="mySlides">
-            <img class="info-img" src="{% static 'global/EcoLabels_visual/quality.png' %}" />
+            <img class="info-img" src="{% static slide_2_img %}" />
         </div>
 
         <!-- Slide 3-->
         <div class="mySlides">
-            <img class="info-img" src="{% static 'global/EcoLabels_visual/sus_linear.png' %}" />
+            <img class="info-img" src="{% static slide_3_img %}" />
         </div>
 
 
@@ -36,9 +36,11 @@
             <span class="dot" onclick="currentSlide(2)"></span>
             <span class="dot" onclick="currentSlide(3)"></span>
         </div>
-        <button id="submit" class="info-button">Next</button>
+        <div class="hideButton" id="nextButton">
+            <p><button id="submit" class="info-button">Next</button></p>
+        </div>
     </div>
-    
+
 </body>
 
 <!-- OTREE TEMPLATES -->
@@ -75,7 +77,6 @@
         }
     });
 
-
     // Slide switch function //
     function showSlides(n) {
         let i;
@@ -101,11 +102,16 @@
             arrowLeft.style.display = "block"
         }
 
-        if (n === 3) {
+        if (n === slides.length) {
             arrowRight.style.display = "none" // make right arrow invisible on 4th slide
-        } else if (n < 3) {
+            showButton()
+        } else if (n < slides.length) {
             arrowRight.style.display = "block"
         }
+    }
+
+    function showButton() {
+        document.getElementById("nextButton").style.visibility = "visible";
     }
 
 </script>
