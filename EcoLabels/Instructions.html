@@ -38,12 +38,12 @@
                     In each trial, you will be shown two products which differ from each other in terms of three
                     attributes:
                 </p>
-                
-                    <p>1) Price, which is indicated with a number and a dollar sign,</p>
-                    <p>2) Quality, which is indicated with a Star label, and</p>
-                    <p>3) Sustainability, which is indicated with a Leaf label.</p>
-                
-                
+
+                <p>1) Price, which is indicated with a number and a dollar sign,</p>
+                <p>2) Quality, which is indicated with a Star label, and</p>
+                <p>3) Sustainability, which is indicated with a Leaf label.</p>
+
+
             </div>
         </div>
 
@@ -84,76 +84,56 @@
         <!-- Slide 5 -->
         <div class="mySlides">
             <div class="flex-questions">
-                <p class="title">Please answer these questions to see whether you understood the instructions properly.</p>
-                <li>
-                    <!--Question 1-->
-                    <div class="inst-question">
-                        <label for="Q1">How many decisions do you have to make?</label>
-                    </div>
-                    <div class="answer-field">
-                        <input type="text" name="Q1" id="Q1" class="inst-input">
-                    </div>
-                    <div class="hint" id="hint1">
-                        Incorrect answer
-                    </div>
-                </li>
-                <li>
-                    <!--Question 2-->
-                    <div class="inst-question">
-                        <label for="Q2"> Are you a Wizard?
-                        </label>
-                    </div>
-                    <div class="answer-field">
-                        <label class="radio"> Yes
-                            <input type="radio" name="Q2" id="Q2" class="Q-input" value="Yes">
-                        </label>
-                        <label class="radio"> No
-                            <input type="radio" name="Q2" id="Q2" class="Q-input" value="No">
-                        </label>
-                    </div>
-                    <div class="hint" id="hint2"> Incorrect answer<div>
-                </li>
+                <p class="title">Please answer these questions to see whether you understood the instructions correctly.
+                </p>
                 <li>
                     <!--Question 3-->
                     <div class="inst-question">
-                        <label for="Q3">Which object represents the eco-label?</label>
+                        <label for="Q1">How many practice trials does the experiment have?</label>
                     </div>
                     <div class="answer-field">
-                        <select name="Q3" id="Q3" class="Q-input dropdown">
+                        <select name="Q1" id="Q1" class="Q-input dropdown">
                             <option value="nothing">--Select--</option>
-                            <option value="leaf">Leaf</option>
-                            <option value="tree">Tree</option>
-                            <option value="flower">Flower</option>
+                            <option value="a">1</option>
+                            <option value="b">3</option>
+                            <option value="c">5</option>
                         </select>
                     </div>
-                    <div class="hint" id="hint3">
+                    <div class="hint" id="hint1">
                         Incorrect answer
                         <div>
                 </li>
                 <li>
-                    <!--Question 4-->
+                    <!--Question 3-->
                     <div class="inst-question">
-                        <label for="Q4"> How well did you understand the instructions?
-                        </label>
+                        <label for="Q2">The Bonus Payment is calculated based on your decisions in …</label>
                     </div>
                     <div class="answer-field">
-                        <label class="radio"> Not at all
-                            <input type="radio" name="Q4" id="Q4" class="Q-input" value=1>
-                        </label>
-                        <label class="radio">
-                            <input type="radio" name="Q4" id="Q4" class="Q-input" value=2>
-                        </label>
-                        <label class="radio">
-                            <input type="radio" name="Q4" id="Q4" class="Q-input" value=3>
-                        </label>
-                        <label class="radio">
-                            <input type="radio" name="Q4" id="Q4" class="Q-input" value=4>
-                        </label>
-                        <label class="radio"> All clear
-                            <input type="radio" name="Q4" id="Q4" class="Q-input" value=5>
-                        </label>
+                        <select name="Q2" id="Q2" class="Q-input dropdown">
+                            <option value="nothing">--Select--</option>
+                            <option value="a">all the trials</option>
+                            <option value="b">the first trial</option>
+                            <option value="c">a random trial</option>
+                        </select>
                     </div>
-                    <div class="hint" id="hint4">
+                    <div class="hint" id="hint2">
+                        Incorrect answer
+                        <div>
+                </li>
+                <li>
+                    <!--Question 3-->
+                    <div class="inst-question">
+                        <label for="Q3">How many trials are there in total?</label>
+                    </div>
+                    <div class="answer-field">
+                        <select name="Q3" id="Q3" class="Q-input dropdown">
+                            <option value="nothing">--Select--</option>
+                            <option value="a">20</option>
+                            <option value="b">50</option>
+                            <option value="c">40</option>
+                        </select>
+                    </div>
+                    <div class="hint" id="hint3">
                         Incorrect answer
                         <div>
                 </li>
@@ -178,7 +158,9 @@
 
     </div>
 
-    <div class="hideButton" id="nextButton"> {% next_button %} </div>
+    <div class="hideButton" id="nextButton">
+        <p><button id="submit" class="info-button">Next</button></p>
+    </div>
 </body>
 
 <!-- OTREE TEMPLATES -->
@@ -254,20 +236,15 @@
 
     function validateAnswers() {
 
-        let solutions = ['50', 'Yes', 'leaf', '1']; // solutions
+        let solutions = ['a', 'a', 'a']; // solutions
         let hints = document.getElementsByClassName("hint"); // make array of hints
 
         // get answer fields
         let A1 = document.getElementById("Q1");
-        let A2 = document.querySelector('input[name="Q2"]:checked');
-        let A3 = document.getElementById('Q3');
-        let A4 = document.querySelector('input[name="Q4"]:checked');
+        let A2 = document.getElementById("Q2");
+        let A3 = document.getElementById("Q3");
 
-        let answerList = [A1, A2, A3, A4];
-        console.log(A1);
-        console.log(A2);
-        console.log(A3);
-        console.log(A4);
+        let answerList = [A1, A2, A3];
         let correct = 0; // initialize counter for correct answers
 
         for (i = 0; i < answerList.length; i++) { // iterate through answers

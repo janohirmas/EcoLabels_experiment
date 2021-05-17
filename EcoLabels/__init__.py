@@ -1,5 +1,5 @@
 from otree.api import *
-
+import random
 
 doc = """
 Your app description
@@ -11,6 +11,12 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
     
+    # Image files for infographics (instructions, quality, sustainability: linear/concave/convex)
+    imgFile_Inst = 'global/EcoLabels_visual/instruction.png'
+    imgFile_Quality = 'global/EcoLabels_visual/quality.png'
+    imgFile_Linear = 'global/EcoLabels_visual/sus_linear.png'
+    imgFile_Concave = 'global/EcoLabels_visual/sus_nonlin_high.png'
+    imgFile_Convex = 'global/EcoLabels_visual/sus_nonlin_low.png'
 
 class Subsession(BaseSubsession):
     pass
@@ -27,15 +33,12 @@ class Player(BasePlayer):
     def creating_session(subsession):
     # randomize to treatments
         for player in subsession.get_players():
-            player.condition = random.choice(['linear', 'nonlinear'])
-            print('set player.credibility to', player.condition)
-
+            player.condition = random.choice([1, 2])
 
     # variables for instructions
-    Q1 = models.IntegerField()
+    Q1 = models.StringField()
     Q2 = models.StringField()
     Q3 = models.StringField()
-    Q4 = models.IntegerField()
 
     # Variables for Demographics
     D1 = models.StringField()
@@ -81,38 +84,37 @@ class Introduction(Page):
 
 class Instructions(Page):
     form_model = 'player'
-    form_fields = ['Q1', 'Q2', 'Q3', 'Q4']
+    form_fields = ['Q1', 'Q2', 'Q3']
 
 class Infographics(Page):
 
     @staticmethod
     def vars_for_template(player):
         condition = 2
-        quality = 'global/EcoLabels_visual/quality.png'
-        cred_linear = 'global/EcoLabels_visual/sus_linear.png'
-        cred_nonlinear_high = 'global/EcoLabels_visual/sus_nonlin_high.png'
-        cred_nonlinear_low = 'global/EcoLabels_visual/sus_nonlin_low.png'
+        
+        # Define images as variables
+        Qual = Constants.imgFile_Quality
 
-        import random
-         
+        # Pick images based on treatment for sustainability info
         if condition == 1:
-            pick_image1 = random.choice([quality, cred_linear])
-            if  pick_image1 == quality:
-                pick_image2 = cred_linear
-            else:
-                pick_image2 = quality
+            Sus = Constants.imgFile_Linear
+        elif condition == 2:
+            Sus = Constants.imgFile_Concave
         else:
-            pick_nonlinear = random.choice([cred_nonlinear_high, cred_nonlinear_low])
-            pick_image1 = random.choice([quality, pick_nonlinear])
-            if pick_image1 == quality:
-                pick_image2 = pick_nonlinear
-            else:
-                pick_image2 = quality
+            Sus = Constants.imgFile_Convex
 
+        # randomly pick the presentation order of quality and sustainability      
+        img1 = random.choice([Qual, Sus])
+        if img1 == Qual:
+            img2 = Sus
+        else:
+            img2 = Qual
+
+        # These images will be shown in this order on Infographic(Page) slides 
         return dict(
-            slide_1_img = 'global/EcoLabels_visual/instruction.png',
-            slide_2_img = pick_image1,
-            slide_3_img = pick_image2,
+            slide_1_img = Constants.imgFile_Inst,
+            slide_2_img = img1,
+            slide_3_img = img2,
         )
 
 
@@ -128,6 +130,6 @@ class Results(Page):
     pass
 
 
-page_sequence = [Instructions, Infographics, Questionnaire, Introduction, Results]
+page_sequence = [Introduction, Instructions, Infographics, Questionnaire, Results]
 
 

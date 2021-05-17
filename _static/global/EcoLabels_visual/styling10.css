@@ -102,16 +102,16 @@
         height: 65vh;
         width: 80vw;
         background-color: white;
-        padding-top: 2vh;
-        font-size: 2.5vh;
+        padding-top: 4vh;
+        font-size: 2.7vh;
     }
 
     /* questions */
     .flex-questions li {
         height: 12vh;
-        padding-left: 3vw;
+        padding-left: 5vw;
         padding-right: 3vw;
-        padding-top: 1vw;
+        padding-top: 2vw;
         list-style: none;
         display: flex;
         flex-direction: row;
@@ -124,11 +124,11 @@
     }
 
     .inst-question {
-        flex-basis: 27vw;
+        flex-basis: 37vw;
     }
 
     .answer-field {
-        flex-basis: 27vw;
+        flex-basis: 20vw;
     }    
 
     .radio {
