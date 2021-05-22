@@ -28,12 +28,8 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
 
-    condition = models.StringField()
-
-    def creating_session(subsession):
-    # randomize to treatments
-        for player in subsession.get_players():
-            player.condition = random.choice([1, 2])
+    treatment = models.IntegerField()
+    PresOrder = models.StringField()
 
     # variables for instructions
     Q1 = models.StringField()
@@ -78,6 +74,18 @@ class Player(BasePlayer):
     QT26 = models.StringField()
     QT27 = models.StringField()
 
+# Functions
+    def creating_session(subsession):
+    # randomize to treatments
+            for player in subsession.get_players():           
+                participant = player.participant 
+                if player.round_number == 1:  
+                    participant.treatment = random.choice([1, 2, 3])
+                    participant.PresOrder = random.choice(['Qual', 'Sus'])
+                player.treatment = participant.treatment
+                player.PresOrder = participant.PresOrder
+
+
 # PAGES
 class Introduction(Page):
     pass
@@ -90,31 +98,32 @@ class Infographics(Page):
 
     @staticmethod
     def vars_for_template(player):
-        condition = 2
-        
+
         # Define images as variables
+        img1 = Constants.imgFile_Inst
         Qual = Constants.imgFile_Quality
 
         # Pick images based on treatment for sustainability info
-        if condition == 1:
+        if player.treatment == 1:
             Sus = Constants.imgFile_Linear
-        elif condition == 2:
+        elif player.treatment == 2:
             Sus = Constants.imgFile_Concave
         else:
             Sus = Constants.imgFile_Convex
 
-        # randomly pick the presentation order of quality and sustainability      
-        img1 = random.choice([Qual, Sus])
-        if img1 == Qual:
+        # assign presentation order of quality and sustainability      
+        if player.PresOrder == 'Qual':
+            img1 = Qual
             img2 = Sus
         else:
+            img1 = Sus
             img2 = Qual
 
         # These images will be shown in this order on Infographic(Page) slides 
         return dict(
-            slide_1_img = Constants.imgFile_Inst,
-            slide_2_img = img1,
-            slide_3_img = img2,
+            slide_1_img = img1,
+            slide_2_img = img2,
+            slide_3_img = img3,
         )
 
 
@@ -130,6 +139,6 @@ class Results(Page):
     pass
 
 
-page_sequence = [Introduction, Instructions, Infographics, Questionnaire, Results]
+page_sequence = [Infographics, Introduction, Instructions, Questionnaire, Results]
 
 

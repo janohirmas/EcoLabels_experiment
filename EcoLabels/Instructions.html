@@ -138,7 +138,9 @@
                         <div>
                 </li>
                 <li>
-                    <input class="submitButton" type="button" onclick=validateAnswers() value="Submit">
+                    <div id= "submitNext">
+                    <button class="submitButton" id type="button" onclick=validateAnswers() value="Submit">
+                    </div>
                 </li>
             </div>
         </div>
@@ -231,6 +233,10 @@
     }
 
     // QUESTIONS SLIDE //
+
+    function SubmitNext() {
+        let buttonContainer = document.getElementById("submit-next");
+    }
 
     // This function runs when "Submit" button is clicked. It compares all the inputs to question with solutions; if input is incorrect or empty, the function makes hint to that specific field visible. If the answer is correct, it adds + 1 to "correct"-array and makes hint invisible again. If all input are marked as correct, the oTree "Next" button will become visible. 
 
