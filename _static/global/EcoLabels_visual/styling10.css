@@ -121,6 +121,8 @@
 
     .flex-questions li:last-child {
         border-bottom: none;
+        padding-top: 3vh;
+        height: 15vh;
     }
 
     .inst-question {
@@ -156,40 +158,12 @@
 
 
     /* Submit Button */
-    .submitButton {
-        background-color: #50b454;
-        color: white;
-        border: none;
-        height: 6vh;
-        width: 7vw;
-        border-radius: 2px;
-    }
-
-    .submitButton:hover{
-        background-color: #3e9140;
-    }
-
-    .submitButton:checked{
-        border: none;
-    }
 
     .intro-button {
         display: inline-block;
         position:absolute;
-        font-family: 'Work Sans', sans-serif;
-        font-size: 1.2em;
-        font-style: bold;
-        background-color: rgb(33, 202, 132);
-        color: #fff;
-        border: 0px;
-        border-radius: 3px;
-        padding: 4vh;
-        cursor: pointer;
-        margin: 55vh;
-        text-decoration: none;  
+        margin: 55vh; 
     }
-
-
 
     /* Hide Next(page) button */ 
     .hideButton {
@@ -354,19 +328,22 @@
         font-family: 'Work Sans', sans-serif;
         font-size: 1.2em;
         font-style: bold;
+        width: 8.5vw;
         background-color: rgb(33, 202, 132);
         color: #fff;
         border: 0px;
         border-radius: 3px;
         padding: 4vh;
         cursor: pointer;
-        margin-top: 15vh;
-        text-decoration: none;       
+        text-decoration: none;   
     }
-
     .button:hover {
         background-color: rgb(39, 221, 145);
         color: #fff;
+    }
+
+    .QT-button {
+        margin-top: 15vh;   
     }
 
     .slide {

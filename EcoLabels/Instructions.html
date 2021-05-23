@@ -84,7 +84,7 @@
         <!-- Slide 5 -->
         <div class="mySlides">
             <div class="flex-questions">
-                <p class="title">Please answer these questions to see whether you understood the instructions correctly.
+                <p class="title">Please answer the questions to see whether you understood the instructions correctly.
                 </p>
                 <li>
                     <!--Question 3-->
@@ -137,10 +137,11 @@
                         Incorrect answer
                         <div>
                 </li>
+                <!-- Submit answers and Next button (next button appears when user answers all questions correctly)-->
                 <li>
-                    <div id= "submitNext">
-                    <button class="submitButton" id type="button" onclick=validateAnswers() value="Submit">
-                    </div>
+                    <a id="submitAnswer" class="button" onclick=validateAnswers()>Submit
+                    </a>
+                    <button id="submit" class="button">Next</button>
                 </li>
             </div>
         </div>
@@ -160,9 +161,6 @@
 
     </div>
 
-    <div class="hideButton" id="nextButton">
-        <p><button id="submit" class="info-button">Next</button></p>
-    </div>
 </body>
 
 <!-- OTREE TEMPLATES -->
@@ -234,12 +232,13 @@
 
     // QUESTIONS SLIDE //
 
-    function SubmitNext() {
-        let buttonContainer = document.getElementById("submit-next");
-    }
-
     // This function runs when "Submit" button is clicked. It compares all the inputs to question with solutions; if input is incorrect or empty, the function makes hint to that specific field visible. If the answer is correct, it adds + 1 to "correct"-array and makes hint invisible again. If all input are marked as correct, the oTree "Next" button will become visible. 
 
+    let submitButton = document.getElementById("submitAnswer");
+    let nextButton = document.getElementById("submit");
+
+    nextButton.style.display = "none"
+    
     function validateAnswers() {
 
         let solutions = ['a', 'a', 'a']; // solutions
@@ -266,7 +265,8 @@
             }
         }
         if (correct === answerList.length) { // if all correct, show next button
-            document.getElementById("nextButton").style.visibility = "visible";
+            submitButton.style.display = "none"
+            nextButton.style.display = "block"
         }
 
     }

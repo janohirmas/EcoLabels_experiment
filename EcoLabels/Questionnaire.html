@@ -69,9 +69,9 @@
             <div class="quiz-container">
                 <div id="quiz"></div>
             </div>
-            <a id="previous" class="button" onclick=showPreviousSlide()>Previous</a>
-            <a id="next" class="button" onclick=showNextSlide()> Next</a>
-            <button id="submit" class="button" onclick=showResults()>Submit</button>
+            <a id="previous" class="button QT-button" onclick=showPreviousSlide()>Previous</a>
+            <a id="next" class="button QT-button" onclick=showNextSlide()> Next</a>
+            <button id="submit" class="button QT-button" onclick=showResults()>Submit</button>
         </div>
     </div>
     <div id="otreeData"></div>
@@ -128,14 +128,14 @@
                     } else if (currentQuestion.type === "longOpen") {
                         answers.push(
                             `<label class="Demo-label">
-                      <textarea class="demo-textbox" type="text" id = "question${questionNumber}" name="question${questionNumber}" rows="5" cols= "50" placeholder="Write here..."></textarea>
+                      <textarea class="demo-textbox" type="text" id = "question${questionNumber}" name="question${questionNumber}" rows="5" cols= "50" placeholder="Type here..."></textarea>
                     </label>`
                         );
                     } else if (currentQuestion.type === "open") {
                         answers.push(
                             `<form autocomplete= "off" action="/action_page.php">
                              <label class="Demo-label">
-                      <input class="demo-textbox autocomplete" type="text" id = "question${questionNumber}" name="question${questionNumber}" rows="1" cols= "50">
+                      <input class="demo-textbox autocomplete" type="text" id = "question${questionNumber}" name="question${questionNumber}" rows="1" cols= "50" placeholder="Type here...">
                     </label></form>`
                         );
                     } else {
@@ -244,7 +244,7 @@
             {
                 question: "",
                 type: "instruction",
-                answer: "That was the end of the experiment. Next, we would like you to answer a few questions about yourself. All answers will be treated confidentially. Note that you can only move to the next question after you have given your answer. There is no possibility to go back in your answers!",
+                answer: "That was the end of the experiment. Next, we would like you to answer a few questions about yourself. All answers will be treated confidentially. Note that you can only move to the next question after you have given your answer. <u>You cannot leave answers blank.</u> Also note that there is no possibility to go back in your answers.",
             },
             {
                 question: "What is your age?",
@@ -431,6 +431,11 @@
                 question: "I avoid buying goods from companies with a bad reputation for looking after their employees and the environment.",
                 name: "QT27",
                 type: "radioHorizontal",
+            },
+            {
+                question: "",
+                type: "instruction",
+                answer: "That was the end of the questionnaire. Thank you for your answers. Please click 'Submit' to submit your answers and move on to the next page.",
             },
         ];
 

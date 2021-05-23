@@ -28,7 +28,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
 
-    treatment = models.IntegerField()
+    treatment = models.StringField(blank=True)
     PresOrder = models.StringField()
 
     # variables for instructions
@@ -81,6 +81,7 @@ class Player(BasePlayer):
                 participant = player.participant 
                 if player.round_number == 1:  
                     participant.treatment = random.choice([1, 2, 3])
+                    print(participant.treatment)
                     participant.PresOrder = random.choice(['Qual', 'Sus'])
                 player.treatment = participant.treatment
                 player.PresOrder = participant.PresOrder
@@ -98,11 +99,10 @@ class Infographics(Page):
 
     @staticmethod
     def vars_for_template(player):
-
         # Define images as variables
         img1 = Constants.imgFile_Inst
         Qual = Constants.imgFile_Quality
-
+        participant = player.participant
         # Pick images based on treatment for sustainability info
         if player.treatment == 1:
             Sus = Constants.imgFile_Linear
@@ -139,6 +139,6 @@ class Results(Page):
     pass
 
 
-page_sequence = [Infographics, Introduction, Instructions, Questionnaire, Results]
+page_sequence = [Introduction, Instructions, Questionnaire, Infographics, Results]
 
 
