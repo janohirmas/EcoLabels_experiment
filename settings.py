@@ -2,35 +2,7 @@ from os import environ
 
 
 SESSION_CONFIGS = [
-    dict(
-        name='public_goods',
-        app_sequence=['public_goods', 'payment_info'],
-        num_demo_participants=3,
-    ),
-    dict(
-        name='guess_two_thirds',
-        display_name="Guess 2/3 of the Average",
-        app_sequence=['guess_two_thirds', 'payment_info'],
-        num_demo_participants=3,
-    ),
-    dict(
-        name='survey', app_sequence=['survey', 'payment_info'], num_demo_participants=1
-    ),
-     dict(
-        name='my_simple_survey',
-        num_demo_participants=3,
-        app_sequence=['my_simple_survey']
-    ),
-    dict(
-        name='my_public_goods',
-        num_demo_participants=3,
-        app_sequence=['my_public_goods']
-    ),
-    dict(
-        name='my_trust',
-        num_demo_participants=2,
-        app_sequence=['my_trust']
-    ),
+
     dict(
         name='EcoLabels',
         num_demo_participants= 1,

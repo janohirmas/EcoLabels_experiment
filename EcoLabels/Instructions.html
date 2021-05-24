@@ -87,24 +87,19 @@
                 <p class="title">Please answer the questions to see whether you understood the instructions correctly.
                 </p>
                 <li>
-                    <!--Question 3-->
+                    <!--Question 1-->
                     <div class="inst-question">
                         <label for="Q1">How many practice trials does the experiment have?</label>
                     </div>
                     <div class="answer-field">
-                        <select name="Q1" id="Q1" class="Q-input dropdown">
-                            <option value="nothing">--Select--</option>
-                            <option value="a">1</option>
-                            <option value="b">3</option>
-                            <option value="c">5</option>
-                        </select>
+                        <input type="text" name="Q1" id="Q1" class="inst-input">
                     </div>
                     <div class="hint" id="hint1">
-                        Incorrect answer
+                        Incorrect: see slide 3
                         <div>
                 </li>
                 <li>
-                    <!--Question 3-->
+                    <!--Question 2-->
                     <div class="inst-question">
                         <label for="Q2">The Bonus Payment is calculated based on your decisions in …</label>
                     </div>
@@ -117,7 +112,7 @@
                         </select>
                     </div>
                     <div class="hint" id="hint2">
-                        Incorrect answer
+                        Incorrect: see slide 2
                         <div>
                 </li>
                 <li>
@@ -134,7 +129,7 @@
                         </select>
                     </div>
                     <div class="hint" id="hint3">
-                        Incorrect answer
+                        Incorrect: see slide 1
                         <div>
                 </li>
                 <!-- Submit answers and Next button (next button appears when user answers all questions correctly)-->
@@ -238,10 +233,10 @@
     let nextButton = document.getElementById("submit");
 
     nextButton.style.display = "none"
-    
+
     function validateAnswers() {
 
-        let solutions = ['a', 'a', 'a']; // solutions
+        let solutions = ['3', 'a', 'a']; // solutions
         let hints = document.getElementsByClassName("hint"); // make array of hints
 
         // get answer fields

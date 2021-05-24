@@ -32,7 +32,7 @@ class Player(BasePlayer):
     PresOrder = models.StringField()
 
     # variables for instructions
-    Q1 = models.StringField()
+    Q1 = models.IntegerField()
     Q2 = models.StringField()
     Q3 = models.StringField()
 
@@ -139,6 +139,6 @@ class Results(Page):
     pass
 
 
-page_sequence = [Introduction, Instructions, Questionnaire, Infographics, Results]
+page_sequence = [Infographics, Introduction, Instructions, Questionnaire, Results]
 
 
