@@ -6,7 +6,7 @@ SESSION_CONFIGS = [
     dict(
         name='EcoLabels',
         num_demo_participants= 1,
-        app_sequence=['EcoLabels']
+        app_sequence=['Instructions', 'Questionnaire', 'Infographics']
     ),
 ]
 
@@ -14,14 +14,14 @@ SESSION_CONFIGS = [
 # in SESSION_CONFIGS, except those that explicitly override it.
 # the session config can be accessed from methods in your apps as self.session.config,
 # e.g. self.session.config['participation_fee']
-PARTICIPANT_FIELDS = ['treatment']
+PARTICIPANT_FIELDS = ['treatment', 'PresOrder']
 
 
 SESSION_CONFIG_DEFAULTS = dict(
     real_world_currency_per_point=1.00, participation_fee=0.00, doc=""
 )
 
-OTREE_PRODUCTION = 1
+#OTREE_PRODUCTION = 1
 
 
 # ISO-639 code

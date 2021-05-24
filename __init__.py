@@ -28,7 +28,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
 
-    treatment = models.StringField(blank=True)
+    treatment = models.StringField()
     PresOrder = models.StringField()
 
     # variables for instructions
@@ -74,17 +74,18 @@ class Player(BasePlayer):
     QT26 = models.StringField()
     QT27 = models.StringField()
 
+
 # Functions
-    def creating_session(subsession):
+def creating_session(subsession):
     # randomize to treatments
-            for player in subsession.get_players():           
-                participant = player.participant 
-                if player.round_number == 1:  
-                    participant.treatment = random.choice([1, 2, 3])
-                    print(participant.treatment)
-                    participant.PresOrder = random.choice(['Qual', 'Sus'])
-                player.treatment = participant.treatment
-                player.PresOrder = participant.PresOrder
+    if subsession.round_number == 1:
+        for player in subsession.get_players():
+            participant = player.participant
+            print(participant)
+            participant.treatment = random.choice([1, 2, 3])
+            print(participant.treatment)
+            participant.PresOrder = random.choice(['Qual', 'Sus'])
+            print(participant.PresOrder)
 
 
 # PAGES
@@ -103,6 +104,7 @@ class Infographics(Page):
         img1 = Constants.imgFile_Inst
         Qual = Constants.imgFile_Quality
         participant = player.participant
+        
         # Pick images based on treatment for sustainability info
         if player.treatment == 1:
             Sus = Constants.imgFile_Linear
@@ -139,6 +141,6 @@ class Results(Page):
     pass
 
 
-page_sequence = [Infographics, Introduction, Instructions, Questionnaire, Results]
+page_sequence = [Introduction, Instructions, Infographics, Questionnaire, Results]
 
 
