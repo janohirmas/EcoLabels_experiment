@@ -58,20 +58,20 @@ class Infographics(Page):
         participant = player.participant
         
         # Pick images based on treatment for sustainability info
-        if player.treatment == 1:
+        if participant.treatment == 1:
             Sus = Constants.imgFile_Linear
-        elif player.treatment == 2:
+        elif participant.treatment == 2:
             Sus = Constants.imgFile_Concave
         else:
             Sus = Constants.imgFile_Convex
 
         # assign presentation order of quality and sustainability      
-        if player.PresOrder == 'Qual':
-            img1 = Qual
-            img2 = Sus
-        else:
-            img1 = Sus
+        if participant.PresOrder == 'Qual':
             img2 = Qual
+            img3 = Sus
+        else:
+            img2 = Sus
+            img3 = Qual
 
         # These images will be shown in this order on Infographic(Page) slides 
         return dict(

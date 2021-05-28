@@ -16,24 +16,6 @@
     .debug-info {
         display:none;
     }
-    
-    .btn {
-        position: absolute;
-        display:inline-block;
-        margin-left: 70vw;
-    }
-
-    /* next button */
-    .otree-btn-next {
-        background: #50b454;
-        border: none;
-        width: 10vw;
-        height: 8vh;
-    }
-
-    .otree-btn-next:hover {
-        background-color: #3e9140;
-    }
 
     * {
         box-sizing: border-box
@@ -48,13 +30,45 @@
 
     /* Titles */
     h1 {
-        font-size: 2.5em;
+        font-size: 5vh;
         margin-top: -10vh;
         text-align: center;
         padding: 4vh;
         background-color: rgba(59, 121, 139, 0.678);
         color: white;
         width: 80vw;
+    }
+
+    .button {
+        font-family: 'Work Sans', sans-serif;
+        font-size: 3vh;
+        width: 8vw;
+        height: 12vh;
+        background-color: rgb(33, 202, 132);
+        color: #fff;
+        border: 0px;
+        border-radius: 3px;
+        line-height: 12vh;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;   
+    }
+
+    .button:hover {
+        background-color: rgb(39, 221, 145);
+        color: #fff;
+    }
+
+    input {
+        border: 1px solid transparent;
+        background-color: #f1f1f1;
+        padding: 10px;
+        font-size: 2vh;
+    }
+
+    input[type=text] {
+        background-color: #f1f1f1;
+        width: 100%;
     }
 
 /* INTRODUCTION & INSTRUCTIONS */
@@ -83,9 +97,12 @@
     .slide-item {
         height: 65vh;
         width: 80vw;
-        padding: 5vh;
+        padding-top: 5vh;
+        padding-left: 5vw;
+        padding-right: 5vw;
         background-color: white;
-        font-size: 3vh;
+        font-size: 2.7vh;
+        margin-bottom: 2vh;
     }
 
     /* Slide title*/
@@ -103,7 +120,7 @@
         width: 80vw;
         background-color: white;
         padding-top: 4vh;
-        font-size: 2.7vh;
+        font-size: 2.5vh;
     }
 
     /* questions */
@@ -131,15 +148,16 @@
 
     .answer-field {
         flex-basis: 20vw;
+        padding-left: 3vw;
+        padding-bottom: 1vh;
     }    
 
-    .radio {
-        color:black;
-        margin-right: 2vw;
+    .inst-input {
+        width: 9vw;
     }
-
     .dropdown {
         height: 5vh;
+        width: 9vw;
     }
 
     /* Hints */
@@ -147,9 +165,9 @@
         visibility: hidden;
         flex-grow: 1;
         padding-top: 0.5vh;
-        border: 1.5px solid red;
+        background-color: rgb(250, 144, 144);
         border-radius: 2px;
-        color:red;
+        color:white;
         height: 4.5vh;
         width: 8vw;
         margin-left: 1vh;
@@ -284,15 +302,15 @@
     }
 
     .question {
-        font-size: 1.4em;
+        font-size: 3vh;
         height: 10vh;
-        margin-bottom: 4vh;
         padding: 3vh;
+        margin-top: 5vh;
+        margin-bottom: 3vh;
     }
 
     .answers {
-        font-size: 1.2em;
-        margin-top: 3vh;
+        font-size: 2.7vh;
         margin-bottom: 10vh;
         text-align: left;
         display: inline-block;
@@ -301,45 +319,32 @@
 
     .Demo-label {
         display: block;
-        margin-bottom: 10px;
     }
 
     .QT-radio {
+        display: block;
+        margin-bottom: 2vh;
+        width: 30vw;
+        text-align: left;
+        margin-left: 20vw;
+    }
+
+    .QT-radioH {
         display: block;
         margin: 0 auto;
     }
 
     .QT-label {
-        font-size: 1em;
         display: inline-block;
         width: 12vw;
         text-align: center;
     }
 
     .QT-inst {
-        font-size: 1.2em;
         text-align: center;
         padding-top: 0;
         padding-left: 3vw;
         padding-right: 3vw;
-    }
-
-    .button {
-        font-family: 'Work Sans', sans-serif;
-        font-size: 1.2em;
-        font-style: bold;
-        width: 8.5vw;
-        background-color: rgb(33, 202, 132);
-        color: #fff;
-        border: 0px;
-        border-radius: 3px;
-        padding: 4vh;
-        cursor: pointer;
-        text-decoration: none;   
-    }
-    .button:hover {
-        background-color: rgb(39, 221, 145);
-        color: #fff;
     }
 
     .QT-button {
@@ -372,9 +377,44 @@
 
     .progress-bar {
         display: inline-block;
+        position: relative;
+        z-index: -1;
         width: 20vw;
         opacity: 0.7;
         text-align: center;
         -webkit-appearance: none;
         appearance: none;
     }
+
+    /* Autocomplete styling for short open questions*/
+
+    .autocomplete-items {
+        border: 1px solid #d4d4d4;
+        border-bottom: none;
+        border-top: none;
+        z-index: 99;
+
+        /*position the autocomplete items to be the same width as the container:*/
+        top: 100%;
+        left: 0;
+        right: 0;
+    }
+
+    .autocomplete-items div {
+        padding: 10px;
+        cursor: pointer;
+        background-color: #fff;
+        border-bottom: 1px solid #d4d4d4;
+    }
+
+    /*when hovering an item:*/
+    .autocomplete-items div:hover {
+        background-color: #e9e9e9;
+    }
+
+    /*when navigating through the items using the arrow keys:*/
+    .autocomplete-active {
+        background-color: DodgerBlue !important;
+        color: #ffffff;
+    }
+
