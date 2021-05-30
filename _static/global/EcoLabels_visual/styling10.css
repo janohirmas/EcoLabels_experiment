@@ -2,10 +2,12 @@
 /* CSS STYLESHEET FOR ECOLABELS EXPERIMENT */
  
 /* GLOBAL STYLING */
+
+/* Get font style */
  @import url(https://fonts.googleapis.com/css?family=Work+Sans:300,600);
 
 
-    /* set oTree default margins/padding off, define viewport */
+    /* set oTree default margins & padding off, define viewport */
     .otree-body {
        height: 100vh;
        width: 100vw; 
@@ -21,6 +23,7 @@
         box-sizing: border-box
     }
 
+    /* Set global styling, same for all pages */
     body {
        font-family: 'Work Sans', sans-serif;
        color: #333;
@@ -28,7 +31,7 @@
        text-align: center;  
     }
 
-    /* Titles */
+    /* titles */
     h1 {
         font-size: 5vh;
         margin-top: -10vh;
@@ -39,6 +42,7 @@
         width: 80vw;
     }
 
+    /* Next & submit button */
     .button {
         font-family: 'Work Sans', sans-serif;
         font-size: 3vh;
@@ -59,13 +63,20 @@
         color: #fff;
     }
 
+    /* Hide button */ 
+    .hideButton {
+        visibility: hidden;
+    }
+
+    /* Input fields */
     input {
         border: 1px solid transparent;
         background-color: #f1f1f1;
         padding: 10px;
-        font-size: 2vh;
+        font-size: 2.5vh;
     }
 
+    /* This is for autocomplete dropdown */
     input[type=text] {
         background-color: #f1f1f1;
         width: 100%;
@@ -73,7 +84,7 @@
 
 /* INTRODUCTION & INSTRUCTIONS */
 
-    /* Content container */
+    /* Slide container */
     .flex-container {
         display: flex;
         flex-flow: row wrap;
@@ -93,7 +104,7 @@
         display: none;
     }
 
-    /* Slides*/
+    /* Slides */
     .slide-item {
         height: 65vh;
         width: 80vw;
@@ -105,14 +116,13 @@
         margin-bottom: 2vh;
     }
 
-    /* Slide title*/
+    /* Slide title */
     .title {
         font-weight: bold;
         text-align: center;
     }
 
     /* Container for questions slide */
-
     .flex-questions {
         display: flex;
         flex-direction: column;
@@ -123,7 +133,7 @@
         font-size: 2.5vh;
     }
 
-    /* questions */
+    /* Container for individual questions (question, input field, hint) */
     .flex-questions li {
         height: 12vh;
         padding-left: 5vw;
@@ -142,25 +152,25 @@
         height: 15vh;
     }
 
+    /* Only questions */
     .inst-question {
         flex-basis: 37vw;
     }
 
+    /* Only input fields */
     .answer-field {
         flex-basis: 20vw;
         padding-left: 3vw;
         padding-bottom: 1vh;
     }    
 
-    .inst-input {
-        width: 9vw;
-    }
+    /* Dropdown input */ 
     .dropdown {
         height: 5vh;
         width: 9vw;
     }
 
-    /* Hints */
+    /* Incorrect/hint bar */
     .hint {
         visibility: hidden;
         flex-grow: 1;
@@ -174,18 +184,11 @@
         text-align: center;
     }
 
-
-    /* Submit Button */
-
+    /* Submit button Introduction*/
     .intro-button {
         display: inline-block;
         position:absolute;
         margin: 55vh; 
-    }
-
-    /* Hide Next(page) button */ 
-    .hideButton {
-        visibility: hidden;
     }
 
     /* Next & previous buttons (arrows) */
@@ -211,6 +214,7 @@
         right: 3vw;
     }
 
+    /* Position the "previous button" to the left */
     .prev {
         left: 4vw;
     }
@@ -245,8 +249,9 @@
         background-color: #717171;
     }
 
-/* INFOGRAPHIC */
+/* INFOGRAPHICS */
 
+    /* Image slide container */
     .infograph-container {
         height: 80vh;
         width: 80vw;
@@ -256,36 +261,30 @@
         text-align: center;
     }
 
+    /* Image sizing */
     .info-img {
         height: 80vh;
         width: 80vw;
         object-fit:contain;
     }
 
+    /* Dots */
     .info-dotrow {
         position: inline-block;
         text-align: center;
         margin: -5vh;
     }
 
+    /* Next button */
     .info-button {
         display: absolute;
-        display: inline-block;
-        font-family: 'Work Sans', sans-serif;
-        font-size: 1.2em;
-        font-style: bold;
-        background-color: rgb(33, 202, 132);
-        color: #fff;
-        border: 0px;
-        border-radius: 3px;
-        padding: 4vh;
-        cursor: pointer;
-        text-decoration: none;  
+        display: inline-block;  
         margin: 10vh;
     }
 
 /* QUESTIONNAIRE */
     
+    /* Questionnaire container */
     .questionnaire {
         margin-top: 10vh;
         text-align: center; 
@@ -295,12 +294,14 @@
         padding-bottom: 3vh;    
     }
 
+    /* Slide container */
     .element-container {
         background-color: white;
         height: 70vh;
         width: 80vw;
     }
 
+    /* Question box */
     .question {
         font-size: 3vh;
         height: 10vh;
@@ -309,6 +310,7 @@
         margin-bottom: 3vh;
     }
 
+    /* Answer box */
     .answers {
         font-size: 2.7vh;
         margin-bottom: 10vh;
@@ -317,10 +319,7 @@
         height: 20vh;
     }
 
-    .Demo-label {
-        display: block;
-    }
-
+    /* Radio button vertical */ 
     .QT-radio {
         display: block;
         margin-bottom: 2vh;
@@ -329,17 +328,19 @@
         margin-left: 20vw;
     }
 
-    .QT-radioH {
-        display: block;
-        margin: 0 auto;
-    }
-
+    /* Radio button horizontal */
     .QT-label {
         display: inline-block;
         width: 12vw;
         text-align: center;
     }
 
+    .QT-radioH {
+        display: block;
+        margin: 0 auto;
+    }
+
+    /* Instruction styling */
     .QT-inst {
         text-align: center;
         padding-top: 0;
@@ -347,10 +348,12 @@
         padding-right: 3vw;
     }
 
+    /* Next/submit button location */
     .QT-button {
         margin-top: 15vh;   
     }
 
+    /* Slide */
     .slide {
         position: absolute;
         height: 50vh;
@@ -365,16 +368,14 @@
         z-index: 2;
     }
 
+    /* Container for questions, answers and progress bar */
     .quiz-container {
         position: relative;
         height: 40vh;
         margin-top: 1vh;
     }
 
-    .demo-textbox {
-        font-size: 0.8em;
-    }
-
+    /* Progress bar */
     .progress-bar {
         display: inline-block;
         position: relative;
@@ -386,8 +387,7 @@
         appearance: none;
     }
 
-    /* Autocomplete styling for short open questions*/
-
+    /* Autocomplete styling for open questions*/
     .autocomplete-items {
         border: 1px solid #d4d4d4;
         border-bottom: none;

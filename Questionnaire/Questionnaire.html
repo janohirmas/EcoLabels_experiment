@@ -3,22 +3,38 @@
 <!-- LINK TO STYLESHEET -->
 <link rel="stylesheet" href="{% static 'global/EcoLabels_visual/styling10.css' %}">
 
+<!-- Set viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- oTree templates-->
 {% load otree static %}
 {% block content %}
-  
+
 <body>
 
+    <!-- Questionnaire container -->
     <div class="questionnaire">
+
+        <!-- Title -->
         <h1>Questionnaire</h1>
+
+        <!-- Slide container -->
         <div class="element-container">
+
+            <!-- Questionnaire element container  -->
             <div class="quiz-container">
+                <!-- Questionnaire elements (Question, answer, progress bar)-->
                 <div id="quiz"></div>
             </div>
+            <!-- Previous button (not used in this questionnaire)-->
             <a id="previous" class="button QT-button" onclick=showPreviousSlide()>Previous</a>
+            <!-- Next button -->
             <a id="next" class="button QT-button" onclick=showNextSlide()> Next</a>
-            <button id="submit" class="button QT-button" onclick=showResults()>Submit</button>
+            <!-- Submit button -->
+            <button id="submit" class="button QT-button" onclick=getResults()>Submit</button>
         </div>
     </div>
+    <!-- This one is used to save data to oTree server, see JS-->
     <div id="otreeData"></div>
 
 </body>
@@ -30,7 +46,9 @@
 <script>
 
     (function () {
-        // Functions
+
+        // Function buildQuiz builds the questionnaire elements. Based on slide count, it takes values (question, name, type, answer) from myQuestions object to create x amount of slides with question, answer field, and a progress bar that increases together with slide count. The type of answer field for each question is indicated in the object (type: radio, radioHorizontal, longOpen, open). For instruction slide, the function inserts text in place of the answer field (type: instruction) and leaves question field empty. Note: this function creates the whole questionnaire at once, but user sees questions one by one. 
+
         function buildQuiz() {
             // variable to store the HTML output
             const output = [];
@@ -43,12 +61,10 @@
                     // variable to store the list of possible answers
                     const answers = [];
 
-                    // and for each available answer...
+                    // If question type = radio, create vertical radio button for each available answer
                     if (currentQuestion.type === "radio") {
 
                         for (letter in currentQuestion.answers) {
-
-                            // ...add an HTML radio button 
                             answers.push(
                                 `<label class="QT-radio">
                       <input type="radio" name="question${questionNumber}" value="${letter}">             
@@ -56,6 +72,7 @@
                     </label>`
                             );
                         }
+                        // If question type = radioHorizontal, create horizontal radio buttons with fixed values (1-5) > this is for sustainability questionnaire items
                     } else if (currentQuestion.type === "radioHorizontal") {
                         answers.push(
                             `<div>
@@ -70,27 +87,29 @@
                       <input type="radio" class="QT-radioH" name="question${questionNumber}" value="5"/> Strongly agree            
                     </label></div>`
                         );
+                        // If question type = longOpen, create textarea 
                     } else if (currentQuestion.type === "longOpen") {
                         answers.push(
-                            `<label class="Demo-label">
-                      <textarea class="demo-textbox" type="text" id = "question${questionNumber}" name="question${questionNumber}" rows="5" cols= "50" placeholder="Type here..."></textarea>
+                            `<label>
+                      <textarea type="text" id = "question${questionNumber}" name="question${questionNumber}" rows="5" cols= "50" placeholder="Type here..."></textarea>
                     </label>`
                         );
+                        // If question type = open, create input field with autocomplete (see function autocomplete) 
                     } else if (currentQuestion.type === "open") {
                         answers.push(
                             `<form autocomplete= "off" action="/action_page.php">
-                             <label class="Demo-label">
-                      <input class="demo-textbox autocomplete" type="text" id = "question${questionNumber}" name="question${questionNumber}" rows="1" cols= "50" placeholder="Type here...">
+                             <label>
+                      <input class="autocomplete" type="text" id = "question${questionNumber}" name="question${questionNumber}" rows="1" cols= "50" placeholder="Type here...">
                     </label></form>`
                         );
+                        // If question type = instruction, insert text into answer field 
                     } else {
                         answers.push(
                             `<p class="QT-inst"> ${currentQuestion.answer}</p>`
                         )
                     }
 
-
-                    // add this question and its answers to the output
+                    // add current question and its answers + progress bar to the HTML output (= 1 slide)
                     output.push(
                         `<div class="slide">
                     <div class="question"> ${currentQuestion.question} </div>
@@ -104,36 +123,43 @@
                 }
             );
 
-            // finally combine our output list into one string of HTML and put it on the page
-            quizContainer.innerHTML = output.join('');
+            // finally combine output list (slides) into one string of HTML and put it on the page (= full questionnaire)
+            QTContainer.innerHTML = output.join('');
         }
 
-        function showResults() {
+        // This function gets all the user answers from answer fields and saves them on oTree
+        function getResults() {
 
-            // gather answer containers from our quiz
-            const answerContainers = quizContainer.querySelectorAll('.answers');
+            // gather answer containers from the questionnaire slides
+            const answerContainers = QTContainer.querySelectorAll('.answers');
 
             // for each question...
             myQuestions.forEach((currentQuestion, questionNumber) => {
 
-                // find selected answer
+                // find selected answer and get value
                 const answerContainer = answerContainers[questionNumber];
                 let selector = '';
                 let userAnswer = '';
+                // for question with radio buttons
                 if (currentQuestion.type === "radio" || currentQuestion.type === "radioHorizontal") {
                     selector = `input[name=question${questionNumber}]:checked`;
                     userAnswer = (answerContainer.querySelector(selector) || {}).value;
+                    // for question with textarea
                 } else if (currentQuestion.type === "longOpen") {
                     selector = `textarea[name=question${questionNumber}]`;
                     userAnswer = (answerContainer.querySelector(selector)).value;
+                    // for question with input field
                 } else if (currentQuestion.type === "open") {
                     selector = `input[name=question${questionNumber}]`;
                     userAnswer = (answerContainer.querySelector(selector)).value;
+                    // for instruction slide, skip
                 } else {
                     userAnswer = "notAnAnswer"
                 }
-                // save the user answers on oTree by creating hidden html with name that matches names in init
-                let saveOtree = document.getElementById('otreeData');
+                
+                // save the user answers on oTree by creating hidden HTML with ID that matches ID in init.py
+                let saveOtree = document.getElementById('otreeData'); // get HTML element to save user answers to
+                // if user answer is NOT an instruction slide, insert value of that answer to the oTree HTML element
                 if (userAnswer !== "notAnAnswer") {
                     recordAnswer.push(
                         `<input type="hidden" name="${currentQuestion.name}" value="${userAnswer}">`
@@ -148,19 +174,19 @@
             slides[currentSlide].classList.remove('active-slide');
             slides[n].classList.add('active-slide');
             currentSlide = n;
-            if (currentSlide === 0) {
+            if (currentSlide === 0) { // do not show previous button on first slide
                 previousButton.style.display = 'none';
             }
             else {
                 previousButton.style.display = 'none'; // change this to inline-block if you want to enable previous button.
             }
             if (currentSlide === slides.length - 1) {
-                nextButton.style.display = 'none';
-                submitButton.style.display = 'inline-block';
+                nextButton.style.display = 'none'; // do not show next button on last slide
+                submitButton.style.display = 'inline-block'; // show submit button on last slide
             }
             else {
-                nextButton.style.display = 'inline-block';
-                submitButton.style.display = 'none';
+                nextButton.style.display = 'inline-block'; // if not last slide, show next button
+                submitButton.style.display = 'none'; // if not last slide, do not show submit button
             }
         }
 
@@ -175,16 +201,14 @@
         }
         */
 
-        // Variables
-        const quizContainer = document.getElementById('quiz');
+        // Get HTML elements
+        const QTContainer = document.getElementById('quiz');
         const submitButton = document.getElementById('submit');
 
-        // array for saving the html with correct 
+        // Array for saving the html with correct 
         let recordAnswer = []
 
-
-        // object containing questions + names. Name needs to match the name given in init.py under class Questionnaire(Page) form_fields!
-
+        // Object containing questions (question), input type (type), names used for question (name) and answer options (answer). Name needs to match the name given in init.py form_fields!
         const myQuestions = [
             {
                 question: "",
@@ -387,18 +411,26 @@
         // Kick things off
         buildQuiz();
 
-        // Pagination
+        // Get buttons
         const previousButton = document.getElementById("previous");
         const nextButton = document.getElementById("next");
+
+        // Get slides
         const slides = document.querySelectorAll(".slide");
+
+        // initialize slide count
         let currentSlide = 0;
 
         // Show the first slide
         showSlide(currentSlide);
 
-        // Event listeners
-        submitButton.addEventListener('click', showResults);
+        // If submit button clicked, submit questionnaire
+        submitButton.addEventListener('click', getResults);
+
+        // If previous button clicked, show previous question
         //previousButton.addEventListener("click", showPreviousSlide);
+
+        // If next button clicked, show next question
         nextButton.addEventListener("click", showNextSlide);
 
         // Keypress controls next/previous slide
@@ -424,7 +456,7 @@
         //initialize slide count for showNextSlide()
         let slideCount = 0;
 
-        // This function runs if user click "Next" (or "Enter"). It lets the user go to the next question (slide) only if answer was given to the current questions. The user cannot leave answer fields empty. 
+        // Function showNextSlide runs if user click "Next" (or "Enter"). It lets the user go to the next question (slide) only if answer was given to the current questions. The user cannot leave answer fields empty. 
         function showNextSlide() {
             slideCount = slideCount + 1; // increase slide count by one
 
@@ -440,20 +472,20 @@
                 // initialize counter to index current question/answer from arrays
                 let counter = slideCount - 1;
                 // get all answers and save in container
-                const answerSelector = quizContainer.querySelectorAll('.answers');
+                const answerSelector = QTContainer.querySelectorAll('.answers');
                 // select current answer container
                 let answerContainer2 = answerSelector[counter];
                 // create variables to save current answer
                 let selection = '';
                 let checkAnswer = '';
 
-                // based on question type (open, longOpen, radio, radioHorizontal), get current answer
+                // based on question type (open, longOpen, radio, radioHorizontal), get current answer. If question type = instruction, then assign 1 as value. 
                 if (questionTypes[counter] === "longOpen") {
                     selection = `textarea[name=question${counter}]`;
                     checkAnswer = (answerContainer2.querySelector(selection)).value;
                 } else if (questionTypes[counter] === "open") {
                     selection = `input[name=question${counter}]`;
-                    checkAnswer = (answerContainer2.querySelector(selection)).value; 
+                    checkAnswer = (answerContainer2.querySelector(selection)).value;
                 } else if (questionTypes[counter] === "radio" || questionTypes[counter] === "radioHorizontal") {
                     checkAnswer = answerContainer2.querySelector(`input[name=question${counter}]:checked`);
                 } else {
@@ -469,6 +501,8 @@
 
             }
         };
+
+        // Function autocomplete creates a dropdown menu for question type "open". When user writes in the input field, the function activates. It suggests answers based on what user is writing in the field. 
 
         function autocomplete(inp, arr) {
             /*the autocomplete function takes two arguments,
@@ -574,4 +608,5 @@
         autocomplete(document.getElementById("question3"), countries);
         autocomplete(document.getElementById("question4"), countries);
     })();
+
 </script>

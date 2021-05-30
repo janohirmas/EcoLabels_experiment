@@ -3,27 +3,39 @@
 <!-- LINK TO STYLESHEET-->
 <link rel="stylesheet" href="{% static 'global/EcoLabels_visual/styling10.css' %}">
 
-<!-- OTREE TEMPLATES -->
+<!-- Set viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- oTree templates -->
 {% load otree static %}
 {% block content %}
 
 <body>
 
+    <!-- Slide container-->
     <div class="flex-container">
 
+        <!-- Title -->
         <h1> Instructions </h1>
 
         <!-- Slide 1-->
+
+        <!-- Hide slide by default-->
         <div class="mySlides">
+
+            <!-- Style slide items-->
             <div class="slide-item">
-                <p class="title">General</p>
+
+                <!-- Slide title -->
+                <p class="title"> General </p>
+
+                <!-- Slide text -->
                 <p>
                     This study uses Experimental Currency Units (ECU). One ECU is equivalent
                     to 2.5p (0.025 Pounds). You have received an initial Bonus Payment of 40 ECUs.
                     The Bonus Payment (40ECU) is used in this experiment as your "shopping" money. This amount
                     can <i>increase (or decrease)</i> depending on your decisions in this experiment. <u>The bonus
-                        payment
-                        is <i>additional</i> to your participation fee.</u>
+                        payment is <i>additional</i> to your participation fee.</u>
                 </p>
             </div>
         </div>
@@ -42,8 +54,6 @@
                 <p>1) Price, which is indicated with a number and a dollar sign,</p>
                 <p>2) Quality, which is indicated with a Star label, and</p>
                 <p>3) Sustainability, which is indicated with a Leaf label.</p>
-
-
             </div>
         </div>
 
@@ -83,18 +93,19 @@
 
         <!-- Slide 5 -->
         <div class="mySlides">
+            <!-- Question slide container-->
             <div class="flex-questions">
-                <p class="title">Please answer the questions to see whether you understood the instructions correctly.
+                <p class="title"> Please answer the questions to see whether you understood the instructions correctly.
                 </p>
                 <li>
                     <!--Question 1-->
-                    <div class="inst-question">
+                    <div class="inst-question"> <!-- Question-->
                         <label for="Q1">How many practice trials does the experiment have?</label>
                     </div>
-                    <div class="answer-field">
-                        <input type="text" name="Q1" id="Q1" style= "width: 9vw">
+                    <div class="answer-field"> <!-- Input field -->
+                        <input type="text" name="Q1" id="Q1" style="width: 9vw">
                     </div>
-                    <div class="hint" id="hint1">
+                    <div class="hint" id="hint1"> <!-- Hint -->
                         Incorrect: see slide 3
                         <div>
                 </li>
@@ -132,8 +143,8 @@
                         Incorrect: see slide 1
                         <div>
                 </li>
-                <!-- Submit answers and Next button (next button appears when user answers all questions correctly)-->
                 <li>
+                    <!-- Submit answers and Next button (next button appears when user answers all questions correctly)-->
                     <a id="submitAnswer" class="button" onclick=validateAnswers()>Submit
                     </a>
                     <button id="submit" class="button">Next</button>
@@ -158,8 +169,7 @@
 
 </body>
 
-<!-- OTREE TEMPLATES -->
-
+<!-- oTree templates -->
 {% endblock %}
 
 
@@ -192,25 +202,24 @@
         }
     });
 
-
     // Slide switch function //
     function showSlides(n) {
-        let i;
-        let slides = document.getElementsByClassName("mySlides");
-        let dots = document.getElementsByClassName("dot");
-        let arrowLeft = document.querySelector("#leftArrow");
-        let arrowRight = document.querySelector("#rightArrow");
+        let i; // slide count
+        let slides = document.getElementsByClassName("mySlides"); // get slides
+        let dots = document.getElementsByClassName("dot"); // get dots
+        let arrowLeft = document.querySelector("#leftArrow"); // get left arrow
+        let arrowRight = document.querySelector("#rightArrow"); // get right arrow
 
-        if (n > slides.length) { slideIndex = 1 }
+        if (n > slides.length) { slideIndex = 1 } // make slides visible/hide based on slide count
         if (n < 1) { slideIndex = slides.length }
         for (i = 0; i < slides.length; i++) {
             slides[i].style.display = "none";
         }
-        for (i = 0; i < dots.length; i++) {
+        for (i = 0; i < dots.length; i++) { // change dot color based on dot count
             dots[i].className = dots[i].className.replace(" active", "");
         }
-        slides[slideIndex - 1].style.display = "block";
-        dots[slideIndex - 1].className += " active";
+        slides[slideIndex - 1].style.display = "block"; // make slides visible/hide based on slide count
+        dots[slideIndex - 1].className += " active"; // change dot color based on dot count
 
         if (n === 1) {
             arrowLeft.style.display = "none" // make left arrow invisible on 1st slide
@@ -227,12 +236,12 @@
 
     // QUESTIONS SLIDE //
 
-    // This function runs when "Submit" button is clicked. It compares all the inputs to question with solutions; if input is incorrect or empty, the function makes hint to that specific field visible. If the answer is correct, it adds + 1 to "correct"-array and makes hint invisible again. If all input are marked as correct, the oTree "Next" button will become visible. 
+    // This function runs when "Submit" button is clicked. It compares all the inputs to question with solutions; if input is incorrect or empty, hint appears next to it. If the answer is correct, the function makes hint invisible again. If all inputs are correct, "Next" button will become visible. 
 
-    let submitButton = document.getElementById("submitAnswer");
-    let nextButton = document.getElementById("submit");
+    let submitButton = document.getElementById("submitAnswer"); // get submit button
+    let nextButton = document.getElementById("submit"); // get Next button
 
-    nextButton.style.display = "none"
+    nextButton.style.display = "none" // Hide Next button
 
     function validateAnswers() {
 
@@ -244,22 +253,22 @@
         let A2 = document.getElementById("Q2");
         let A3 = document.getElementById("Q3");
 
-        let answerList = [A1, A2, A3];
+        let answerList = [A1, A2, A3]; // create an array out of the answers
         let correct = 0; // initialize counter for correct answers
 
         for (i = 0; i < answerList.length; i++) { // iterate through answers
             if (answerList[i] !== null) { // check for empty fields
                 answerList[i] = answerList[i].value; // get value if not empty
             }
-            if (answerList[i] !== solutions[i] || answerList[i] === null) {
-                hints[i].style.visibility = "visible"; // incorrect or empty field: show hint
+            if (answerList[i] !== solutions[i] || answerList[i] === null) { // incorrect or empty field: show hint
+                hints[i].style.visibility = "visible"; 
             } else {
-                correct = correct + 1;
-                hints[i].style.visibility = "hidden"; // correct: increase counter, hide hint
+                correct = correct + 1; // correct: increase counter, hide hint
+                hints[i].style.visibility = "hidden"; 
 
             }
         }
-        if (correct === answerList.length) { // if all correct, show next button
+        if (correct === answerList.length) { // if all correct, hide Submit button and show Next button
             submitButton.style.display = "none"
             nextButton.style.display = "block"
         }
