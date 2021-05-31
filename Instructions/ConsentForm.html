@@ -1,0 +1,63 @@
+<!-- CONSENT FORM -->
+
+<!-- LINK TO STYLESHEET-->
+<link rel="stylesheet" href="{% static 'global/EcoLabels_visual/styling10.css' %}">
+
+<!-- Set viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- oTree template -->
+{% load otree static %}
+{% block content %}
+
+<body>
+
+    <!-- Slide container -->
+    <div class="flex-container">
+
+        <!-- Title -->
+        <h1> Introduction </h1>
+
+        <!-- Consent form text -->
+        <div class="slide-item">
+            <p>
+                <br>
+                In order to participate in this experiment you need to be <b>18 or older</b> and can speak and read
+                <b>in
+                    English.</b> <br><br>
+                Also, we will require you to <u>focus only on the experiment</u> for its duration. If you agree to
+                continue, we
+                will ask you <u>set this window in Fullscreen</u> (if you do not know how to do it, we will explain). We
+                reserve the right to exclude you from payment if we detect that you are jumping between other windows or
+                set off the Fullscreen too many times.
+            </p>
+            <br>
+            <!-- Check box T&C -->
+            <div class="checkBox">
+                <input type="checkbox" required id="TC" name="TC" value="check">
+                <label for="TC"> I agree to the Terms and Conditions above and to participate in this
+                    experiment.</label>
+            </div>
+        </div>
+
+        <!-- Next button -->
+        <button id="submit" class="button intro-button"> Next </button>
+    </div>
+
+</body>
+
+<!-- oTree template -->
+{% endblock %}
+
+<!-- JAVASCRIPT-->
+
+<script>
+    
+    // Disable Next button if checkbox not ticked when Next button is clicked-- >
+    document.getElementById("submit").addEventListener("click", (event) => {
+        if ($('#checkBox').is(':not(:checked)')) {
+            document.getElementById("submit").disabled = true;
+        }
+    });
+
+</script>

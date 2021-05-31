@@ -3,16 +3,14 @@
 
 ** IMPROVEMENTS **
 
-> Get rid off debug mode on oTree
-
-> Slides
-    - Change sizing to em/rem/vh
-    - make prettier (fonts, colors etc.)
-
-> Questions Slide:
-    - make the layout prettier 
-    - make questions functional + add prompts
+> Questionnaire: previous button (nextSlide function need to be changed for this to work)
+> Instructions: get slide texts, questions, dots from object instead of hardcoded
+> put objects in JSON files
 
 ------------------------------------------------------------------------------
 
 ** BUGS **
+
+> Questionnaire: progress bar moves together with autocomplete dropdown menu. It should flow over it without the progress bar moving anywhere
+
+> ConsentForm: if check button is ticked, and then unticked, and then the user clicks on Next button, oTree gives default error bar
