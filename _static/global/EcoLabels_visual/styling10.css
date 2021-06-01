@@ -125,7 +125,14 @@
     /* Slide title */
     .title {
         font-weight: bold;
-        text-align: center;
+        text-align: left;
+        margin-bottom: 4vh;
+    }
+
+    .title-questions {
+        font-weight: bold;
+        text-align: left;
+        margin-bottom: 2vh;
     }
 
     /* Container for questions slide */
@@ -135,15 +142,15 @@
         height: 65vh;
         width: 80vw;
         background-color: white;
-        padding-top: 4vh;
+        padding-top: 5vh;
+        padding-left: 5vw;
+        padding-right: 3vw;
         font-size: 2.5vh;
     }
 
     /* Container for individual questions (question, input field, hint) */
     .flex-questions li {
         height: 12vh;
-        padding-left: 5vw;
-        padding-right: 3vw;
         padding-top: 2vw;
         list-style: none;
         display: flex;
