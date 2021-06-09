@@ -2,7 +2,7 @@
 
 
 -------- CONSISTS OF THE FOLLOWING FILES ---------
-                (at the moment...)
+                (Needs to be updated, old info)
 
 ***** EcoLabels ****** (folder)
 
