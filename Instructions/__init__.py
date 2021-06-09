@@ -9,6 +9,9 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
 
+    leaf_symbol = 'global/EcoLabels_visual/one_leaf.png'
+    star_symbol = 'global/EcoLabels_visual/one_star.png'
+
 class Subsession(BaseSubsession):
     pass
 
@@ -38,6 +41,14 @@ class ConsentForm(Page):
 class Instructions(Page):
     form_model = 'player'
     form_fields = ['Q1', 'Q2', 'Q3']
+
+    @staticmethod
+    def vars_for_template(player):
+        return dict(
+            leaf_symbol = Constants.leaf_symbol,
+            star_symbol = Constants.star_symbol,
+        )
+
 
 page_sequence = [Introduction, ConsentForm, Instructions]
 

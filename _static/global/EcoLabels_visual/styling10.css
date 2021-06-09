@@ -3,8 +3,65 @@
  
 /* GLOBAL STYLING */
 
-/* Get font style */
+    @media only screen and (min-width: 1600px) {
+        h1 {
+            font-size: 46px !important;
+        }
 
+        input {
+            font-size: 24px !important;
+        }
+
+        .button {
+            height: 10vh !important;
+            width: 8vw !important;
+            font-size: 24px !important;
+            line-height: 10vh !important;
+        }
+
+        .title {
+            font-size: 24px !important;
+        }
+
+        .slide-item {
+            font-size: 22px !important;
+            line-height: 2 !important;
+        }
+
+        .flex-questions {
+            font-size: 24px !important;
+        }
+
+        .dot {
+            height: 24px !important;
+            width: 24px !important;
+        }
+
+        .prev, .next {
+            font-size: 6vh !important;
+        }
+
+        .question {
+            font-size: 26px !important;
+        }
+
+        .answers {
+            font-size: 24px !important;
+        }
+
+        .infograph-container {
+            height: 60vh !important;
+            width: 60vw !important;
+            margin-left: 20vw !important;
+            margin-top: 10vh;
+            margin-bottom: 2vh !important;
+        }
+
+        .info-img {
+            height: 60vh !important;
+            width: 60vw !important;
+        }
+    }
 
     /* set oTree default margins & padding off, define viewport */
     .otree-body {
@@ -24,10 +81,10 @@
 
     /* Set global styling, same for all pages */
     body {
-       font-family: 'Work Sans', sans-serif;
+       font-family: Helvetica, sans-serif;
        color: #333;
        background-color: #f8f6f0;
-       text-align: center;  
+       text-align: center;   
     }
 
     /* titles */
@@ -115,24 +172,80 @@
         width: 80vw;
         padding-top: 5vh;
         padding-left: 6vw;
-        padding-right: 6vw;
+        padding-right: 15vw;
         background-color: white;
-        font-size: 2.7vh;
+        font-size: 2.8vh;
+        line-height: 1.5;
         margin-bottom: 2vh;
         text-align: left;
+    }
+
+    .slide-item2 {
+        padding-right: 6vw !important;
     }
 
     /* Slide title */
     .title {
         font-weight: bold;
-        text-align: left;
-        margin-bottom: 4vh;
-    }
-
-    .title-questions {
-        font-weight: bold;
+        text-decoration: underline;
+        font-size: 2.8vh;
         text-align: left;
         margin-bottom: 2vh;
+    }
+
+    /* Product Characteristics slide */
+    .symbol {
+        width: 1.5vw;
+        margin: 1px;
+    }
+
+    /* Tutorial slide */
+    .button-text-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .text-container {
+        flex-basis: 50%;
+        margin-right: 3vw;
+    }
+
+    .button-container {
+        flex-basis: 50%;
+        text-align: center;
+    }
+
+    .text-reveal {
+        visibility: hidden;
+    }
+
+    .hover-button {
+        height: 15vh;
+        width: 15vh;
+        margin-bottom: 5vh;
+    }
+
+    .hidden {
+        color:  rgb(200, 200, 200);
+        background-color: rgb(200, 200, 200);
+    }
+  
+    .non-hidden {
+        color: #000;
+        background-color: rgb(200, 200, 200);
+    }
+  
+    .hidden .button-img{
+        display: none;
+    }
+  
+    .non-hidden .button-img{
+        display: inline-flex;
+    }
+
+    .button-outcome {
+        font-size: 1em;
     }
 
     /* Container for questions slide */
@@ -243,7 +356,7 @@
     /* The dots/bullets/indicators */
     .dot_row {
         position: absolute;
-        margin-top: 60vh;
+        margin-top: 63vh;
         text-align: center;
     }
 
@@ -291,9 +404,17 @@
 
     /* Next button */
     .info-button {
-        display: absolute;
         display: inline-block;  
         margin: 10vh;
+    }
+
+    /* Next & Previous button location */
+    .prev-info {
+        left: 10vw !important;
+    }
+
+    .next-info {
+        right: 10vw !important;
     }
 
 /* QUESTIONNAIRE */
@@ -318,7 +439,7 @@
     /* Question box */
     .question {
         font-size: 3vh;
-        height: 10vh;
+        height: 11vh;
         padding: 3vh;
         margin-top: 5vh;
         margin-bottom: 3vh;
@@ -358,8 +479,8 @@
     .QT-inst {
         text-align: center;
         padding-top: 0;
-        padding-left: 3vw;
-        padding-right: 3vw;
+        padding-left: 12vw;
+        padding-right: 12vw;
     }
 
     /* Next/submit button location */

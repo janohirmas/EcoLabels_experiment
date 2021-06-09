@@ -34,8 +34,8 @@
 
 
         <!-- Next and previous buttons -->
-        <a id="leftArrow" class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a id="rightArrow" class="next" onclick="plusSlides(1)">&#10095;</a>
+        <a id="leftArrow" class="prev prev-info" onclick="plusSlides(-1)">&#10094;</a>
+        <a id="rightArrow" class="next next-info" onclick="plusSlides(1)">&#10095;</a>
 
         <!-- Dots-->
         <div class="info-dotrow">
@@ -46,7 +46,7 @@
 
         <!-- Next button, appears at third slide-->
         <div class="hideButton" id="nextButton">
-            <p><button id="submit" class="button info-button">Next</button></p>
+            <button class="button info-button">Next</button>
         </div>
     </div>
 
@@ -65,10 +65,16 @@
     showSlides(slideIndex);
 
 
-    // Next/previous controls
+    // Next/previous controls: activate showSlides functions if arrows and arrow keys pressed. Stops the slides from going in "carousel".
     function plusSlides(n) {
-        showSlides(slideIndex += n);
-    }
+        if (n === (-1) && slideIndex === 1) {
+            return;
+        } else if (n === 1 && slideIndex === 3) {
+            return;
+        } else {
+            showSlides(slideIndex += n);
+        }
+    };
 
     // Thumbnail image controls
     function currentSlide(n) {
@@ -93,9 +99,7 @@
         let arrowLeft = document.querySelector("#leftArrow"); // get left arrow
         let arrowRight = document.querySelector("#rightArrow"); // get right arrow
 
-        if (n > slides.length) { slideIndex = 1 } // show slides based on count
-        if (n < 1) { slideIndex = slides.length }
-        for (i = 0; i < slides.length; i++) {
+        for (i = 0; i < slides.length; i++) { // hide slides by default
             slides[i].style.display = "none";
         }
         for (i = 0; i < dots.length; i++) { // change dot color based on count
