@@ -4,31 +4,37 @@
 -------- CONSISTS OF THE FOLLOWING FILES ---------
                 (Needs to be updated, old info)
 
-***** EcoLabels ****** (folder)
+***** EcoLabels ****** 
 
-1. Introduction.html
-    - Introduction of the experiment 
+// APPS // --> play in this order
+***********************************
 
-2. Instructions.html
-    - HTML & JAVASCRIPT
-    - Slideshow for instructions
+1. Instructions
+    - Introduction.html
+    - ConsentForm.html
+    - Instructions.html
 
-3. Results.html 
-    - nothing here yet
+2. Game
+    - Here come all the experiment files
 
-4. bugs_and_fixes
-    - record of current bugs and pending improvements
+3. Infographics 
+    - Infographics.html
 
-5. _init_.py
-    - experiment settings (oTree)
-    - determine amount of players, sessions, groups etc.
+4. Questionnaire
+    - Questionnaire.html
+    - EndPage.html
 
-6. _psycache_
-    - not sure what this is
+********************************
+
+5. bugs_and_fixes
+    - record of current bugs and suggested improvements
+
+6. settings.py
+    - determines treatment + app sequence
 
 ****** _static/global/EcoLabels_visual ***** (folder)
 
 7. styling2.css
-    - main stylesheet css
+    - main stylesheet CSS for all apps
 
-8. Picture files (mayny)
+8. Picture files (many)
