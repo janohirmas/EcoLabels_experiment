@@ -38,5 +38,3 @@
     - main stylesheet CSS for all apps
 
 8. Picture files (many)
-
-Testing changes

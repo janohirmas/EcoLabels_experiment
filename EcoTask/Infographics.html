@@ -1,0 +1,130 @@
+
+<!-- INFOGRAPHICS PAGE -->
+
+<!-- LINK TO STYLESHEET-->
+<link rel="stylesheet" href="{% static 'global/styling10.css' %}">
+
+<!-- Set viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- oTree templates -->
+{% load otree static %}
+{% block content %}
+
+<body>
+
+    <!-- Slide container -->
+    <div class="infograph-container">
+
+        <!-- Slide 1-->
+        <div class="mySlides"> <!-- Hide image by default -->
+            <!-- Get image-->
+            <img class="info-img" src="{% static slide_1_img %}" /> 
+        </div>
+
+        <!-- Slide 2-->
+        <div class="mySlides">
+            <img class="info-img" src="{% static slide_2_img %}" />
+        </div>
+
+        <!-- Slide 3-->
+        <div class="mySlides">
+            <img class="info-img" src="{% static slide_3_img %}" />
+        </div>
+
+
+        <!-- Next and previous buttons -->
+        <a id="leftArrow" class="prev prev-info" onclick="plusSlides(-1)">&#10094;</a>
+        <a id="rightArrow" class="next next-info" onclick="plusSlides(1)">&#10095;</a>
+
+        <!-- Dots-->
+        <div class="info-dotrow">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+
+        <!-- Next button, appears at third slide-->
+        <div class="hideButton" id="nextButton">
+            <button class="button info-button">Next</button>
+        </div>
+    </div>
+
+</body>
+
+<!-- oTree templates -->
+{% endblock %}
+
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+    // Initialize slide index //
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+
+    // Next/previous controls: activate showSlides functions if arrows and arrow keys pressed. Stops the slides from going in "carousel".
+    function plusSlides(n) {
+        if (n === (-1) && slideIndex === 1) {
+            return;
+        } else if (n === 1 && slideIndex === 3) {
+            return;
+        } else {
+            showSlides(slideIndex += n);
+        }
+    };
+
+    // Thumbnail image controls
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    // Next/previous keypress controls //
+    document.addEventListener('keydown', (event) => {
+        let keypress = event.key;
+        if (keypress === 'ArrowLeft') {
+            plusSlides(-1);
+        } else if (keypress === 'ArrowRight') {
+            plusSlides(1);
+        }
+    });
+
+    // Slide switch function //
+    function showSlides(n) {
+        let i; // initialize count
+        let slides = document.getElementsByClassName("mySlides"); // get slides
+        let dots = document.getElementsByClassName("dot"); // get dots
+        let arrowLeft = document.querySelector("#leftArrow"); // get left arrow
+        let arrowRight = document.querySelector("#rightArrow"); // get right arrow
+
+        for (i = 0; i < slides.length; i++) { // hide slides by default
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) { // change dot color based on count
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block"; // show slide
+        dots[slideIndex - 1].className += " active"; // change dot color
+
+        if (n === 1) {
+            arrowLeft.style.display = "none" // make left arrow invisible on 1st slide
+        } else if (n > 1) {
+            arrowLeft.style.display = "block"
+        }
+
+        if (n === slides.length) {
+            arrowRight.style.display = "none" // make right arrow invisible on 4th slide
+            showButton() // show Next button when at last slide
+        } else if (n < slides.length) {
+            arrowRight.style.display = "block"
+        }
+    }
+
+    // Makes Next button visible
+    function showButton() { 
+        document.getElementById("nextButton").style.visibility = "visible";
+    }
+
+</script>
