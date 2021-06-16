@@ -5,6 +5,8 @@ const TablePaddingH = js_vars.TablePaddingH;
 const iTimeOut      = js_vars.iTimeOut;
 const vColNames     = js_vars.vColnames;
 const vRowNames     = js_vars.vRownames;
+const sImagePath    = js_vars.sImagePath;
+
 
 // O-tree variables
 let sActivation     = js_vars.sActivation;
@@ -169,7 +171,7 @@ function CheckImage(btn,sValue) {
     if (sValue.substring(0, 4)=='img:') {
       //console.log(btn.id+' is image')
       let ButtonImage = document.createElement('img');
-      ButtonImage.src = '/static/EcoTask/'+sValue.substring(4);
+      ButtonImage.src = sImagePath+sValue.substring(4);
       ButtonImage.className = 'button-img'
       btn.appendChild(ButtonImage);
       return 
