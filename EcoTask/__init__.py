@@ -43,13 +43,13 @@ class Constants(BaseConstants):
     # Row Names
     vRownames           = ["Price","Quality","Sustainability"] 
     # Image Path
-    sImagePath          = 'EcoTask/Figures'        
+    sImagePath          = '/static/EcoTask/figures/'        
     # Image files for infographics (instructions, quality, sustainability: linear/concave/convex)
-    imgFile_Inst        = 'EcoTask/Figures/instruction.png'
-    imgFile_Quality     = 'EcoTask/Figures/quality.png'
-    imgFile_Linear      = 'EcoTask/Figures/sus_linear.png'
-    imgFile_Concave     = 'EcoTask/Figures/sus_nonlin_high.png'
-    imgFile_Convex      = 'EcoTask/Figures/sus_nonlin_low.png'                               
+    imgFile_Inst        = 'EcoTask/figures/instruction.png'
+    imgFile_Quality     = 'EcoTask/figures/quality.png'
+    imgFile_Linear      = 'EcoTask/figures/sus_linear.png'
+    imgFile_Concave     = 'EcoTask/figures/sus_nonlin_high.png'
+    imgFile_Convex      = 'EcoTask/figures/sus_nonlin_low.png'                               
     
 
 
@@ -60,14 +60,19 @@ class Group(BaseGroup):
     pass
 
 class Player(BasePlayer):
+    ## Decision Variables
     iDec                = models.IntegerField(blank=True)
     dRT                 = models.FloatField(blank=True)
+    ## Attention Variables
     sButtonClick        = models.StringField(blank=True)
     sTimeClick          = models.StringField(blank=True)
+    ## Trial Variables
     sTableVals          = models.StringField(blank=True)
     iTreatment          = models.IntegerField(blank=True)
     PresOrder           = models.StringField(blank=True)
     sAttrOrder          = models.StringField(blank=True)
+    bStartLeft          = models.BooleanField(blank=True)
+    ## Trial Variables
     iFocusLost          = models.IntegerField(blank=True)
     dFocusLostT         = models.FloatField(blank=True)
     iFullscreenChange   = models.IntegerField(blank=True)
@@ -77,6 +82,7 @@ class Player(BasePlayer):
     Q2                  = models.StringField(blank=True)
     S1                  = models.StringField(blank=True)
     S2                  = models.StringField(blank=True)
+
 
 
 # FUNCTIONS
@@ -92,18 +98,23 @@ def creating_session(subsession):
             participant.PresOrder = random.choice(['Qual', 'Sus'])
 
     for player in subsession.get_players():
+        ## Load participant and save participant variables in player
         participant = player.participant
+        player.iTreatment = int(participant.treatment)
+        player.PresOrder  = str(participant.PresOrder)
+        ## Round Variables
         round = player.round_number
-        player.iTreatment = participant.treatment
-        player.PresOrder  = participant.PresOrder
         total_rounds = Constants.num_rounds/2
+        ## Define same attributes for first and second block
         if round<total_rounds:
             x = int(round-1)
             lAttr = participant.mTreat[x].split(',')
         else:
             x = int(round-total_rounds-1)
             lAttr = participant.mTreat[x].split(',')
-        print(lAttr)
+        ## Randomize if mouse starts on left or right
+        player.bStartLeft = random.choice([True,False])
+        # // print(lAttr)
 
         # Check order of Attributes and save them as player variables
         
@@ -269,6 +280,16 @@ class Decision(Page):
             'sImagePath'        : Constants.sImagePath,
         }
         
+class Between(Page):
+    @staticmethod
+    def js_vars(player: Player):
+        return {
+            'StartLeft' : player.bStartLeft,
+            'bRequireFS'        : Constants.bRequireFS,
+            'bCheckFocus'       : Constants.bCheckFocus,
+        }
+
+
 
 class Infographics(Page):
 
@@ -305,4 +326,4 @@ class Infographics(Page):
     def is_displayed(player):
         return player.round_number == Constants.num_rounds/2+1
 
-page_sequence = [Infographics, Decision]
+page_sequence = [Infographics, Between, Decision]

@@ -5,6 +5,7 @@ const bCheckFocus     = js_vars.bCheckFocus;
 
 if (bRequireFS) {
   // Create input iFullscreenChange
+  console.log('Checking for Fullscreen')
   var iFullscreenChange       = document.createElement("input");
   iFullscreenChange.type      = 'hidden';
   iFullscreenChange.name      = 'iFullscreenChange';
