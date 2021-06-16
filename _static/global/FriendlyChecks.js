@@ -2,6 +2,7 @@
 const bRequireFS      = js_vars.bRequireFS;
 const bCheckFocus     = js_vars.bCheckFocus;
 
+
 if (bRequireFS) {
   // Create input iFullscreenChange
   var iFullscreenChange       = document.createElement("input");
@@ -164,3 +165,4 @@ function getOS() {
 
   return os;
 }
+
