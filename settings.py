@@ -10,6 +10,7 @@ SESSION_CONFIGS = [
     ),
 ]
 
+
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
 # in SESSION_CONFIGS, except those that explicitly override it.
 # the session config can be accessed from methods in your apps as self.session.config,
@@ -51,5 +52,6 @@ Here are some oTree games.
 
 
 SECRET_KEY = '4165392775761'
+OTREE_ADMIN_PASSWORD = 'thisexperimentisgoingtorock!'
 
 INSTALLED_APPS = ['otree']
