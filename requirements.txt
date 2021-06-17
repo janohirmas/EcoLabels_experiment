@@ -2,3 +2,4 @@ otree>=5.0.0a24
 psycopg2>=2.8.4
 numpy>=1.9.2
 scipy>=0.15.1
+pandas>=1.2.4
