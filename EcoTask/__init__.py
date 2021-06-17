@@ -102,6 +102,7 @@ def creating_session(subsession):
         participant = player.participant
         player.iTreatment = int(participant.treatment)
         player.PresOrder  = str(participant.PresOrder)
+        player.sAttrOrder = participant.vRownames[1]
         ## Round Variables
         round = player.round_number
         total_rounds = Constants.num_rounds/2
