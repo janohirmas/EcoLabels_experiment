@@ -17,6 +17,8 @@ class Constants(BaseConstants):
     ## Variables that are not fully defined yet
     MaxBonus = int(3)
     NumTrials = int(66) 
+    AvgDur = "15-25"
+
 class Subsession(BaseSubsession):
     pass
 

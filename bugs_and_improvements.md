@@ -3,9 +3,25 @@ THIS TEXT FILE IS FOR KEEPING RECORD OF CURRENT BUGS AND SUGGESTED IMPROVEMENTS
 
 # IMPROVEMENTS
 
+    ## CSS 
+
+    - Change the font-sizes to em not vw or vh. 
+    
+    ## Instructions
+
+    - Change variables that have been decided
+    - Perhaps: Rephrase star and leaf explanation (not lead to)
+    - Add Overall Iddle Time-out
+    - Add slide explaining between trial page. 
+
     ## Decision
 
-    - Create in between page with 
+    - Choose prices
+    - Add check-up questions in infographic. 
+
+    ## Questionnaire
+
+    - Add end-page with payment
 
     ## Others
 
