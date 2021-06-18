@@ -34,98 +34,96 @@
 
                 <!-- Slide title -->
                 <p class="title"> The Experiment </p>
-
-                <!-- Slide text -->
-                <p>
-                    In this study you will make purchasing decisions. The products that you will observe are
-                    <b>artificial</b>. There is no physical product, but your <u>decisions</u> will have <b>real consequences.</b>
-                </p>
-                <p>
-                    Depending on your <u>decisions</u> you can obtain an
-                    additional <b>bonus payment up to €{{ Constants.MaxBonus }}</b>. Also, depending your decisions you can help the
-                    environment by <b>planting trees in the Amazon</b>.
-                </p>
+                    <ul>
+                        <li> 
+                            In this study you will make purchasing decisions. 
+                        </li>
+                        <li>
+                            The products that you will observe are <b>not real</b>. 
+                        </li>
+                        <li>
+                            There is no physical product, but your <u>decisions</u> will have <b>real consequences.</b>
+                        </li>
+                        <li>
+                            Depending on your <u>decisions</u> you can an obtain additional <b>bonus payment up to €{{ Constants.MaxBonus }}</b> 
+                            and help the environment by <b>planting trees in the Amazon</b>
+                        </li>
+                        <li> The donations will be done by {{ Constants.TreesOrg }}</li>
+                    </ul>
             </div>
         </div>
-
         <!-- Slide 2-->
         <div class="mySlides">
             <div class="slide-item">
-                <p class="title">The Benefits</p>
-                <p>
-                    In this experiment you will make multiple rounds <b>({{ Constants.NumTrials }})</b> of a purchasing decision. 
-                    In each round you will see <b>two products</b>. These products are not real, but their benefits are. 
-                    Products can grant you two benefits:
-                </p>
-                <p>
-                    <b>1) Bonus Payment:</b> The products will have a level of <b>‘Quality’</b>. 
-                </p>
-                <p style="margin-left: 50px;">
-                    Higher quality  <span>&#8594;</span> higher bonus payments.
-                </p>                
-                <p>
-                    <b>2) Planting trees in the Amazon:</b> The products will have a level of <b>‘Sustainability’</b>. 
-                </p>   
-                <p style="margin-left: 50px;">
-                    Higher sustainability <span>&#8594;</span> more trees planted in the Amazon. 
-                </p>
-
+                <p class="title" > Your decisions </p>
+                
+                <div style="display: flex; flex-direction: row; width: 100%;">
+                    <div class="slide-text" style="padding-right: 1em; width: 75%;"> 
+                        In this experiment you will:
+                        <ul>
+                            <li> Make multiple purchasing decisions (<b>{{ Constants.NumTrials }} rounds</b>).</li>
+                            <li> In each round, you will see <b>2 products</b> and their characteristics.</li>
+                            <li> These products are not real, but their benefits are. </li>
+                            <li> The next slide explains the benefits and characteristics of the products.</li>
+                        </ul>
+                    </div>
+                    <div class="slide-figure" style="width: 20%;"> Here we need a screenshot of the decision table with all attributes visible </div> 
+                </div>
             </div>
         </div>
 
         <!-- Slide 3-->
         <div class="mySlides">
             <div class="slide-item">
-                <p class="title">The Cost</p>
-                <p>
-                    You need to choose one of the <b>two products</b> to <u>purchase</u>. 
-                    By the end of the experiment, we will choose <b>1 rounds (randomly) </b>. 
-                    You will obtain the benefits of your purchased product in that round (aside from your participation fee).
-                </p>
-                <p>
-                    The <b>cost of the product</b> will be subtracted from your <b>bonus payment.</b> 
-                    The cost will never be higher than the benefit, so do not
-                    worry, <b> you will never lose anything</b>!
-                </p>
-            </div>
-        </div>
-
-        <!-- Slide 4-->
-        <div class="mySlides">
-            <div class="slide-item">
                 <p class="title">The Product characteristics</p>
                 <p>
-                    In each round, we will show you the two products and their characteristics:
+                    The characteristics of the products you choose, will affect the benefits you get:
                 </p>
-                <p>
-                    <b>Price:</b> Cost you need to pay for the product.
-                </p>
-                <p>
-                    <b>Quality:</b> 1-3 star (<img class="symbol" src="{% static star_symbol %}" />) rating. Products
-                    with more stars (<img class="symbol" src="{% static star_symbol %}" />) are more likely to have
-                    higher quality.
-                </p>
-                <p>
-                    <b>Eco-Label:</b> 1-3 leaf (<img class="symbol" src="{% static leaf_symbol %}" />) rating. Products
-                    with more leaves (<img class="symbol" src="{% static leaf_symbol %}" />) are more likely
-                    to be more sustainable.
-                </p>
+                <ul>
+                    <li>
+                        <b>Price:</b> This is the cost you need to pay for the product. The price is in (pound symbol)
+                    </li>
+                    <p style="margin-left: 50px;font-size: 0.8em;">
+                       Higher Price <span>&#8594;</span> lower bonus payments. 
+                    </p>
+                    <li> 
+                        <b>Quality:</b> 1-3 star (<img class="symbol" src="{% static star_symbol %}" />) rating. Products
+                        with more stars (<img class="symbol" src="{% static star_symbol %}" />) are more likely to have
+                        higher quality.
+                    </li>
+                    <p style="margin-left: 50px;font-size: 0.8em;">
+                        Higher quality  <span>&#8594;</span> higher bonus payments.
+                    </p> 
+                    <li>
+                        <b>Eco-Label:</b> 1-3 leaf (<img class="symbol" src="{% static leaf_symbol %}" />) rating. Products
+                        with more leaves (<img class="symbol" src="{% static leaf_symbol %}" />) are more likely
+                        to be more sustainable.
+                    </li>
+                    <p style="margin-left: 50px;font-size: 0.8em;">
+                        Higher sustainability <span>&#8594;</span> more trees planted in the Amazon. 
+                    </p>
+                </ul>
+
+                
             </div>
         </div>
 
-        <!-- Slide 5 -->
+        <!-- Slide 4 -->
         <div class="mySlides">
             <div class="slide-item slide-item2">
                 <p class="title"> Purchasing Platform </p>
                 <div class="button-text-container">
                     <div class="text-container">
                         <p>
-                            The product characteristics (Price, Quality and Eco-Label) for each product will be behind
+                            The product characteristics (Price, Quality and Sustainability) for each product will be behind
                             <i>‘boxes’.</i>
                         </p>
                         <p>
                             To reveal the information, all you need to do is to move your mouse on top of the <i>‘box’</i> and the
-                            information will be revealed. Here is an example, <u>try moving your mouse on top of the box.</u>
+                            information will be revealed. Here is an example.
+                        </p>
+                        <p>
+                            <b>Try moving your mouse on top of the box.</b>
                         </p>
                     </div>
                     <div class="button-container">
@@ -143,25 +141,26 @@
             </div>
         </div>
 
-        <!-- Slide 6 -->
+        <!-- Slide 5 -->
         <div class="mySlides">
             <div class="slide-item">
                 <p class="title"> The Choice </p>
-                <p>
-                    Once you have analyzed the products, you can choose between one of them. 
-                    Below the characteristics, you will find one button for each option. 
-                    To choose one product, just click the corresponding button below.
-                </p>
-                <p>
-                    If you didn't quite get it yet, don't worry!
-                </p>
-                <p>
-                    There will be <b>3 practice trials</b> before the real experiment starts.
-                </p>
+                <div style="display: flex; flex-direction: row; width: 100%;">
+                    <div class="slide-text" style="padding-right: 1em; width: 75%;"> 
+                        In this experiment you will:
+                        <ul>
+                            <li> Once you have analyzed the products, you can choose between one of them. </li>
+                            <li> Below the characteristics, you will find one button for each option.</li>
+                            <li> To choose one product, just click the corresponding button below. </li>
+                            <li> If you didn't quite get it yet, don't worry! There will be <b>3 practice trials</b> before the real experiment starts. </li>
+                            <li> At the end of the experiment, we will choose 1 of the rounds (randomly), and you will receive the benefits of that round.</li>
+                        </ul>
+                    </div>
+                <div class="slide-figure" style="width: 20%;"> Here we screenshot of the decision page with the decision buttons rounded. </div> 
             </div>
         </div>
                 
-        <!-- Slide 8 (Questions) -->
+        <!-- Slide 6 (Questions) -->
         <div class="mySlides">
             <!-- Question slide container-->
             <div class="flex-questions">
@@ -170,7 +169,7 @@
                     <!--Question 1-->
                     <div class="inst-question">
                         <!-- Question-->
-                        <label for="Q1">How many practice trials do you get?</label>
+                        <label for="Q1"> How many decisions will be chosen for payment? </label>
                     </div>
                     <div class="answer-field">
                         <!-- Input field -->
@@ -178,7 +177,7 @@
                     </div>
                     <div class="hint" id="hint1">
                         <!-- Hint -->
-                        Incorrect: see slide 6!
+                        Incorrect: see slide 5!
                         <div>
                 </li>
                 <li>
@@ -236,7 +235,7 @@
             <span class="dot" onclick="currentSlide(4)"></span>
             <span class="dot" onclick="currentSlide(5)"></span>
             <span class="dot" onclick="currentSlide(6)"></span>
-            <span class="dot" onclick="currentSlide(7)"></span>
+            <!-- <span class="dot" onclick="currentSlide(7)"></span> -->
         </div>
 
     </div>

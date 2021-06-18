@@ -18,6 +18,7 @@ class Constants(BaseConstants):
     MaxBonus = int(3)
     NumTrials = int(66) 
     AvgDur = "15-25"
+    TreesOrg = "One Tree Planted"
 
 class Subsession(BaseSubsession):
     pass

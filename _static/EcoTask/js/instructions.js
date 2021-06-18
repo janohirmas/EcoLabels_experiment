@@ -88,7 +88,7 @@ nextButton.style.display = "none" // Hide Next button
 
 function validateAnswers() {
 
-    let solutions = ['3', 'b', 'c']; // solutions
+    let solutions = ['1', 'b', 'c']; // solutions
     let hints = document.getElementsByClassName("hint"); // make array of hints
 
     // get answer fields
