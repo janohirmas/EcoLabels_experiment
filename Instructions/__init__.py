@@ -31,12 +31,12 @@ class Player(BasePlayer):
 
     # Terms & conditions
     #! Do you need this saved? If they say no, they cannot proceed
-    TC                  = models.StringField()
+    # TC                  = models.StringField()
 
     # Variables for instructions
-    Q1                  = models.IntegerField()
-    Q2                  = models.StringField()
-    Q3                  = models.StringField()
+    # Q1                  = models.IntegerField()
+    # Q2                  = models.StringField()
+    # Q3                  = models.StringField()
 
     # Fullscreen and FocusChecks 
     iFullscreenChange   = models.IntegerField(blank=True)
@@ -48,12 +48,14 @@ class Introduction(Page):
     pass
 
 class ConsentForm(Page):
-    form_model = 'player'
-    form_fields = ['TC']
+    pass
+    # form_model = 'player'
+    # form_fields = ['TC']
 
 class Instructions(Page):
     form_model = 'player'
-    form_fields = ['Q1', 'Q2', 'Q3', 'iFullscreenChange', 'iFocusLost', 'dFocusLostT' ]
+    # form_fields = ['Q1', 'Q2', 'Q3', 'iFullscreenChange', 'iFocusLost', 'dFocusLostT' ]
+    form_fields = ['iFullscreenChange', 'iFocusLost', 'dFocusLostT' ]
 
     @staticmethod
     def js_vars(player):
