@@ -29,7 +29,9 @@ THIS TEXT FILE IS FOR KEEPING RECORD OF CURRENT BUGS AND SUGGESTED IMPROVEMENTS
     ## Decision
 
     - (AH) Choose prices
+    - (AH) Fix selection of final payoff. 
     - Change lay-out of button in Between.html
+    - check that participant variables worked!
 
     ## Infographics
     - Change the order of first slide depending on what is presented first and after. (i.e. if order is leaves and stars, the first slide says stars and leaves. This can be confusing.)
@@ -42,7 +44,9 @@ THIS TEXT FILE IS FOR KEEPING RECORD OF CURRENT BUGS AND SUGGESTED IMPROVEMENTS
 
     - Write down below button (or press 'Enter'). Once it's pressed, the parenthesis should dissappear. 
     - (AH) Add end-page with payment
-    - (AH) If we use PlantOneTree, we can let them choose where to plant the trees and how many in each place :)
+    - Edit EndPage so layout is consistent with the rest. 
+    - If we use PlantOneTree (TBD), we can let them choose where to plant the trees and how many in each place :)
+
 
     ## Others (Are these still issues?)
 

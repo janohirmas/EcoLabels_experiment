@@ -58,6 +58,11 @@ class Player(BasePlayer):
     QT26 = models.StringField()
     QT27 = models.StringField()
 
+    # Selected Trial
+    SelectedTrial = models.IntegerField()
+    TreesLocation = models.StringField()
+    Bonus = models.FloatField()
+
 # PAGES
 
 class Questionnaire(Page):
@@ -65,10 +70,27 @@ class Questionnaire(Page):
     form_fields = ['D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'QT1', 'QT2', 'QT3','QT4', 'QT5', 'QT6', 'QT7','QT8', 'QT9', 'QT10', 'QT11', 'QT12', 'QT13', 'QT14', 'QT15','QT16', 'QT17', 'QT18','QT19', 'QT20', 'QT21', 'QT22','QT23', 'QT24', 'QT25','QT26', 'QT27']
 
     def is_displayed(self):
-        return True
+        return False
 
 class EndPage(Page):
-    pass
+    form_model = 'player'
+    form_fields = ['TreesLocation']
+    @staticmethod
+    def vars_for_template(player):
+        participant = player.participant
+        participant.Price = 5
+        participant.Q = 10
+        participant.S = 3
+        participant.SelectedTrial = 19
+        player.Bonus = participant.Q - participant.Price
+
+        return {
+            'SelectedTrial' : participant.SelectedTrial,
+            'Price' : participant.Price,
+            'Q' : participant.Q,
+            'S' : participant.S,
+            'Bonus' : player.Bonus,
+        }
 
 page_sequence = [Questionnaire, EndPage]
 

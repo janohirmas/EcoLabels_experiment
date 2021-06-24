@@ -1,7 +1,7 @@
 from otree.api import *
 import numpy as np
 from numpy import random
-from random import sample
+from random import SystemRandom, sample
 from random import choices
 import pandas as pd
 import csv
@@ -49,9 +49,16 @@ class Constants(BaseConstants):
     imgFile_Quality     = 'EcoTask/figures/quality.png'
     imgFile_Linear      = 'EcoTask/figures/sus_linear.png'
     imgFile_Concave     = 'EcoTask/figures/sus_nonlin_high.png'
-    imgFile_Convex      = 'EcoTask/figures/sus_nonlin_low.png'                               
-    
-
+    imgFile_Convex      = 'EcoTask/figures/sus_nonlin_low.png'    
+    # Quality and Sustainability ranges
+    Q1      = 5
+    Q_step  = 2
+    S1      = 0
+    S2_1    = 2
+    S2_2    = 1
+    S2_3    = 3
+    S3      = 4
+    S_step  = 2
 
 class Subsession(BaseSubsession):
     pass
@@ -96,6 +103,8 @@ def creating_session(subsession):
             participant.mTreat = lTreat
             participant.treatment = random.choice([1, 2, 3])
             participant.PresOrder = random.choice(['Qual', 'Sus'])
+            participant.SelectedTrial = random.choice(range(1,Constants.num_rounds))
+            print(participant.SelectedTrial)
 
     for player in subsession.get_players():
         ## Load participant and save participant variables in player
@@ -280,6 +289,33 @@ class Decision(Page):
             'iTimeOut'          : Constants.iTimeOut,
             'sImagePath'        : Constants.sImagePath,
         }
+    staticmethod
+    def before_next_page(player, timeout_happened):
+        participant = player.participant
+        if (participant.SelectedTrial==player.round_number):
+            if (player.iDec==0):
+                participant.Price = player.P1
+                Qmin = Constants.Q1 + Constants.Q_step*(int(player.Q1)-1)
+                Qrange = range(Qmin,Qmin+Constants.Q_step+1)
+                print("S1",player.S1=="0")
+                if (Player.S1=="0"):
+                    Smin = Constants.S1
+                elif (Player.S1=="1"):
+                    if (player.iTreatment=="1"):
+                        Smin = Constants.S2_1
+                    elif (player.iTreatment=="2"):
+                        Smin = Constants.S2_2
+                    elif (player.iTreatment=="3"):
+                        Smin = Constants.S2_3
+                elif (Player.S1=="2"):
+                    Smin = Constants.S3
+                Srange = range(Smin,Smin+Constants.S_step+1)
+            else:
+                pass
+
+            participant.Q = random.choice(Qrange)
+            participant.S = random.choice(Srange)
+            print([participant.SelectedTrial, participant.Q,participant.S,participant.Price])
         
 class Between(Page):
     @staticmethod
