@@ -3,66 +3,6 @@
  
 /* GLOBAL STYLING */
 
-    @media only screen and (min-width: 1600px) {
-        h1 {
-            font-size: 46px !important;
-        }
-
-        input {
-            font-size: 24px !important;
-        }
-
-        .button {
-            height: 10vh !important;
-            width: 8vw !important;
-            font-size: 24px !important;
-            line-height: 10vh !important;
-        }
-
-        .title {
-            font-size: 24px !important;
-        }
-
-        .slide-item {
-            font-size: 22px !important;
-            line-height: 2 !important;
-        }
-
-        .flex-questions {
-            font-size: 24px !important;
-        }
-
-        .dot {
-            height: 24px !important;
-            width: 24px !important;
-        }
-
-        .prev, .next {
-            font-size: 6vh !important;
-        }
-
-        .question {
-            font-size: 26px !important;
-        }
-
-        .answers {
-            font-size: 24px !important;
-        }
-
-        .infograph-container {
-            height: 60vh !important;
-            width: 60vw !important;
-            margin-left: 20vw !important;
-            margin-top: 10vh;
-            margin-bottom: 2vh !important;
-        }
-
-        .info-img {
-            height: 60vh !important;
-            width: 60vw !important;
-        }
-    }
-
     /* set oTree default margins & padding off, define viewport */
     .otree-body {
        height: 100vh;
@@ -151,7 +91,7 @@
     .flex-container {
         display: flex;
         flex-flow: row wrap;
-        height: 70vh;
+        height: 75vh;
         width: 80vw;
         padding: 0;
         margin-top: 10vh;
@@ -168,7 +108,7 @@
 
     /* Slides */
     .slide-item {
-        height: 65vh;
+        height: 70vh;
         width: 80vw;
         padding-top: 5vh;
         padding-left: 6vw;
@@ -315,7 +255,7 @@
     .intro-button {
         display: inline-block;
         position:absolute;
-        margin: 55vh; 
+        margin: 60vh; 
     }
 
     /* Next & previous buttons (arrows) */
@@ -356,7 +296,7 @@
     /* The dots/bullets/indicators */
     .dot_row {
         position: absolute;
-        margin-top: 63vh;
+        margin-top: 67vh;
         text-align: center;
     }
 
@@ -553,3 +493,65 @@
         color: #ffffff;
     }
 
+
+    /* Media query for large screen (stops elements from becoming gigantic)*/
+
+    @media only screen and (min-width: 1600px) {
+        h1 {
+            font-size: 46px !important;
+        }
+
+        input {
+            font-size: 24px !important;
+        }
+
+        .button {
+            height: 10vh !important;
+            width: 8vw !important;
+            font-size: 24px !important;
+            line-height: 10vh !important;
+        }
+
+        .title {
+            font-size: 24px !important;
+        }
+
+        .slide-item {
+            font-size: 22px !important;
+            line-height: 2 !important;
+        }
+
+        .flex-questions {
+            font-size: 24px !important;
+        }
+
+        .dot {
+            height: 24px !important;
+            width: 24px !important;
+        }
+
+        .prev, .next {
+            font-size: 6vh !important;
+        }
+
+        .question {
+            font-size: 26px !important;
+        }
+
+        .answers {
+            font-size: 24px !important;
+        }
+
+        .infograph-container {
+            height: 60vh !important;
+            width: 60vw !important;
+            margin-left: 20vw !important;
+            margin-top: 10vh;
+            margin-bottom: 2vh !important;
+        }
+
+        .info-img {
+            height: 60vh !important;
+            width: 60vw !important;
+        }
+    }

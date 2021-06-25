@@ -7,8 +7,7 @@ THIS TEXT FILE IS FOR KEEPING RECORD OF CURRENT BUGS AND SUGGESTED IMPROVEMENTS
 
     - Change the font-sizes to em not vw or vh. 
         * em is a flexible property that depends on the users preference.
-        * Careful: The property em inherits the parents' size. (if div1 has font-size 1.5em and div2 (inside div1) has size 2em, then the font size in div2 will be 1.5*2em)
-    - Adjust size, spacing so the new layout looks good. 
+        * Careful: The property em inherits the parents' size. (if div1 has font-size 1.5em and div2 (inside div1) has size 2em, then the font size in div2 will be 1.5*2em) 
     
     ## Introduction
 
@@ -18,7 +17,6 @@ THIS TEXT FILE IS FOR KEEPING RECORD OF CURRENT BUGS AND SUGGESTED IMPROVEMENTS
 
     - (AH) Change AvgDur, NN trials and Max Bonus in constants for lay-out
     - (AH) Add Overall Iddle Time-out
-    - Change hints according to new slides.
     - Add images in slides 2 and 5 (left a ppt on the main folder so you can use that as an example.)
     - Write down Left(Right) arrow button: "(or press 'Left(right) arrow symbol')". Once any of them is pressed, the parenthesis should dissappear.
     - In the first slide, add the image of the company. Use Vars_for_template to load the image, so we can change it easier. 
