@@ -2,7 +2,11 @@ from os import environ
 
 
 SESSION_CONFIGS = [
-
+    dict(
+        name='EndPage',
+        num_demo_participants= 1,
+        app_sequence=['Questionnaire']
+    ),
     dict(
         name='EcoLabels',
         num_demo_participants= 1,
@@ -15,7 +19,7 @@ SESSION_CONFIGS = [
 # in SESSION_CONFIGS, except those that explicitly override it.
 # the session config can be accessed from methods in your apps as self.session.config,
 # e.g. self.session.config['participation_fee']
-PARTICIPANT_FIELDS = ['treatment', 'PresOrder','mTreat','vRownames']
+PARTICIPANT_FIELDS = ['treatment', 'PresOrder','mTreat','vRownames','SelectedTrial','Price','Q','S']
 
 
 SESSION_CONFIG_DEFAULTS = dict(
