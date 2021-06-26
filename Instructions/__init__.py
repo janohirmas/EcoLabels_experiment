@@ -9,6 +9,8 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
     ## Symbols directory
+    revealed_task = 'EcoTask/figures/revealed_task_img.png'
+    circled_task = 'EcoTask/figures/circled_task_img.png'
     leaf_symbol = 'EcoTask/figures/one_leaf.png'
     star_symbol = 'EcoTask/figures/one_star.png'
     ## Friendly Checks
@@ -68,6 +70,8 @@ class Instructions(Page):
     @staticmethod
     def vars_for_template(player):
         return dict(
+            revealed_task = Constants.revealed_task,
+            circled_task = Constants.circled_task,
             leaf_symbol = Constants.leaf_symbol,
             star_symbol = Constants.star_symbol,
         )

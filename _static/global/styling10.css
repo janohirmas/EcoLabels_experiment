@@ -139,16 +139,26 @@
         margin: 1px;
     }
 
-    /* Tutorial slide */
-    .button-text-container {
+    /* Slides that have content split in two */
+    .double-container {
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
     }
 
     .text-container {
-        flex-basis: 50%;
-        margin-right: 3vw;
+        width: 70%;
+    }
+
+    .img-container {
+        padding-left: 5vw;
+        text-align: center;
+        width: 30%;
+    }
+
+    .task-img {
+        width: 17vw;
+        border: 1px solid #333;
+        object-fit: contain;
     }
 
     .button-container {

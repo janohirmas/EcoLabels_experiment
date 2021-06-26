@@ -17,9 +17,10 @@ THIS TEXT FILE IS FOR KEEPING RECORD OF CURRENT BUGS AND SUGGESTED IMPROVEMENTS
 
     - (AH) Change AvgDur, NN trials and Max Bonus in constants for lay-out
     - (AH) Add Overall Iddle Time-out
-    - Add images in slides 2 and 5 (left a ppt on the main folder so you can use that as an example.)
     - Write down Left(Right) arrow button: "(or press 'Left(right) arrow symbol')". Once any of them is pressed, the parenthesis should dissappear.
     - In the first slide, add the image of the company. Use Vars_for_template to load the image, so we can change it easier. 
+    - Add "correct" symbol if answers were correct
+    - Make "next"button more visible after it appear (animation or bordering)
 
     ## Practice Trials
     - (AH) Add Practice trials
