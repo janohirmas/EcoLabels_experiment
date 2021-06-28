@@ -49,16 +49,23 @@ class Constants(BaseConstants):
     imgFile_Quality     = 'EcoTask/figures/quality.png'
     imgFile_Linear      = 'EcoTask/figures/sus_linear.png'
     imgFile_Concave     = 'EcoTask/figures/sus_nonlin_high.png'
-    imgFile_Convex      = 'EcoTask/figures/sus_nonlin_low.png'    
-    # Quality and Sustainability ranges
-    Q1      = 5
-    Q_step  = 2
-    S1      = 0
-    S2_1    = 2
-    S2_2    = 1
-    S2_3    = 3
-    S3      = 4
-    S_step  = 2
+    imgFile_Convex      = 'EcoTask/figures/sus_nonlin_low.png'  
+    # Treatment Variables
+    lS1 = [[0,1],[1,2],[0,2]]
+    lS2 = [[0,0],[1,1],[2,2]]
+
+    ## Quality
+    lQc = [[1,0],[2,0],[2,1]]
+    lQs = [[0,1],[0,2],[1,2]]
+    lQe = [[0,0],[1,1],[2,2]]
+
+    ## Prices
+    iP1,iP2,iP3,iP4 = [1,2,3,4]
+
+    lPoe = [[iP2,iP1],[iP3,iP1],[iP3,iP2],[iP4,iP1],[iP4,iP2],[iP4,iP3]]
+    lPse = [[iP1,iP2],[iP1,iP3],[iP2,iP3],[iP1,iP4],[iP2,iP4],[iP3,iP4]]
+    lPeq = [[iP1,iP1],[iP2,iP2],[iP3,iP3],[iP4,iP4]]
+  
 
 class Subsession(BaseSubsession):
     pass
@@ -147,20 +154,17 @@ def createTreatment():
     iSize = 2*5*3+3
 
     ## Sustainability
-    lS1 = [[0,1],[1,2],[0,2]]
-    lS2 = [[0,0],[1,1],[2,2]]
-
+    lS1 = Constants.lS1
+    lS2 = Constants.lS2
     ## Quality
-    lQc = [[1,0],[2,0],[2,1]]
-    lQs = [[0,1],[0,2],[1,2]]
-    lQe = [[0,0],[1,1],[2,2]]
+    lQc = Constants.lQc
+    lQs = Constants.lQs
+    lQe = Constants.lQe
 
     ## Prices
-    iP1,iP2,iP3 = [10,15,20]
-
-    lPoe = [[iP2,iP1],[iP3,iP1],[iP3,iP2]]
-    lPse = [[iP1,iP2],[iP1,iP3],[iP2,iP3]]
-    lPeq = [[iP1,iP1],[iP2,iP2],[iP3,iP3]]
+    lPoe = Constants.lPoe
+    lPse = Constants.lPse
+    lPeq = Constants.lPeq
 
     #* Functions
     def join2String(list, delimiter= ','):
@@ -239,6 +243,7 @@ def createTreatment():
         counter +=1
     lAttList = ['Price', order[0], order[1]]
     random.shuffle(lTreatments)
+    pd.DataFrame(lTreatments).to_csv('treatment.csv')
     return lTreatments,lAttList
 
 # PAGES
@@ -295,27 +300,12 @@ class Decision(Page):
         if (participant.SelectedTrial==player.round_number):
             if (player.iDec==0):
                 participant.Price = player.P1
-                Qmin = Constants.Q1 + Constants.Q_step*(int(player.Q1)-1)
-                Qrange = range(Qmin,Qmin+Constants.Q_step+1)
-                print("S1",player.S1=="0")
-                if (Player.S1=="0"):
-                    Smin = Constants.S1
-                elif (Player.S1=="1"):
-                    if (player.iTreatment=="1"):
-                        Smin = Constants.S2_1
-                    elif (player.iTreatment=="2"):
-                        Smin = Constants.S2_2
-                    elif (player.iTreatment=="3"):
-                        Smin = Constants.S2_3
-                elif (Player.S1=="2"):
-                    Smin = Constants.S3
-                Srange = range(Smin,Smin+Constants.S_step+1)
+                participant.Q = player.Q1
+                participant.S = player.S1
             else:
-                pass
-
-            participant.Q = random.choice(Qrange)
-            participant.S = random.choice(Srange)
-            print([participant.SelectedTrial, participant.Q,participant.S,participant.Price])
+                participant.Price = player.P1
+                participant.Q = player.Q1
+                participant.S = player.S1
         
 class Between(Page):
     @staticmethod
