@@ -72,7 +72,6 @@ class Player(BasePlayer):
     QT27 = models.StringField()
 
     # Selected Trial
-    SelectedTrial = models.IntegerField(blank=True)
     TreesLocation = models.StringField(blank=True)
     Bonus = models.FloatField(blank=True)
 
@@ -91,7 +90,6 @@ class EndPage(Page):
     @staticmethod
     def vars_for_template(player):
         participant = player.participant
-        player.SelectedTrial = participant.SelectedTrial
         ## Determining Value of Sustainability rating
         S = int(participant.S)
         T = int(participant.treatment)
