@@ -91,6 +91,7 @@ class EndPage(Page):
     @staticmethod
     def vars_for_template(player):
         participant = player.participant
+        player.SelectedTrial = participant.SelectedTrial
         ## Determining Value of Sustainability rating
         S = int(participant.S)
         T = int(participant.treatment)
