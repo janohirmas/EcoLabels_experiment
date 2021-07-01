@@ -72,9 +72,9 @@ class Player(BasePlayer):
     QT27 = models.StringField()
 
     # Selected Trial
-    SelectedTrial = models.IntegerField()
-    TreesLocation = models.StringField()
-    Bonus = models.FloatField()
+    SelectedTrial = models.IntegerField(blank=True)
+    TreesLocation = models.StringField(blank=True)
+    Bonus = models.FloatField(blank=True)
 
 # PAGES
 
