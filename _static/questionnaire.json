@@ -56,19 +56,3 @@
                 "type": "longopen"
     }
 
-    
-    // Show text under arrows until user presses right or left key. Then make invisible.
-    let textRight = document.getElementById("nextKey");
-    let textLeft = document.getElementById("prevKey");
-    
-    if (n >= 2) {
-        textLeft.style.display = "block"
-    } else {
-        textLeft.style.display = "none"
-    } 
-    if (conditionArrows === false) {
-        textRight.style.display = "block"
-    } else if (conditionArrows === true) {
-        textRight.style.display = "none"
-        textLeft.style.display = "none"
-    }

@@ -17,10 +17,8 @@ THIS TEXT FILE IS FOR KEEPING RECORD OF CURRENT BUGS AND SUGGESTED IMPROVEMENTS
 
     - (AH) Change AvgDur, NN trials and Max Bonus in constants for lay-out
     - (AH) Add Overall Iddle Time-out
-    - Write down Left(Right) arrow button: "(or press 'Left(right) arrow symbol')". Once any of them is pressed, the parenthesis should dissappear.
     - In the first slide, add the image of the company. Use Vars_for_template to load the image, so we can change it easier. 
     - Add "correct" symbol if answers were correct
-    - Make "next"button more visible after it appear (animation or bordering)
 
     ## Practice Trials
     - (AH) Add Practice trials
@@ -57,16 +55,6 @@ THIS TEXT FILE IS FOR KEEPING RECORD OF CURRENT BUGS AND SUGGESTED IMPROVEMENTS
 
 # BUGS 
 
-> Instructions: there is still more slides than the current ones. Your function should look how many slides there are and act according to that. That should not be a value. But don't worry, change it manually now, I will fix it for the future. 
-
-> Now the arrows don't appear until a couple of slides.
-
-> Instructions: Size of the screen is more than 100vw, then when I press left or right the whole page moves. This can be a bit distracting.
-
-(Are these still an issue?)
-
 > Questionnaire: progress bar moves together with autocomplete dropdown menu. It should flow over it without the progress bar moving anywhere
-
-> Instructions: slide 7 (questions) "jumps" down. Something wrong with container placement
 
 > Infographic: when Next button appears on Slide 3, the dots stop working (cannot switch slide with them anymore). Probably something to do with the placing of the button. 

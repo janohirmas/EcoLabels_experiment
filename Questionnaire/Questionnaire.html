@@ -32,6 +32,7 @@
             <a id="next" class="button QT-button" onclick=showNextSlide()> Next</a>
             <!-- Submit button -->
             <button id="submit" class="button QT-button" onclick=getResults()>Submit</button>
+            <p id = "buttonText" class = "button-text"> or click 'Enter' </p>
         </div>
     </div>
     <!-- This one is used to save data to oTree server, see JS-->
@@ -438,10 +439,16 @@
             let keypress = event.key;
             if (keypress === 'Enter') { // click 'Enter' = next slide
                 showNextSlide();
+                hideEnter();
             } else if (keypress === 'Backspace') { // click 'backspace' = previous slide
                 showPreviousSlide();
             }
         });
+
+        // If Enter is clicked, hide text under Next button
+        function hideEnter() {
+            document.getElementById("buttonText").style.visibility = "hidden"
+        };
 
         // prevent submitting the questionnaire if user click "Enter"
         $(document).ready(function () {

@@ -269,6 +269,28 @@
         margin: 60vh; 
     }
 
+    /* Glowing button Instructions */
+    .glow-button {  
+        -webkit-border-radius: 60px; 
+        border-radius: 3px !important ;
+        animation: glowing 2000ms infinite;
+    }
+
+    @keyframes glowing {
+        0% {
+            background-color: rgb(33, 202, 132);
+            box-shadow: 0 0 3px rgb(33, 202, 132);
+        }
+        50% {
+            background-color: rgb(33, 202, 112);
+            box-shadow: 0 0 10px rgb(33, 202, 112);
+        }
+        100% {
+            background-color:rgb(33, 202, 132);
+            box-shadow: 0 0 3px rgb(33, 202, 132);
+        }
+}
+
     /* Next & previous buttons (arrows) */
     .prev,
     .next {
@@ -456,6 +478,26 @@
     .QT-button {
         margin-top: 15vh;   
     }
+
+    .button-text {
+        font-size: 2vh;
+        -webkit-border-radius: 60px; 
+        border-radius: 10px;
+        text-shadow: rgb(8, 235, 140);
+        animation: glowing 2000ms infinite;
+    }
+
+    @keyframes glowing {
+        0% {
+            text-shadow: 0 0 10px #000;
+        }
+        50% {
+            text-shadow: 0 0 20px #000;
+        }
+        100% {
+            text-shadow: 0 0 10px #000;
+        }
+}
 
     /* Slide */
     .slide {

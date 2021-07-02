@@ -84,17 +84,18 @@ function showSlides(n) {
         arrowRight.style.display = "block"
     }
 
-    if (n === 1) {
+    if (n === 1) { // make arrow text visible/invisible based on slide count
         document.getElementById("prevKey").style.display = "none";
     } else {
         document.getElementById("prevKey").style.display = "block";
     };
     if (n === slides.length) {
         document.getElementById("nextKey").style.display = "none";
+    } else {
+        document.getElementById("nextKey").style.display = "block";
     };
 
 }
-
 
 // QUESTIONS SLIDE //
 
