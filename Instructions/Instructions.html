@@ -228,7 +228,10 @@
 
         <!-- Next and previous buttons -->
         <a id="leftArrow" class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a id="rightArrow" class="next" onclick="plusSlides(1)">&#10095;</a>
+        <p id= "prevKey" class = "prev-key"> <b>or press [&#8592;]</b> </p>
+
+        <a id= "rightArrow" class="next" onclick="plusSlides(1)">&#10095;</a>
+        <p id = "nextKey" class = "next-key"> <b>or press [&#8594;] </b></p>
 
         <!-- The dots/circles (if you want to add extra slides, add span(s) here)-->
         <div class="dot_row">
@@ -245,7 +248,5 @@
 </body>
 
 <!-- oTree templates -->
-<script>
-    const GameBody = document.getElementsByClassName('_otree-content')[0];
-</script>
+
 {% endblock %}

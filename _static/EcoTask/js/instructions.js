@@ -37,14 +37,23 @@ document.getElementById("b3").addEventListener("mouseover", (event) => {
 });
 
 // Next/previous keypress controls //
+
 document.addEventListener('keydown', (event) => {
     let keypress = event.key;
     if (keypress === 'ArrowLeft') {
         plusSlides(-1);
+        ArrowText();       
     } else if (keypress === 'ArrowRight') {
         plusSlides(1);
+        ArrowText();
     }
 });
+
+// Hide text under arrows when user clicks left or right arrow button
+function ArrowText() {
+    document.getElementById("nextKey").style.display = "none"
+    document.getElementById("prevKey").style.display = "none";
+};
 
 // Slide switch function //
 function showSlides(n) {
@@ -74,7 +83,18 @@ function showSlides(n) {
     } else if (n < slides.length) {
         arrowRight.style.display = "block"
     }
+
+    if (n === 1) {
+        document.getElementById("prevKey").style.display = "none";
+    } else {
+        document.getElementById("prevKey").style.display = "block";
+    };
+    if (n === slides.length) {
+        document.getElementById("nextKey").style.display = "none";
+    };
+
 }
+
 
 // QUESTIONS SLIDE //
 

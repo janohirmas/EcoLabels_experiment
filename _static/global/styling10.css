@@ -302,7 +302,25 @@
         background-color: #bbb;
         color: black;
     }
-    
+   
+    .prev-key,
+    .next-key {
+        position: absolute;
+        top: 60%;
+        padding: 2vh;
+        color: black;
+        font-size: 2vh;
+        text-align: center;
+    }
+
+    .prev-key {
+        left: 1vw;
+    }
+        
+    .next-key {
+        right: 0.5vw;
+    }
+
     /* The dots/bullets/indicators */
     .dot_row {
         position: absolute;
