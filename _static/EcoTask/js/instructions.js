@@ -51,8 +51,8 @@ document.addEventListener('keydown', (event) => {
 
 // Hide text under arrows when user clicks left or right arrow button
 function ArrowText() {
-    document.getElementById("nextKey").style.display = "none"
-    document.getElementById("prevKey").style.display = "none";
+    document.getElementById("nextKey").style.visibility = "hidden"
+    document.getElementById("prevKey").style.visibility = "hidden";
 };
 
 // Slide switch function //
