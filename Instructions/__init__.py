@@ -50,6 +50,9 @@ class Player(BasePlayer):
 class Introduction(Page):
     pass
 
+class EndPageTest(Page):
+    pass
+
 class ConsentForm(Page):
     pass
     # form_model = 'player'

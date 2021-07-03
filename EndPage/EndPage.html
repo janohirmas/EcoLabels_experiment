@@ -1,26 +1,47 @@
-{% load otree static %}
+<!-- END/RESULTS PAGE -->
 
 <!-- LINK TO STYLESHEET-->
 <link rel="stylesheet" href="{% static 'global/styling10.css' %}">
 
+<!-- Set viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <!-- Link to JS -->
 
-
+{% load otree static %}
 {% block content %}
 
-<p class="title"> Results: </p>
-<p> The experiment has ended. These are your results: </p>
-<ul>
-    <li> The randomly selected trial is: {{ SelectedTrial }} </li>
-    <li> The Price of the product you selected was: {{ Price }} </li>
-    <li> The value of the product was: {{ Q }} </li>
-    <li> The amount of trees planted will be: {{ S }} </li>
-    <li> You bonus Payment is: {{ Bonus }} </li>
-    <li> PlaneOneTree can plant the {{ S }} trees in many places. Where do you want to plant it? </li>
-    
-</ul>
+<body>
 
+    <!-- Slide container -->
+    <div class="flex-container">
+
+        <!-- Title -->
+        <h1> Results </h1>
+
+        <!-- Intro text -->
+        <div class="slide-item">
+            <p class="title"> The experiment has ended. These are your results: </p>
+            <div class="double-container">
+                <div class="text-container">
+                    <ul style="line-height: 2">
+                        <li> The randomly selected trial is: {{ SelectedTrial }} </li>
+                        <li> The Price of the product you selected was: {{ Price }} </li>
+                        <li> The value of the product was: {{ Q }} </li>
+                        <li> The amount of trees planted will be: {{ S }} </li>
+                        <li> You bonus Payment is: {{ Bonus }} </li>
+                    </ul>
+                </div>
+                <div class="button-container">
+                    <p>Onetreeplanted can plant the {{ S }} trees in many places around the world. Where do you want to
+                        plant them?</p>
+                </div>
+            </div>
+        </div>
+        <!-- Submit button -->
+        <button class="button intro-button">Submit</button>
+    </div>
+
+</body>
 
 {% endblock %}
-
-

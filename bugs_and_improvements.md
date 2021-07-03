@@ -39,10 +39,8 @@ THIS TEXT FILE IS FOR KEEPING RECORD OF CURRENT BUGS AND SUGGESTED IMPROVEMENTS
 
     ## Questionnaire
 
-    - Write down below button (or press 'Enter'). Once it's pressed, the parenthesis should dissappear. 
     - (AH) Add end-page with payment
-    - Edit EndPage so layout is consistent with the rest. 
-    - If we use PlantOneTree (TBD), we can let them choose where to plant the trees and how many in each place :)
+    - SAVE ANSWERS ONETREEPLANTED!!! 
 
 
     ## Others (Are these still issues?)

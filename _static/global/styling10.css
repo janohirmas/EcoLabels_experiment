@@ -208,7 +208,7 @@
         padding-top: 5vh;
         padding-left: 5vw;
         padding-right: 3vw;
-        font-size: 2.5vh;
+        font-size: 2.8vh;
         margin-bottom: 2vh;
     }
 
@@ -479,6 +479,7 @@
         margin-top: 15vh;   
     }
 
+    /* Text under Next Button */
     .button-text {
         font-size: 2vh;
         -webkit-border-radius: 60px; 
@@ -564,6 +565,22 @@
         color: #ffffff;
     }
 
+    /* END PAGE */
+
+    .second-text-container {
+        flex-basis: 50%;
+        text-align: left;
+        padding-left: 4vh;
+        font-size: 3vh;
+    }
+
+    .slide-item3 {
+        padding-right: 6vw !important; 
+    }
+
+    .dropdown2 {
+        width: 12vw;
+    }
 
     /* Media query for large screen (stops elements from becoming gigantic)*/
 
