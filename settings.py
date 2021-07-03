@@ -10,7 +10,7 @@ SESSION_CONFIGS = [
     dict(
         name='EcoLabels',
         num_demo_participants= 1,
-        app_sequence=['Instructions','Questionnaire', 'EcoTask']
+        app_sequence=['EcoTask', 'Instructions','Questionnaire']
     ),
 ]
 

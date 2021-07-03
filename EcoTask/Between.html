@@ -1,35 +1,26 @@
+<!-- BETWEEN DECISIONS-->
+
+<!-- Link to JS -->
 <!-- Full-Screen & Focus -->
 <script src="{% static 'global/FriendlyChecks.js' %}"></script>
 
-{% load otree static %}
-
-{% block app_styles %}
+<!-- LINK TO STYLESHEET-->
+<link rel="stylesheet" href="{% static 'global/styling10.css' %}">
 <link href="{% static 'EcoTask/css/LineReveal.css' %}" rel="stylesheet">
 <link href="{% static 'global/FriendlyChecks.css' %}" rel="stylesheet">
 
-    <style>
-        #game-body {
-            background-color: #eee;
-            height: 100vh;
-            width: 100vw;
-            display: block;
-        }
-        #between-button {
-            position: absolute;
-            top: 50vh;
-            left: 50vw;
-            transform: translate(-50%,-50%);
-        }
-    </style>
+<!-- Set viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{% load otree static %}
+{% block content %}
+
+    <div id="game-body">
+        <button class= "button" id="between-button"> Press here!</button>
+    </div>
+
 {% endblock %}
 
-
-
-{% block content %}
-    <div id="game-body">
-        <button id="between-button"> Press Here! </button>
-    </div>
-    
     <script>
         const GameBody = document.getElementById('game-body');
         const NextButton = document.getElementById('between-button');
@@ -43,4 +34,3 @@
     </script>
 
 
-{% endblock %}
