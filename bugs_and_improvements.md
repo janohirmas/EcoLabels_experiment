@@ -8,18 +8,12 @@ THIS TEXT FILE IS FOR KEEPING RECORD OF CURRENT BUGS AND SUGGESTED IMPROVEMENTS
     - Change the font-sizes to em not vw or vh. 
         * em is a flexible property that depends on the users preference.
         * Careful: The property em inherits the parents' size. (if div1 has font-size 1.5em and div2 (inside div1) has size 2em, then the font size in div2 will be 1.5*2em) 
-    
-    ## Introduction
-
-    - Add UvA Logo to introduction page. 
 
     ## Instructions
 
     - (AH) Change AvgDur, NN trials and Max Bonus in constants for lay-out
     - (AH) Add Overall Iddle Time-out
-    - In the first slide, add the image of the company. Use Vars_for_template to load the image, so we can change it easier. 
-    
-
+  
     ## Practice Trials
     - (AH) Add Practice trials
 
@@ -40,6 +34,8 @@ THIS TEXT FILE IS FOR KEEPING RECORD OF CURRENT BUGS AND SUGGESTED IMPROVEMENTS
 
     - (AH) Add end-page with payment
     - SAVE ANSWERS ONETREEPLANTED!!! 
+
+    - Add a page after questionnaire thanking for participation. 
 
 # FOR LATER
 

@@ -610,6 +610,12 @@
         width: 12vw;
     }
 
+    /* FINAL PAGE */
+    .final-text {
+        padding-top: 20vh;
+        font-size: 3vh;
+    }
+
     /* Media query for large screen (stops elements from becoming gigantic)*/
 
     @media only screen and (min-width: 1600px) {
