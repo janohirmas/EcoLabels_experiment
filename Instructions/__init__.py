@@ -9,6 +9,8 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
     ## Symbols directory
+    UvA_logo = 'EcoTask/figures/UvA_logo.png'
+    OTP_logo = 'EcoTask/figures/Logo_OneTreePlanted.png'
     revealed_task = 'EcoTask/figures/revealed_task_img.png'
     circled_task = 'EcoTask/figures/circled_task_img.png'
     leaf_symbol = 'EcoTask/figures/one_leaf.png'
@@ -48,10 +50,11 @@ class Player(BasePlayer):
 
 # PAGES
 class Introduction(Page):
-    pass
-
-class EndPageTest(Page):
-    pass
+    @staticmethod
+    def vars_for_template(player):
+        return dict(
+            UvA_logo = Constants.UvA_logo,
+        )
 
 class ConsentForm(Page):
     pass
@@ -73,6 +76,7 @@ class Instructions(Page):
     @staticmethod
     def vars_for_template(player):
         return dict(
+            OTP_logo = Constants.OTP_logo,
             revealed_task = Constants.revealed_task,
             circled_task = Constants.circled_task,
             leaf_symbol = Constants.leaf_symbol,

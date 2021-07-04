@@ -18,7 +18,7 @@ THIS TEXT FILE IS FOR KEEPING RECORD OF CURRENT BUGS AND SUGGESTED IMPROVEMENTS
     - (AH) Change AvgDur, NN trials and Max Bonus in constants for lay-out
     - (AH) Add Overall Iddle Time-out
     - In the first slide, add the image of the company. Use Vars_for_template to load the image, so we can change it easier. 
-    - Add "correct" symbol if answers were correct
+    
 
     ## Practice Trials
     - (AH) Add Practice trials
@@ -26,8 +26,7 @@ THIS TEXT FILE IS FOR KEEPING RECORD OF CURRENT BUGS AND SUGGESTED IMPROVEMENTS
     ## Decision
 
     - (AH) Choose prices
-    - (AH) Fix selection of final payoff. 
-    - Change lay-out of button in Between.html
+    - (AH) Fix selection of final payoff.
     - check that participant variables worked!
 
     ## Infographics
@@ -42,12 +41,13 @@ THIS TEXT FILE IS FOR KEEPING RECORD OF CURRENT BUGS AND SUGGESTED IMPROVEMENTS
     - (AH) Add end-page with payment
     - SAVE ANSWERS ONETREEPLANTED!!! 
 
-
-    ## Others (Are these still issues?)
+# FOR LATER
 
     - Questionnaire: previous button (nextSlide function need to be changed for this to work)
 
-    - Instructions: get slide texts, questions, dots from object instead of hardcoded
+    - Instructions: make a flexible version of the slide function (not hardcoded!!)
+
+    - Instructions: Add "correct" symbol if answers were correct when answers submitted 
 
     - input fields and radiobuttons sizing is a little bit off with big screen.  
 
@@ -55,4 +55,5 @@ THIS TEXT FILE IS FOR KEEPING RECORD OF CURRENT BUGS AND SUGGESTED IMPROVEMENTS
 
 > Questionnaire: progress bar moves together with autocomplete dropdown menu. It should flow over it without the progress bar moving anywhere
 
-> Infographic: when Next button appears on Slide 3, the dots stop working (cannot switch slide with them anymore). Probably something to do with the placing of the button. 
+
+

@@ -133,6 +133,18 @@
         margin-bottom: 2vh;
     }
 
+    /* UvA logo */
+    .UvA-logo {
+        width: 15vw;
+        margin-left: 2vh;
+    }
+
+    /* OTP logo */
+    .OTP-logo {
+        width: 15vw;
+        margin: 2vh;
+    }
+
     /* Product Characteristics slide */
     .symbol {
         width: 1.5vw;
@@ -583,7 +595,7 @@
 
     /* END PAGE */
 
-    .second-text-container {
+    .text-container2 {
         flex-basis: 50%;
         text-align: left;
         padding-left: 4vh;
