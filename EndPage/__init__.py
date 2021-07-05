@@ -34,7 +34,7 @@ class Group(BaseGroup):
 class Player(BasePlayer):
 
     # Selected Trial
-    trial_pay = models.IntegerField()
+    trial_pay = models.StringField()
     Bonus = models.FloatField()
     TreeAmount = models.IntegerField()
 
@@ -52,11 +52,11 @@ class EndPage(Page):
         print(type(S))
         if (S!=1):
             Svalue = Constants.S1 + S*Constants.S_step + random.randint(0,Constants.S_step)
-        elif (S==2 & T==1):
+        elif (S==1 & T==1):
             Svalue = Constants.S1 + S*Constants.S_step + random.randint(0,Constants.S_step)
-        elif (S==2 & T==2):
+        elif (S==1 & T==2):
             Svalue = Constants.S2_2 + random.randint(0,Constants.S_step)
-        elif (S==2 & T==3):
+        elif (S==1 & T==3):
             Svalue = Constants.S2_3+ random.randint(0,Constants.S_step) 
         else:
             print('Error determining treatment and Sustainability level')  
@@ -77,7 +77,7 @@ class EndPage(Page):
     @staticmethod
     def before_next_page(player, timeout_happened):
         part = player.participant
-        player.trial_pay = int(part.SelectedTrial)
+        player.trial_pay = str(part.SelectedTrial)
         player.Bonus = part.Bonus
         player.TreeAmount = part.TreeAmount
 
