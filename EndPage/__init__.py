@@ -41,8 +41,6 @@ class Player(BasePlayer):
 
 
 class EndPage(Page):
-    form_model = 'player'
-    form_fields = ['TreesLocation']
     @staticmethod
     def vars_for_template(player):
         participant = player.participant

@@ -48,8 +48,10 @@ class Player(BasePlayer):
     iFocusLost          = models.IntegerField(blank=True)
     dFocusLostT         = models.FloatField(blank=True)
 
+
 # PAGES
 class Introduction(Page):
+
     @staticmethod
     def vars_for_template(player):
         return dict(
@@ -62,9 +64,6 @@ class ConsentForm(Page):
     # form_fields = ['TC']
 
 class Instructions(Page):
-    form_model = 'player'
-    # form_fields = ['Q1', 'Q2', 'Q3', 'iFullscreenChange', 'iFocusLost', 'dFocusLostT' ]
-    form_fields = ['iFullscreenChange', 'iFocusLost', 'dFocusLostT' ]
 
     @staticmethod
     def js_vars(player):
