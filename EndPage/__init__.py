@@ -1,5 +1,5 @@
 from otree.api import *
-from numpy import random
+from numpy import empty, random
 from random import SystemRandom, sample
 from random import choices
 
@@ -34,9 +34,9 @@ class Group(BaseGroup):
 class Player(BasePlayer):
 
     # Selected Trial
-    trial_pay = models.StringField()
-    Bonus = models.FloatField()
-    TreeAmount = models.IntegerField()
+    trial_pay   = models.StringField()
+    Bonus       = models.FloatField()
+    TreeAmount  = models.IntegerField(blank=True)
 
 # PAGES
 
