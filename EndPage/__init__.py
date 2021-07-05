@@ -34,14 +34,19 @@ class Group(BaseGroup):
 class Player(BasePlayer):
 
     # Selected Trial
-    trial_pay   = models.StringField(initial="1")
-    Bonus       = models.FloatField()
-    TreeAmount  = models.IntegerField()
+    SelectedTrial   = models.IntegerField()
+    Bonus           = models.FloatField()
+    TreeAmount      = models.IntegerField()
+    TreeLocation    = models.StringField()
+    ProlificID      = models.StringField()
 
 # PAGES
 
 
 class EndPage(Page):
+    form_model = 'player'
+    form_fields = ['TreeLocation']
+
     @staticmethod
     def vars_for_template(player):
         participant = player.participant
@@ -77,9 +82,11 @@ class EndPage(Page):
     @staticmethod
     def before_next_page(player, timeout_happened):
         part = player.participant
-        player.trial_pay = str(part.SelectedTrial)
+        player.SelectedTrial = int(part.SelectedTrial)
         player.Bonus = part.Bonus
         player.TreeAmount = part.TreeAmount
+        player.ProlificID = part.label
+
 
 
 class FinalPage(Page):

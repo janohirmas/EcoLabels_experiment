@@ -48,6 +48,8 @@ class Player(BasePlayer):
     iFocusLost          = models.IntegerField(blank=True)
     dFocusLostT         = models.FloatField(blank=True)
 
+    ProlificID          = models.StringField(initial='test')
+
 
 # PAGES
 class Introduction(Page):
@@ -57,6 +59,7 @@ class Introduction(Page):
         return dict(
             UvA_logo = Constants.UvA_logo,
         )
+
 
 class ConsentForm(Page):
     pass
@@ -81,6 +84,7 @@ class Instructions(Page):
             leaf_symbol = Constants.leaf_symbol,
             star_symbol = Constants.star_symbol,
         )
+
 
 
 page_sequence = [Introduction, ConsentForm, Instructions]
