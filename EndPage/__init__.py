@@ -34,7 +34,7 @@ class Group(BaseGroup):
 class Player(BasePlayer):
 
     # Selected Trial
-    SelectedTrial = models.IntegerField()
+    trial_pay = models.IntegerField()
     Bonus = models.FloatField()
     TreeAmount = models.IntegerField()
 
@@ -77,7 +77,7 @@ class EndPage(Page):
     @staticmethod
     def before_next_page(player, timeout_happened):
         part = player.participant
-        player.SelectedTrial = int(part.SelectedTrial)
+        player.trial_pay = int(part.SelectedTrial)
         player.Bonus = part.Bonus
         player.TreeAmount = part.TreeAmount
 
