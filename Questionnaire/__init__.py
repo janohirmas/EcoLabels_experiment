@@ -71,10 +71,6 @@ class Player(BasePlayer):
     QT26 = models.StringField()
     QT27 = models.StringField()
 
-    SelectedTrial = models.IntegerField()
-    Bonus = models.FloatField()
-    TreeAmount = models.IntegerField()
-
 
 # PAGES
 
@@ -82,52 +78,7 @@ class Questionnaire(Page):
     form_model = 'player'
     form_fields = ['D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'QT1', 'QT2', 'QT3','QT4', 'QT5', 'QT6', 'QT7','QT8', 'QT9', 'QT10', 'QT11', 'QT12', 'QT13', 'QT14', 'QT15','QT16', 'QT17', 'QT18','QT19', 'QT20', 'QT21', 'QT22','QT23', 'QT24', 'QT25','QT26', 'QT27']
 
-class EndPage(Page):
-    @staticmethod
-    def vars_for_template(player):
-        participant = player.participant
-        ## Determining Value of Sustainability rating
-        S = int(participant.S)
-        T = int(participant.treatment)
-        Q = int(participant.Q)
-        print(type(S))
-        if (S!=1):
-            Svalue = Constants.S1 + S*Constants.S_step + random.randint(0,Constants.S_step)
-        elif (S==2 & T==1):
-            Svalue = Constants.S1 + S*Constants.S_step + random.randint(0,Constants.S_step)
-        elif (S==2 & T==2):
-            Svalue = Constants.S2_2 + random.randint(0,Constants.S_step)
-        elif (S==2 & T==3):
-            Svalue = Constants.S2_3+ random.randint(0,Constants.S_step) 
-        else:
-            print('Error determining treatment and Sustainability level')  
-        print(Svalue)
-        ## Determining value of Quality rating
-        Qvalue = Constants.Q1 + Q*Constants.Q_step + random.randint(0,Constants.Q_step)
-        participant.Bonus = Qvalue - int(participant.Price)
-        participant.TreeAmount = Svalue
-        
-        return {
-            'SelectedTrial' : participant.SelectedTrial,
-            'Price' : participant.Price,
-            'Q' : Qvalue,
-            'S' : Svalue,
-            'Bonus' : participant.Bonus,
-        }
 
-    @staticmethod
-    def before_next_page(player, timeout_happened):
-        part = player.participant
-        player.SelectedTrial = int(part.SelectedTrial)
-        player.Bonus = part.Bonus
-        player.TreeAmount = part.TreeAmount
-
-
-class FinalPage(Page):
-    pass
-
-
-
-page_sequence = [ EndPage, FinalPage]
+page_sequence = [ Questionnaire]
 
 
