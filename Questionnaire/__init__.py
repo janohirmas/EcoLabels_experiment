@@ -71,14 +71,12 @@ class Player(BasePlayer):
     QT26 = models.StringField()
     QT27 = models.StringField()
 
+    SelectedTrial = models.IntegerField()
+    Bonus = models.FloatField()
+    TreeAmount = models.IntegerField()
+
+
 # PAGES
-def custom_export(players):
-    # header row
-    yield ['session', 'participant_code', 'Prolific_id', 'Bonus', 'TreeLocation', 'TreeAmount']
-    for p in players:
-        participant = p.participant
-        session = p.session
-        yield [session.code, participant.code, participant.prolific_id , participant.Bonus, participant.TreeLocation, participant.TreeAmount]
 
 class Questionnaire(Page):
     form_model = 'player'
@@ -92,6 +90,7 @@ class EndPage(Page):
         S = int(participant.S)
         T = int(participant.treatment)
         Q = int(participant.Q)
+        print(type(S))
         if (S!=1):
             Svalue = Constants.S1 + S*Constants.S_step + random.randint(0,Constants.S_step)
         elif (S==2 & T==1):
@@ -106,6 +105,7 @@ class EndPage(Page):
         ## Determining value of Quality rating
         Qvalue = Constants.Q1 + Q*Constants.Q_step + random.randint(0,Constants.Q_step)
         participant.Bonus = Qvalue - int(participant.Price)
+        participant.TreeAmount = Svalue
         
         return {
             'SelectedTrial' : participant.SelectedTrial,
@@ -115,12 +115,19 @@ class EndPage(Page):
             'Bonus' : participant.Bonus,
         }
 
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        part = player.participant
+        player.SelectedTrial = int(part.SelectedTrial)
+        player.Bonus = part.Bonus
+        player.TreeAmount = part.TreeAmount
+
 
 class FinalPage(Page):
     pass
 
 
 
-page_sequence = [Questionnaire, EndPage, FinalPage]
+page_sequence = [ EndPage, FinalPage]
 
 

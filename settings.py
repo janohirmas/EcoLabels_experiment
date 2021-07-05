@@ -25,8 +25,6 @@ PARTICIPANT_FIELDS = [
     'S',
     'ProlificID',
     'Bonus',
-    'SubmitCode',
-    'TreeLocation',
     'TreeAmount'
     ]
 
