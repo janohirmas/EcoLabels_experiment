@@ -34,9 +34,9 @@ class Group(BaseGroup):
 class Player(BasePlayer):
 
     # Selected Trial
-    trial_pay   = models.StringField()
+    trial_pay   = models.StringField(initial="1")
     Bonus       = models.FloatField()
-    TreeAmount  = models.IntegerField(blank=True)
+    TreeAmount  = models.IntegerField()
 
 # PAGES
 
