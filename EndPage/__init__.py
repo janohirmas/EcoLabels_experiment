@@ -1,5 +1,5 @@
 from otree.api import *
-from numpy import random
+from numpy import empty, random
 from random import SystemRandom, sample
 from random import choices
 
@@ -34,15 +34,19 @@ class Group(BaseGroup):
 class Player(BasePlayer):
 
     # Selected Trial
-    TreesLocation = models.StringField(blank=True)
-    Bonus = models.FloatField(blank=True)
+    SelectedTrial   = models.IntegerField()
+    Bonus           = models.FloatField()
+    TreeAmount      = models.IntegerField()
+    TreeLocation    = models.StringField()
+    ProlificID      = models.StringField()
 
 # PAGES
 
 
 class EndPage(Page):
     form_model = 'player'
-    form_fields = ['TreesLocation']
+    form_fields = ['TreeLocation']
+
     @staticmethod
     def vars_for_template(player):
         participant = player.participant
@@ -50,29 +54,47 @@ class EndPage(Page):
         S = int(participant.S)
         T = int(participant.treatment)
         Q = int(participant.Q)
+        print(type(S))
         if (S!=1):
             Svalue = Constants.S1 + S*Constants.S_step + random.randint(0,Constants.S_step)
-        elif (S==2 & T==1):
+        elif (S==1 & T==1):
             Svalue = Constants.S1 + S*Constants.S_step + random.randint(0,Constants.S_step)
-        elif (S==2 & T==2):
+        elif (S==1 & T==2):
             Svalue = Constants.S2_2 + random.randint(0,Constants.S_step)
-        elif (S==2 & T==3):
+        elif (S==1 & T==3):
             Svalue = Constants.S2_3+ random.randint(0,Constants.S_step) 
         else:
             print('Error determining treatment and Sustainability level')  
         print(Svalue)
         ## Determining value of Quality rating
         Qvalue = Constants.Q1 + Q*Constants.Q_step + random.randint(0,Constants.Q_step)
-        player.Bonus = Qvalue - int(participant.Price)
-
+        participant.Bonus = Qvalue - int(participant.Price)
+        participant.TreeAmount = Svalue
+        
         return {
             'SelectedTrial' : participant.SelectedTrial,
             'Price' : participant.Price,
             'Q' : Qvalue,
             'S' : Svalue,
-            'Bonus' : player.Bonus,
+            'Bonus' : participant.Bonus,
         }
 
-page_sequence = [EndPage]
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        part = player.participant
+        player.SelectedTrial = int(part.SelectedTrial)
+        player.Bonus = part.Bonus
+        player.TreeAmount = part.TreeAmount
+        player.ProlificID = part.label
+
+
+
+class FinalPage(Page):
+    pass
+
+
+
+page_sequence = [ EndPage, FinalPage]
+
 
 

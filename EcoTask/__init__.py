@@ -15,7 +15,7 @@ class Constants(BaseConstants):
     name_in_url         = 'EcoTask'
     players_per_group   = None
     # Number of rounds
-    num_rounds          = 66 
+    num_rounds          = 2 
     # Number of Practice Rounds                                    
     num_prounds         = 3
     # mouseover or click 

@@ -29,6 +29,8 @@ THIS TEXT FILE IS FOR KEEPING RECORD OF CURRENT BUGS AND SUGGESTED IMPROVEMENTS
     ## Questionnaire
 
     - (AH) Add end-page with payment
+    - Instead of having click and enter. Whenever they click, jump to next question and add back button in case they want to fix a previous question
+    - In the filling questions (like nationality) if I fill something, but they haven't finished the word and they press enter, it goes to the next question anyways. Make sure that the input is on the list. 
     - SAVE ANSWERS ONETREEPLANTED!!! 
 
 # FOR LATER

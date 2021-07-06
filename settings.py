@@ -3,23 +3,29 @@ from os import environ
 
 SESSION_CONFIGS = [
     dict(
-        name='EndPage',
-        num_demo_participants= 1,
-        app_sequence=['EndPage']
-    ),
-    dict(
         name='EcoLabels',
         num_demo_participants= 1,
-        app_sequence=['EcoTask','Instructions', 'Questionnaire']
+        app_sequence=['Instructions', 'EcoTask', 'Questionnaire' ,'EndPage']
     ),
 ]
-
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
 # in SESSION_CONFIGS, except those that explicitly override it.
 # the session config can be accessed from methods in your apps as self.session.config,
 # e.g. self.session.config['participation_fee']
-PARTICIPANT_FIELDS = ['treatment', 'PresOrder','mTreat','vRownames','SelectedTrial','Price','Q','S']
+PARTICIPANT_FIELDS = [
+    'treatment', 
+    'PresOrder',
+    'mTreat',
+    'vRownames',
+    'SelectedTrial',
+    'Price',
+    'Q',
+    'S',
+    'ProlificID',
+    'Bonus',
+    'TreeAmount'
+    ]
 
 
 SESSION_CONFIG_DEFAULTS = dict(
@@ -46,16 +52,16 @@ ROOMS = [
     dict(name='live_demo', display_name='Room for live demo (no participant labels)'),
 ]
 
+OTREE_AUTH_LEVEL = 'DEMO'
 ADMIN_USERNAME = 'admin'
 # for security, best to set admin password in an environment variable
+OTREE_ADMIN_PASSWORD = 'thisexperimentisgoingtorock!'
 ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 
 DEMO_PAGE_INTRO_HTML = """
 Here are some oTree games.
 """
-
-
 SECRET_KEY = '4165392775761'
-OTREE_ADMIN_PASSWORD = 'thisexperimentisgoingtorock!'
 
 INSTALLED_APPS = ['otree']
+

@@ -48,13 +48,18 @@ class Player(BasePlayer):
     iFocusLost          = models.IntegerField(blank=True)
     dFocusLostT         = models.FloatField(blank=True)
 
+    ProlificID          = models.StringField(initial='test')
+
+
 # PAGES
 class Introduction(Page):
+
     @staticmethod
     def vars_for_template(player):
         return dict(
             UvA_logo = Constants.UvA_logo,
         )
+
 
 class ConsentForm(Page):
     pass
@@ -62,9 +67,6 @@ class ConsentForm(Page):
     # form_fields = ['TC']
 
 class Instructions(Page):
-    form_model = 'player'
-    # form_fields = ['Q1', 'Q2', 'Q3', 'iFullscreenChange', 'iFocusLost', 'dFocusLostT' ]
-    form_fields = ['iFullscreenChange', 'iFocusLost', 'dFocusLostT' ]
 
     @staticmethod
     def js_vars(player):
@@ -82,6 +84,7 @@ class Instructions(Page):
             leaf_symbol = Constants.leaf_symbol,
             star_symbol = Constants.star_symbol,
         )
+
 
 
 page_sequence = [Introduction, ConsentForm, Instructions]
