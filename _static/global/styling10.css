@@ -399,7 +399,7 @@
 
     /* Image slide container */
     .infograph-container {
-        height: 80vh;
+        height: 75vh;
         width: 80vw;
         padding: 0;
         margin-left: 10vw;
@@ -409,7 +409,7 @@
 
     /* Image sizing */
     .info-img {
-        height: 80vh;
+        height: 70vh;
         width: 80vw;
         object-fit:contain;
     }
@@ -434,6 +434,38 @@
 
     .next-info {
         right: 10vw !important;
+    }
+
+/* INFOGRAPHICS NEW */
+    .info-title {
+        font-size: 4vh;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    .img-container-info {
+        width: 60%;
+    }
+
+    .img-info {
+        object-fit: contain;
+        width: 35vw;
+    }
+
+    .text-info {
+        width: 40%;
+        color: #333;
+    }
+
+    .flex-questions2 li:last-child {
+        padding-top: 8vh !important;
+    }
+
+/* READY */
+    .ready-button {
+        display: inline-block;
+        position:absolute;
+        margin: 30vh; 
     }
 
 /* QUESTIONNAIRE */

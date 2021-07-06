@@ -45,6 +45,7 @@ class Constants(BaseConstants):
     # Image Path
     sImagePath          = '/static/EcoTask/figures/'        
     # Image files for infographics (instructions, quality, sustainability: linear/concave/convex)
+    test_graph          = 'EcoTask/figures/Infographic_graphs/Q_double_1-3.png'
     imgFile_Inst        = 'EcoTask/figures/instruction.png'
     imgFile_Quality     = 'EcoTask/figures/quality.png'
     imgFile_Linear      = 'EcoTask/figures/sus_linear.png'
@@ -316,7 +317,15 @@ class Between(Page):
             'bCheckFocus'       : Constants.bCheckFocus,
         }
 
+class Infographics_New(Page):
+    @staticmethod
+    def vars_for_template(player):
+        return dict(
+            test_graph = Constants.test_graph
+        ) 
 
+class Ready(Page):
+    pass
 
 class Infographics(Page):
 
@@ -353,4 +362,4 @@ class Infographics(Page):
     def is_displayed(player):
         return player.round_number == Constants.num_rounds/2+1
 
-page_sequence = [Infographics, Between, Decision]
+page_sequence = [Infographics_New, Ready, Decision, Between, Infographics]

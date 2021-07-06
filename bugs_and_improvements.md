@@ -24,18 +24,12 @@ THIS TEXT FILE IS FOR KEEPING RECORD OF CURRENT BUGS AND SUGGESTED IMPROVEMENTS
     - check that participant variables worked!
 
     ## Infographics
-    - Change the order of first slide depending on what is presented first and after. (i.e. if order is leaves and stars, the first slide says stars and leaves. This can be confusing.)
-    - Add check-up questions in infographic (don't record them). 
-        1. If you get a product with 3 leaves (symbol), what is the maximum amount of trees that can be planted?
-        2. If you get a product with 2 stars, what is the minimum amount of points you can get?
     - Add a page, now we are going to proceed with the experiment. (and next button)
 
     ## Questionnaire
 
     - (AH) Add end-page with payment
     - SAVE ANSWERS ONETREEPLANTED!!! 
-
-    - Add a page after questionnaire thanking for participation. 
 
 # FOR LATER
 
