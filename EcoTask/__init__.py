@@ -15,9 +15,9 @@ class Constants(BaseConstants):
     name_in_url         = 'EcoTask'
     players_per_group   = None
     # Number of rounds
-    num_rounds          = 2 
+    num_rounds          = 3 
     # Number of Practice Rounds                                    
-    num_prounds         = 3
+    num_prounds         = 1
     # mouseover or click 
     sActivation         = 'mouseover'                             
     # List that can include val,col,row
@@ -110,7 +110,7 @@ def creating_session(subsession):
             participant.mTreat = lTreat
             participant.treatment = random.choice([1, 2, 3])
             participant.PresOrder = random.choice(['Qual', 'Sus'])
-            participant.SelectedTrial = random.choice(range(1,Constants.num_rounds))
+            participant.SelectedTrial = random.choice(range(Constants.num_prounds+1,Constants.num_rounds))
             print(participant.SelectedTrial)
 
     for player in subsession.get_players():
@@ -247,6 +247,16 @@ def createTreatment():
     return lTreatments,lAttList
 
 # PAGES
+class PracticeInfo1(Page):
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number == 1
+
+class PracticeInfo2(Page):
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number == Constants.num_prounds
+
 class Decision(Page):
     form_model = 'player'
     form_fields = [
@@ -316,8 +326,6 @@ class Between(Page):
             'bCheckFocus'       : Constants.bCheckFocus,
         }
 
-
-
 class Infographics(Page):
 
     @staticmethod
@@ -351,6 +359,7 @@ class Infographics(Page):
         )
     @staticmethod
     def is_displayed(player):
-        return player.round_number == Constants.num_rounds/2+1
+        return player.round_number == (Constants.num_rounds-Constants.num_prounds)/2+1
+        
 
-page_sequence = [Infographics, Between, Decision]
+page_sequence = [PracticeInfo1, Between, Decision, Infographics, PracticeInfo2]
