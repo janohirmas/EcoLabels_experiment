@@ -454,7 +454,15 @@
 
     .text-info {
         width: 40%;
-        color: #333;
+        font-size: 0.7em;
+        text-align: justify;
+    }
+
+    .text-info ul {
+        margin: 0;
+        padding: 0;
+        border: 0;   
+        list-style-type: none;    
     }
 
     .flex-questions2 li:last-child {

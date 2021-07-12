@@ -7,6 +7,11 @@ SESSION_CONFIGS = [
         num_demo_participants= 1,
         app_sequence=['Instructions', 'EcoTask', 'Questionnaire' ,'EndPage']
     ),
+    dict(
+        name='Task',
+        num_demo_participants= 1,
+        app_sequence=['EcoTask']
+    ),
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs

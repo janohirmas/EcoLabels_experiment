@@ -1,0 +1,12 @@
+<p>
+    The products leaf label (<img class="symbol" src="{% static Constants.leaf_symbol %}" />) represents the products quality. 
+If you purchase a product with higher quality, you will obtain a larger bonus payment.
+This graph shows how much the bonus payment can be, depending on the star label. 
+</p>
+
+<p> Products with: </p>
+<ul>
+    <li>  1 <img class="symbol" src="{% static Constants.leaf_symbol %}" /> will grant between {{ Constants.S1l }} and  {{ Constants.S1h }} and {{ Constants.Currency }}  </li>
+    <li>  2 <img class="symbol" src="{% static Constants.leaf_symbol %}" /> will grant between {{ S2l }} and  {{ S2h }} and {{ Constants.Currency }}  </li>
+    <li>  3 <img class="symbol" src="{% static Constants.leaf_symbol %}" /> will grant between {{ Constants.S3l }} and  {{ Constants.S3h }} and {{ Constants.Currency }}  </li>
+</ul>

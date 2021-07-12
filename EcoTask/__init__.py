@@ -17,7 +17,7 @@ class Constants(BaseConstants):
     # Number of rounds
     num_rounds          = 3 
     # Number of Practice Rounds                                    
-    num_prounds         = 1
+    num_prounds         = 0
     # mouseover or click 
     sActivation         = 'mouseover'                             
     # List that can include val,col,row
@@ -45,12 +45,33 @@ class Constants(BaseConstants):
     # Image Path
     sImagePath          = '/static/EcoTask/figures/'        
     # Image files for infographics (instructions, quality, sustainability: linear/concave/convex)
-    test_graph          = 'EcoTask/figures/Infographic_graphs/Q_double_1-3.png'
-    imgFile_Inst        = 'EcoTask/figures/instruction.png'
-    imgFile_Quality     = 'EcoTask/figures/quality.png'
-    imgFile_Linear      = 'EcoTask/figures/sus_linear.png'
-    imgFile_Concave     = 'EcoTask/figures/sus_nonlin_high.png'
-    imgFile_Convex      = 'EcoTask/figures/sus_nonlin_low.png'  
+    txtSustainability   = 'EcoTask/text/sustainability.html'
+    txtQuality          = 'EcoTask/text/quality.html'
+    imgLeaf_symbol      = 'EcoTask/figures/one_leaf.png'
+    imgStar_symbol      = 'EcoTask/figures/one_star.png'
+    imgFile_Quality     = 'EcoTask/figures/Infographic_graphs/quality.png'
+    imgFile_Linear      = 'EcoTask/figures/Infographic_graphs/sus_linear.png'
+    imgFile_Concave     = 'EcoTask/figures/Infographic_graphs/sus_concave.png'
+    imgFile_Convex      = 'EcoTask/figures/Infographic_graphs/sus_convex.png' 
+    # Variables for Infographics
+    Q1l = 4
+    Q1h = 5 
+    Q2l = 5
+    Q2h = 6 
+    Q3l = 6
+    Q3h = 7 
+    S1l = 0
+    S1h = 2 
+    S2l_l = 2
+    S2h_l = 4 
+    S2l_cv = 3
+    S2h_cv = 5 
+    S2l_cx = 1
+    S2h_cx = 3 
+    S3l = 4
+    S3h = 6 
+    Currency = 'Pounds'
+
     # Treatment Variables
     lS1 = [[0,1],[1,2],[0,2]]
     lS2 = [[0,0],[1,1],[2,2]]
@@ -327,17 +348,76 @@ class Between(Page):
             'bCheckFocus'       : Constants.bCheckFocus,
         }
 
-class Infographics_New(Page):
+class Infographics(Page):
     @staticmethod
     def vars_for_template(player):
+        participant = player.participant
+        
+        # Pick images based on treatment for sustainability info
+        if participant.treatment == 1:
+            S2low = Constants.S2l_l
+            S2high = Constants.S2h_l
+            Sgraph = Constants.imgFile_Linear
+        elif participant.treatment == 2:
+            S2low = Constants.S2l_cv
+            S2high = Constants.S2h_cv
+            Sgraph = Constants.imgFile_Concave
+        else:
+            S2low = Constants.S2l_cx
+            S2high = Constants.S2h_cx
+            Sgraph = Constants.imgFile_Convex
+        # Create Dictionary with all necessary info
+        dicSustainabilityInfo = {
+            'Item' : 'Leaf-rating & trees planted',
+            'Graph' : Sgraph,
+            'Title' : 'Sustainability',
+            'p1' : 'leaf',
+            'p2' : 'sustainability',
+            'p3' : 'the amount of planted trees',
+            'p4' : 'trees',
+            'Symbol' : Constants.imgLeaf_symbol,
+            'low1' : Constants.S1l,
+            'low2' : S2low,
+            'low3' : Constants.S3l,
+            'hi1' : Constants.S1h,
+            'hi2' : S2high,
+            'hi3' : Constants.S3h,
+
+        }
+        dicQualityInfo = {
+            'Item' : 'Star-rating & Bonus Payment',
+            'Graph' : Constants.imgFile_Quality,
+            'Title' : 'Quality',
+            'p1' : 'star',
+            'p2' : 'quality',
+            'p3' : 'the value you will get',
+            'p4' : Constants.Currency,
+            'Symbol' : Constants.imgStar_symbol,
+            'low1' : Constants.Q1l,
+            'low2' : Constants.Q2l,
+            'low3' : Constants.Q3l,
+            'hi1' : Constants.Q1h,
+            'hi2' : Constants.Q2h,
+            'hi3' : Constants.Q3h,
+
+        }
+        # Pick images based on treatment for sustainability info
+        if participant.PresOrder == 'Qual':
+            dicFirst    = dicQualityInfo
+            dicSecond   = dicSustainabilityInfo
+        else:
+            dicFirst   = dicSustainabilityInfo
+            dicSecond    = dicQualityInfo
+
         return dict(
-            test_graph = Constants.test_graph
+            First = dicFirst,
+            Second = dicSecond,
         ) 
 
 class Ready(Page):
     pass
 
-class Infographics(Page):
+class Infographics_old(Page):
 
     @staticmethod
     def vars_for_template(player):
