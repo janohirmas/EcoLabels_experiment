@@ -15,7 +15,7 @@ class Constants(BaseConstants):
     name_in_url         = 'EcoTask'
     players_per_group   = None
     # Number of rounds
-    num_rounds          = 3 
+    num_rounds          = 2 
     # Number of Practice Rounds                                    
     num_prounds         = 0
     # mouseover or click 
@@ -413,44 +413,15 @@ class Infographics(Page):
             First = dicFirst,
             Second = dicSecond,
         ) 
-
-class Ready(Page):
-    pass
-
-class Infographics_old(Page):
-
-    @staticmethod
-    def vars_for_template(player):
-        # Define images as variables
-        img1 = Constants.imgFile_Inst
-        Qual = Constants.imgFile_Quality
-        participant = player.participant
-        
-        # Pick images based on treatment for sustainability info
-        if participant.treatment == 1:
-            Sus = Constants.imgFile_Linear
-        elif participant.treatment == 2:
-            Sus = Constants.imgFile_Concave
-        else:
-            Sus = Constants.imgFile_Convex
-
-        # assign presentation order of quality and sustainability      
-        if participant.PresOrder == 'Qual':
-            img2 = Qual
-            img3 = Sus
-        else:
-            img2 = Sus
-            img3 = Qual
-
-        # These images will be shown in this order on Infographic(Page) slides 
-        return dict(
-            slide_1_img = img1,
-            slide_2_img = img2,
-            slide_3_img = img3,
-        )
+    ## Show only in the middle of the experiment
     @staticmethod
     def is_displayed(player):
-        return player.round_number == (Constants.num_rounds-Constants.num_prounds)/2+1
+        return player.round_number == np.floor( (Constants.num_rounds-Constants.num_prounds)/2+1)
+
+class Ready(Page):
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number == np.floor( (Constants.num_rounds-Constants.num_prounds)/2+1)
         
 
-page_sequence = [PracticeInfo1, Between, Decision, Infographics, PracticeInfo2]
+page_sequence = [PracticeInfo1, Between, Decision, Infographics, Ready, PracticeInfo2]

@@ -452,13 +452,14 @@
         width: 35vw;
     }
 
-    .text-info {
+    .text-infographic {
         width: 40%;
-        font-size: 0.7em;
+        font-size: 1em;
         text-align: justify;
+        color: black;
     }
 
-    .text-info ul {
+    .text-infographic ul {
         margin: 0;
         padding: 0;
         border: 0;   

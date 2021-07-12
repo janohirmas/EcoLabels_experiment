@@ -48,7 +48,7 @@
                     <div class="img-container-info">
                         <img class="img-info" src="{% static First.Graph %}" /> 
                     </div>
-                    <div class="text-info"> 
+                    <div class="text-infographic"> 
                         <p>
                             The products {{ First.p1 }} rating (<img class="symbol" src="{% static First.Symbol %}" />) represents the product's {{ First.p2 }}. 
                         If you purchase a product with higher {{ First.p2 }}, you will obtain a larger {{ First.p3 }}.
@@ -75,7 +75,7 @@
                     <div class="img-container-info">
                         <img class="img-info" src="{% static Second.Graph %}" />
                     </div>
-                    <div class="text-info"> 
+                    <div class="text-infographic"> 
                         <p>
                             The products {{ Second.p1 }} rating (<img class="symbol" src="{% static Second.Symbol %}" />) represents the product's {{ Second.p2 }}. 
                         If you purchase a product with higher {{ Second.p2 }}, you will obtain a larger {{ Second.p3 }}.
@@ -253,7 +253,7 @@
 
     function validateAnswers() {
 
-        let solutions = ['6', '3']; // solutions
+        let solutions = ['6', '6']; // solutions
         let hints = document.getElementsByClassName("hint"); // make array of hints
 
         // get answer fields
