@@ -1,16 +1,28 @@
 from otree.api import *
-import random
+from numpy import random
+from random import SystemRandom, sample
+from random import choices
+
 
 doc = """
-Your app description
+This app creates the questionnaire and shows end page. 
 """
 
 
 class Constants(BaseConstants):
-    name_in_url = 'EcoLabels'
+    name_in_url = 'Questionnaire'
     players_per_group = None
     num_rounds = 1
-    
+        # Quality and Sustainability ranges
+    Q1      = 5
+    Q_step  = 2
+    S1      = 0
+    S2_2    = 3
+    S2_3    = 1
+    S3      = 4
+    S_step  = 2
+
+
 class Subsession(BaseSubsession):
     pass
 
@@ -61,17 +73,12 @@ class Player(BasePlayer):
 
 
 # PAGES
+
 class Questionnaire(Page):
     form_model = 'player'
     form_fields = ['D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'QT1', 'QT2', 'QT3','QT4', 'QT5', 'QT6', 'QT7','QT8', 'QT9', 'QT10', 'QT11', 'QT12', 'QT13', 'QT14', 'QT15','QT16', 'QT17', 'QT18','QT19', 'QT20', 'QT21', 'QT22','QT23', 'QT24', 'QT25','QT26', 'QT27']
 
-    def is_displayed(self):
-        return True
 
-class Results(Page):
-    pass
-
-
-page_sequence = [Questionnaire, Results]
+page_sequence = [ Questionnaire]
 
 

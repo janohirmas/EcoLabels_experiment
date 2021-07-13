@@ -1,0 +1,620 @@
+<!-- QUESTIONNAIRE -->
+
+<!-- LINK TO STYLESHEET -->
+<link rel="stylesheet" href="{% static 'global/styling10.css' %}">
+
+<!-- Set viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- oTree templates-->
+{% load otree static %}
+{% block content %}
+
+<body>
+
+    <!-- Questionnaire container -->
+    <div class="questionnaire">
+
+        <!-- Title -->
+        <h1>Questionnaire</h1>
+
+        <!-- Slide container -->
+        <div class="element-container">
+
+            <!-- Questionnaire element container  -->
+            <div class="quiz-container">
+                <!-- Questionnaire elements (Question, answer, progress bar)-->
+                <div id="quiz"></div>
+            </div>
+            <!-- Previous button (not used in this questionnaire)-->
+            <a id="previous" class="button QT-button" onclick=showPreviousSlide()>Previous</a>
+            <!-- Next button -->
+            <a id="next" class="button QT-button" onclick=showNextSlide()> Next</a>
+            <!-- Submit button -->
+            <button id="submit" class="button QT-button" onclick=getResults()>Submit</button>
+            <p id = "buttonText" class = "button-text"> or click 'Enter' </p>
+        </div>
+    </div>
+    <!-- This one is used to save data to oTree server, see JS-->
+    <div id="otreeData"></div>
+
+</body>
+
+{% endblock %}
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+    (function () {
+
+        // Function buildQuiz builds the questionnaire elements. Based on slide count, it takes values (question, name, type, answer) from myQuestions object to create x amount of slides with question, answer field, and a progress bar that increases together with slide count. The type of answer field for each question is indicated in the object (type: radio, radioHorizontal, longOpen, open). For instruction slide, the function inserts text in place of the answer field (type: instruction) and leaves question field empty. Note: this function creates the whole questionnaire at once, but user sees questions one by one. 
+
+        function buildQuiz() {
+            // variable to store the HTML output
+            const output = [];
+            // variable to define the length of the progress bar
+            const progressLimit = myQuestions.length;
+            // for each question...
+            myQuestions.forEach(
+                (currentQuestion, questionNumber) => {
+
+                    // variable to store the list of possible answers
+                    const answers = [];
+
+                    // If question type = radio, create vertical radio button for each available answer
+                    if (currentQuestion.type === "radio") {
+
+                        for (letter in currentQuestion.answers) {
+                            answers.push(
+                                `<label class="QT-radio">
+                      <input type="radio" name="question${questionNumber}" value="${letter}">             
+                      ${currentQuestion.answers[letter]}
+                    </label>`
+                            );
+                        }
+                        // If question type = radioHorizontal, create horizontal radio buttons with fixed values (1-5) > this is for sustainability questionnaire items
+                    } else if (currentQuestion.type === "radioHorizontal") {
+                        answers.push(
+                            `<div>
+                      <label class="QT-label"><input type="radio" class="QT-radioH" name="question${questionNumber}" value="1"/> Strongly disagree
+                      </label><label class="QT-label">                  
+                      <input type="radio" class="QT-radioH" name="question${questionNumber}" value="2"/> Disagree
+                      </label><label class="QT-label">
+                      <input type="radio" class="QT-radioH" name="question${questionNumber}" value="3"/> Neutral
+                      </label><label class="QT-label">
+                      <input type="radio" class="QT-radioH" name="question${questionNumber}" value="4"/> Agree
+                      </label><label class="QT-label">
+                      <input type="radio" class="QT-radioH" name="question${questionNumber}" value="5"/> Strongly agree            
+                    </label></div>`
+                        );
+                        // If question type = longOpen, create textarea 
+                    } else if (currentQuestion.type === "longOpen") {
+                        answers.push(
+                            `<label>
+                      <textarea type="text" id = "question${questionNumber}" name="question${questionNumber}" rows="5" cols= "50" placeholder="Type here..."></textarea>
+                    </label>`
+                        );
+                        // If question type = open, create input field with autocomplete (see function autocomplete) 
+                    } else if (currentQuestion.type === "open") {
+                        answers.push(
+                            `<form autocomplete= "off" action="/action_page.php">
+                             <label>
+                      <input class="autocomplete" type="text" id = "question${questionNumber}" name="question${questionNumber}" rows="1" cols= "50" placeholder="Type here...">
+                    </label></form>`
+                        );
+                        // If question type = instruction, insert text into answer field 
+                    } else {
+                        answers.push(
+                            `<p class="QT-inst"> ${currentQuestion.answer}</p>`
+                        )
+                    }
+
+                    // add current question and its answers + progress bar to the HTML output (= 1 slide)
+                    output.push(
+                        `<div class="slide">
+                    <div class="question"> ${currentQuestion.question} </div>
+                    <div class="answers"> ${answers.join("")} </div>
+                    <br>
+                    <label> 0% </label>
+                        <progress class="progress-bar" min="1" max="${progressLimit}" value="${questionNumber + 1}"></progress>
+                        <label> 100% </label>
+                  </div>`
+                    );
+                }
+            );
+
+            // finally combine output list (slides) into one string of HTML and put it on the page (= full questionnaire)
+            QTContainer.innerHTML = output.join('');
+        }
+
+        // This function gets all the user answers from answer fields and saves them on oTree
+        function getResults() {
+
+            // gather answer containers from the questionnaire slides
+            const answerContainers = QTContainer.querySelectorAll('.answers');
+
+            // for each question...
+            myQuestions.forEach((currentQuestion, questionNumber) => {
+
+                // find selected answer and get value
+                const answerContainer = answerContainers[questionNumber];
+                let selector = '';
+                let userAnswer = '';
+                // for question with radio buttons
+                if (currentQuestion.type === "radio" || currentQuestion.type === "radioHorizontal") {
+                    selector = `input[name=question${questionNumber}]:checked`;
+                    userAnswer = (answerContainer.querySelector(selector) || {}).value;
+                    // for question with textarea
+                } else if (currentQuestion.type === "longOpen") {
+                    selector = `textarea[name=question${questionNumber}]`;
+                    userAnswer = (answerContainer.querySelector(selector)).value;
+                    // for question with input field
+                } else if (currentQuestion.type === "open") {
+                    selector = `input[name=question${questionNumber}]`;
+                    userAnswer = (answerContainer.querySelector(selector)).value;
+                    // for instruction slide, skip
+                } else {
+                    userAnswer = "notAnAnswer"
+                }
+                
+                // save the user answers on oTree by creating hidden HTML with ID that matches ID in init.py
+                let saveOtree = document.getElementById('otreeData'); // get HTML element to save user answers to
+                // if user answer is NOT an instruction slide, insert value of that answer to the oTree HTML element
+                if (userAnswer !== "notAnAnswer") {
+                    recordAnswer.push(
+                        `<input type="hidden" name="${currentQuestion.name}" value="${userAnswer}">`
+                    );
+                    saveOtree.innerHTML = recordAnswer.join('');
+                }
+            });
+        }
+
+        // Question slides: show one by one
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active-slide');
+            slides[n].classList.add('active-slide');
+            currentSlide = n;
+            if (currentSlide === 0) { // do not show previous button on first slide
+                previousButton.style.display = 'none';
+            }
+            else {
+                previousButton.style.display = 'none'; // change this to inline-block if you want to enable previous button.
+            }
+            if (currentSlide === slides.length - 1) {
+                nextButton.style.display = 'none'; // do not show next button on last slide
+                submitButton.style.display = 'inline-block'; // show submit button on last slide
+            }
+            else {
+                nextButton.style.display = 'inline-block'; // if not last slide, show next button
+                submitButton.style.display = 'none'; // if not last slide, do not show submit button
+            }
+        }
+
+        /* this page does not include a previous button anymore but here is the piece of code if you want to make one. NOTE that this button does not work well together with the showNextSlide() (one that checks if answer was given). You can change showNextSlide() back to: 
+
+        function showNextSlide() {
+        showSlide(currentSlide + 1);
+        }
+        
+        function showPreviousSlide() {
+            showSlide(currentSlide - 1);
+        }
+        */
+
+        // Get HTML elements
+        const QTContainer = document.getElementById('quiz');
+        const submitButton = document.getElementById('submit');
+
+        // Array for saving the html with correct 
+        let recordAnswer = []
+
+        // Object containing questions (question), input type (type), names used for question (name) and answer options (answer). Name needs to match the name given in init.py form_fields!
+        const myQuestions = [
+            {
+                question: "",
+                type: "instruction",
+                answer: "Next, we would like you to answer a few questions about yourself. All answers will be treated confidentially. Note that you can only move to the next question after you have given your answer. <u>You cannot leave answers blank.</u> Also note that there is no possibility to go back in your answers.",
+            },
+            {
+                question: "What is your age?",
+                name: "D1",
+                type: "open",
+            },
+            {
+                question: "Which gender do you identify the most with?",
+                name: "D2",
+                type: "radio",
+                answers: {
+                    1: "Female",
+                    2: "Male",
+                    3: "Other",
+                    4: "Prefer not to say"
+                },
+            },
+            {
+                question: "What country do you live in?",
+                name: "D3",
+                type: "open",
+            },
+            {
+                question: "What is your nationality?",
+                name: "D4",
+                type: "open",
+            },
+            {
+                question: "Have you ever participated in an incentivized economic experiment (such as this one) before?",
+                name: "D5",
+                type: "radio",
+                answers: {
+                    1: "Yes",
+                    2: "No",
+                    3: "Not sure / don't remember"
+                }
+            },
+            {
+                question: "What do you think is the purpose of this study? Describe shortly in your own words.",
+                name: "D6",
+                type: "longOpen",
+            },
+            {
+                question: "During the experiment, did you use any specific strategy or rule of thumb when deciding which of the two products to purchase? If so, describe it shortly.",
+                name: "D7",
+                type: "longOpen",
+            },
+            {
+                question: "",
+                type: "instruction",
+                answer: "In the next part, you will be presented with 27 statements. Please indicate your agreement or disagreement with these statements by choosing one of the answer options. You can move to the next stament by clicking 'Next' or 'Enter'",
+            },
+            {
+                question: "Reducing water consumption is necessary for sustainable development.",
+                name: "QT1",
+                type: "radioHorizontal",
+            },
+            {
+                question: "Preserving the variety of living creatures is necessary for sustainable development (preserving biological diversity).",
+                name: "QT2",
+                type: "radioHorizontal",
+            },
+            {
+                question: "For sustainable development, people need to be educated in how to protect themselves against natural disasters.",
+                name: "QT3",
+                type: "radioHorizontal",
+            },
+            {
+                question: "A culture where conflicts are resolved peacefully through discussion is necessary for sustainable development.",
+                name: "QT4",
+                type: "radioHorizontal",
+            },
+            {
+                question: "Respecting human rights is necessary for sustainable development.",
+                name: "QT5",
+                type: "radioHorizontal",
+            },
+            {
+                question: "To achieve sustainable development, all the people in the world must have access to good education.",
+                name: "QT6",
+                type: "radioHorizontal",
+            },
+            {
+                question: "Sustainable development requires that companies act responsibly towards their employees, customers and suppliers.",
+                name: "QT7",
+                type: "radioHorizontal",
+            },
+            {
+                question: "Sustainable development requires a fair distribution of goods and services among people in the world.",
+                name: "QT8",
+                type: "radioHorizontal",
+            },
+            {
+                question: "Wiping out poverty in the world is necessary for sustainable development.",
+                name: "QT9",
+                type: "radioHorizontal",
+            },
+            {
+                question: "I think that using more natural resources than we need does not threaten the health and well‐being of people in the future.",
+                name: "QT10",
+                type: "radioHorizontal",
+            },
+            {
+                question: "I think that we need stricter laws and regulations to protect the environment.",
+                name: "QT11",
+                type: "radioHorizontal",
+            },
+            {
+                question: "I think that it is important to take measures against problems which have to do with climate change.",
+                name: "QT12",
+                type: "radioHorizontal",
+            },
+            {
+                question: "I think that everyone ought to be given the opportunity to acquire the knowledge, values and skills that are necessary to live sustainably.",
+                name: "QT13",
+                type: "radioHorizontal",
+            },
+            {
+                question: "I think that we who are living now should make sure that people in the future enjoy the same quality of life as we do today.",
+                name: "QT14",
+                type: "radioHorizontal",
+            },
+            {
+                question: "I think that women and men throughout the world must be given the same opportunities for education and employment.",
+                name: "QT15",
+                type: "radioHorizontal",
+            },
+            {
+                question: "I think that companies have a responsibility to reduce the use of packaging and disposable articles.",
+                name: "QT16",
+                type: "radioHorizontal",
+            },
+            {
+                question: "I think it is important to reduce poverty.",
+                name: "QT17",
+                type: "radioHorizontal",
+            },
+            {
+                question: "I think that companies in rich countries should give employees in poor nations the same conditions as in rich countries.",
+                name: "QT18",
+                type: "radioHorizontal",
+            },
+            {
+                question: "I recycle as much as I can.",
+                name: "QT19",
+                type: "radioHorizontal",
+            },
+            {
+                question: "I always separate food waste before putting out the rubbish when I have the chance.",
+                name: "QT20",
+                type: "radioHorizontal",
+            },
+            {
+                question: "I have changed my personal lifestyle in order to reduce waste (e.g., throwing away less food or not wasting materials).",
+                name: "QT21",
+                type: "radioHorizontal",
+            },
+            {
+                question: "When I use a computer or mobile to chat, to text, to play games and so on, I always treat others as respectfully as I would in real life.",
+                name: "QT22",
+                type: "radioHorizontal",
+            },
+            {
+                question: "I support an aid organization or environmental group.",
+                name: "QT23",
+                type: "radioHorizontal",
+            },
+            {
+                question: "I show the same respect to men and women, boys and girls.",
+                name: "QT24",
+                type: "radioHorizontal",
+            },
+            {
+                question: "	I do things which help poor people.",
+                name: "QT25",
+                type: "radioHorizontal",
+            },
+            {
+                question: "I often purchase second‐hand goods over the internet or in a shop",
+                name: "QT26",
+                type: "radioHorizontal",
+            },
+            {
+                question: "I avoid buying goods from companies with a bad reputation for looking after their employees and the environment.",
+                name: "QT27",
+                type: "radioHorizontal",
+            },
+            {
+                question: "",
+                type: "instruction",
+                answer: "That was the end of the questionnaire. Thank you for your answers. Please click 'Submit' to submit your answers and move on to the next page.",
+            },
+        ];
+
+        // Kick things off
+        buildQuiz();
+
+        // Get buttons
+        const previousButton = document.getElementById("previous");
+        const nextButton = document.getElementById("next");
+
+        // Get slides
+        const slides = document.querySelectorAll(".slide");
+
+        // initialize slide count
+        let currentSlide = 0;
+
+        // Show the first slide
+        showSlide(currentSlide);
+
+        // If submit button clicked, submit questionnaire
+        submitButton.addEventListener('click', getResults);
+
+        // If previous button clicked, show previous question
+        //previousButton.addEventListener("click", showPreviousSlide);
+
+        // If next button clicked, show next question
+        nextButton.addEventListener("click", showNextSlide);
+
+        // Keypress controls next/previous slide
+        document.addEventListener('keydown', (event) => {
+            let keypress = event.key;
+            if (keypress === 'Enter') { // click 'Enter' = next slide
+                showNextSlide();
+                hideEnter();
+            } else if (keypress === 'Backspace') { // click 'backspace' = previous slide
+                showPreviousSlide();
+            }
+        });
+
+        // If Enter is clicked, hide text under Next button
+        function hideEnter() {
+            document.getElementById("buttonText").style.visibility = "hidden"
+        };
+
+        // prevent submitting the questionnaire if user click "Enter"
+        $(document).ready(function () {
+            $(window).keydown(function (event) {
+                if (event.keyCode == 13) {
+                    event.preventDefault();
+                    return false;
+                }
+            });
+        });
+
+        //initialize slide count for showNextSlide()
+        let slideCount = 0;
+
+        // Function showNextSlide runs if user click "Next" (or "Enter"). It lets the user go to the next question (slide) only if answer was given to the current questions. The user cannot leave answer fields empty. 
+        function showNextSlide() {
+            slideCount = slideCount + 1; // increase slide count by one
+
+            // create variable to store question type
+            let questionTypes = [];
+            // for each question, get question type and store in variable
+            myQuestions.forEach(Question => {
+                questionTypes.push(Question.type)
+            });
+
+            // run this code until all questions have been checked
+            if (slideCount < myQuestions.length) {
+                // initialize counter to index current question/answer from arrays
+                let counter = slideCount - 1;
+                // get all answers and save in container
+                const answerSelector = QTContainer.querySelectorAll('.answers');
+                // select current answer container
+                let answerContainer2 = answerSelector[counter];
+                // create variables to save current answer
+                let selection = '';
+                let checkAnswer = '';
+
+                // based on question type (open, longOpen, radio, radioHorizontal), get current answer. If question type = instruction, then assign 1 as value. 
+                if (questionTypes[counter] === "longOpen") {
+                    selection = `textarea[name=question${counter}]`;
+                    checkAnswer = (answerContainer2.querySelector(selection)).value;
+                } else if (questionTypes[counter] === "open") {
+                    selection = `input[name=question${counter}]`;
+                    checkAnswer = (answerContainer2.querySelector(selection)).value;
+                } else if (questionTypes[counter] === "radio" || questionTypes[counter] === "radioHorizontal") {
+                    checkAnswer = answerContainer2.querySelector(`input[name=question${counter}]:checked`);
+                } else {
+                    checkAnswer = 1;
+                }
+
+                // if answer container is empty, return slide count back to where it was. If answer container was not empty, move to next question.
+                if (checkAnswer == null || checkAnswer == "") {
+                    slideCount = slideCount - 1;
+                } else {
+                    showSlide(currentSlide + 1);
+                }
+
+            }
+        };
+
+        // Function autocomplete creates a dropdown menu for question type "open". When user writes in the input field, the function activates. It suggests answers based on what user is writing in the field. 
+
+        function autocomplete(inp, arr) {
+            /*the autocomplete function takes two arguments,
+            the text field element and an array of possible autocompleted values:*/
+            var currentFocus;
+            /*execute a function when someone writes in the text field:*/
+            inp.addEventListener("input", function (e) {
+                var a, b, i, val = this.value;
+                /*close any already open lists of autocompleted values*/
+                closeAllLists();
+                if (!val) { return false; }
+                currentFocus = -1;
+                /*create a DIV element that will contain the items (values):*/
+                a = document.createElement("DIV");
+                a.setAttribute("id", this.id + "autocomplete-list");
+                a.setAttribute("class", "autocomplete-items");
+                /*append the DIV element as a child of the autocomplete container:*/
+                this.parentNode.appendChild(a);
+                /*for each item in the array...*/
+                for (i = 0; i < arr.length; i++) {
+                    /*check if the item starts with the same letters as the text field value:*/
+                    if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                        /*create a DIV element for each matching element:*/
+                        b = document.createElement("DIV");
+                        /*make the matching letters bold:*/
+                        b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                        b.innerHTML += arr[i].substr(val.length);
+                        /*insert a input field that will hold the current array item's value:*/
+                        b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                        /*execute a function when someone clicks on the item value (DIV element):*/
+                        b.addEventListener("click", function (e) {
+                            /*insert the value for the autocomplete text field:*/
+                            inp.value = this.getElementsByTagName("input")[0].value;
+                            /*close the list of autocompleted values,
+                            (or any other open lists of autocompleted values:*/
+                            closeAllLists();
+                        });
+                        a.appendChild(b);
+                    }
+                }
+            });
+            /*execute a function presses a key on the keyboard:*/
+            inp.addEventListener("keydown", function (e) {
+                var x = document.getElementById(this.id + "autocomplete-list");
+                if (x) x = x.getElementsByTagName("div");
+                if (e.keyCode == 40) {
+                    /*If the arrow DOWN key is pressed,
+                    increase the currentFocus variable:*/
+                    currentFocus++;
+                    /*and and make the current item more visible:*/
+                    addActive(x);
+                } else if (e.keyCode == 38) { //up
+                    /*If the arrow UP key is pressed,
+                    decrease the currentFocus variable:*/
+                    currentFocus--;
+                    /*and and make the current item more visible:*/
+                    addActive(x);
+                } else if (e.keyCode == 13) {
+                    /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                    e.preventDefault();
+                    if (currentFocus > -1) {
+                        /*and simulate a click on the "active" item:*/
+                        if (x) x[currentFocus].click();
+                    }
+                }
+            });
+            function addActive(x) {
+                /*a function to classify an item as "active":*/
+                if (!x) return false;
+                /*start by removing the "active" class on all items:*/
+                removeActive(x);
+                if (currentFocus >= x.length) currentFocus = 0;
+                if (currentFocus < 0) currentFocus = (x.length - 1);
+                /*add class "autocomplete-active":*/
+                x[currentFocus].classList.add("autocomplete-active");
+            }
+            function removeActive(x) {
+                /*a function to remove the "active" class from all autocomplete items:*/
+                for (var i = 0; i < x.length; i++) {
+                    x[i].classList.remove("autocomplete-active");
+                }
+            }
+            function closeAllLists(elmnt) {
+                /*close all autocomplete lists in the document,
+                except the one passed as an argument:*/
+                var x = document.getElementsByClassName("autocomplete-items");
+                for (var i = 0; i < x.length; i++) {
+                    if (elmnt != x[i] && elmnt != inp) {
+                        x[i].parentNode.removeChild(x[i]);
+                    }
+                }
+            }
+            /*execute a function when someone clicks in the document:*/
+            document.addEventListener("click", function (e) {
+                closeAllLists(e.target);
+            });
+        }
+
+        //list of countries
+        var countries = ["My country is not listed", "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua & Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia & Herzegovina", "Botswana", "Brazil", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central Arfrican Republic", "Chad", "Chile", "China", "Colombia", "Congo", "Cook Islands", "Costa Rica", "Cote D Ivoire", "Croatia", "Cuba", "Curacao", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland", "France", "French Polynesia", "French West Indies", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauro", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russia", "Rwanda", "Saint Pierre & Miquelon", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "St Kitts & Nevis", "St Lucia", "St Vincent", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor L'Este", "Togo", "Tonga", "Trinidad & Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks & Caicos", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States of America", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Virgin Islands (US)", "Yemen", "Zambia", "Zimbabwe"];
+
+        // Get input fields by id that require autocomplete (open questions)
+        // What is your nationality, what country do you live in?
+        autocomplete(document.getElementById("question3"), countries);
+        autocomplete(document.getElementById("question4"), countries);
+    })();
+
+</script>
