@@ -22,12 +22,17 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    pass
+    D2 = models.StringField()
+    D3 = models.StringField()
+    QT1 = models.StringField()
+    D7 = models.StringField()
+    D1 = models.StringField()
 
 
 # PAGES
 class Questionnaire(Page):
-    pass
+    form_model = 'player'
+    form_fields = ['D1', 'D2', 'D3','QT1','D7']
 
 
 page_sequence = [Questionnaire]

@@ -513,7 +513,11 @@
         display: inline-block;
         height: 20vh;
     }
-
+    .question-slide {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
     /* Radio button vertical */ 
     .QT-radio {
         display: block;
