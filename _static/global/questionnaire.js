@@ -152,14 +152,10 @@ QuestionSlide.prototype.printSlide = function() {
         input.id    = `answer-${this.Question.name}`;
         input.cols  = '50';
         // Create next button
-        let NextButton = document.createElement('button');
-        NextButton.type = 'button';
-        NextButton.className = 'button QT-button';
-        NextButton.innerHTML = 'Next'
-        NextButton.onclick = nextSlide(`${this.Question.name}`);
+        let NextButton = `<button type="button" class="button QT-button" onclick="nextSlide('${this.Question.name}')" > Next </button>`
         // Nest elements and append them to html
         div.appendChild(input);
-        div.appendChild(NextButton);
+        div.innerHTML += NextButton;
         slideQuestion.appendChild(div);
     
     } else if ( this.Question.type==='shortOpen' || this.Question.type==='autocomplete') {
@@ -183,15 +179,11 @@ QuestionSlide.prototype.printSlide = function() {
         form.autocomplete  = 'off';
         form.action  = '/action_page.php';
         // Create next button
-        let NextButton = document.createElement('button');
-        NextButton.type = 'button';
-        NextButton.className = 'button QT-button';
-        NextButton.innerHTML = 'Next'
-        NextButton.onclick = nextSlide(`${this.Question.name}`);
+        let NextButton = `<button type="button" class="button QT-button" onclick="nextSlide('${this.Question.name}')" > Next </button>`
         // Nest elements and append them to html
         form.appendChild(input);
         div.appendChild(form);
-        div.appendChild(NextButton);
+        div.innerHTML += NextButton;
         slideQuestion.appendChild(div);
     } 
 
@@ -227,12 +219,12 @@ QuestionSlide.prototype.printSlide = function() {
 function nextSlide(sQuestionName,sValue="") {
 
     // Check that there is an answer
+    console.log('here')
     if (checkAnswer()) {
-        console.log('here')
         let input = document.getElementById(sQuestionName);
-        if (sValue!="") {
+        if (sValue==="") {
             // Retrieve answer from forms
-            let answer = document.getElementById(`${sQuestionName}`).value;
+            let answer = document.getElementById(`answer-${sQuestionName}`).value;
             input.value =  answer;
         } else {
             input.value = sValue;
@@ -258,7 +250,7 @@ function nextSlide(sQuestionName,sValue="") {
 function checkAnswer(bClean=false) {
     let Question = myQuestions[slideIndex];
     let qType = Question.type;
-    if (qType==='radio' || qType==='radio' ) {
+    if (qType==='radio' || qType==='radioH' ) {
         let inputs = document.getElementsByClassName(`answer-${Question.name}`);
         if (bClean) { 
             console.log(`Question ${Question.name} cleaned`);

@@ -32,7 +32,7 @@ class Player(BasePlayer):
 # PAGES
 class Questionnaire(Page):
     form_model = 'player'
-    form_fields = ['D1', 'D2', 'D3','QT1','D7']
+    form_fields = ['D1', 'D2', 'D3', 'QT1']
 
 
 page_sequence = [Questionnaire]
