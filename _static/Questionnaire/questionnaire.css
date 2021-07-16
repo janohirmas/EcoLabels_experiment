@@ -1,0 +1,340 @@
+
+/* CSS STYLESHEET FOR ECOLABELS EXPERIMENT */
+ 
+/* GLOBAL STYLING */
+
+    /* set oTree default margins & padding off, define viewport */
+    .otree-body {
+       height: 100vh;
+       width: 100vw; 
+       margin: 0;
+       padding: 0;
+       align-items: center;
+    }
+
+    .debug-info {
+        display:none;
+    }
+
+    * {
+        box-sizing: border-box
+    }
+
+    /* Set global styling, same for all pages */
+    body {
+       font-family: Helvetica, sans-serif;
+       color: #333;
+       background-color: #f8f6f0;
+       text-align: center;   
+       align-items: center;
+
+    }
+
+    /* titles */
+    h1 {
+        font-size: 5vh;
+        margin-top: -10vh;
+        text-align: center;
+        padding: 4vh;
+        background-color: rgba(59, 121, 139, 0.678);
+        color: white;
+        width: 80vw;
+    }
+
+    /* Next & submit button */
+    .button {
+        font-family: 'Work Sans', sans-serif;
+        font-size: 1.5em;
+        width: 8vw;
+        align-items: center;
+        background-color: rgb(33, 202, 132);
+        color: #fff;
+        border: 0;
+        border-radius: 3px;
+        padding: 10px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;   
+    }
+
+    .button:hover {
+        background-color: rgb(39, 221, 145);
+    }
+
+
+    /* Input fields */
+    input {
+        border: 1px solid transparent;
+        background-color: #f1f1f1;
+        padding: 10px;
+        font-size: 1em;
+    }
+
+    /* This is for autocomplete dropdown */
+    input[type=text] {
+        background-color: #f1f1f1;
+        width: 100%;
+    }
+
+    /* Checkbox styling for ticked/unticked */ 
+
+    input[type="checkbox"]:required:valid + label { 
+        color: green;
+        
+    }
+
+/* QUESTIONNAIRE */ 
+
+/* Slide container */
+.element-container {
+    width: 90vw ;
+    left: 10vw;
+    position: relative;
+}
+
+/* Question slide */
+.question-slide {
+    height: 70vh;
+    width: 80vw;
+    background-color: white;
+    transition: 1s;
+}
+
+/* TEXT INPUTS  */ 
+/* Input container */
+.div-input-text {
+    width: 100%;
+    min-height: 30vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Input container */
+.input-text {
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+}
+
+/* RADIO INPUTS  */ 
+
+/* Input container */
+.div-input-radioH {
+    min-height: 30vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.QT-radioH {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 5px;
+    line-height: 2em ;
+    width: 10vw;
+}
+/* Next Button */
+.QT-Next {
+    margin-left: 10px;
+}
+
+/* Back Button */
+.QT-Back {
+    margin: 20px 0;
+
+}
+
+/* Fading animation */
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+    }
+@-webkit-keyframes fade {
+from {opacity: .4}
+to {opacity: 1}
+}
+
+@keyframes fade {
+from {opacity: .4}
+to {opacity: 1}
+}
+    /* Question box */
+    .question {
+        font-size: 3vh;
+        height: 11vh;
+        padding: 3vh;
+        margin-top: 5vh;
+        margin-bottom: 3vh;
+    }
+
+    /* Answer box */
+    .answers {
+        font-size: 2.7vh;
+        margin-bottom: 10vh;
+        text-align: left;
+        display: inline-block;
+        height: 20vh;
+    }
+    .question-slide {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    /* Radio button vertical */ 
+    .QT-radio {
+        display: block;
+        margin-bottom: 2vh;
+        width: 30vw;
+        text-align: left;
+        margin-left: 20vw;
+    }
+
+    /* Radio button horizontal */
+    .QT-label {
+        display: inline-block;
+        width: 12vw;
+        text-align: center;
+    }
+
+    /* Instruction styling */
+    .QT-inst {
+        text-align: center;
+        padding-top: 0;
+        padding-left: 12vw;
+        padding-right: 12vw;
+    }
+
+
+    @keyframes glowing {
+        0% {
+            text-shadow: 0 0 10px #000;
+        }
+        50% {
+            text-shadow: 0 0 20px #000;
+        }
+        100% {
+            text-shadow: 0 0 10px #000;
+        }
+}
+
+
+
+    /* Progress bar */
+    .progress-bar {
+        display: inline-block;
+        position: relative;
+        z-index: -1;
+        width: 20vw;
+        opacity: 0.7;
+        text-align: center;
+        -webkit-appearance: none;
+        appearance: none;
+    }
+
+    /* Autocomplete styling for open questions*/
+    .autocomplete-items {
+        border: 1px solid #d4d4d4;
+        border-bottom: none;
+        border-top: none;
+        z-index: 99;
+
+        /*position the autocomplete items to be the same width as the container:*/
+        top: 100%;
+        left: 0;
+        right: 0;
+    }
+
+    .autocomplete-items div {
+        padding: 10px;
+        cursor: pointer;
+        background-color: #fff;
+        border-bottom: 1px solid #d4d4d4;
+    }
+
+    /*when hovering an item:*/
+    .autocomplete-items div:hover {
+        background-color: #e9e9e9;
+    }
+
+    /*when navigating through the items using the arrow keys:*/
+    .autocomplete-active {
+        background-color: DodgerBlue !important;
+        color: #ffffff;
+    }
+
+
+
+    /* Media query for large screen (stops elements from becoming gigantic)*/
+
+    @media only screen and (min-width: 1600px) {
+        h1 {
+            font-size: 46px !important;
+        }
+
+        input {
+            font-size: 24px !important;
+        }
+
+        .button {
+            height: 10vh !important;
+            width: 8vw !important;
+            font-size: 24px !important;
+            line-height: 10vh !important;
+        }
+
+        .title {
+            font-size: 24px !important;
+        }
+
+        .slide-item {
+            font-size: 22px !important;
+            line-height: 2 !important;
+        }
+
+        .flex-questions {
+            font-size: 24px !important;
+        }
+
+        .dot {
+            height: 24px !important;
+            width: 24px !important;
+        }
+
+        .prev, .next {
+            font-size: 6vh !important;
+        }
+
+        .question {
+            font-size: 26px !important;
+        }
+
+        .answers {
+            font-size: 24px !important;
+        }
+
+        .infograph-container {
+            height: 60vh !important;
+            width: 60vw !important;
+            margin-left: 20vw !important;
+            margin-top: 10vh;
+            margin-bottom: 2vh !important;
+        }
+
+        .info-img {
+            height: 60vh !important;
+            width: 60vw !important;
+        }
+
+        #between-button {
+            font-size: 24px !important;
+            line-height: 4vh !important;
+        }
+    }

@@ -25,7 +25,7 @@ class Player(BasePlayer):
     D2 = models.StringField()
     D3 = models.StringField()
     QT1 = models.StringField()
-    D7 = models.StringField()
+    #D7 = models.StringField()
     D1 = models.StringField()
 
 

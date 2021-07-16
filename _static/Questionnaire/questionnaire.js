@@ -1,18 +1,37 @@
+// Dynamic variables
 var slideIndex = 0;
-// Likert Scales
-let likertScale = [
-    'Strongly Disagree',
-    'Disagree',
-    'Neutral',
-    'Agree',
-    'Strongly Agree'
+// Constants and Scales
+const countries = ["My country is not listed", "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua & Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia & Herzegovina", "Botswana", "Brazil", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central Arfrican Republic", "Chad", "Chile", "China", "Colombia", "Congo", "Cook Islands", "Costa Rica", "Cote D Ivoire", "Croatia", "Cuba", "Curacao", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland", "France", "French Polynesia", "French West Indies", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauro", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russia", "Rwanda", "Saint Pierre & Miquelon", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "St Kitts & Nevis", "St Lucia", "St Vincent", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor L'Este", "Togo", "Tonga", "Trinidad & Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks & Caicos", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States of America", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Virgin Islands (US)", "Yemen", "Zambia", "Zimbabwe"];
+const likertScale = [ 'Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'];
+const likertValues = [1,2,3,4,5];
+const height = 70;
+const width = 80;
+const BackButtonProps = [
+    {
+        sName: 'type',
+        sProperty: 'button',
+    },
+    {
+        sName: 'class',
+        sProperty: 'button QT-Back',
+    },
+    {
+        sName: 'onclick',
+        sProperty: `backSlide()`,
+    },
 ];
-let likertValues = [1,2,3,4,5];
-//list of countries
-let countries = ["My country is not listed", "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua & Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia & Herzegovina", "Botswana", "Brazil", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central Arfrican Republic", "Chad", "Chile", "China", "Colombia", "Congo", "Cook Islands", "Costa Rica", "Cote D Ivoire", "Croatia", "Cuba", "Curacao", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland", "France", "French Polynesia", "French West Indies", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauro", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russia", "Rwanda", "Saint Pierre & Miquelon", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "St Kitts & Nevis", "St Lucia", "St Vincent", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor L'Este", "Togo", "Tonga", "Trinidad & Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks & Caicos", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States of America", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Virgin Islands (US)", "Yemen", "Zambia", "Zimbabwe"];
+const NextButtonProps = [
+    {
+        sName: 'type',
+        sProperty: 'button',
+    },
+    {
+        sName: 'class',
+        sProperty: 'button QT-Back',
+    },
+];
 
-
-myQuestions = [ 
+const myQuestions = [ 
     {
         question: "Which gender do you identify the most with?",
         name: "D2",
@@ -48,6 +67,8 @@ myQuestions = [
         type: "shortOpen",
     },
 ];
+const maxQ  = myQuestions.length;
+
 
 // Initialize
 document.addEventListener("DOMContentLoaded", function() {
@@ -58,6 +79,7 @@ document.addEventListener("DOMContentLoaded", function() {
     myQuestions.forEach(question => { 
         // Create slide
         let slide = new QuestionSlide(counter,question);
+        counter++;
         slide.printSlide();
         // Create input
         let input   = document.createElement('input');
@@ -105,7 +127,7 @@ function QuestionSlide(iNumber, jsonQuestion) {
 QuestionSlide.prototype.printSlide = function() {
     // Create Slide
     let slideQuestion = document.createElement('div');
-    slideQuestion.className = 'question-slide';
+    slideQuestion.className = 'question-slide fade';
     slideQuestion.id = `slide-${this.Question.name}`;
     // Create Question
     let pQuestion = document.createElement('p');
@@ -133,9 +155,9 @@ QuestionSlide.prototype.printSlide = function() {
         // Write inputs within div
         for (let i=0; i<values.length; i++) {
             // create input (for some reason I could not add the onclick command via js, so I input this as html)
-            let input = `<label class="QT-${this.Question.type}">
+            let input = `<label class="QT-${this.Question.type}"> ${labels[i]}
             <input type="radio" class="answer-${this.Question.name}" id="answer-${this.Question.name}-${i}" onclick="nextSlide('${this.Question.name}', '${values[i]}')"> 
-            ${labels[i]} </label>`;
+             </label>`;
             div.innerHTML +=input;
         }
         // append question
@@ -148,11 +170,14 @@ QuestionSlide.prototype.printSlide = function() {
         let input   = document.createElement('textarea');
         input.rows  = '5';
         input.type  = 'text';
+        input.className = 'input-text';
         input.name  = `answer-${this.Question.name}`;
         input.id    = `answer-${this.Question.name}`;
         input.cols  = '50';
         // Create next button
-        let NextButton = `<button type="button" class="button QT-button" onclick="nextSlide('${this.Question.name}')" > Next </button>`
+        var lProp       = NextButtonProps
+        lProp.push( {sName: 'onclick', sProperty: `nextSlide('${this.Question.name}')`} );
+        let NextButton = writeTag('button','Next',lProp);
         // Nest elements and append them to html
         div.appendChild(input);
         div.innerHTML += NextButton;
@@ -167,6 +192,7 @@ QuestionSlide.prototype.printSlide = function() {
         input.type  = 'text';
         input.name  = `answer-${this.Question.name}`;
         input.id    = `answer-${this.Question.name}`;
+        input.className = 'input-text';
         input.rows = '1';
         input.cols  = '50';
         input.placeholder = 'Type here...'
@@ -179,7 +205,9 @@ QuestionSlide.prototype.printSlide = function() {
         form.autocomplete  = 'off';
         form.action  = '/action_page.php';
         // Create next button
-        let NextButton = `<button type="button" class="button QT-button" onclick="nextSlide('${this.Question.name}')" > Next </button>`
+        let lProp       = NextButtonProps
+        lProp.push( {sName: 'onclick', sProperty: `nextSlide('${this.Question.name}')`} );
+        let NextButton = writeTag('button','Next',lProp);
         // Nest elements and append them to html
         form.appendChild(input);
         div.appendChild(form);
@@ -188,22 +216,79 @@ QuestionSlide.prototype.printSlide = function() {
     } 
 
     // Create back button
-    let qName = this.Question.name;
-    let BackButton = document.createElement('button');
-    BackButton.type = 'button';
-    BackButton.className = 'button QT-button';
-    BackButton.innerHTML = 'Back'
-    BackButton.onclick = function() {
-        // Reset answered input
-        checkAnswer(true);
-        // Move slide
-        plusSlides(-1);
-    };
-    slideQuestion.appendChild(BackButton);
+
+    let BackButton = writeTag('button','Back',BackButtonProps);
+    // let BackButton = `<button type="button" class="button QT-Back" onclick="backSlide()" > Back </button>`
+    // Create progress bar
+    let progBar = writeProgBar(this.iSlideNumber)
+    // Add Button and ProgressBar
+    if (this.iSlideNumber>0) {slideQuestion.innerHTML+=BackButton};
+    slideQuestion.innerHTML+= progBar;
     container = document.getElementsByClassName('element-container')[0];
     container.appendChild(slideQuestion);
 
 };
+
+// *********************************************************************
+// Function Name:   writeProgBar()
+// Functionality:
+//                  1. writes a Tag with the specified requirements
+//
+// input:           sTag: Tag for the input (default: div)
+//                  sInnerHTML: content inside (default: "")
+//                  lAttr : list of object with all attributes. 
+//                      - sName: string with the name of the attribute
+//                      - sProperty: string with properties
+//                  
+// returns:         string with the html line
+// ********************************************************************
+function writeProgBar(slide) {
+    return `<div class="pbar-container"> <label> 0% </label>
+    <progress class="progress-bar" min="0" max="${maxQ}" value="${slide+1}"></progress>
+                        <label> 100% </label> </div>`
+}
+
+// *********************************************************************
+// Function Name:   writeTag()
+// Functionality:
+//                  1. writes a Tag with the specified requirements
+//
+// input:           sTag: Tag for the input (default: div)
+//                  sInnerHTML: content inside (default: "")
+//                  lAttr : list of object with all attributes. 
+//                      - sName: string with the name of the attribute
+//                      - sProperty: string with properties
+//                  
+// returns:         string with the html line
+// ********************************************************************
+function writeTag(sTag,sInnerHTML,lAttr) {
+    str = `<${sTag}`;
+    lAttr.forEach(elem => {
+        str += ` ${elem.sName}="${elem.sProperty}"`;
+    }); 
+    str += `> ${sInnerHTML} </${sTag}>`;
+    return str;
+}
+
+// *********************************************************************
+// Function Name:   backSlide
+// Functionality:
+//                  1. Checks if question is answered, clears it
+//                  2. Goes to the previous slide
+//
+// input:           null
+// returns:         void
+// ********************************************************************
+
+function backSlide() {
+    // uncheck answer
+    checkAnswer(true);
+    // go to previous slide
+    plusSlides(-1);
+}
+
+
+
 // *********************************************************************
 // Function Name:   nextSlide
 // Functionality:
@@ -219,7 +304,7 @@ QuestionSlide.prototype.printSlide = function() {
 function nextSlide(sQuestionName,sValue="") {
 
     // Check that there is an answer
-    console.log('here')
+    
     if (checkAnswer()) {
         let input = document.getElementById(sQuestionName);
         if (sValue==="") {
@@ -253,7 +338,7 @@ function checkAnswer(bClean=false) {
     if (qType==='radio' || qType==='radioH' ) {
         let inputs = document.getElementsByClassName(`answer-${Question.name}`);
         if (bClean) { 
-            console.log(`Question ${Question.name} cleaned`);
+            console.log(`Question ${Question.name} cleared`);
             for (let i = 0; i<Question.values.length; i++) {
                 inputs[i].checked = false;
             }
@@ -301,9 +386,7 @@ function showSlides(n) {
     let i;
     let slides = document.getElementsByClassName("question-slide");
     // Go back when reaching the end
-    console.log([n,slides.length]);
     if (n >= slides.length) {
-        console.log('end')
         document.getElementsByClassName('next_button')[0].click();
     } 
     // Avoid negative slide counter
