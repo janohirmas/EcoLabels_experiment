@@ -5,26 +5,39 @@
 //     1. question: String containing the question itself
 //     2. name: string with the input name for this question
 //     3. type: Type of question (+ shows additional fields required):
-//         - radio: multiple choice question. Options are presented vertically
-//             + values (Required):    list with the value to be input for each possible answer (stored data)
-//             + labels (Optional):    list. In case you want to label the possible answers, 
+//          - radio: multiple choice question. Options are presented vertically
+//              + values (Required):    list with the value to be input for each possible answer (stored data)
+//              + labels (Optional):    list. In case you want to label the possible answers, 
 //                                     you need to provide a list with one label per value
-//     - radioH: multiple choice question. Options are presented horizontally
-//             + values (Required):    list with the value to be input for each possible answer (stored data)
-//             + labels (Optional):    list. In case you want to label the possible answers, 
+//          - radioH: multiple choice question. Options are presented horizontally
+//              + values (Required):    list with the value to be input for each possible answer (stored data)
+//              + labels (Optional):    list. In case you want to label the possible answers, 
 //                                     you need to provide a list with one label per value
-//     - autocomplete: Text input with list to autocomplete
-//             + list: list with possible options to autocomplete 
-//     - shortOpen: Text input (one row to write)
-//     - longOpen: Text input for long Text. (5 rows to write) 
+//          - autocomplete: Text input with list to autocomplete
+//              + list: list with possible options to autocomplete 
+//          - shortOpen: Text input (one row to write)
+//              + validate: function with str input. Returns true if answer is valid.
+//              + invalidMessage: str explaining why form is invalid
+//          - longOpen: Text input for long Text. (5 rows to write) 
+//              + validate: function with str input. Returns true if answer is valid.
+//              + invalidMessage: str explaining why form is invalid
 // *********************************************************************
 
 // *********************************************************************
 // Add here any lists that you require for the questions
+// Add here any validation function
 // *********************************************************************
+function validInt(str) {return (!isNaN(parseInt(str)))};
+function validAge(str) {
+    num = parseInt(str);
+    return (num>=18 && num<= 122);
+}
 const countries = ["My country is not listed", "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua & Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia & Herzegovina", "Botswana", "Brazil", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central Arfrican Republic", "Chad", "Chile", "China", "Colombia", "Congo", "Cook Islands", "Costa Rica", "Cote D Ivoire", "Croatia", "Cuba", "Curacao", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland", "France", "French Polynesia", "French West Indies", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauro", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russia", "Rwanda", "Saint Pierre & Miquelon", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "St Kitts & Nevis", "St Lucia", "St Vincent", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor L'Este", "Togo", "Tonga", "Trinidad & Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks & Caicos", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States of America", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Virgin Islands (US)", "Yemen", "Zambia", "Zimbabwe"];
 const likertScale = [ 'Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'];
 const likertValues = [1,2,3,4,5];
+const warningAutocomplete = 'Please select one item from the list';
+const warningEmpty = 'Please do not leave this question unanswered';
+const warningAge = 'Please provide a valid answer (number from 18 to 122)';
 
 // *********************************************************************
 // Add Your Questions here
@@ -65,11 +78,9 @@ const myQuestions = [
         question: "What is your age?",
         name: "D1",
         type: "shortOpen",
+        validate: validAge ,
+        invalidMessage: warningAge,
     },    
-    // { 
-    //     question: "You have reached the end of the questionnaire! Please press 'Continue' to see your results.",    
-    //     type: "final"
-    // }
 ];    
 
 // *********************************************************************
@@ -82,6 +93,7 @@ var slideIndex = 0;
 const maxQ  = myQuestions.length;
 const height = 70;
 const width = 80;
+
 const BackButtonProps = [
     {
         sName: 'type',
@@ -205,6 +217,19 @@ QuestionSlide.prototype.printSlide = function() {
         div.appendChild(input);
         div.innerHTML += NextButton;
         slideQuestion.appendChild(div);
+        // Create warning message
+        if (typeof this.Question.validate==='function') {
+            let errorMessage = document.createElement('div');
+            errorMessage.className = 'error-message fade';
+            errorMessage.id = `warning-${this.Question.name}`;
+            errorMessage.style.visibility = 'hidden';
+            if (typeof this.Question.invalidMessage==='string') {
+                errorMessage.innerHTML = invalidMessage;
+            } else {
+                errorMessage.innerHTML = 'Please enter a valid answer'
+            }
+            slideQuestion.appendChild(errorMessage);
+        }
     
     } else if ( this.Question.type==='shortOpen' || this.Question.type==='autocomplete') {
         // Div container for input and Next Button
@@ -234,6 +259,26 @@ QuestionSlide.prototype.printSlide = function() {
         div.appendChild(form);
         div.innerHTML += NextButton;
         slideQuestion.appendChild(div);
+        // Create warning message
+        if (typeof this.Question.validate==='function') {
+            let errorMessage = document.createElement('div');
+            errorMessage.className = 'error-message fade';
+            errorMessage.id = `warning-${this.Question.name}`;
+            errorMessage.style.visibility = 'hidden';
+            if (typeof this.Question.invalidMessage==='string') {
+                errorMessage.innerHTML = this.Question.invalidMessage;
+            } else {
+                errorMessage.innerHTML = 'Please enter a valid answer'
+            }
+            slideQuestion.appendChild(errorMessage);
+        } else if (this.Question.type ==='autocomplete') {
+            let errorMessage = document.createElement('div');
+            errorMessage.className = 'error-message fade';
+            errorMessage.id = `warning-${this.Question.name}`;
+            errorMessage.style.visibility = 'hidden';
+            errorMessage.innerHTML = warningAutocomplete;
+            slideQuestion.appendChild(errorMessage);
+        }
     } else if (this.Question.type==='final') {
         let ContinueButton = writeTag('button','Continue',FinalButtonProps);
         slideQuestion.innerHTML += ContinueButton;
@@ -355,9 +400,7 @@ function backSlide() {
 // ********************************************************************
 
 function nextSlide(sQuestionName,sValue="") {
-
-    // Check that there is an answer
-    
+   
     if (checkAnswer()) {
         let input = document.getElementById(sQuestionName);
         if (sValue==="") {
@@ -369,9 +412,13 @@ function nextSlide(sQuestionName,sValue="") {
         }
     // go to next slide
     plusSlides(1);
+} else {
+    let warning = document.getElementById(`warning-${sQuestionName}`);
+    warning.style.visibility = 'visible';
 }
 
 }
+
 
 // *********************************************************************
 // Function Name:   checkAnswer
@@ -404,12 +451,22 @@ function checkAnswer(bClean=false) {
             return bAnswered;
         };
     } else if (qType === 'longOpen'|| qType === 'shortOpen'|| qType === 'autocomplete') {
+        // clean input if needed
         let input = document.getElementById(`answer-${Question.name}`);
         if (bClean) {
             console.log(`Question ${Question.name} cleaned`);
             input.value = ""
         }
-        return (input.value!='');
+        // Check if question needs to be validated:
+        if (qType==='autocomplete') {
+            return Question.list.includes(input.value);
+        } else if (typeof Question.validate==="function" ) {
+            // if required function
+            return Question.validate(input.value);
+        } else {
+            // if no requirement, return true
+            return true;
+        }
     }
 }
 

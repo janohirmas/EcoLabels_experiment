@@ -118,6 +118,17 @@
     flex-direction: column;
 }
 
+/* Message for wrong forms */
+.error-message {
+    color: #842029;
+    background-color: #f8d7da;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    padding: 1em;
+}
+
 /* RADIO INPUTS  */ 
 
 /* Input container */
