@@ -10,7 +10,7 @@ This app creates the questionnaire and shows end page.
 
 
 class Constants(BaseConstants):
-    name_in_url = 'Questionnaire'
+    name_in_url = 'Questionnaire_old'
     players_per_group = None
     num_rounds = 1
         # Quality and Sustainability ranges

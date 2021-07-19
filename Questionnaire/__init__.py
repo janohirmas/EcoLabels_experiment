@@ -8,7 +8,7 @@ Your app description
 
 
 class Constants(BaseConstants):
-    name_in_url = 'Questionnaire_old'
+    name_in_url = 'Questionnaire'
     players_per_group = None
     num_rounds = 1
 
@@ -25,14 +25,14 @@ class Player(BasePlayer):
     D2 = models.StringField()
     D3 = models.StringField()
     QT1 = models.StringField()
-    #D7 = models.StringField()
+    D7 = models.StringField()
     D1 = models.StringField()
 
 
 # PAGES
 class Questionnaire(Page):
     form_model = 'player'
-    form_fields = ['D1', 'D2', 'D3', 'QT1']
+    form_fields = ['D1', 'D2', 'D3', 'D7', 'QT1']
 
 
 page_sequence = [Questionnaire]

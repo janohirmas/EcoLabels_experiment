@@ -1,9 +1,85 @@
-// Dynamic variables
-var slideIndex = 0;
-// Constants and Scales
+// *********************************************************************
+// How to write instructions:
+// - myQuestions : list element [] containing all questions as JSON objects
+// - Each question requires the following fields:
+//     1. question: String containing the question itself
+//     2. name: string with the input name for this question
+//     3. type: Type of question (+ shows additional fields required):
+//         - radio: multiple choice question. Options are presented vertically
+//             + values (Required):    list with the value to be input for each possible answer (stored data)
+//             + labels (Optional):    list. In case you want to label the possible answers, 
+//                                     you need to provide a list with one label per value
+//     - radioH: multiple choice question. Options are presented horizontally
+//             + values (Required):    list with the value to be input for each possible answer (stored data)
+//             + labels (Optional):    list. In case you want to label the possible answers, 
+//                                     you need to provide a list with one label per value
+//     - autocomplete: Text input with list to autocomplete
+//             + list: list with possible options to autocomplete 
+//     - shortOpen: Text input (one row to write)
+//     - longOpen: Text input for long Text. (5 rows to write) 
+// *********************************************************************
+
+// *********************************************************************
+// Add here any lists that you require for the questions
+// *********************************************************************
 const countries = ["My country is not listed", "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua & Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia & Herzegovina", "Botswana", "Brazil", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central Arfrican Republic", "Chad", "Chile", "China", "Colombia", "Congo", "Cook Islands", "Costa Rica", "Cote D Ivoire", "Croatia", "Cuba", "Curacao", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland", "France", "French Polynesia", "French West Indies", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauro", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russia", "Rwanda", "Saint Pierre & Miquelon", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "St Kitts & Nevis", "St Lucia", "St Vincent", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor L'Este", "Togo", "Tonga", "Trinidad & Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks & Caicos", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States of America", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Virgin Islands (US)", "Yemen", "Zambia", "Zimbabwe"];
 const likertScale = [ 'Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'];
 const likertValues = [1,2,3,4,5];
+
+// *********************************************************************
+// Add Your Questions here
+// *********************************************************************
+
+const myQuestions = [ 
+    {
+        question: "Which gender do you identify the most with?",
+        name: "D2",
+        type: "radio",
+        values: [1,2,3,4],
+        labels: [
+            "Female",
+            "Male",
+            "Other",
+            "Prefer not to say"
+        ]    
+    },    
+    {
+        question: "What country do you live in?",
+        name: "D3",
+        type: "autocomplete",
+        list: countries,
+    },    
+    {
+        question: "Reducing water consumption is necessary for sustainable development.",
+        name: "QT1",
+        type: "radioH",
+        values: likertValues,
+        labels: likertScale,
+    },    
+    {
+        question: "During the experiment, did you use any specific strategy or rule of thumb when deciding which of the two products to purchase? If so, describe it shortly.",
+        name: "D7",
+        type: "longOpen",
+    },    
+    {
+        question: "What is your age?",
+        name: "D1",
+        type: "shortOpen",
+    },    
+    // { 
+    //     question: "You have reached the end of the questionnaire! Please press 'Continue' to see your results.",    
+    //     type: "final"
+    // }
+];    
+
+// *********************************************************************
+// YOU DO NOT NEED TO MODIFY ANYTHING BELOW THIS POINT. 
+// *********************************************************************
+
+// Dynamic variables
+var slideIndex = 0;
+// Constants and Scales
+const maxQ  = myQuestions.length;
 const height = 70;
 const width = 80;
 const BackButtonProps = [
@@ -20,54 +96,14 @@ const BackButtonProps = [
         sProperty: `backSlide()`,
     },
 ];
-const NextButtonProps = [
-    {
-        sName: 'type',
-        sProperty: 'button',
-    },
+
+const FinalButtonProps = [
     {
         sName: 'class',
-        sProperty: 'button QT-Back',
+        sProperty: 'button QT-Next',
     },
 ];
 
-const myQuestions = [ 
-    {
-        question: "Which gender do you identify the most with?",
-        name: "D2",
-        type: "radio",
-        values: [1,2,3,4],
-        labels: [
-            "Female",
-            "Male",
-            "Other",
-            "Prefer not to say"
-        ]
-    },
-    {
-        question: "What country do you live in?",
-        name: "D3",
-        type: "autocomplete",
-        list: countries,
-    },
-    {question: "Reducing water consumption is necessary for sustainable development.",
-    name: "QT1",
-    type: "radioH",
-    values: likertValues,
-    labels: likertScale,
-    },
-    // {
-    //     question: "During the experiment, did you use any specific strategy or rule of thumb when deciding which of the two products to purchase? If so, describe it shortly.",
-    //     name: "D7",
-    //     type: "longOpen",
-    // },
-    {
-        question: "What is your age?",
-        name: "D1",
-        type: "shortOpen",
-    },
-];
-const maxQ  = myQuestions.length;
 
 
 // Initialize
@@ -102,17 +138,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     });
-    // Add eventListener to advance with Enter
-    // document.addEventListener('keydown', (event) => {
-    //     let keypress = event.key;
-    //     if (keypress === 'Enter' && checkAnswer(false)) { 
-    //         hideEnter(); // hide all (Press enter indications)
-    //         plusSlides(1); // click 'Enter' = next slide
-    //     }; 
-    // });
-    
-    // Create submit hidden button
-
 
     // Show first slide
     showSlides(slideIndex);
@@ -175,9 +200,7 @@ QuestionSlide.prototype.printSlide = function() {
         input.id    = `answer-${this.Question.name}`;
         input.cols  = '50';
         // Create next button
-        var lProp       = NextButtonProps
-        lProp.push( {sName: 'onclick', sProperty: `nextSlide('${this.Question.name}')`} );
-        let NextButton = writeTag('button','Next',lProp);
+        let NextButton = writeNextButton(this.Question.name);
         // Nest elements and append them to html
         div.appendChild(input);
         div.innerHTML += NextButton;
@@ -205,15 +228,16 @@ QuestionSlide.prototype.printSlide = function() {
         form.autocomplete  = 'off';
         form.action  = '/action_page.php';
         // Create next button
-        let lProp       = NextButtonProps
-        lProp.push( {sName: 'onclick', sProperty: `nextSlide('${this.Question.name}')`} );
-        let NextButton = writeTag('button','Next',lProp);
+        let NextButton = writeNextButton(this.Question.name);
         // Nest elements and append them to html
         form.appendChild(input);
         div.appendChild(form);
         div.innerHTML += NextButton;
         slideQuestion.appendChild(div);
-    } 
+    } else if (this.Question.type==='final') {
+        let ContinueButton = writeTag('button','Continue',FinalButtonProps);
+        slideQuestion.innerHTML += ContinueButton;
+    }
 
     // Create back button
 
@@ -228,6 +252,35 @@ QuestionSlide.prototype.printSlide = function() {
     container.appendChild(slideQuestion);
 
 };
+// *********************************************************************
+// Function Name:   writeNextButton('sQuestion')
+// Functionality:
+//                  1. writes a Tag for the Next button, and adds the functions specific to sQuestions' name
+//
+// input:           sQuestion, string with the question name
+//                  
+// returns:         string with the html line
+// ********************************************************************
+function writeNextButton(sQuestion) {
+    let NextButtonProps = [
+        {
+            sName: 'type',
+            sProperty: 'button',
+        },
+        {
+            sName: 'class',
+            sProperty: 'button QT-Next',
+        },
+        {
+            sName: 'onclick',
+            sProperty: `nextSlide('${sQuestion}')`,
+        },
+    ];
+
+    return writeTag('button','Next',NextButtonProps);
+}
+
+
 
 // *********************************************************************
 // Function Name:   writeProgBar()
@@ -360,20 +413,42 @@ function checkAnswer(bClean=false) {
     }
 }
 
-// Functions to move slides
+// *********************************************************************
+// Function Name:   plusSlides
+// Functionality:   
+//                  1. Changes slide index by adding n
+//                  2. Shows slide SlideIndex+n 
+//
+// Source: https://www.w3schools.com/howto/howto_js_slideshow.asp
+//
+// input:           n: Number of slides to be skipped
+//
+// returns:         void
+// *********************************************************************
 
-// If Enter is clicked, hide text under Next button
-function hideEnter() {
-    document.getElementById("buttonText").style.visibility = "hidden"
-};
 // Advance a slide
 function plusSlides(n) {
   showSlides(slideIndex += n);
 }
+// *********************************************************************
+// Function Name:   currentSlide
+// Functionality:   
+//                  1. Changes slide index to n
+//                  2. Shows slide n 
+//
+// Source: https://www.w3schools.com/howto/howto_js_slideshow.asp
+//
+// input:           n: Number of slides to be skipped
+//
+// returns:         void
+// *********************************************************************
+
+
 // Show current slide
 function currentSlide(n) {
   showSlides(slideIndex = n);
 }
+
 // *********************************************************************
 // Function Name:   showSlides
 // Functionality:   Display current slide, hide the rest
@@ -387,7 +462,7 @@ function showSlides(n) {
     let slides = document.getElementsByClassName("question-slide");
     // Go back when reaching the end
     if (n >= slides.length) {
-        document.getElementsByClassName('next_button')[0].click();
+        document.getElementById('final-button').click();
     } 
     // Avoid negative slide counter
     if (n < 1) {0};

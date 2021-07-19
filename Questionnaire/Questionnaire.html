@@ -1,18 +1,20 @@
-<!-- QUESTIONNAIRE -->
-<script src="{% static 'Questionnaire/questionnaire.js' %}"></script>
-<!-- LINK TO STYLESHEET -->
+{% block app_styles %}
 <link rel="stylesheet" href="{% static 'Questionnaire/questionnaire.css' %}">
-<!-- Set viewport -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- oTree templates-->
+{% endblock %}
+
+{% block app_scripts %}
+<script src="{% static 'Questionnaire/questionnaire.js' %}"></script>
+{% endblock %}
+
 {% load otree static %}
 {% block content %}
 
+<div id="final-answers">  </div>
  <!-- Slide container -->
  <div class="element-container">  </div>
- <div id="final-answers">  </div>
  
- <button class="next_button btn btn-primary btn-large" style="visibility: hidden;" > </button>
- 
+ <button class="next_button btn btn-primary btn-large" id="final-button" style="visibility: hidden;" > </button>
+
 {% endblock %}
+
