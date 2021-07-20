@@ -29,7 +29,8 @@ PARTICIPANT_FIELDS = [
     'S',
     'ProlificID',
     'Bonus',
-    'TreeAmount'
+    'TreeAmount',
+    'validQuestionnaire'
     ]
 
 

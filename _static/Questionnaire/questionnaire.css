@@ -104,10 +104,10 @@
 /* Input container */
 .div-input-text {
     width: 100%;
-    min-height: 30vh;
+    min-height: 20vh;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
 }
 
@@ -131,13 +131,35 @@
 
 /* RADIO INPUTS  */ 
 
-/* Input container */
+/* Input containers */
 .div-input-radioH {
-    min-height: 30vh;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.div-input-radio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.div-input-scale {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
+    margin-bottom: 2em;
+    
+}
+
+.limit_left {
+    margin-right: 1em;
+}
+.limit_right {
+    margin-left: 1em;
 }
 
 .QT-radioH {
@@ -149,6 +171,9 @@
     line-height: 2em ;
     width: 10vw;
 }
+
+
+/************* BUTTONS *************/
 /* Next Button */
 .QT-Next {
     margin-left: 10px;
@@ -159,6 +184,22 @@
     margin: 20px 0;
 
 }
+/* Scale Button */ 
+.ScaleButton {
+    margin: 0;
+    height: 3em ;
+    width: 3em;
+    font-size: 2em;
+    background-color: rgb(33, 202, 132);
+    color: #fff;
+    border: 0;
+}
+
+.ScaleButton:hover {
+    background-color: rgb(39, 221, 145);
+}
+/***********************************/
+
 
 /* Fading animation */
 .fade {

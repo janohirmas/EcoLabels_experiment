@@ -6,13 +6,16 @@
 //     2. name: string with the input name for this question
 //     3. type: Type of question (+ shows additional fields required):
 //          - radio: multiple choice question. Options are presented vertically
-//              + values (Required):    list with the value to be input for each possible answer (stored data)
-//              + labels (Optional):    list. In case you want to label the possible answers, 
+//              + values (default: likertValues):    list with the value to be input for each possible answer (stored data)
+//              + labels (default: likertScale):    list. In case you want to label the possible answers, 
 //                                     you need to provide a list with one label per value
 //          - radioH: multiple choice question. Options are presented horizontally
-//              + values (Required):    list with the value to be input for each possible answer (stored data)
-//              + labels (Optional):    list. In case you want to label the possible answers, 
+//              + values (default: likertValues):    list with the value to be input for each possible answer (stored data)
+//              + labels (default: likertScale):    list. In case you want to label the possible answers, 
 //                                     you need to provide a list with one label per value
+//          - scale: bar scale (similar to radioH) with buttons instead of radio buttons
+//              + values (default: likertValues):    list with the value to be input for each possible answer (stored data)
+//              + limits (default: likertLimits):    list with the left and right extreme labels
 //          - autocomplete: Text input with list to autocomplete
 //              + list: list with possible options to autocomplete 
 //          - shortOpen: Text input (one row to write)
@@ -38,12 +41,21 @@ const likertValues = [1,2,3,4,5];
 const warningAutocomplete = 'Please select one item from the list';
 const warningEmpty = 'Please do not leave this question unanswered';
 const warningAge = 'Please provide a valid answer (number from 18 to 122)';
+const likertLimits = ['Strongly Disagree','Strongly Agree'];
 
 // *********************************************************************
 // Add Your Questions here
 // *********************************************************************
 
+
 const myQuestions = [ 
+    {
+        question: "What is your age?",
+        name: "D1",
+        type: "shortOpen",
+        validate: validAge ,
+        invalidMessage: warningAge,
+    },   
     {
         question: "Which gender do you identify the most with?",
         name: "D2",
@@ -63,25 +75,183 @@ const myQuestions = [
         list: countries,
     },    
     {
-        question: "Reducing water consumption is necessary for sustainable development.",
-        name: "QT1",
-        type: "radioH",
-        values: likertValues,
-        labels: likertScale,
-    },    
+        question: "What is your nationality?",
+        name: "D4",
+        type: "autocomplete",
+        list: countries,
+    },
+    {
+        question: "Have you ever participated in an incentivized economic experiment (such as this one) before?",
+        name: "D5",
+        type: "radio",
+        values: [1,2,3],
+        labels: ['Yes','No',"Not sure / don't remember"]
+    },
+    {
+        question: "What do you think is the purpose of this study? Describe shortly in your own words.",
+        name: "D6",
+        type: "longOpen",
+    },
     {
         question: "During the experiment, did you use any specific strategy or rule of thumb when deciding which of the two products to purchase? If so, describe it shortly.",
         name: "D7",
         type: "longOpen",
+    },
+    {
+        question: "Reducing water consumption is necessary for sustainable development.",
+        name: "QT1",
+        type: "scale",
+        values: likertValues,
+        limits: likertLimits,
+
+    },
+    {
+        question: "Preserving the variety of living creatures is necessary for sustainable development (preserving biological diversity).",
+        name: "QT2",
+        type: "scale",
+    },
+    {
+        question: "For sustainable development, people need to be educated in how to protect themselves against natural disasters.",
+        name: "QT3",
+        type: "scale",
+    },
+    {
+        question: "A culture where conflicts are resolved peacefully through discussion is necessary for sustainable development.",
+        name: "QT4",
+        type: "scale",
+    },
+    {
+        question: "Respecting human rights is necessary for sustainable development.",
+        name: "QT5",
+        type: "scale",
+    },
+    {
+        question: "To receive payment, Select '4'.",
+        name: "V1",
+        type: "scale",
     },    
     {
-        question: "What is your age?",
-        name: "D1",
-        type: "shortOpen",
-        validate: validAge ,
-        invalidMessage: warningAge,
+        question: "To achieve sustainable development, all the people in the world must have access to good education.",
+        name: "QT6",
+        type: "scale",
+    },
+    {
+        question: "Sustainable development requires that companies act responsibly towards their employees, customers and suppliers.",
+        name: "QT7",
+        type: "scale",
+    },
+    {
+        question: "Sustainable development requires a fair distribution of goods and services among people in the world.",
+        name: "QT8",
+        type: "scale",
+    },
+    {
+        question: "Wiping out poverty in the world is necessary for sustainable development.",
+        name: "QT9",
+        type: "scale",
+    },
+    {
+        question: "I think that using more natural resources than we need does not threaten the health and well‐being of people in the future.",
+        name: "QT10",
+        type: "scale",
+    },
+    {
+        question: "I think that we need stricter laws and regulations to protect the environment.",
+        name: "QT11",
+        type: "scale",
+    },
+    {
+        question: "I think that it is important to take measures against problems which have to do with climate change.",
+        name: "QT12",
+        type: "scale",
+    },
+    {
+        question: "I think that everyone ought to be given the opportunity to acquire the knowledge, values and skills that are necessary to live sustainably.",
+        name: "QT13",
+        type: "scale",
+    },
+    {
+        question: "I think that we who are living now should make sure that people in the future enjoy the same quality of life as we do today.",
+        name: "QT14",
+        type: "scale",
+    },
+    {
+        question: "I think that women and men throughout the world must be given the same opportunities for education and employment.",
+        name: "QT15",
+        type: "scale",
+    },
+    {
+        question: "I think that companies have a responsibility to reduce the use of packaging and disposable articles.",
+        name: "QT16",
+        type: "scale",
+    },
+    {
+        question: "I think it is important to reduce poverty.",
+        name: "QT17",
+        type: "scale",
+    },
+    {
+        question: "I think that companies in rich countries should give employees in poor nations the same conditions as in rich countries.",
+        name: "QT18",
+        type: "scale",
+    },
+    {
+        question: "I am paying attention, so I select '1'.",
+        name: "V2",
+        type: "scale",
     },    
-];    
+    {
+        question: "I recycle as much as I can.",
+        name: "QT19",
+        type: "scale",
+    },
+    {
+        question: "I always separate food waste before putting out the rubbish when I have the chance.",
+        name: "QT20",
+        type: "scale",
+    },
+    {
+        question: "I have changed my personal lifestyle in order to reduce waste (e.g., throwing away less food or not wasting materials).",
+        name: "QT21",
+        type: "scale",
+    },
+    {
+        question: "When I use a computer or mobile to chat, to text, to play games and so on, I always treat others as respectfully as I would in real life.",
+        name: "QT22",
+        type: "scale",
+    },
+    {
+        question: "I support an aid organization or environmental group.",
+        name: "QT23",
+        type: "scale",
+    },
+    {
+        question: "I show the same respect to men and women, boys and girls.",
+        name: "QT24",
+        type: "scale",
+    },
+    {
+        question: "	I do things which help poor people.",
+        name: "QT25",
+        type: "scale",
+    },
+    {
+        question: "To show you are paying attention, please select '2'.",
+        name: "V3",
+        type: "scale",
+    },
+    {
+        question: "I often purchase second‐hand goods over the internet or in a shop",
+        name: "QT26",
+        type: "scale",
+    },
+    {
+        question: "I avoid buying goods from companies with a bad reputation for looking after their employees and the environment.",
+        name: "QT27",
+        type: "scale",
+    },
+];
+  
 
 // *********************************************************************
 // YOU DO NOT NEED TO MODIFY ANYTHING BELOW THIS POINT. 
@@ -174,30 +344,10 @@ QuestionSlide.prototype.printSlide = function() {
     // Depending on input type, create inputs accordingly
     if (this.Question.type==='radio' || this.Question.type==='radioH') {
         // 1. Radio or RadioHorizontal
-        // Create div for inputs
-        let div = document.createElement('div');
-        div.className = `div-input-${this.Question.type}`;
-        // Check if labels for the values exist
-        let labels = [];
-        if (typeof this.Question.labels === 'undefined' || this.Question.labels === null) {
-            labels = this.Question.values; 
-        } else {
-            labels = this.Question.labels;
-        }
-        let values = this.Question.values;
-        // Check that labels and values have the same length
-        if (labels.length != values.length) {
-            console.log(`Question ${this.Question.name}: Dimensions of labels and values do not match`)
-        };
-        // Write inputs within div
-        for (let i=0; i<values.length; i++) {
-            // create input (for some reason I could not add the onclick command via js, so I input this as html)
-            let input = `<label class="QT-${this.Question.type}"> ${labels[i]}
-            <input type="radio" class="answer-${this.Question.name}" id="answer-${this.Question.name}-${i}" onclick="nextSlide('${this.Question.name}', '${values[i]}')"> 
-             </label>`;
-            div.innerHTML +=input;
-        }
-        // append question
+        let div = writeRadio(this.Question);
+        slideQuestion.appendChild(div);
+    } else if ( this.Question.type==='scale' ) {
+        let div = writeScale(this.Question);
         slideQuestion.appendChild(div);
     } else if (this.Question.type==='longOpen') {
         // Div container for input and Next Button
@@ -227,9 +377,9 @@ QuestionSlide.prototype.printSlide = function() {
                 errorMessage.innerHTML = invalidMessage;
             } else {
                 errorMessage.innerHTML = 'Please enter a valid answer'
-            }
+            }    
             slideQuestion.appendChild(errorMessage);
-        }
+        }    
     
     } else if ( this.Question.type==='shortOpen' || this.Question.type==='autocomplete') {
         // Div container for input and Next Button
@@ -298,6 +448,107 @@ QuestionSlide.prototype.printSlide = function() {
 
 };
 // *********************************************************************
+// Function Name:   writeRadio(Question)
+// Functionality:
+//                  1. writes the labels contianing radio inputs
+//                  2. Joins all inputs in one div
+//
+// input:           sQuestion, string with the question name
+//                  
+// returns:         string with the html line
+// ********************************************************************
+function writeRadio(Question) {
+    // Create div for inputs
+    let div = document.createElement('div');
+    div.className = `div-input-${Question.type}`;
+    // Check if values and labels are predetermined
+    let values = [];
+    let labels = [];
+    if (typeof Question.values === 'undefined' || Question.values === null) {
+        values =likertValues;
+        labels =likertScale 
+    } else {
+        values = Question.values
+        // Check if labels for the values exist
+        if (typeof Question.labels === 'undefined' || Question.labels === null) {
+            labels = Question.values; 
+        } else {
+            labels = Question.labels;
+        }
+    }
+    // Check that labels and values have the same length
+    if (labels.length != values.length) {
+        console.log(`Question ${Question.name}: Dimensions of labels and values do not match`)
+    };
+    // Write inputs within div
+    for (let i=0; i<values.length; i++) {
+        // create input (for some reason I could not add the onclick command via js, so I input this as html)
+        let input = "";
+        if (Question.type==='radio') {
+            input = `<label class="QT-${Question.type}"> 
+            <input type="radio" class="answer-${Question.name}" id="answer-${Question.name}-${i}" onclick="nextSlide('${Question.name}', '${values[i]}')"> 
+            ${labels[i]} </label>`;
+        } else if (Question.type==='radioH') {
+            input = `<label class="QT-${Question.type}">  ${labels[i]}
+            <input type="radio" class="answer-${Question.name}" id="answer-${Question.name}-${i}" onclick="nextSlide('${Question.name}', '${values[i]}')"> 
+                </label>`;
+        }
+        div.innerHTML +=input;
+    }
+
+    return div; 
+}
+
+// *********************************************************************
+// Function Name:   writeScale(Question)
+// Functionality:
+//                  1. the html code for a Scale question
+//                  2. puts all necessary elements within a div
+//
+// input:           Question: Question object from myQuestions
+//                  
+// returns:         div with necessary elements
+// ********************************************************************
+function writeScale(Question) {
+    // Check if values and limits are predetermined
+    let values = [];
+    let limits = [];
+    if (typeof Question.values === 'undefined' || Question.values === null) {
+        values =likertValues;
+        limits =likertLimits; 
+    } else {
+        values = Question.values
+        limits = Question.limits; 
+    };
+    // Create input container
+    let div = document.createElement('div');
+    div.className = `div-input div-input-${Question.type}`;
+    // Add Left extreme of scale
+    div.innerHTML = `<label class="limit_left"> ${limits[0]} </label> `;
+    
+    // Add Buttons
+    for (i=0;i<values.length;i++) {
+        let lProps = [
+            {
+                sName: 'class',
+                sProperty: 'ScaleButton',
+            },
+            {
+                sName: 'type',
+                sProperty: 'button',
+            },
+            {
+                sName: 'onclick',
+                sProperty: `nextSlide('${Question.name}',sValue='${values[i]}')`
+            }
+        ];
+        div.innerHTML += writeTag('button',values[i],lProps);
+    };
+    div.innerHTML +=  ` <label class="limit_right"> ${limits[1]} </label>`;
+    return div;
+}
+
+// *********************************************************************
 // Function Name:   writeNextButton('sQuestion')
 // Functionality:
 //                  1. writes a Tag for the Next button, and adds the functions specific to sQuestions' name
@@ -324,7 +575,6 @@ function writeNextButton(sQuestion) {
 
     return writeTag('button','Next',NextButtonProps);
 }
-
 
 
 // *********************************************************************
@@ -379,10 +629,13 @@ function writeTag(sTag,sInnerHTML,lAttr) {
 // ********************************************************************
 
 function backSlide() {
-    // uncheck answer
+    // uncheck answer current question
     checkAnswer(true);
     // go to previous slide
     plusSlides(-1);
+    // uncheck answer previous question
+    checkAnswer(true);
+
 }
 
 
@@ -412,10 +665,10 @@ function nextSlide(sQuestionName,sValue="") {
         }
     // go to next slide
     plusSlides(1);
-} else {
-    let warning = document.getElementById(`warning-${sQuestionName}`);
-    warning.style.visibility = 'visible';
-}
+    } else {
+        let warning = document.getElementById(`warning-${sQuestionName}`);
+        warning.style.visibility = 'visible';
+    }
 
 }
 
@@ -467,7 +720,7 @@ function checkAnswer(bClean=false) {
             // if no requirement, return true
             return true;
         }
-    }
+    } else if (qType === 'scale') {return true};
 }
 
 // *********************************************************************

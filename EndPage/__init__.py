@@ -39,6 +39,7 @@ class Player(BasePlayer):
     TreeAmount      = models.IntegerField()
     TreeLocation    = models.StringField()
     ProlificID      = models.StringField()
+    validQ          = models.BooleanField()
 
 # PAGES
 
@@ -86,6 +87,8 @@ class EndPage(Page):
         player.Bonus = part.Bonus
         player.TreeAmount = part.TreeAmount
         player.ProlificID = part.label
+        player.validQ = part.validQuestionnaire
+
 
 
 
