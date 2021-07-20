@@ -47,8 +47,7 @@ const likertLimits = ['Strongly Disagree','Strongly Agree'];
 // Add Your Questions here
 // *********************************************************************
 
-
-const myQuestions = [ 
+const firstQuestions = [
     {
         question: "What is your age?",
         name: "D1",
@@ -97,13 +96,14 @@ const myQuestions = [
         name: "D7",
         type: "longOpen",
     },
+
+];
+// Add questionnaire questions in different orders
+const shuffleQuestions = [ 
     {
         question: "Reducing water consumption is necessary for sustainable development.",
         name: "QT1",
         type: "scale",
-        values: likertValues,
-        limits: likertLimits,
-
     },
     {
         question: "Preserving the variety of living creatures is necessary for sustainable development (preserving biological diversity).",
@@ -115,26 +115,26 @@ const myQuestions = [
         name: "QT3",
         type: "scale",
     },
-    {
-        question: "A culture where conflicts are resolved peacefully through discussion is necessary for sustainable development.",
-        name: "QT4",
-        type: "scale",
-    },
-    {
-        question: "Respecting human rights is necessary for sustainable development.",
-        name: "QT5",
-        type: "scale",
-    },
+    // {
+    //     question: "A culture where conflicts are resolved peacefully through discussion is necessary for sustainable development.",
+    //     name: "QT4",
+    //     type: "scale",
+    // },
+    // {
+    //     question: "Respecting human rights is necessary for sustainable development.",
+    //     name: "QT5",
+    //     type: "scale",
+    // },
     {
         question: "To receive payment, Select '4'.",
         name: "V1",
         type: "scale",
     },    
-    {
-        question: "To achieve sustainable development, all the people in the world must have access to good education.",
-        name: "QT6",
-        type: "scale",
-    },
+    // {
+    //     question: "To achieve sustainable development, all the people in the world must have access to good education.",
+    //     name: "QT6",
+    //     type: "scale",
+    // },
     {
         question: "Sustainable development requires that companies act responsibly towards their employees, customers and suppliers.",
         name: "QT7",
@@ -165,21 +165,21 @@ const myQuestions = [
         name: "QT12",
         type: "scale",
     },
-    {
-        question: "I think that everyone ought to be given the opportunity to acquire the knowledge, values and skills that are necessary to live sustainably.",
-        name: "QT13",
-        type: "scale",
-    },
-    {
-        question: "I think that we who are living now should make sure that people in the future enjoy the same quality of life as we do today.",
-        name: "QT14",
-        type: "scale",
-    },
-    {
-        question: "I think that women and men throughout the world must be given the same opportunities for education and employment.",
-        name: "QT15",
-        type: "scale",
-    },
+    // {
+    //     question: "I think that everyone ought to be given the opportunity to acquire the knowledge, values and skills that are necessary to live sustainably.",
+    //     name: "QT13",
+    //     type: "scale",
+    // },
+    // {
+    //     question: "I think that we who are living now should make sure that people in the future enjoy the same quality of life as we do today.",
+    //     name: "QT14",
+    //     type: "scale",
+    // },
+    // {
+    //     question: "I think that women and men throughout the world must be given the same opportunities for education and employment.",
+    //     name: "QT15",
+    //     type: "scale",
+    // },
     {
         question: "I think that companies have a responsibility to reduce the use of packaging and disposable articles.",
         name: "QT16",
@@ -215,21 +215,21 @@ const myQuestions = [
         name: "QT21",
         type: "scale",
     },
-    {
-        question: "When I use a computer or mobile to chat, to text, to play games and so on, I always treat others as respectfully as I would in real life.",
-        name: "QT22",
-        type: "scale",
-    },
-    {
-        question: "I support an aid organization or environmental group.",
-        name: "QT23",
-        type: "scale",
-    },
-    {
-        question: "I show the same respect to men and women, boys and girls.",
-        name: "QT24",
-        type: "scale",
-    },
+    // {
+    //     question: "When I use a computer or mobile to chat, to text, to play games and so on, I always treat others as respectfully as I would in real life.",
+    //     name: "QT22",
+    //     type: "scale",
+    // },
+    // {
+    //     question: "I support an aid organization or environmental group.",
+    //     name: "QT23",
+    //     type: "scale",
+    // },
+    // {
+    //     question: "I show the same respect to men and women, boys and girls.",
+    //     name: "QT24",
+    //     type: "scale",
+    // },
     {
         question: "	I do things which help poor people.",
         name: "QT25",
@@ -260,6 +260,7 @@ const myQuestions = [
 // Dynamic variables
 var slideIndex = 0;
 // Constants and Scales
+const myQuestions = firstQuestions.concat(shuffleArray(shuffleQuestions));
 const maxQ  = myQuestions.length;
 const height = 70;
 const width = 80;
@@ -889,5 +890,30 @@ function showSlides(n) {
     });
 }
 
+// *********************************************************************
+// Function Name:   shuffleArray()
+// Functionality:   shuffles an array 
+// Source: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+// input:           array
+// returns:         array, shuffled
+// ********************************************************************
 
+
+function shuffleArray(array) {
+    var currentIndex = array.length,  randomIndex;
+  
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+  
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  
+    return array;
+  }
 
