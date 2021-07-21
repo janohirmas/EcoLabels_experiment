@@ -1,146 +1,174 @@
+// General variables and constants
+var slideIndex = 0;
 
-// Initialize slide index //
-let slideIndex = 1;
-showSlides(slideIndex);
+document.addEventListener("DOMContentLoaded", function() {
+    showSlides(slideIndex);
+});
 
 
-// Next/previous controls: activate showSlides functions if arrows and arrow keys pressed. Stops the slides from going in "carousel" + slide 5 & 6 enabled after hovering a button on slide 4. 
+// *********************************************************************
+// Function Name:   plusSlides
+// Functionality:   
+//                  1. Changes slide index by adding n
+//                  2. Shows slide SlideIndex+n 
+//
+// Source: https://www.w3schools.com/howto/howto_js_slideshow.asp
+//
+// input:           n: Number of slides to be skipped
+//
+// returns:         void
+// *********************************************************************
+
+// Advance a slide
 function plusSlides(n) {
-    if (n === 1 && slideIndex === 4 && conditionSlide4 === false) {
-        return;
-    } else if (n === (-1) && slideIndex === 1) {
-        return;
-    } else if (n === 1 && slideIndex === 6) {
-        return;
-    } else {
-        showSlides(slideIndex += n);
+    showSlides(slideIndex += n);
+  }
+  // *********************************************************************
+  // Function Name:   currentSlide
+  // Functionality:   
+  //                  1. Changes slide index to n
+  //                  2. Shows slide n 
+  //
+  // Source: https://www.w3schools.com/howto/howto_js_slideshow.asp
+  //
+  // input:           n: Number of slides to be skipped
+  //
+  // returns:         void
+  // *********************************************************************
+  
+  
+  // Show current slide
+  function currentSlide(n) {
+    showSlides(slideIndex = n);
+  }
+  
+  // *********************************************************************
+  // Function Name:   showSlides
+  // Functionality:   Display current slide, hide the rest
+  // Source: https://www.w3schools.com/howto/howto_js_slideshow.asp
+  //
+  // input:           n: Slide number to be shown
+  // returns:         void
+  // ********************************************************************
+  function showSlides(n) {
+      let i;
+      let slides = document.getElementsByClassName("slide-item");
+      // Go back when reaching the end
+      if (n >= slides.length) {
+          document.getElementById('final-button').click();
+      } 
+      // Avoid negative slide counter
+      if (n < 1) {0};
+    
+      for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";  
+      }
+      slides[slideIndex].style.display = "flex";  
+    
     }
-};
-
-// Thumbnail image controls (slide 5 & 6 enabled after hovering a button on slide 4)
-function currentSlide(n) {
-    if (n === 5 && slideIndex <= 4 && conditionSlide4 === false) {
-        return;
-    } else if (n === 6 && slideIndex <= 4 && conditionSlide4 === false) {
-        return;
-    } else {
-        showSlides(slideIndex = n);
-    };
-};
-
-// User needs to hover over button on slide 4 to be able to go forward. Reveals text under button after hovering. 
-let conditionSlide4 = false;
-
-document.getElementById("b3").addEventListener("mouseover", (event) => {
-    conditionSlide4 = true;
-    document.getElementById("reveal").style.visibility = "visible";
-});
-
-// Next/previous keypress controls //
-
-document.addEventListener('keydown', (event) => {
-    let keypress = event.key;
-    if (keypress === 'ArrowLeft') {
-        plusSlides(-1);
-        ArrowText();       
-    } else if (keypress === 'ArrowRight') {
-        plusSlides(1);
-        ArrowText();
-    }
-});
-
-// Hide text under arrows when user clicks left or right arrow button
-function ArrowText() {
-    document.getElementById("nextKey").style.visibility = "hidden"
-    document.getElementById("prevKey").style.visibility = "hidden";
-};
-
-// Slide switch function //
-function showSlides(n) {
-    let i; // slide count
-    let slides = document.getElementsByClassName("mySlides"); // get slides
-    let dots = document.getElementsByClassName("dot"); // get dots
-    let arrowLeft = document.querySelector("#leftArrow"); // get left arrow
-    let arrowRight = document.querySelector("#rightArrow"); // get right arrow
-
-    for (i = 0; i < slides.length; i++) { // hide slides by default
-        slides[i].style.display = "none";
-    }
-    for (i = 0; i < dots.length; i++) { // change dot color based on dot count
-        dots[i].className = dots[i].className.replace(" active", "");
-    }
-    slides[slideIndex - 1].style.display = "block"; // show slide
-    dots[slideIndex - 1].className += " active"; // change dot color 
-
-    if (n === 1) {
-        arrowLeft.style.display = "none" // make left arrow invisible on 1st slide
-    } else if (n > 1) {
-        arrowLeft.style.display = "block"
-    }
-
-    if (n >= slides.length) {
-        arrowRight.style.display = "none" // make right arrow invisible on 4th slide
-    } else if (n < slides.length) {
-        arrowRight.style.display = "block"
-    }
-
-    if (n === 1) { // make arrow text visible/invisible based on slide count
-        document.getElementById("prevKey").style.display = "none";
-    } else {
-        document.getElementById("prevKey").style.display = "block";
-    };
-    if (n === slides.length) {
-        document.getElementById("nextKey").style.display = "none";
-    } else {
-        document.getElementById("nextKey").style.display = "block";
-    };
-
-}
-
-// QUESTIONS SLIDE //
-
-// This function runs when "Submit" button is clicked. It compares all the inputs to question with solutions; if input is incorrect or empty, hint appears next to it. If the answer is correct, the function makes hint invisible again. If all inputs are correct, "Next" button will become visible. 
-
-let submitButton = document.getElementById("submitAnswer"); // get submit button
-let nextButton = document.getElementById("submit"); // get Next button
-
-nextButton.style.display = "none" // Hide Next button
-
-function validateAnswers() {
-
-    let solutions = ['1', 'b', 'c']; // solutions
-    let hints = document.getElementsByClassName("hint"); // make array of hints
-
-    // get answer fields
-    let A1 = document.getElementById("Q1");
-    let A2 = document.getElementById("Q2");
-    let A3 = document.getElementById("Q3");
-
-    let answerList = [A1, A2, A3]; // create an array out of the answers
-    let correct = 0; // initialize counter for correct answers
-
-    for (i = 0; i < answerList.length; i++) { // iterate through answers
-        if (answerList[i] !== null) { // check for empty fields
-            answerList[i] = answerList[i].value; // get value if not empty
-        }
-        if (answerList[i] !== solutions[i] || answerList[i] === null) { // incorrect or empty field: show hint
-            hints[i].style.visibility = "visible";
-        } else {
-            correct = correct + 1; // correct: increase counter, hide hint
-            hints[i].style.visibility = "hidden";
-
-        }
-    }
-    if (correct === answerList.length) { // if all correct, hide Submit button and show Next button
-        submitButton.style.display = "none"
-        nextButton.style.display = "block"
-    }
-
-}
-
-// For the hover button on slide 4
-document.addEventListener("DOMContentLoaded", function (debug = true) {
-    InitializeVT(document.getElementsByClassName('otree-body')[0]);
-    // Convert all buttons with the class 'mousy' into mouseover VT buttons
-    ConvertButtons2VT('mousy', sActivation = 'mouseover');
-});
+  // *********************************************************************
+  // Function Name:   autocomplete
+  // Functionality:   Create autocomplete for text inputs
+  // Source: https://www.w3schools.com/howto/howto_js_autocomplete.asp
+  // input:           inp: HTML object, input that needs autocomplete
+  //                  arr: array of autocomplete options
+  // returns:         void
+  // ********************************************************************
+  
+    function autocomplete(inp, arr) {
+      /*the autocomplete function takes two arguments,
+      the text field element and an array of possible autocompleted values:*/
+      var currentFocus;
+      /*execute a function when someone writes in the text field:*/
+      inp.addEventListener("input", function (e) {
+          var a, b, i, val = this.value;
+          /*close any already open lists of autocompleted values*/
+          closeAllLists();
+          if (!val) { return false; }
+          currentFocus = -1;
+          /*create a DIV element that will contain the items (values):*/
+          a = document.createElement("DIV");
+          a.setAttribute("id", this.id + "autocomplete-list");
+          a.setAttribute("class", "autocomplete-items");
+          /*append the DIV element as a child of the autocomplete container:*/
+          this.parentNode.appendChild(a);
+          /*for each item in the array...*/
+          for (i = 0; i < arr.length; i++) {
+              /*check if the item starts with the same letters as the text field value:*/
+              if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                  /*create a DIV element for each matching element:*/
+                  b = document.createElement("DIV");
+                  /*make the matching letters bold:*/
+                  b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                  b.innerHTML += arr[i].substr(val.length);
+                  /*insert a input field that will hold the current array item's value:*/
+                  b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                  /*execute a function when someone clicks on the item value (DIV element):*/
+                  b.addEventListener("click", function (e) {
+                      /*insert the value for the autocomplete text field:*/
+                      inp.value = this.getElementsByTagName("input")[0].value;
+                      /*close the list of autocompleted values,
+                      (or any other open lists of autocompleted values:*/
+                      closeAllLists();
+                  });
+                  a.appendChild(b);
+              }
+          }
+      });
+      /*execute a function presses a key on the keyboard:*/
+      inp.addEventListener("keydown", function (e) {
+          var x = document.getElementById(this.id + "autocomplete-list");
+          if (x) x = x.getElementsByTagName("div");
+          if (e.keyCode == 40) {
+              /*If the arrow DOWN key is pressed,
+              increase the currentFocus variable:*/
+              currentFocus++;
+              /*and and make the current item more visible:*/
+              addActive(x);
+          } else if (e.keyCode == 38) { //up
+              /*If the arrow UP key is pressed,
+              decrease the currentFocus variable:*/
+              currentFocus--;
+              /*and and make the current item more visible:*/
+              addActive(x);
+          } else if (e.keyCode == 13) {
+              /*If the ENTER key is pressed, prevent the form from being submitted,*/
+              e.preventDefault();
+              if (currentFocus > -1) {
+                  /*and simulate a click on the "active" item:*/
+                  if (x) x[currentFocus].click();
+              }
+          }
+      });
+      function addActive(x) {
+          /*a function to classify an item as "active":*/
+          if (!x) return false;
+          /*start by removing the "active" class on all items:*/
+          removeActive(x);
+          if (currentFocus >= x.length) currentFocus = 0;
+          if (currentFocus < 0) currentFocus = (x.length - 1);
+          /*add class "autocomplete-active":*/
+          x[currentFocus].classList.add("autocomplete-active");
+      }
+      function removeActive(x) {
+          /*a function to remove the "active" class from all autocomplete items:*/
+          for (var i = 0; i < x.length; i++) {
+              x[i].classList.remove("autocomplete-active");
+          }
+      }
+      function closeAllLists(elmnt) {
+          /*close all autocomplete lists in the document,
+          except the one passed as an argument:*/
+          var x = document.getElementsByClassName("autocomplete-items");
+          for (var i = 0; i < x.length; i++) {
+              if (elmnt != x[i] && elmnt != inp) {
+                  x[i].parentNode.removeChild(x[i]);
+              }
+          }
+      }
+      /*execute a function when someone clicks in the document:*/
+      document.addEventListener("click", function (e) {
+          closeAllLists(e.target);
+      });
+  }
+  

@@ -1,0 +1,59 @@
+<div class="flex-questions">
+    <p class="title"> Is it all clear? Please answer these questions correctly to proceed:</p>
+    <li>
+        <!--Question 1-->
+        <div class="inst-question">
+            <!-- Question-->
+            <label for="Q1">How many rounds are selected for payment?</label>
+        </div>
+        <div class="answer-field">
+            <!-- Input field -->
+            <input type="text" name="Q1" id="Q1" style="width: 9vw; height: 6vh">
+        </div>
+        <div class="hint" id="hint1">
+            <!-- Hint -->
+            Incorrect: see slide 5!
+            <div>
+    </li>
+    <li>
+        <!--Question 2-->
+        <div class="inst-question">
+            <label for="Q2"> What does the <img class="symbol" src="{% static Constants.star_symbol %}" /> stand
+                for?</label>
+        </div>
+        <div class="answer-field">
+            <select name="Q2" id="Q2" class="dropdown">
+                <option value="nothing">--Select--</option>
+                <option value="a">User rating</option>
+                <option value="b">Quality</option>
+                <option value="c">Sustainability</option>
+            </select>
+        </div>
+        <div class="hint" id="hint2">
+            Incorrect: see slide 3!
+            <div>
+    </li>
+    <li>
+        <!--Question 3-->
+        <div class="inst-question">
+            <label for="Q3">Decisions in this experiment can ...</label>
+        </div>
+        <div class="answer-field">
+            <select name="Q3" id="Q3" class="dropdown">
+                <option value="nothing">--Select--</option>
+                <option value="a">earn you money</option>
+                <option value="b">help the environment</option>
+                <option value="c">both</option>
+            </select>
+        </div>
+        <div class="hint" id="hint3">
+            Incorrect: see slide 1!
+            <div>
+    </li>
+    <li>
+        <!-- Submit answers and Next button (next button appears when user answers all questions correctly)-->
+        <a id="submitAnswer" class="button" onclick=validateAnswers()>Submit
+        </a>
+        <button id="submit" class="button glow-button">Next</button>
+    </li>
+</div>

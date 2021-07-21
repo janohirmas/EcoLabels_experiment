@@ -12,7 +12,7 @@ Creates Table with Visual Tracing
 
 
 class Constants(BaseConstants):
-    name_in_url         = 'EcoTask'
+    name_in_url         = 'Main-Task'
     players_per_group   = None
     # Number of rounds
     num_rounds          = 2 

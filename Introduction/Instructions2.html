@@ -1,0 +1,41 @@
+{% load otree static %}
+
+{% block content %}
+<div class="IntroContent">
+
+  <!-- previous button -->
+  <div class="prevDiv">
+    <a id="leftArrow" class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <p id="prevKey" class="prev-key"> <b>or press [&#8592;]</b> </p>
+  </div>
+  <!-- Slides  -->
+  <div class="mySlides">
+    {{ for slide in Constants.Slides }}
+    <div class="slide-item">
+      <!-- Title -->
+      <h1> {{ slide.Title }} </h1>
+      <!-- context -->
+        {{ include slide.path }}
+    </div>
+    {{ endfor }}
+  </div>
+  <!-- Next Button -->
+  <div class="nextDiv"> 
+    <a id="rightArrow" class="next" onclick="plusSlides(1)">&#10095;</a>
+    <p id="nextKey" class="next-key"> <b>or press [&#8594;] </b></p>
+  </div>
+  
+</div>
+
+{% endblock %}
+
+{% block app_styles %}
+<link rel="stylesheet" href="{% static 'Introduction/intro.css' %}">
+{% endblock %}
+
+{% block app_scripts %}
+
+<script src="{% static 'global/VT_functionality.js' %}"></script>
+<script src="{% static 'EcoTask/js/instructions.js' %}"></script>
+
+{% endblock %}
