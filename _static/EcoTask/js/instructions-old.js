@@ -1,31 +1,31 @@
 
 
 // Initialize slide index //
-var slideIndex = 1;
-showSlides(slideIndex);
+var iSlideIndex = 1;
+showSlides(iSlideIndex);
 
 
 // Next/previous controls: activate showSlides functions if arrows and arrow keys pressed. Stops the slides from going in "carousel" + slide 5 & 6 enabled after hovering a button on slide 4. 
 function plusSlides(n) {
-    if (n === 1 && slideIndex === 4 && conditionSlide4 === false) {
+    if (n === 1 && iSlideIndex === 4 && conditionSlide4 === false) {
         return;
-    } else if (n === (-1) && slideIndex === 1) {
+    } else if (n === (-1) && iSlideIndex === 1) {
         return;
-    } else if (n === 1 && slideIndex === 6) {
+    } else if (n === 1 && iSlideIndex === 6) {
         return;
     } else {
-        showSlides(slideIndex += n);
+        showSlides(iSlideIndex += n);
     }
 };
 
 // Thumbnail image controls (slide 5 & 6 enabled after hovering a button on slide 4)
 function currentSlide(n) {
-    if (n === 5 && slideIndex <= 4 && conditionSlide4 === false) {
+    if (n === 5 && iSlideIndex <= 4 && conditionSlide4 === false) {
         return;
-    } else if (n === 6 && slideIndex <= 4 && conditionSlide4 === false) {
+    } else if (n === 6 && iSlideIndex <= 4 && conditionSlide4 === false) {
         return;
     } else {
-        showSlides(slideIndex = n);
+        showSlides(iSlideIndex = n);
     };
 };
 
@@ -70,8 +70,8 @@ function showSlides(n) {
     for (i = 0; i < dots.length; i++) { // change dot color based on dot count
         dots[i].className = dots[i].className.replace(" active", "");
     }
-    slides[slideIndex - 1].style.display = "block"; // show slide
-    dots[slideIndex - 1].className += " active"; // change dot color 
+    slides[iSlideIndex - 1].style.display = "block"; // show slide
+    dots[iSlideIndex - 1].className += " active"; // change dot color 
 
     if (n === 1) {
         arrowLeft.style.display = "none" // make left arrow invisible on 1st slide

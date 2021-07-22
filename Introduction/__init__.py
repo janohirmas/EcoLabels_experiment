@@ -25,6 +25,7 @@ class Constants(BaseConstants):
     TreesOrg = "One Tree Planted"
     ## Slides for introduction
     SlidePath = 'Instructions/slide'
+    DotsPath = 'Instructions/dots.html'
     Slides = [
         dict(
             Title = 'The Experiment',
@@ -47,7 +48,7 @@ class Constants(BaseConstants):
             path=SlidePath+'5.html'
             ),
         dict(
-            Title = 'The product characteristics',
+            Title = 'Is it all clear? Please answer these questions correctly to proceed:',
             path=SlidePath+'6.html'
             ),
         # dict(

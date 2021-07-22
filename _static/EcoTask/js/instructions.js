@@ -1,9 +1,132 @@
 // General variables and constants
-var slideIndex = 0;
+var iSlideIndex = 0;
+const lSolutions =  ['1', 'b', 'c'];
 
 document.addEventListener("DOMContentLoaded", function() {
-    showSlides(slideIndex);
+    showSlides(iSlideIndex);
 });
+
+document.addEventListener('keydown', (event) => {
+    let keypress = event.key;
+    if (keypress === 'ArrowLeft') {
+        plusSlides(-1);
+        ArrowText();       
+    } else if (keypress === 'ArrowRight') {
+        plusSlides(1);
+        ArrowText();
+    }
+});
+
+// *********************************************************************
+// Function Name:   adjustElem
+// Functionality:   
+//                  1. resizes element until there is no overflow
+//
+// input:           elem: element, contains elements to resize
+//
+// returns:         void
+// *********************************************************************
+
+function adjustElem(elem) {
+    let zoom = 1;  
+    zoomChildren(elem,zoom);                                    // Set initial zoom as 100%
+    let overflow = checkOverflow(elem);                         // boolean describing if element is overflown
+    let iter = 0;                                               // max iteration in case something goes wrong
+    // Iterate until there is no overflow
+    while (overflow && iter<30) {
+        zoom += -0.01;                                          // reduce zoom in 1%
+        zoomChildren(elem,zoom);
+        overflow = checkOverflow(elem);
+        console.log(overflow);
+        iter++;
+    };
+    if (iter==30) {console.log('problem resizing element')};   // notify in console if there is no convergence
+};
+
+// *********************************************************************
+// Function Name:   zoomChildren
+// Functionality:   
+//                  1. zooms all children within an element
+//
+// input:           elem: element, contains elements to resize
+//                  zoom: float, positive number denoting zoom (1 = 100%)
+//
+// returns:         void
+// *********************************************************************
+
+function zoomChildren(elem,zoom) {
+    let children = elem.children;
+    if (typeof children !=='undefined') {
+        for (let i=0; i<children.length; i++) {
+            children[i].style.zoom = zoom;
+        };
+    };
+};
+
+// *********************************************************************
+// Function Name:   checkOverflow
+// Functionality:   
+//                  1. hides text suggesting to press keys
+//
+// Source:          modified from: 
+//                  https://www.codegrepper.com/code-examples/javascript/javascript+check+if+element+is+overflowing
+//
+// input:           elem, element to check if has overflow
+//
+// returns:         boolean, true if overflow
+// *********************************************************************
+
+
+function checkOverflow(elem) {
+    let overflow = elem.clientWidth != elem.scrollWidth || elem.clientHeight != elem.scrollHeight;
+    return overflow;
+};
+
+
+// *********************************************************************
+// Function Name:   ArrowText
+// Functionality:   
+//                  1. hides text suggesting to press keys
+//
+// input:           void
+//
+// returns:         void
+// *********************************************************************
+
+function validateAnswers() {
+
+    let lHints      = document.getElementsByClassName("hint");                          // make array of hints
+    let lQuestions  = document.getElementsByClassName("ControlQuestions");              // make array of questions
+    let iCorrect    = 0;                                                                // initialize counter for correct answers
+
+    for (i = 0; i < lQuestions.length; i++) {                                           // iterate through answers
+        if (lQuestions[i].value !== lSolutions[i] || lQuestions[i].value === null) {    // incorrect or empty field
+            lHints[i].style.visibility = "visible";                                     // Show Hint
+        } else {
+            iCorrect +=1;                                                               // iCorrect: increase counter
+            lHints[i].style.visibility = "hidden";                                      // Hide Hint
+        }
+    }
+    if (iCorrect === lQuestions.length) {                                               // if all correct, Submit
+        document.getElementById('submit').click();
+    }
+
+}
+
+
+// *********************************************************************
+// Function Name:   ArrowText
+// Functionality:   
+//                  1. hides text suggesting to press keys
+//
+// input:           void
+//
+// returns:         void
+// *********************************************************************
+function ArrowText() {
+    document.getElementById("nextKey").style.visibility = "hidden"
+    document.getElementById("prevKey").style.visibility = "hidden";
+};
 
 
 // *********************************************************************
@@ -19,10 +142,10 @@ document.addEventListener("DOMContentLoaded", function() {
 // returns:         void
 // *********************************************************************
 
-// Advance a slide
 function plusSlides(n) {
-    showSlides(slideIndex += n);
-  }
+    showSlides(iSlideIndex += n);
+}
+
   // *********************************************************************
   // Function Name:   currentSlide
   // Functionality:   
@@ -38,9 +161,9 @@ function plusSlides(n) {
   
   
   // Show current slide
-  function currentSlide(n) {
-    showSlides(slideIndex = n);
-  }
+function currentSlide(n) {
+    showSlides(iSlideIndex = n);
+}
   
   // *********************************************************************
   // Function Name:   showSlides
@@ -50,22 +173,37 @@ function plusSlides(n) {
   // input:           n: Slide number to be shown
   // returns:         void
   // ********************************************************************
-  function showSlides(n) {
-      let i;
-      let slides = document.getElementsByClassName("slide-item");
-      // Go back when reaching the end
-      if (n >= slides.length) {
-          document.getElementById('final-button').click();
-      } 
-      // Avoid negative slide counter
-      if (n < 1) {0};
-    
-      for (i = 0; i < slides.length; i++) {
-          slides[i].style.display = "none";  
-      }
-      slides[slideIndex].style.display = "flex";  
-    
+function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("slide-item");
+    let nextDiv = document.getElementsByClassName('nextDiv')[0];
+    let prevDiv = document.getElementsByClassName('prevDiv')[0];
+
+    // Avoid slide counter going out of bounds
+    if (n <= 0) { iSlideIndex=0 };
+    if (n >= slides.length ) { iSlideIndex=slides.length-1 };
+    // Hide all slides
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
     }
+    // Hide right arrows if last slide
+    if (iSlideIndex == slides.length-1 ) {
+        nextDiv.style.visibility = 'hidden';
+    } else {
+        nextDiv.style.visibility = 'visible';
+    }
+    // Hide right arrows if last slide
+    if (iSlideIndex == 0 ) {
+        prevDiv.style.visibility = 'hidden';
+    } else {
+        prevDiv.style.visibility = 'visible';
+    }
+
+    // Show displayed slide
+    slides[iSlideIndex].style.display = "flex"; 
+    // adjust slide size
+    adjustElem(slides[iSlideIndex]);
+}
   // *********************************************************************
   // Function Name:   autocomplete
   // Functionality:   Create autocomplete for text inputs

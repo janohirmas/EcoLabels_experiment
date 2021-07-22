@@ -1,455 +1,360 @@
+/* SETUP FONT SIZES */
+
 
 /* CSS STYLESHEET FOR ECOLABELS EXPERIMENT */
  
 /* GLOBAL STYLING */
 
-    /* set oTree default margins & padding off, define viewport */
-    .otree-body {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box
-    }
-
-    .debug-info {
-        display:none;
-    }
-
-    /* Set global styling, same for all pages */
-    body {
-       font-family: Helvetica, sans-serif;
-       color: #333;
-       background-color: #f8f6f0;
-       text-align: center;   
-    }
-
-    /* titles */
-    h1 {
-        font-size: 5vh;
-        text-align: center;
-        padding: 1em;
-        background-color: rgba(59, 121, 139, 0.678);
-        color: white;
-        width: 100%;
-    }
-
-    /* Next & submit button */
-    .button {
-        font-family: 'Work Sans', sans-serif;
-        font-size: 3vh;
-        width: 8vw;
-        height: 12vh;
-        background-color: rgb(33, 202, 132);
-        color: #fff;
-        border: 0px;
-        border-radius: 3px;
-        line-height: 12vh;
-        cursor: pointer;
-        text-align: center;
-        text-decoration: none;   
-    }
-
-    .button:hover {
-        background-color: rgb(39, 221, 145);
-        color: #fff;
-    }
-
-    /* Hide button */ 
-    .hideButton {
-        visibility: hidden;
-    }
-
-    /* Input fields */
-    input {
-        border: 1px solid transparent;
-        background-color: #f1f1f1;
-        padding: 10px;
-        font-size: 2.5vh;
-    }
-
-    /* This is for autocomplete dropdown */
-    input[type=text] {
-        background-color: #f1f1f1;
-        width: 100%;
-    }
-
-    /* Checkbox styling for ticked/unticked */ 
-
-    input[type="checkbox"]:required:valid + label { 
-        color: green;
-        
-    }
-
-/* INTRODUCTION & INSTRUCTIONS */
-    .IntroContent {
-        transform: translate(-50vw,-50vh);
-        position: absolute;
-        top: 50vh;
-        left: 50vw;
-        height: 100vh;
-        width: 100vw; 
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /* Slide container */
-    .mySlides {
-        display: flex;
-        flex-flow: row;
-        height: 80vh;
-        width: 80vw;
-        margin: 0 1em;
-        justify-content: center;
-        align-content: center;
-    }
-
-    /* Slides */
-    .slide-item {
-        display: none;
-        flex-direction: column;
-        height: 70vh;
-        width: 80vw;
-        background-color: white;
-        font-size: 2.8vh;
-        line-height: 1.5;
-        margin-bottom: 2vh;
-        text-align: left;
-    }
-
-
-
-
-    /* UvA logo */
-    .UvA-logo {
-        width: 15vw;
-        margin-left: 2vh;
-    }
-
-    /* OTP logo */
-    .OTP-logo {
-        width: 15vw;
-        margin: 2vh;
-    }
-
-    /* Product Characteristics slide */
-    .symbol {
-        width: 1.5vw;
-        margin: 1px;
-    }
-
-    /* Slides that have content split in two */
-    .double-container {
-        display: flex;
-        flex-direction: row;
-    }
-
-    .text-container {
-        width: 70%;
-    }
-
-    .img-container {
-        padding-left: 5vw;
-        text-align: center;
-        width: 30%;
-    }
-
-    .task-img {
-        width: 17vw;
-        border: 1px solid #333;
-        object-fit: contain;
-    }
-
-    .button-container {
-        flex-basis: 50%;
-        text-align: center;
-    }
-
-    .text-reveal {
-        visibility: hidden;
-    }
-
-    .hover-button {
-        height: 15vh;
-        width: 15vh;
-        margin-bottom: 5vh;
-    }
-
-    .hidden {
-        color:  rgb(200, 200, 200);
-        background-color: rgb(200, 200, 200);
-    }
-  
-    .non-hidden {
-        color: #000;
-        background-color: rgb(200, 200, 200);
-    }
-  
-    .hidden .button-img{
-        display: none;
-    }
-  
-    .non-hidden .button-img{
-        display: inline-flex;
-    }
-
-    .button-outcome {
-        font-size: 1em;
-    }
-
-    /* Container for questions slide */
-    .flex-questions {
-        display: flex;
-        flex-direction: column;
-        height: 70vh;
-        width: 80vw;
-        background-color: white;
-        padding-top: 5vh;
-        padding-left: 5vw;
-        padding-right: 3vw;
-        font-size: 2.8vh;
-        margin-bottom: 2vh;
-    }
-
-    /* Container for individual questions (question, input field, hint) */
-    .flex-questions li {
-        height: 12vh;
-        padding-top: 2vw;
-        list-style: none;
-        display: flex;
-        flex-direction: row;
-        text-align: left;
-        justify-content: space-between;
-        border-bottom:1px solid rgb(233, 232, 232);
-    }
-
-    .flex-questions li:last-child {
-        border-bottom: none;
-        padding-top: 3vh;
-        height: 15vh;
-    }
-
-    /* Only questions */
-    .inst-question {
-        flex-basis: 37vw;
-    }
-
-    /* Only input fields */
-    .answer-field {
-        flex-basis: 20vw;
-        padding-left: 3vw;
-        padding-bottom: 1vh;
-    }    
-
-    /* Dropdown input */ 
-    .dropdown {
-        height: 5vh;
-        width: 9vw;
-    }
-
-    /* Incorrect/hint bar */
-    .hint {
-        visibility: hidden;
-        flex-grow: 1;
-        padding-top: 0.5vh;
-        background-color: rgb(250, 144, 144);
-        border-radius: 2px;
-        color:white;
-        height: 4.5vh;
-        width: 8vw;
-        margin-left: 1vh;
-        text-align: center;
-    }
-
-    /* Submit button Introduction*/
-    .intro-button {
-        display: inline-block;
-        position:absolute;
-        margin: 60vh; 
-    }
-
-    /* Glowing button Instructions */
-    .glow-button {  
-        -webkit-border-radius: 60px; 
-        border-radius: 3px !important ;
-        animation: glowing 2000ms infinite;
-    }
-
-    @keyframes glowing {
-        0% {
-            background-color: rgb(33, 202, 132);
-            box-shadow: 0 0 3px rgb(33, 202, 132);
-        }
-        50% {
-            background-color: rgb(33, 202, 112);
-            box-shadow: 0 0 10px rgb(33, 202, 112);
-        }
-        100% {
-            background-color:rgb(33, 202, 132);
-            box-shadow: 0 0 3px rgb(33, 202, 132);
-        }
+/* set oTree default margins & padding off, define viewport */
+.otree-body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
 }
 
-    /* Next & previous buttons (arrows) */
-    .prevDiv, .nextDiv {
-        display: flex;
-        height: 5em;
-        width: 3em;
-        flex-direction:column;
-        align-items: center;
-        justify-content: center;
-    }
+.debug-info {
+    display:none;
+}
 
-    .prev, .next {
-        color: black;
-        font-size: 5em;
-        cursor: pointer;
-        width: auto;
-        transition: 0.6s ease;
-        user-select: none;
-        text-decoration: none;
-        text-align: center;
-    }
+/* Set global styling, same for all pages */
+body {
+    font-family: Helvetica, sans-serif;
+    color: #333;
+    background-color: #f8f6f0;
+    text-align: center;   
+}
 
-    .prev-key,.next-key {
-        font-size: 1em;
-        text-align: center;
-    }
+/* titles */
+h1 {
+    font-size: 5vh;
+    text-align: center;
+    padding: 1em;
+    background-color: rgba(59, 121, 139, 0.678);
+    color: white;
+    width: 100%;
+}
 
-    /* On hover, add a black background color with a little bit see-through */
-    .prev:hover,.next:hover {
-        background-color: #bbb;
-        color: black;
-    }
-   
-    /* The dots/bullets/indicators */
-    .dot_row {
-        position: absolute;
-        margin-top: 67vh;
-        text-align: center;
-    }
+/* Next & submit button */
+.button {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 3vh;
+    width: 8vw;
+    height: 12vh;
+    background-color: rgb(33, 202, 132);
+    color: #fff;
+    border: 0px;
+    border-radius: 3px;
+    line-height: 12vh;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;   
+}
 
-    .dot {
-        cursor: pointer;
-        height: 2.5vh;
-        width: 2.5vh;
-        margin: 0 2px;
-        background-color: #bbb;
-        border-radius: 50%;
-        display: inline-block;
-        transition: background-color 0.6s ease;
-    }
+.button:hover {
+    background-color: rgb(39, 221, 145);
+    color: #fff;
+}
 
-    .active,
-    .dot:hover {
-        background-color: #717171;
-    }
+/* Input fields */
+input {
+    border: 1px solid transparent;
+    background-color: #f1f1f1;
+    padding: 10px;
+    font-size: 2.5vh;
+}
+
+/* This is for autocomplete dropdown */
+input[type=text] {
+    background-color: #f1f1f1;
+    width: 100%;
+}
+
+/* Checkbox styling for ticked/unticked */ 
+
+input[type="checkbox"]:required:valid + label { 
+    color: green;
+    
+}
+
+/* INTRODUCTION & INSTRUCTIONS */
+.IntroContent {
+    transform: translate(-50vw,-50vh);
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    height: 100vh;
+    width: 100vw; 
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Slide container */
+.mySlides {
+    display: flex;
+    flex-flow: row;
+    height: 80vh;
+    width: 70vw;
+    margin: 0 1em;
+    justify-content: center;
+    align-content: center;
+}
+
+/* Slides */
+.slide-item {
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;    
+    height: 80vh;
+    width: 80vw;
+    overflow: auto;
+    background-color: white;
+    font-size: 2.8vh;
+    line-height: 1.5;
+    margin-bottom: 2vh;
+    text-align: left;
+}
 
 
-/* READY */
-    .ready-button {
-        display: inline-block;
-        position:absolute;
-        margin: 30vh; 
-    }
 
 
-    /* Autocomplete styling for open questions*/
-    .autocomplete-items {
-        border: 1px solid #d4d4d4;
-        border-bottom: none;
-        border-top: none;
-        z-index: 99;
+/* UvA logo */
+.UvA-logo {
+    width: 15vw;
+    margin-left: 2vh;
+}
 
-        /*position the autocomplete items to be the same width as the container:*/
-        top: 100%;
-        left: 0;
-        right: 0;
-    }
+/* OTP logo */
+.OTP-logo {
+    width: 15vw;
+    margin: 2vh;
+}
 
-    .autocomplete-items div {
-        padding: 10px;
-        cursor: pointer;
-        background-color: #fff;
-        border-bottom: 1px solid #d4d4d4;
-    }
+/* Product Characteristics slide */
+.symbol {
+    width: 1.5vw;
+    margin: 1px;
+}
 
-    /*when hovering an item:*/
-    .autocomplete-items div:hover {
-        background-color: #e9e9e9;
-    }
+/* Slides that have content split in two */
+.ContentContainer {
+    display: flex;
+    padding: 1em;
+    justify-content: center;
+}
 
-    /*when navigating through the items using the arrow keys:*/
-    .autocomplete-active {
-        background-color: DodgerBlue !important;
-        color: #ffffff;
-    }
+.double-container {
+    display: flex;
+    flex-direction: row;
+}
 
-    /* Media query for large screen (stops elements from becoming gigantic)*/
-/*
-    @media only screen and (min-width: 1600px) {
-        h1 {
-            font-size: 46px !important;
-        }
+.text-container {
+    width: 70%;
+}
 
-        input {
-            font-size: 24px !important;
-        }
+.img-container {
+    padding-left: 5vw;
+    text-align: center;
+    width: 30%;
+}
 
-        .button {
-            height: 10vh !important;
-            width: 8vw !important;
-            font-size: 24px !important;
-            line-height: 10vh !important;
-        }
+.task-img {
+    width: 17vw;
+    border: 1px solid #333;
+    object-fit: contain;
+}
 
-        .title {
-            font-size: 24px !important;
-        }
+.button-container {
+    flex-basis: 50%;
+    text-align: center;
+}
 
-        .slide-item {
-            font-size: 22px !important;
-            line-height: 2 !important;
-        }
+.text-reveal {
+    visibility: hidden;
+}
 
-        .flex-questions {
-            font-size: 24px !important;
-        }
+.hover-button {
+    height: 15vh;
+    width: 15vh;
+    margin-bottom: 5vh;
+}
 
-        .dot {
-            height: 24px !important;
-            width: 24px !important;
-        }
+.hidden {
+    color:  rgb(200, 200, 200);
+    background-color: rgb(200, 200, 200);
+}
 
-        .prev, .next {
-            font-size: 6vh !important;
-        }
+.non-hidden {
+    color: #000;
+    background-color: rgb(200, 200, 200);
+}
 
-        .question {
-            font-size: 26px !important;
-        }
+.hidden .button-img{
+    display: none;
+}
 
-        .answers {
-            font-size: 24px !important;
-        }
+.non-hidden .button-img{
+    display: inline-flex;
+}
 
-        .infograph-container {
-            height: 60vh !important;
-            width: 60vw !important;
-            margin-left: 20vw !important;
-            margin-top: 10vh;
-            margin-bottom: 2vh !important;
-        }
+.button-outcome {
+    font-size: 1em;
+}
 
-        .info-img {
-            height: 60vh !important;
-            width: 60vw !important;
-        }
+/* Container for questions slide */
+.flex-questions {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    align-items: center;
+}
 
-        #between-button {
-            font-size: 24px !important;
-            line-height: 4vh !important;
-        }
-    }
+/* Container for individual questions (question, input field, hint) */
+.flex-questions li {
+    height: 2em;
+    padding-top: 0.5em;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    justify-content: space-between;
+}
+
+.flex-questions li:last-child {
+    border-bottom: none;
+    padding-top: 3vh;
+    height: 15vh;
+}
+
+/* Only questions */
+.inst-question {
+    flex-basis: 37vw;
+}
+
+/* Only input fields */
+.answer-field {
+    flex-basis: 20vw;
+    padding-left: 3vw;
+    padding-bottom: 1vh;
+}    
+
+/* Dropdown input */ 
+.dropdown {
+    height: 2.5em;
+    width: 5em;
+    border-width: 1px;
+    border-color: black;
+}
+
+
+/* Incorrect/hint bar */
+.hint {
+    visibility: hidden;
+    background-color: rgb(250, 144, 144);
+    border-radius: 2px;
+    color:white;
+    height: 4.5vh;
+    width: 100%;
+    margin-left: 1vh;
+    text-align: center;
+}
+
+/* Next & previous buttons (arrows) */
+.prevDiv, .nextDiv {
+    display: flex;
+    height: 5em;
+    width: 3em;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
+}
+
+.prev, .next {
+    color: black;
+    font-size: 5em;
+    cursor: pointer;
+    width: auto;
+    transition: 0.6s ease;
+    transition: visibility 0s;
+    user-select: none;
+    text-decoration: none;
+    text-align: center;
+}
+
+.prev-key,.next-key {
+    font-size: 1em;
+    text-align: center;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,.next:hover {
+    background-color: #bbb;
+    color: black;
+}
+
+/* The dots/bullets/indicators */
+.dot_row {
+    align-items: center;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50vw;
+    top: 95vh
+}
+
+.dot {
+    cursor: pointer;
+    height: 2.5vh;
+    width: 2.5vh;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active,
+.dot:hover {
+    background-color: #717171;
+}
+
+
+
+/* Autocomplete styling for open questions*/
+.autocomplete-items {
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+/*when hovering an item:*/
+.autocomplete-items div:hover {
+    background-color: #e9e9e9;
+}
+
+/*when navigating through the items using the arrow keys:*/
+.autocomplete-active {
+    background-color: DodgerBlue !important;
+    color: #ffffff;
+}
+
+#submitAnswer {
+    padding: 0 0.5em;
+    width: auto;
+    height: auto;
+}

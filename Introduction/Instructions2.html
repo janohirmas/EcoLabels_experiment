@@ -1,7 +1,7 @@
 {% load otree static %}
 
 {% block content %}
-<div class="IntroContent">
+<div class="IntroContent" id="IntroContent">
 
   <!-- previous button -->
   <div class="prevDiv">
@@ -10,21 +10,29 @@
   </div>
   <!-- Slides  -->
   <div class="mySlides">
-    {{ for slide in Constants.Slides }}
-    <div class="slide-item">
-      <!-- Title -->
-      <h1> {{ slide.Title }} </h1>
-      <!-- context -->
-        {{ include slide.path }}
-    </div>
-    {{ endfor }}
+    {% for slide in Constants.Slides %}
+      <div class="slide-item" id="slide-{% forloop.counter0 %}">
+        <!-- Title -->
+        <h1> {{ slide.Title }} </h1>
+        <!-- context -->
+        <div class="ContentContainer"> 
+          {{ include slide.path }}
+        </div>
+      </div>
+    {% endfor %}
   </div>
   <!-- Next Button -->
   <div class="nextDiv"> 
     <a id="rightArrow" class="next" onclick="plusSlides(1)">&#10095;</a>
     <p id="nextKey" class="next-key"> <b>or press [&#8594;] </b></p>
   </div>
-  
+</div>
+
+<!-- Dot buttons below -->
+<div class="dot_row">
+  {% for slide in Constants.Slides %}
+    <span class="dot" onclick="currentSlide({{ forloop.counter0 }})"></span>
+  {% endfor %}
 </div>
 
 {% endblock %}
