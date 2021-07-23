@@ -78,7 +78,7 @@ function zoomChildren(elem,zoom) {
 
 
 function checkOverflow(elem) {
-    let overflow = elem.clientWidth != elem.scrollWidth || elem.clientHeight != elem.scrollHeight;
+    let overflow = elem.clientWidth < elem.scrollWidth || elem.clientHeight < elem.scrollHeight;
     return overflow;
 };
 

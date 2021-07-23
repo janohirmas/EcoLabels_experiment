@@ -110,7 +110,7 @@ input[type="checkbox"]:required:valid + label {
     justify-content: flex-start;    
     height: 80vh;
     width: 80vw;
-    overflow: auto;
+    overflow: hidden;
     background-color: white;
     font-size: 2.8vh;
     line-height: 1.5;
@@ -274,7 +274,7 @@ input[type="checkbox"]:required:valid + label {
 
 .prev, .next {
     color: black;
-    font-size: 5em;
+    font-size: 3em;
     cursor: pointer;
     width: auto;
     transition: 0.6s ease;
