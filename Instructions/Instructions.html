@@ -1,248 +1,27 @@
-<!-- INSTRUCTION PAGE -->
+{% extends "global/SliderTemplate.html" %}
 
-<!-- LINK TO CSS & JS-->
-<link rel="stylesheet" href="{% static 'global/styling10.css' %}">
-<link rel="stylesheet" href="{% static 'global/FriendlyChecks.css' %}">
+{% block app_styles %}
 
-<!-- Link to JS -->
-<script src="{% static 'global/VT_functionality.js' %}"></script>
-<script src="{% static 'global/FriendlyChecks.js' %}"></script>
+<link rel="stylesheet" href="{% static 'Introduction/intro.css' %}">
+
+{% endblock %}
+
+{% block app_scripts %}
 <script src="{% static 'EcoTask/js/instructions.js' %}"></script>
 
-<!-- Set viewport -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<!-- oTree templates -->
-{% load otree static %}
-{% block content %}
-
-<body>
-
-    <!-- Slide container-->
-    <div class="flex-container">
-
-        <!-- Title -->
-        <h1> Instructions </h1>
-
-        <!-- Slide 1-->
-
-        <!-- Hide slide by default-->
-        <div class="mySlides">
-
-            <!-- Style slide items-->
-            <div class="slide-item">
-
-                <!-- Slide title -->
-                <p class="title"> The Experiment </p>
-
-                <!-- Slide text -->
-                <ul style="line-height: 2;">
-                    <li>In this study you will make purchasing decisions.</li>
-                    <li>The products that you will observe are <b>not real</b>.</li>
-                    <li>There is no physical product, but your <u>decisions</u> will have <b>real consequences.</b></li>
-                    <li>Depending on your <u>decisions</u> you can an obtain additional <b>bonus payment up to £{{
-                            Constants.MaxBonus}} </b>and help the environment by <b>planting trees in a country of your choosing.</b></li>
-                    <li> The donations will be done by: <img class="OTP-logo" src="{% static OTP_logo %}" /></li>
-                    
-                </ul>
-            </div>
-        </div>
-
-        <!-- Slide 2-->
-        <div class="mySlides">
-            <div class="slide-item">
-                <p class="title">Your Decisions</p>
-                <div class="double-container">
-                    <div class="text-container">
-                        <p> In this experiment you will:</p>
-                        <ul>
-                            <li> Make multiple purchasing decisions (<b>{{ Constants.NumTrials }} rounds</b>).</li>
-                            <li> In each round, you will see <b>2 products</b> and their characteristics.</li>
-                            <li> These products are not real, but their benefits are. </li>
-                            <li> The next slide explains the benefits and characteristics of the products.</li>
-                        </ul>
-                    </div>
-                    <div class="img-container">
-                        <img class="task-img" src="{% static revealed_task %}" />
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 3-->
-        <div class="mySlides">
-            <div class="slide-item">
-                <p class="title">The Product Characteristics</p>
-                <p>
-                    The characteristics of the products you choose, will affect the benefits you get:
-                </p>
-                <ul>
-                    <li>
-                        <b>Price:</b> This is the cost you need to pay for the product. The price is in <b>£</b>.
-                    </li>
-                    <p style="margin-left: 50px;font-size: 0.8em;">
-                        Higher Price <span>&#8594;</span> lower bonus payments.
-                    </p>
-                    <li>
-                        <b>Quality:</b> 1-3 star (<img class="symbol" src="{% static star_symbol %}" />) rating.
-                        Products
-                        with more stars (<img class="symbol" src="{% static star_symbol %}" />) are more likely to have
-                        higher quality.
-                    </li>
-                    <p style="margin-left: 50px;font-size: 0.8em;">
-                        Higher quality <span>&#8594;</span> higher bonus payments.
-                    </p>
-                    <li>
-                        <b>Eco-Label:</b> 1-3 leaf (<img class="symbol" src="{% static leaf_symbol %}" />) rating.
-                        Products
-                        with more leaves (<img class="symbol" src="{% static leaf_symbol %}" />) are more likely
-                        to be more sustainable.
-                    </li>
-                    <p style="margin-left: 50px;font-size: 0.8em;">
-                        Higher sustainability <span>&#8594;</span> more trees planted.
-                    </p>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Slide 4 -->
-        <div class="mySlides">
-            <div class="slide-item slide-item2">
-                <p class="title"> Purchasing Platform </p>
-                <div class="double-container">
-                    <div class="text-container">
-                        <p>
-                            The product characteristics (Price, Quality and Sustainability) for each product will be
-                            behind
-                            <i>‘boxes’.</i>
-                        </p>
-                        <p>
-                            To reveal the information, all you need to do is to move your mouse on top of the
-                            <i>‘box’</i> and the
-                            information will be revealed. Here is an example.
-                        </p>
-                        <p>
-                            <b>Try moving your mouse on top of the box.</b>
-                        </p>
-                    </div>
-                    <div class="button-container">
-                        <p>
-                            Hover me!
-                        </p>
-                        <button type="button" class="r1 mousy button-outcome hidden hover-button" id="b3">
-                            Good job!
-                        </button>
-                        <p class="text-reveal" id="reveal">
-                            See, it's easy? <br>You can now move to the next slide.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 5 -->
-        <div class="mySlides">
-            <div class="slide-item">
-                <p class="title"> The Choice </p>
-                <div class="double-container">
-                    <div class="text-container">
-                        <ul>
-                            <li> Once you have analyzed the products, you can choose between one of them. </li>
-                            <li> Below the characteristics, you will find one button for each option.</li>
-                            <li> To choose one product, just click the corresponding button below. </li>
-                            <li> If you didn't quite get it yet, don't worry! There will be <b>3 practice trials</b>
-                                before the real
-                                experiment starts. </li>
-                            <li> At the end of the experiment, we will choose 1 of the rounds (randomly), and you will
-                                receive the
-                                benefits of that round.</li>
-                        </ul>
-                    </div>
-                    <div class="img-container">
-                        <img class="task-img" class="symbol" src="{% static circled_task %}" />
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 6 (Questions) -->
-        <div class="mySlides">
-            <!-- Question slide container-->
-            <div class="flex-questions">
-                <p class="title"> Is it all clear? Please answer these questions correctly to proceed:</p>
-                <li>
-                    <!--Question 1-->
-                    <div class="inst-question">
-                        <!-- Question-->
-                        <label for="Q1">How many rounds are selected for payment?</label>
-                    </div>
-                    <div class="answer-field">
-                        <!-- Input field -->
-                        <input type="text" name="Q1" id="Q1" style="width: 9vw; height: 6vh">
-                    </div>
-                    <div class="hint" id="hint1">
-                        <!-- Hint -->
-                        Incorrect: see slide 5!
-                        <div>
-                </li>
-                <li>
-                    <!--Question 2-->
-                    <div class="inst-question">
-                        <label for="Q2"> What does the <img class="symbol" src="{% static star_symbol %}" /> stand
-                            for?</label>
-                    </div>
-                    <div class="answer-field">
-                        <select name="Q2" id="Q2" class="dropdown">
-                            <option value="nothing">--Select--</option>
-                            <option value="a">User rating</option>
-                            <option value="b">Quality</option>
-                            <option value="c">Sustainability</option>
-                        </select>
-                    </div>
-                    <div class="hint" id="hint2">
-                        Incorrect: see slide 3!
-                        <div>
-                </li>
-                <li>
-                    <!--Question 3-->
-                    <div class="inst-question">
-                        <label for="Q3">Decisions in this experiment can ...</label>
-                    </div>
-                    <div class="answer-field">
-                        <select name="Q3" id="Q3" class="dropdown">
-                            <option value="nothing">--Select--</option>
-                            <option value="a">earn you money</option>
-                            <option value="b">help the environment</option>
-                            <option value="c">both</option>
-                        </select>
-                    </div>
-                    <div class="hint" id="hint3">
-                        Incorrect: see slide 1!
-                        <div>
-                </li>
-                <li>
-                    <!-- Submit answers and Next button (next button appears when user answers all questions correctly)-->
-                    <a id="submitAnswer" class="button" onclick=validateAnswers()>Submit
-                    </a>
-                    <button id="submit" class="button glow-button">Next</button>
-                </li>
-            </div>
-        </div>
-
-        <!-- Next and previous buttons -->
-        <a id="leftArrow" class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <p id="prevKey" class="prev-key"> <b>or press [&#8592;]</b> </p>
-
-        <a id="rightArrow" class="next" onclick="plusSlides(1)">&#10095;</a>
-        <p id="nextKey" class="next-key"> <b>or press [&#8594;] </b></p>
-
-        <!-- The dots/circles (if you want to add extra slides, add span(s) here)-->
-
-
-    </div>
-
-</body>
-
-<!-- oTree templates -->
+<script>
+  var bClickHere      = false;                // This is a condition for slide 4
+  const lSolutions    =  ['1', 'b', 'c'];     // Solutions for Check-up questions in the last slide
+  // Check if person did mouseover the button in slide 4. 
+  document.getElementById("b3").addEventListener("mouseover", (event) => {
+      bClickHere = true;
+      document.getElementById("reveal").style.visibility = "visible";
+  });
+  function canMove() {
+    let bConditions = !(iSlideIndex===3 && !bClickHere);
+    return bConditions;
+  };
+</script>
+<script src="{% static 'global/VT_functionality.js' %}"></script>
 
 {% endblock %}

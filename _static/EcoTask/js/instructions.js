@@ -1,11 +1,20 @@
 // General variables and constants
-var iSlideIndex = 0;
-const lSolutions =  ['1', 'b', 'c'];
+var iSlideIndex     = 0;                    // This variable is to know in which slide you are
 
+// When page is loaded
 document.addEventListener("DOMContentLoaded", function() {
-    showSlides(iSlideIndex);
+    showSlides(iSlideIndex);                                            // show first slide
+    // * Add here anything that needs to be added to the page when the rest of the content is already loaded
+    InitializeVT(document.getElementsByClassName('IntroContent')[0]);   // Initialize visual tracing
+    ConvertButtons2VT('mousy', sActivation = 'mouseover');              // Mouseover for slide 4
 });
 
+// *********************************************************************
+// * EVENT LISTENERS *
+// *********************************************************************
+
+
+// Move slides with left and right arrows
 document.addEventListener('keydown', (event) => {
     let keypress = event.key;
     if (keypress === 'ArrowLeft') {
@@ -16,6 +25,29 @@ document.addEventListener('keydown', (event) => {
         ArrowText();
     }
 });
+
+// *********************************************************************
+// * FUNCTIONS *
+// *********************************************************************
+
+// *********************************************************************
+// * Please add here any constraints for the slides. 
+// * For example: Participants do something special before they can move the slides again
+// Function Name:   canMove
+// Functionality:   
+//                  1. Checks if slides can be passed
+//
+// input:           void
+//
+// returns:         boolean
+// *********************************************************************
+
+if (typeof canMove==='undefined') {
+    function canMove(iSlideIndex) {
+        return true;
+    };
+}
+
 
 // *********************************************************************
 // Function Name:   adjustElem
@@ -37,7 +69,6 @@ function adjustElem(elem) {
         zoom += -0.01;                                          // reduce zoom in 1%
         zoomChildren(elem,zoom);
         overflow = checkOverflow(elem);
-        console.log(overflow);
         iter++;
     };
     if (iter==30) {console.log('problem resizing element')};   // notify in console if there is no convergence
@@ -143,7 +174,7 @@ function ArrowText() {
 // *********************************************************************
 
 function plusSlides(n) {
-    showSlides(iSlideIndex += n);
+    if (canMove(iSlideIndex)) { showSlides(iSlideIndex += n)};
 }
 
   // *********************************************************************
@@ -162,7 +193,8 @@ function plusSlides(n) {
   
   // Show current slide
 function currentSlide(n) {
-    showSlides(iSlideIndex = n);
+    if (canMove(iSlideIndex)) { showSlides(iSlideIndex = n)};
+    
 }
   
   // *********************************************************************
@@ -176,15 +208,17 @@ function currentSlide(n) {
 function showSlides(n) {
     let i;
     let slides = document.getElementsByClassName("slide-item");
+    let dots = document.getElementsByClassName("dot"); // get dots
     let nextDiv = document.getElementsByClassName('nextDiv')[0];
     let prevDiv = document.getElementsByClassName('prevDiv')[0];
-
+    // let elemCont = document.getElementsByClassName("ContentContainer");
     // Avoid slide counter going out of bounds
     if (n <= 0) { iSlideIndex=0 };
     if (n >= slides.length ) { iSlideIndex=slides.length-1 };
     // Hide all slides
     for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";  
+        slides[i].style.display = "none";           // Hide slides
+        dots[i].classList.remove("active");   // Deactivate dots
     }
     // Hide right arrows if last slide
     if (iSlideIndex == slides.length-1 ) {
@@ -199,10 +233,9 @@ function showSlides(n) {
         prevDiv.style.visibility = 'visible';
     }
 
-    // Show displayed slide
-    slides[iSlideIndex].style.display = "flex"; 
-    // adjust slide size
-    adjustElem(slides[iSlideIndex]);
+    slides[iSlideIndex].style.display = "flex";     // Show displayed slide 
+    dots[iSlideIndex].classList.add('active');      // Select active dot
+    adjustElem(slides[iSlideIndex]);                // adjust slide size
 }
   // *********************************************************************
   // Function Name:   autocomplete

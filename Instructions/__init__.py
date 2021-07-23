@@ -15,14 +15,39 @@ class Constants(BaseConstants):
     circled_task = 'EcoTask/figures/circled_task_img.png'
     leaf_symbol = 'EcoTask/figures/one_leaf.png'
     star_symbol = 'EcoTask/figures/one_star.png'
-    ## Friendly Checks
-    bRequireFS = True
-    bCheckFocus = True
     ## Variables that are not fully defined yet
     MaxBonus = int(3)
     NumTrials = int(66) 
     AvgDur = "15-25"
     TreesOrg = "One Tree Planted"
+    ## Slides for introduction
+    SlidePath = 'Instructions/slide'
+    Slides = [
+        dict(
+            Title = 'The Experiment',
+            path=SlidePath+'0.html',
+            ),
+        dict(
+            Title = 'Your Decisions',
+            path=SlidePath+'1.html'
+            ),
+        dict(
+            Title = 'The product characteristics',
+            path=SlidePath+'2.html'
+            ),
+        dict(
+            Title = 'Purchasing Platform',
+            path=SlidePath+'3.html'
+            ),
+        dict(
+            Title = 'The product characteristics',
+            path=SlidePath+'4.html'
+            ),
+        dict(
+            Title = 'Is it all clear? Please answer these questions correctly to proceed:',
+            path=SlidePath+'5.html'
+            ),
+    ]
 
 class Subsession(BaseSubsession):
     pass
@@ -33,21 +58,6 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-
-    # Terms & conditions
-    #! Do you need this saved? If they say no, they cannot proceed
-    # TC                  = models.StringField()
-
-    # Variables for instructions
-    # Q1                  = models.IntegerField()
-    # Q2                  = models.StringField()
-    # Q3                  = models.StringField()
-
-    # Fullscreen and FocusChecks 
-    iFullscreenChange   = models.IntegerField(blank=True)
-    iFocusLost          = models.IntegerField(blank=True)
-    dFocusLostT         = models.FloatField(blank=True)
-
     ProlificID          = models.StringField(initial='test')
 
 
@@ -63,18 +73,8 @@ class Introduction(Page):
 
 class ConsentForm(Page):
     pass
-    # form_model = 'player'
-    # form_fields = ['TC']
 
 class Instructions(Page):
-
-    @staticmethod
-    def js_vars(player):
-        return dict(
-            bRequireFS = Constants.bRequireFS,
-            bCheckFocus = Constants.bCheckFocus,
-        )
-
     @staticmethod
     def vars_for_template(player):
         return dict(

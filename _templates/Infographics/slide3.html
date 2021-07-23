@@ -1,0 +1,38 @@
+<div class="flex-questions">
+    <ul>
+            <li>
+            <!--Question 1-->
+            <div class="inst-question">
+                <!-- Question-->
+                <label for="Q1"> If you get a product with 3 leaves (symbol), what is the maximum amount of trees that can be planted?</label>
+            </div>
+            <div class="answer-field">
+                <!-- Input field -->
+                <input type="text" name="Q1" id="Q1" class="ControlQuestions">
+            </div>
+        </li>
+        <div class="hint" id="hint1">
+            <!-- Hint -->
+            Incorrect!
+        </div>
+        <li>
+            <!--Question 2-->
+            <div class="inst-question">
+                <!-- Question-->
+                <label for="Q2"> If you get a product with 2 stars, what is the minimum amount of points you can get?</label>
+            </div>
+            <div class="answer-field">
+                <!-- Input field -->
+                <input type="text" name="Q2" id="Q2" class="ControlQuestions">
+            </div>
+        </li>
+        <div class="hint" id="hint2">
+            <!-- Hint -->
+            Incorrect!
+        </div>
+
+    </ul>
+        <!-- Submit answers and Next button (next button appears when user answers all questions correctly)-->
+        <button type="button" id="submitAnswer" class="button" onclick=validateAnswers()>Submit </button>
+        <button id="submit" class="button glow-button" style="display: none;">Next</button>
+</div>

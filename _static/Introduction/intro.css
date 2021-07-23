@@ -6,6 +6,10 @@
 /* GLOBAL STYLING */
 
 /* set oTree default margins & padding off, define viewport */
+* {
+    box-sizing: border-box;
+}
+
 .otree-body {
     margin: 0;
     padding: 0;
@@ -29,6 +33,7 @@ h1 {
     font-size: 5vh;
     text-align: center;
     padding: 1em;
+    margin: 0;
     background-color: rgba(59, 121, 139, 0.678);
     color: white;
     width: 100%;
@@ -62,6 +67,8 @@ input {
     padding: 10px;
     font-size: 2.5vh;
 }
+
+
 
 /* This is for autocomplete dropdown */
 input[type=text] {
@@ -156,7 +163,6 @@ input[type="checkbox"]:required:valid + label {
 }
 
 .img-container {
-    padding-left: 5vw;
     text-align: center;
     width: 30%;
 }
@@ -214,7 +220,7 @@ input[type="checkbox"]:required:valid + label {
 
 /* Container for individual questions (question, input field, hint) */
 .flex-questions li {
-    height: 2em;
+    height: 3.5em;
     padding-top: 0.5em;
     list-style: none;
     display: flex;
@@ -241,12 +247,14 @@ input[type="checkbox"]:required:valid + label {
     padding-bottom: 1vh;
 }    
 
+
+
 /* Dropdown input */ 
 .dropdown {
-    height: 2.5em;
-    width: 5em;
+    width: 15vw;
     border-width: 1px;
     border-color: black;
+    font-size: inherit;
 }
 
 

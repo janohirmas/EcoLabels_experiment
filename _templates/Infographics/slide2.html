@@ -1,0 +1,20 @@
+<p class="info-title"> {{ Second.Title }} rating explained: </p>
+<div class="double-container">
+    <div class="img-container-info">
+        <img class="img-info" src="{% static Second.Graph %}" />
+    </div>
+    <div class="text-infographic"> 
+        <p>
+            The products {{ Second.p1 }} rating (<img class="symbol" src="{% static Second.Symbol %}" />) represents the product's {{ Second.p2 }}. 
+        If you purchase a product with higher {{ Second.p2 }}, you will obtain a larger {{ Second.p3 }}.
+        This graph shows {{ Second.p3 }}, depending on the {{ Second.p1 }} rating. 
+        </p>
+        
+        <p> Products with: </p>
+        <ul>
+            <li>  1 <img class="symbol" src="{% static Second.Symbol %}" /> : between {{ Second.low1 }} and  {{ Second.hi1 }}  {{ Second.p4 }}  </li>
+            <li>  2 <img class="symbol" src="{% static Second.Symbol %}" /> : between {{ Second.low2 }} and  {{ Second.hi2 }}  {{ Second.p4 }}  </li>
+            <li>  3 <img class="symbol" src="{% static Second.Symbol %}" /> : between {{ Second.low3 }} and  {{ Second.hi3 }}  {{ Second.p4 }}  </li>
+        </ul>
+    </div>
+</div>

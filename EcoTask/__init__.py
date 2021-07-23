@@ -88,6 +88,27 @@ class Constants(BaseConstants):
     lPse = [[iP1,iP2],[iP1,iP3],[iP2,iP3],[iP1,iP4],[iP2,iP4],[iP3,iP4]]
     lPeq = [[iP1,iP1],[iP2,iP2],[iP3,iP3],[iP4,iP4]]
   
+    ## Slides Infographics
+    SlidePath = 'Infographics/slide'
+    Slides = [
+    dict(
+        Title = 'Additional Information',
+        path=SlidePath+'0.html',
+        ),
+    dict(
+        Title = 'Additional Information',
+        path=SlidePath+'1.html',
+        ),    
+    dict(
+        Title = 'Additional Information',
+        path=SlidePath+'2.html',
+        ),
+    dict(
+        Title = 'Everything Clear? Please answer these questions correctly to proceed:',
+        path=SlidePath+'3.html',
+        ),
+
+    ]
 
 class Subsession(BaseSubsession):
     pass

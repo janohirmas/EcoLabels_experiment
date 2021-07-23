@@ -1,0 +1,20 @@
+<p class="info-title"> {{ First.Title }} rating explained </p>
+<div class="double-container">
+    <div class="img-container-info">
+        <img class="img-info" src="{% static First.Graph %}" /> 
+    </div>
+    <div class="text-infographic"> 
+        <p>
+            The products {{ First.p1 }} rating (<img class="symbol" src="{% static First.Symbol %}" />) represents the product's {{ First.p2 }}. 
+        If you purchase a product with higher {{ First.p2 }}, you will obtain a larger {{ First.p3 }}.
+        This graph shows how much the {{ First.p3 }} can be, depending on the {{ First.p1 }} rating. 
+        </p>
+        
+        <p> Products with: </p>
+        <ul>
+            <li>  1 <img class="symbol" src="{% static First.Symbol %}" /> will grant between {{ First.low1 }} and  {{ First.hi1 }}  {{ First.p4 }}  </li>
+            <li>  2 <img class="symbol" src="{% static First.Symbol %}" /> will grant between {{ First.low2 }} and  {{ First.hi2 }}  {{ First.p4 }}  </li>
+            <li>  3 <img class="symbol" src="{% static First.Symbol %}" /> will grant between {{ First.low3 }} and  {{ First.hi3 }}  {{ First.p4 }}  </li>
+        </ul>
+    </div>
+</div>

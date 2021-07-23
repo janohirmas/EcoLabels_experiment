@@ -1,14 +1,26 @@
-<div class="double-container">
-    <div class="text-container">
-        <p> In this experiment you will:</p>
-        <ul>
-            <li> Make multiple purchasing decisions (<b>{{ Constants.NumTrials }} rounds</b>).</li>
-            <li> In each round, you will see <b>2 products</b> and their characteristics.</li>
-            <li> These products are not real, but their benefits are. </li>
-            <li> The next slide explains the benefits and characteristics of the products.</li>
-        </ul>
-    </div>
-    <div class="img-container">
-        <img class="task-img" src="{% static Constants.revealed_task %}" />
-    </div>
-</div>
+<ul>
+    <li>
+        <b>Price:</b> This is the cost you need to pay for the product. The price is in <b>£</b>.
+    </li>
+    <p style="margin-left: 50px;font-size: 0.8em;">
+        Higher Price <span>&#8594;</span> lower bonus payments.
+    </p>
+    <li>
+        <b>Quality:</b> 1-3 star (<img class="symbol" src="{% static Constants.star_symbol %}" />) rating.
+        Products
+        with more stars (<img class="symbol" src="{% static Constants.star_symbol %}" />) are more likely to have
+        higher quality.
+    </li>
+    <p style="margin-left: 50px;font-size: 0.8em;">
+        Higher quality <span>&#8594;</span> higher bonus payments.
+    </p>
+    <li>
+        <b>Eco-Label:</b> 1-3 leaf (<img class="symbol" src="{% static Constants.leaf_symbol %}" />) rating.
+        Products
+        with more leaves (<img class="symbol" src="{% static Constants.leaf_symbol %}" />) are more likely
+        to be more sustainable.
+    </li>
+    <p style="margin-left: 50px;font-size: 0.8em;">
+        Higher sustainability <span>&#8594;</span> more trees planted.
+    </p>
+</ul>

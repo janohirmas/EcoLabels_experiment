@@ -3,47 +3,13 @@ THIS TEXT FILE IS FOR KEEPING RECORD OF CURRENT BUGS AND SUGGESTED IMPROVEMENTS
 
 # To Do:
 
-    ## CSS 
-
-    - Change the font-sizes to em not vw or vh. 
-        * em is a flexible property that depends on the users preference.
-        * Careful: The property em inherits the parents' size. (if div1 has font-size 1.5em and div2 (inside div1) has size 2em, then the font size in div2 will be 1.5*2em) 
-
-    ## Instructions
-
-    - (AH) Change AvgDur, NN trials and Max Bonus in constants for lay-out
-    - (AH) Add Overall Iddle Time-out
-  
-    ## Practice Trials
-    - (AH) Add Practice trials
-
-    ## Decision
-
-    - (AH) Choose prices
-    - check that participant variables worked!
 
     ## Infographics
-    - Add a page, now we are going to proceed with the experiment. (and next button)
+    - Adjust page size for graphs. Images too big.
 
-    ## Questionnaire
-
-    - Instead of having click and enter. Whenever they click, jump to next question and add back button in case they want to fix a previous question
-
-# FOR LATER
-
-    - Questionnaire: previous button (nextSlide function need to be changed for this to work)
-
-    - Instructions: make a flexible version of the slide function (not hardcoded!!)
-
-    - Instructions: Add "correct" symbol if answers were correct when answers submitted 
-
-    - input fields and radiobuttons sizing is a little bit off with big screen.  
 
 # BUGS 
 
-> In the filling questions (like nationality) if I fill something, but they haven't finished the word and they press enter, it goes to the next question anyways. Make sure that the input is on the list. 
-
-> Questionnaire: progress bar moves together with autocomplete dropdown menu. It should flow over it without the progress bar moving anywhere
 
 
 
