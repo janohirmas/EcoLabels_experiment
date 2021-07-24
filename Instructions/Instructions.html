@@ -2,12 +2,10 @@
 
 {% block app_styles %}
 
-<link rel="stylesheet" href="{% static 'Introduction/intro.css' %}">
 
 {% endblock %}
 
 {% block app_scripts %}
-<script src="{% static 'EcoTask/js/instructions.js' %}"></script>
 
 <script>
   var bClickHere      = false;                // This is a condition for slide 4
@@ -22,6 +20,6 @@
     return bConditions;
   };
 </script>
-<script src="{% static 'global/VT_functionality.js' %}"></script>
+<script src="{% static 'global/js/VT_functionality.js' %}"></script>
 
 {% endblock %}

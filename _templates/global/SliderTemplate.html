@@ -1,3 +1,4 @@
+{% extends "otree/Page.html" %}
 {% load otree static %}
 
 {% block content %}
@@ -10,10 +11,10 @@
   </div>
   <!-- Slides  -->
   <div class="mySlides">
-    {% for slide in Constants.Slides %}
+    {% for slide in Slides %}
       <div class="slide-item" id="slide-{% forloop.counter0 %}">
         <!-- Title -->
-        <h1> {{ slide.Title }} </h1>
+          <h1 id="title-{% forloop.counter0 %}"> {{ slide.Title }} </h1>
         <!-- context -->
         <div class="ContentContainer"> 
           {{ include slide.path }}
@@ -35,11 +36,15 @@
   {% endfor %}
 </div>
 
-
-
 {% endblock %}
 
+{% block scripts %}
+  <script src="{% static 'global/js/Sliders.js' %}"></script>
+{% endblock %}
 
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'global/css/Sliders.css' %}">
+{% endblock %}
 
 
 

@@ -390,7 +390,7 @@ function CreateTable(vOutcomes,TableId='',TableClass='',sActivation='click',vTri
     cell = row.insertCell(j+1);
     cell.classList.add('game-element');
 
-    CellDecisionButton(cell,ButtonClass='btn btn-primary btn-large',DecID=DecID,ButtonValue=j,ButtonName=vColNames[j])
+    CellDecisionButton(cell,ButtonClass='dec-button',DecID=DecID,ButtonValue=j,ButtonName=vColNames[j])
   }
   // Append Table to document
   GameBody.appendChild(table);

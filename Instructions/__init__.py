@@ -78,11 +78,7 @@ class Instructions(Page):
     @staticmethod
     def vars_for_template(player):
         return dict(
-            OTP_logo = Constants.OTP_logo,
-            revealed_task = Constants.revealed_task,
-            circled_task = Constants.circled_task,
-            leaf_symbol = Constants.leaf_symbol,
-            star_symbol = Constants.star_symbol,
+            Slides = Constants.Slides,
         )
 
 

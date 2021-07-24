@@ -1,12 +1,11 @@
-    <!-- Line-Reveal -->
-    <link href="{% static 'EcoTask/css/LineReveal.css' %}" rel="stylesheet">
+{% extends "otree/Page.html" %}
+
+{% block app_scripts %}
     <script src="{% static 'EcoTask/js/LineReveal.js' %}"></script>
-    <!-- Full-Screen & Focus -->
-    <script src="{% static 'global/FriendlyChecks.js' %}"></script>
-    <link href="{% static 'global/FriendlyChecks.css' %}" rel="stylesheet">
+    <script src="{% static 'global/js/FriendlyChecks.js' %}"></script>
+{% endblock %}
 
-{% block content %}
-
-
-
+{% block app_styles %}
+    <link href="{% static 'EcoTask/css/LineReveal.css' %}" rel="stylesheet">
+    <link href="{% static 'global/css/FriendlyChecks.css' %}" rel="stylesheet">
 {% endblock %}

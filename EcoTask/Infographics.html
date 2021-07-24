@@ -1,14 +1,35 @@
 {% extends "global/SliderTemplate.html" %}
 
 {% block app_styles %}
+    <style>
+        .img-info {
+            object-fit: contain;
+            width: 100%;
+        }
 
+        .text-container-info {
+            width: 40vw;
+            padding: 1em;
 
+        }
+
+        .text-container-info p {
+            text-align: justify;
+        }
+
+        .img-container-info {
+            width: 60vw;
+        }
+
+    </style>
 {% endblock %}
 
 {% block app_scripts %}
 
+<script src="{% static 'global/js/FriendlyChecks.js' %}"></script>
 <script>
-    const lSolutions    =  ['6', '6'];     // Solutions for Check-up questions in the last slide
+    const GameBody = document.getElementById('game-body');
+    const lSolutions    =  ['6', '4'];     // Solutions for Check-up questions in the last slide
 </script>
 
 {% endblock %}

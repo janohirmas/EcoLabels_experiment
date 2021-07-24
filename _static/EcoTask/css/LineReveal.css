@@ -33,13 +33,17 @@ summary, time, mark, audio, video {
 }
 
 body{
-  background-color: #eee;
+  background-color: #f8f6f0;
   color: var(--outcome-text-color);
   font-size: 1em;
-  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-family: Helvetica, sans-serif;
   min-height: 120vh;
   display: flex;
   flex-direction: column;
+}
+
+.debug-info {
+  display: none;
 }
 
 .game-body {
@@ -68,6 +72,7 @@ body{
   width: var(--row-width);
   text-align  : 'center';
 }
+
 
 .button-game {
   border: 0;
@@ -100,6 +105,22 @@ body{
   background-color: var(--outcome-background-hidden);
   color: var(--outcome-background-hidden);
   font-size: var(--outcome-font-size);
+}  
+
+.dec-button{
+  background-color: rgb(33, 202, 132);
+  color: #fff;
+  border: 0px;
+  border-radius: 3px;
+  font-size: 1.5em !important;
+}
+
+#between-button {
+  position: absolute;
+  top: 50vh;
+  line-height: 2em !important;  
+  transform: translate(-50%,-50%);
+  
 }
 
 .button-img{
@@ -108,24 +129,24 @@ body{
   display: none;
   justify-content: center;
   align-self: center;
-}
+}  
 
 .hidden {
   color:  var(--outcome-background-hidden);
   background-color: var(--outcome-background-hidden);
-}
+}  
 
 .non-hidden {
   color:  var(--outcome-text-color);
   background-color: var(--outcome-background-color);
-}
+}  
 
 .hidden .button-img{
   display: none;
-}
+}  
 
 .non-hidden .button-img{
   display: inline-flex;
-}
+}  
 
 

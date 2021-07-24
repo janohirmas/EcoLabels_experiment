@@ -433,6 +433,7 @@ class Infographics(Page):
         return dict(
             First = dicFirst,
             Second = dicSecond,
+            Slides = Constants.Slides,
         ) 
     ## Show only in the middle of the experiment
     @staticmethod

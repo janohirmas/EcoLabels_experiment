@@ -1,26 +1,7 @@
-<!-- BETWEEN DECISIONS-->
+{% extends "otree/Page.html" %}
 
-<!-- Link to JS -->
-<!-- Full-Screen & Focus -->
-<script src="{% static 'global/FriendlyChecks.js' %}"></script>
-
-<!-- LINK TO STYLESHEET-->
-<link rel="stylesheet" href="{% static 'global/styling10.css' %}">
-<link href="{% static 'EcoTask/css/LineReveal.css' %}" rel="stylesheet">
-<link href="{% static 'global/FriendlyChecks.css' %}" rel="stylesheet">
-
-<!-- Set viewport -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-{% load otree static %}
-{% block content %}
-
-    <div id="game-body">
-        <button class= "button" id="between-button"> Press here!</button>
-    </div>
-
-{% endblock %}
-
+{% block app_scripts %}
+    <script src="{% static 'global/js/FriendlyChecks.js' %}"></script>
     <script>
         const GameBody = document.getElementById('game-body');
         const NextButton = document.getElementById('between-button');
@@ -32,5 +13,21 @@
             NextButton.style.left = '90vw'
         };
     </script>
+{% endblock %}
+
+{% block app_styles %}
+    <link href="{% static 'global/css/FriendlyChecks.css' %}" rel="stylesheet">
+    <link href="{% static 'EcoTask/css/LineReveal.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+
+    <div id="game-body">
+        <button class= "dec-button" id="between-button"> Press here!</button>
+    </div>
+
+{% endblock %}
+
 
 
