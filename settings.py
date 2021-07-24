@@ -30,7 +30,12 @@ PARTICIPANT_FIELDS = [
     'ProlificID',
     'Bonus',
     'TreeAmount',
-    'validQuestionnaire'
+    'validQuestionnaire',
+    'dTimeOutFocus',
+    'iOutFocus'
+    'iFullscreenChanges',
+    'startTime',
+    'sTreesLocation',
     ]
 
 

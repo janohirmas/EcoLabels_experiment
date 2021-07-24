@@ -12,9 +12,19 @@
   const lSolutions    =  ['1', 'b', 'c'];     // Solutions for Check-up questions in the last slide
   // Check if person did mouseover the button in slide 4. 
   document.getElementById("b3").addEventListener("mouseover", (event) => {
-      bClickHere = true;
-      document.getElementById("reveal").style.visibility = "visible";
+    bClickHere = true;
+    document.getElementById("reveal").style.visibility = "visible";
   });
+
+  function sendSelect() {
+    TreeLoc = document.getElementById('TreeLocation');
+    liveSend(TreeLoc.value);
+  }
+
+  function ValidateSaveSubmit() {
+    validateAnswers();
+    sendSelect();
+  }
   function canMove() {
     let bConditions = !(iSlideIndex===3 && !bClickHere);
     return bConditions;

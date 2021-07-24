@@ -1,8 +1,6 @@
 from otree.api import *
-from numpy import empty, random
-from random import SystemRandom, sample
-from random import choices
-
+from numpy import random
+import time
 
 doc = """
 This app creates the questionnaire and shows end page. 
@@ -34,20 +32,22 @@ class Group(BaseGroup):
 class Player(BasePlayer):
 
     # Selected Trial
-    SelectedTrial   = models.IntegerField()
-    Bonus           = models.FloatField()
-    TreeAmount      = models.IntegerField()
-    TreeLocation    = models.StringField()
-    ProlificID      = models.StringField()
-    validQ          = models.BooleanField()
+    SelectedTrial       = models.IntegerField()
+    Bonus               = models.FloatField()
+    TreeAmount          = models.IntegerField()
+    TreeLocation        = models.StringField()
+    ProlificID          = models.StringField()
+    validQ              = models.IntegerField()
+    TotalTime           = models.FloatField()
+    dTimeOutFocus       = models.FloatField()
+    iOutFocus           = models.IntegerField()
+    iFSChanges          = models.IntegerField()
+
 
 # PAGES
 
 
 class EndPage(Page):
-    form_model = 'player'
-    form_fields = ['TreeLocation']
-
     @staticmethod
     def vars_for_template(player):
         participant = player.participant
@@ -55,18 +55,16 @@ class EndPage(Page):
         S = int(participant.S)
         T = int(participant.treatment)
         Q = int(participant.Q)
-        print(type(S))
-        if (S!=1):
-            Svalue = Constants.S1 + S*Constants.S_step + random.randint(0,Constants.S_step)
-        elif (S==1 & T==1):
+        print(type(T))
+        print([S==1,T==2])
+        if (S==1 & T==1):
             Svalue = Constants.S1 + S*Constants.S_step + random.randint(0,Constants.S_step)
         elif (S==1 & T==2):
             Svalue = Constants.S2_2 + random.randint(0,Constants.S_step)
         elif (S==1 & T==3):
             Svalue = Constants.S2_3+ random.randint(0,Constants.S_step) 
         else:
-            print('Error determining treatment and Sustainability level')  
-        print(Svalue)
+            Svalue = Constants.S1 + S*Constants.S_step + random.randint(0,Constants.S_step)
         ## Determining value of Quality rating
         Qvalue = Constants.Q1 + Q*Constants.Q_step + random.randint(0,Constants.Q_step)
         participant.Bonus = Qvalue - int(participant.Price)
@@ -78,18 +76,26 @@ class EndPage(Page):
             'Q' : Qvalue,
             'S' : Svalue,
             'Bonus' : participant.Bonus,
+            'TreeLocation' : str(participant.sTreeLocation)
         }
 
     @staticmethod
     def before_next_page(player, timeout_happened):
-        part = player.participant
-        player.SelectedTrial = int(part.SelectedTrial)
-        player.Bonus = part.Bonus
-        player.TreeAmount = part.TreeAmount
-        player.ProlificID = part.label
-        player.validQ = part.validQuestionnaire
-
-
+        # Define Participant and other Vars
+        part    = player.participant
+        start   = part.startTime
+        end     = time.time()
+        # Save relevant variables
+        player.TotalTime        = end - start
+        player.SelectedTrial    = int(part.SelectedTrial)
+        player.Bonus            = part.Bonus
+        player.TreeAmount       = part.TreeAmount
+        player.ProlificID       = part.label
+        player.validQ           = part.validQuestionnaire
+        player.iFSChanges       = part.iFullscreenChanges
+        player.iOutFocus        = part.iOutFocus
+        player.dTimeOutFocus    = part.dTimeOutFocus
+        player.sTreesLocation   = part.sTreesLocation
 
 
 class FinalPage(Page):

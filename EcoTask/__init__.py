@@ -350,6 +350,12 @@ class Decision(Page):
     staticmethod
     def before_next_page(player, timeout_happened):
         participant = player.participant
+        # Add Focus variables to total if it's not practice trial
+        if (player.round_number < Constants.num_prounds):
+            participant.iOutFocus += player.iOutFocus
+            participant.iFullscreenChanges += player.iFullscreenChanges
+            participant.dTimeOutFocus += player.dTimeOutFocus
+        # If this is selected trial, save relevant variables
         if (participant.SelectedTrial==player.round_number):
             if (player.iDec==0):
                 participant.Price = player.P1

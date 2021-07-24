@@ -74,10 +74,10 @@ class Questionnaire(Page):
     @staticmethod
     def before_next_page(player, timeout_happened):
         # Validate questionnaire
-        valid1 = int(player.V1)==4
-        valid2 = int(player.V2)==1
-        valid3 = int(player.V3)==2
-        player.participant.validQuestionnaire = valid1 & valid2 & valid3
+        valid1 = int(int(player.V1)==4)
+        valid2 = int(int(player.V2)==1)
+        valid3 = int(int(player.V3)==2)
+        player.participant.validQuestionnaire = valid1 + valid2 + valid3
 
 
 page_sequence = [Questionnaire]

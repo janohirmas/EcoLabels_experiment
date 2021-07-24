@@ -1,4 +1,5 @@
 from otree.api import *
+import time
 
 doc = """
 This app includes the introduction page, consent form and instructions of the experiment itself. 
@@ -72,7 +73,15 @@ class Introduction(Page):
 
 
 class ConsentForm(Page):
-    pass
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        part = player.participant
+        # Initialize Focus variables#        
+        part.startTime          = time.time()
+        part.iOutFocus          = 0
+        part.iFullscreenChanges = 0
+        part.dTimeOutFocus      = 0
+
 
 class Instructions(Page):
     @staticmethod
@@ -80,6 +89,11 @@ class Instructions(Page):
         return dict(
             Slides = Constants.Slides,
         )
+    @staticmethod
+    def live_method(player: Player, sLoc):
+        part = player.participant
+        part.sTreesLocation = sLoc
+        print(part.sTreesLocation)
 
 
 
