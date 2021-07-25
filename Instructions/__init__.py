@@ -88,7 +88,8 @@ class Instructions(Page):
     def vars_for_template(player):
         return dict(
             Slides = Constants.Slides,
-        )
+    )
+      
     @staticmethod
     def live_method(player: Player, sLoc):
         part = player.participant

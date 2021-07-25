@@ -35,13 +35,13 @@ class Player(BasePlayer):
     SelectedTrial       = models.IntegerField()
     Bonus               = models.FloatField()
     TreeAmount          = models.IntegerField()
-    TreeLocation        = models.StringField()
     ProlificID          = models.StringField()
     validQ              = models.IntegerField()
     TotalTime           = models.FloatField()
     dTimeOutFocus       = models.FloatField()
     iOutFocus           = models.IntegerField()
     iFSChanges          = models.IntegerField()
+    sTreesLocation      = models.StringField()
 
 
 # PAGES
@@ -76,7 +76,7 @@ class EndPage(Page):
             'Q' : Qvalue,
             'S' : Svalue,
             'Bonus' : participant.Bonus,
-            'TreeLocation' : str(participant.sTreeLocation)
+            'TreeLocation' : str(participant.sTreesLocation),
         }
 
     @staticmethod

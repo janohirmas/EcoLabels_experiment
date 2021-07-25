@@ -32,7 +32,7 @@ PARTICIPANT_FIELDS = [
     'TreeAmount',
     'validQuestionnaire',
     'dTimeOutFocus',
-    'iOutFocus'
+    'iOutFocus',
     'iFullscreenChanges',
     'startTime',
     'sTreesLocation',
