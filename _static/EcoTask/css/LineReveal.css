@@ -119,6 +119,7 @@ body{
   position: absolute;
   top: 50vh;
   line-height: 2em !important;  
+  width: 6em;
   transform: translate(-50%,-50%);
   
 }

@@ -14,36 +14,26 @@ Creates Table with Visual Tracing
 class Constants(BaseConstants):
     name_in_url         = 'Main-Task'
     players_per_group   = None
-    # Number of rounds
-    num_rounds          = 3 
-    # Number of Practice Rounds                                    
-    num_prounds         = 1
-    # mouseover or click 
-    sActivation         = 'mouseover'                             
-    # List that can include val,col,row
-    vTrigger            = "val"                                   
-    # random or constant
-    Attr_order          = "constant"  
-    # Timeout time (in seconds)
-    ## if no time-out required, leave as 0
-    iTimeOut            = 0
-    # Checks if you require FullScreen
+    num_rounds          = 69   # Number of rounds
+    num_prounds         = 3 # Number of Practice Rounds  
+    iTreatment          = 1 # Treatment [1: Linear, 2: Concave, 3: Convex]  
+    ## Attention Setup variables
+    sActivation         = 'mouseover'   # mouseover or click                            
+    vTrigger            = "val"   # List that can include val,col,row                                
+    Attr_order          = "constant"  # random or constant
+    iTimeOut            = 0 # Timeout time (in seconds), if no time-out required, leave as 0
+    # Checks if you require FullScreen 
     ## if you want to record number of FS changes add integer form iFullscreenChange
     bRequireFS          = True                                   
     # Checks if focus changes to other pages
     ## if you want to record the number of times that focus is lost, add integer form iFocusLost
     ## if you want to record the total time that focus is lost, add float form dFocusLostT
     bCheckFocus         = True                               
-    # set up padding between rows (top and bottom)
-    TablePaddingV       = "1vh"                                   
-    # set up padding between columns (left and right)
-    TablePaddingH       = "0vh"                                   
-    # Column Names
-    vColnames           = ["Product A", "Product B"]              
-    # Row Names
-    vRownames           = ["Price","Quality","Sustainability"] 
-    # Image Path
-    sImagePath          = '/static/EcoTask/figures/'        
+    TablePaddingV       = "1vh" # set up padding between rows (top and bottom)                                  
+    TablePaddingH       = "0vh" # set up padding between columns (left and right)                                  
+    vColnames           = ["Product A", "Product B"]   # Column Names           
+    vRownames           = ["Price","Quality","Sustainability"] # Row Names
+    sImagePath          = '/static/EcoTask/figures/'     # Image Path        
     # Image files for infographics (instructions, quality, sustainability: linear/concave/convex)
     txtSustainability   = 'EcoTask/text/sustainability.html'
     txtQuality          = 'EcoTask/text/quality.html'
@@ -124,15 +114,18 @@ class Player(BasePlayer):
     sButtonClick        = models.StringField(blank=True)
     sTimeClick          = models.StringField(blank=True)
     ## Trial Variables
+    iBlock              = models.IntegerField(blank=True)
+    iBlockTrial         = models.IntegerField(blank=True)
     sTableVals          = models.StringField(blank=True)
     iTreatment          = models.IntegerField(blank=True)
     PresOrder           = models.StringField(blank=True)
     sAttrOrder          = models.StringField(blank=True)
     bStartLeft          = models.BooleanField(blank=True)
-    ## Trial Variables
+    ## Focus Variables
     iFocusLost          = models.IntegerField(blank=True)
     dFocusLostT         = models.FloatField(blank=True)
     iFullscreenChange   = models.IntegerField(blank=True)
+    ## Attributes
     P1                  = models.StringField(blank=True)
     P2                  = models.StringField(blank=True)
     Q1                  = models.StringField(blank=True)
@@ -145,17 +138,18 @@ class Player(BasePlayer):
 # FUNCTIONS
 
 def creating_session(subsession):
+    ## SETUP FOR PARTICIPANT
     if subsession.round_number == 1:
         for player in subsession.get_players():
             participant = player.participant
             lTreat, lRownames = createTreatment()
             participant.vRownames = lRownames
             participant.mTreat = lTreat
-            participant.treatment = random.choice([1, 2, 3])
+            participant.treatment = Constants.iTreatment
             participant.PresOrder = random.choice(['Qual', 'Sus'])
             participant.SelectedTrial = random.choice(range(Constants.num_prounds+1,Constants.num_rounds))
             print(participant.SelectedTrial)
-
+    ## SETUP FOR PLAYER ROUNDS
     for player in subsession.get_players():
         ## Load participant and save participant variables in player
         participant = player.participant
@@ -163,13 +157,21 @@ def creating_session(subsession):
         player.PresOrder  = str(participant.PresOrder)
         player.sAttrOrder = participant.vRownames[1]
         ## Round Variables
-        round = player.round_number
-        total_rounds = Constants.num_rounds/2
-        ## Define same attributes for first and second block
-        if round<total_rounds:
+        round = player.round_number-Constants.num_prounds
+        total_rounds = (Constants.num_rounds-Constants.num_prounds)/2
+        if round<1: ## These are practice rounds, random trial selected
+            player.iBlock = 0
+            player.iBlockTrial = random.randint(total_rounds)
+            x = int( player.iBlockTrial-1)
+            lAttr = participant.mTreat[x].split(',')
+        elif (round<=total_rounds): ## These are the observations of the first block
+            player.iBlock = 1
+            player.iBlockTrial = int(round)
             x = int(round-1)
             lAttr = participant.mTreat[x].split(',')
-        else:
+        else: ## These are the observations of the first block
+            player.iBlock = 2
+            player.iBlockTrial = int(round-total_rounds)
             x = int(round-total_rounds-1)
             lAttr = participant.mTreat[x].split(',')
         ## Randomize if mouse starts on left or right
@@ -352,9 +354,9 @@ class Decision(Page):
         participant = player.participant
         # Add Focus variables to total if it's not practice trial
         if (player.round_number < Constants.num_prounds):
-            participant.iOutFocus += player.iOutFocus
-            participant.iFullscreenChanges += player.iFullscreenChanges
-            participant.dTimeOutFocus += player.dTimeOutFocus
+            participant.iOutFocus = int(participant.iOutFocus) + player.iFocusLost
+            participant.iFullscreenChanges = int(participant.iFullscreenChanges) + player.iFullscreenChange
+            participant.dTimeOutFocus = float(participant.dTimeOutFocus) + player.dFocusLostT
         # If this is selected trial, save relevant variables
         if (participant.SelectedTrial==player.round_number):
             if (player.iDec==0):
@@ -444,12 +446,12 @@ class Infographics(Page):
     ## Show only in the middle of the experiment
     @staticmethod
     def is_displayed(player):
-        return player.round_number == np.floor( (Constants.num_rounds-Constants.num_prounds)/2+1)
+        return ((player.iBlock==2) & (player.iBlockTrial==1))
 
 class Ready(Page):
     @staticmethod
     def is_displayed(player):
-        return player.round_number == np.floor( (Constants.num_rounds-Constants.num_prounds)/2+1)
+        return ((player.iBlock==2) & (player.iBlockTrial==1))
         
 
 page_sequence = [PracticeInfo1, Between, Decision, Infographics, Ready, PracticeInfo2]

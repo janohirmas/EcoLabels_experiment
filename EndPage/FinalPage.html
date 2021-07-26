@@ -1,20 +1,23 @@
+{% extends "otree/Page.html" %}
 
-
-{% block app_scripts %}
-<link rel="stylesheet" href="{% static 'global/css/styling10.css' %}">
+{% block app_styles %}
+    <link rel="stylesheet" href="{% static 'global/css/styling10.css' %}">
+    <link rel="stylesheet" href="{% static 'global/css/Sliders.css' %}">
 {% endblock %}
 
 {% block content %}
-
-<div class="practice-info">
-    <div style="align-content: unset;" class="flex-container">
-    
-            <p class= "final-text"> All your answers have been recorded. Thank you for your participation! </p> 
+<div class="slide-item-end">
+    <!-- Title -->
+    <h1> Results </h1>
+    <!-- context -->
+    <div class="ContentContainer"> 
+        <div class="text-container-end"  id="EndFinal">
+            <p class= "final-text"> All your answers have been recorded. </br>  Thank you for your participation! </p> 
             <a href={{ Constants.ProlificLink }}> Go back to Prolific </a>
-    
+        </div>
     </div>
+</div>
 
-
-</div>    
 
 {% endblock %}
+

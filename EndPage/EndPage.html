@@ -1,34 +1,31 @@
+{% extends "otree/Page.html" %}
 
-
-{% block app_scripts %}
-<link rel="stylesheet" href="{% static 'global/css/styling10.css' %}">
+{% block app_styles %}
+    <link rel="stylesheet" href="{% static 'global/css/styling10.css' %}">
+    <link rel="stylesheet" href="{% static 'global/css/Sliders.css' %}">
 {% endblock %}
 
 {% block content %}
-
-<h1> Results </h1>
-
-<div class="practice-info">
-    <p class="title"> The experiment has ended. These are your results: </p>
-    <div class="double-container">
-        <div class="text-container">
-            <ul style="line-height: 2">
-                <li> The randomly selected trial is: {{ SelectedTrial }} </li>
-                <li> The Price of the product you selected was: {{ Price }} </li>
-                <li> The value of the product was: {{ Q }} </li>
-                <li> The amount of trees planted will be: {{ S }} </li>
-                <li> You bonus Payment is: {{ Bonus }}£ </li>
-            </ul>
+<div class="slide-item-end" style="display: flex;">
+    <!-- Title -->
+    <h1> Results </h1>
+    <!-- context -->
+    <div class="ContentContainer"> 
+        <div class="text-container-end" id="EndResults">
+            <p class="title"> The experiment has ended. These are your results: </p>
+            <div class="text-container">
+                <ul>
+                    <li> The randomly selected trial is: {{ SelectedTrial }} </li>
+                    <li> The Price of the product you selected was: {{ Price }} </li>
+                    <li> The value of the product was: {{ Q }} </li>
+                    <li> You bonus Payment is: {{ Bonus }}£ </li>
+                    <li> The amount of trees planted will be: {{ S }} </li>
+                    <li> We will plant the {{ S }} trees in {{ TreeLocation }} for you! </li>
+                </ul>
+            </div>
         </div>
-        <div class="text-container2">
-            <p>Onetreeplanted will plant the {{ S }} trees in {{ TreeLocation }}.</p>
-
-        </div>
+        <button class= "button" id="between-button"> Continue </button>
     </div>
-    <button class="button intro-button">Next</button>
 </div>
-
-
-
 {% endblock %}
 

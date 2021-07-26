@@ -2,6 +2,8 @@ from otree.api import *
 from numpy import random
 import time
 
+
+
 doc = """
 This app creates the questionnaire and shows end page. 
 """
@@ -13,7 +15,7 @@ class Constants(BaseConstants):
     num_rounds = 1
     # Quality and Sustainability ranges
     Q1      = 5
-    Q_step  = 2
+    Q_step  = 1
     S1      = 0
     S2_2    = 3
     S2_3    = 1
@@ -21,6 +23,16 @@ class Constants(BaseConstants):
     S_step  = 2
     # Prolific Link
     ProlificLink = "https://www.google.com"
+    Slides = [
+        dict(
+            Title = 'Results',
+            path='EndPage/slide0.html',
+            ),
+        dict(
+            Title = 'Results',
+            path='EndPage/slide1.html',
+            ),        
+    ]
 
 
 class Subsession(BaseSubsession):
@@ -50,6 +62,7 @@ class Player(BasePlayer):
 
 
 class EndPage(Page):
+
     @staticmethod
     def vars_for_template(player):
         participant = player.participant
@@ -73,6 +86,7 @@ class EndPage(Page):
         participant.TreeAmount = Svalue
         
         return {
+            'Slides' :  Constants.Slides,
             'SelectedTrial' : participant.SelectedTrial,
             'Price' : participant.Price,
             'Q' : Qvalue,
@@ -98,7 +112,6 @@ class EndPage(Page):
         player.iOutFocus        = part.iOutFocus
         player.dTimeOutFocus    = part.dTimeOutFocus
         player.sTreesLocation   = part.sTreesLocation
-
 
 class FinalPage(Page):
     pass

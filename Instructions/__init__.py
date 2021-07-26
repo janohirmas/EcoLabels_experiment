@@ -81,8 +81,6 @@ class Introduction(Page):
             Slides = Constants.SlidesIntro,
         )
 
-
-class ConsentForm(Page):
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
         part = player.participant
@@ -91,7 +89,6 @@ class ConsentForm(Page):
         part.iOutFocus          = 0
         part.iFullscreenChanges = 0
         part.dTimeOutFocus      = 0
-
 
 class Instructions(Page):
     @staticmethod
