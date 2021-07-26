@@ -23,6 +23,16 @@ class Constants(BaseConstants):
     TreesOrg = "One Tree Planted"
     ## Slides for introduction
     SlidePath = 'Instructions/slide'
+    SlidesIntro = [
+        dict(
+            Title = 'Introduction',
+            path='Introduction/slide0.html',
+            ),
+        dict(
+            Title = 'Informed Consent',
+            path='Introduction/slide1.html',
+            ),        
+    ]
     Slides = [
         dict(
             Title = 'The Experiment',
@@ -59,8 +69,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    ProlificID          = models.StringField(initial='test')
-
+    pass
 
 # PAGES
 class Introduction(Page):
@@ -69,6 +78,7 @@ class Introduction(Page):
     def vars_for_template(player):
         return dict(
             UvA_logo = Constants.UvA_logo,
+            Slides = Constants.SlidesIntro,
         )
 
 
@@ -98,6 +108,6 @@ class Instructions(Page):
 
 
 
-page_sequence = [Introduction, ConsentForm, Instructions]
+page_sequence = [Introduction, Instructions]
 
 

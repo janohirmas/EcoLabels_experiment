@@ -17,7 +17,7 @@ We define 3 sets for Price pairs:
         * Equal prices $ P_{EQ} = \{(p_1,p_1),(p_2,p_2),(p_3,p_3)\} $
 
 ## Trials:
-Participants will do **56 trials in total** (28 before and after the information). 
+Participants will do **66 trials in total** (33 before and after the information). 
 - The trials before and after will be the same for each participant
 - the order of these trials will be randomized for each participant. 
 - The order of the attributes will be randomized for each participant, but then it will be constant across trials. The possible orders will be (Price, Quality, Sustainability) or (Price, Sustainability, Quality). We keep Price first to keep resemblance to what a consumer would observe in a webshop. 

@@ -1,27 +1,11 @@
 {% extends "global/SliderTemplate.html" %}
 
 {% block app_styles %}
-    <style>
-        .img-info {
-            object-fit: contain;
-            width: 100%;
-        }
 
-        .text-container-info {
-            width: 40vw;
-            padding: 1em;
+{% endblock %}
 
-        }
-
-        .text-container-info p {
-            text-align: justify;
-        }
-
-        .img-container-info {
-            width: 60vw;
-        }
-
-    </style>
+{% block app_styles %}
+  <link rel="stylesheet" href="{% static 'global/css/styling10.css' %}">
 {% endblock %}
 
 {% block app_scripts %}

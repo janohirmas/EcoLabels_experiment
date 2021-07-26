@@ -1,64 +1,36 @@
-<!-- CONSENT FORM -->
 
-<!-- LINK TO STYLESHEET-->
-<link rel="stylesheet" href="{% static 'global/styling10.css' %}">
+{% block app_styles %}
+    <link rel="stylesheet" href="{% static 'global/css/styling10.css' %}">
+    <link rel="stylesheet" href="{% static 'global/css/Sliders.css' %}">
+{% endblock %}
 
-<!-- Set viewport -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
+{% block app_scripts %}
+    <script>
+        
+        // Disable Next button if checkbox not ticked when Next button is clicked-- >
+        document.getElementById("submit").addEventListener("click", (event) => {
+            if ($('#checkBox').is(':not(:checked)')) {
+                document.getElementById("submit").disabled = true;
+            }
+        });
 
-<!-- oTree template -->
-{% load otree static %}
+    </script>
+{% endblock %}
+
+
 {% block content %}
 
-<body>
-
-    <!-- Slide container -->
-    <div class="flex-container">
-
-        <!-- Title -->
-        <h1> Introduction </h1>
-
-        <!-- Consent form text -->
-        <div class="slide-item">
-            <p>
-                To participate in this experiment you need to:
-                <ul>
-                    <li> Be <b>18 or older</b> </li>
-                    <li> Speak and read in <b>English</b>. </li>
-                    <li> Focus only on the experiment (It will take around {{ Constants.AvgDur }}).</li>
-                    <li> Set this window in <b>Fullscreen</b> (if you do not know how to do it, we will explain) </li>
-                </ul>
-            </p>
-            <p>
-            We reserve the right to exclude you from payment if we detect that you are not paying attention 
-            (jumping between other windows or setting off the Fullscreen too many times).
-            </p>
-            <!-- Check box T&C -->
-            <div class="checkBox">
-                <input type="checkbox" required id="TC" name="TC" value="check">
-                <label for="TC"> I agree to the <u>Terms and Conditions </u> above and to participate in this
-                    experiment.</label>
-            </div>
+<div class="mySlides">
+    <div class="slide-Intro">
+        <h1> Informed Consent </h1>
+        <div class="ContentContainer"> 
         </div>
-
-        <!-- Next button -->
-        <button id="submit" class="button intro-button"> Next </button>
     </div>
+</div>
 
-</body>
+
+
 
 <!-- oTree template -->
 {% endblock %}
 
-<!-- JAVASCRIPT-->
-
-<script>
-    
-    // Disable Next button if checkbox not ticked when Next button is clicked-- >
-    document.getElementById("submit").addEventListener("click", (event) => {
-        if ($('#checkBox').is(':not(:checked)')) {
-            document.getElementById("submit").disabled = true;
-        }
-    });
-
-</script>

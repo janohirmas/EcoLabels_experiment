@@ -1,27 +1,17 @@
-<!-- FINAL PAGE -->
+{% block app_scripts %}
+<link rel="stylesheet" href="{% static 'global/css/styling10.css' %}">
+{% endblock %}
 
-<!-- LINK TO STYLESHEET-->
-<link rel="stylesheet" href="{% static 'global/styling10.css' %}">
-
-<!-- Set viewport -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-{% load otree static %}
 {% block content %}
 
-<body>
-
-    <div style="align-content: unset;" class="flex-container">
-
-            <p class= "final-text"> 
-                The following {{ Constants.num_prounds }} are practice rounds. 
-                They will not count for your final payment. 
-                Press the 'Start' button to start the practice rounds.
+    <div class="practice-info">
+            <p class= "practces-text"> 
+                Now, you will have {{ Constants.num_prounds }} practice rounds. </br>
+                These rounds will not count for your final payment. </br>
             </p> 
             <button class= "button" id="between-button"> Start </button>
   
     </div>
 
-</body>
 
 {% endblock %}

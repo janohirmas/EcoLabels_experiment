@@ -11,7 +11,7 @@ class Constants(BaseConstants):
     name_in_url = 'EndPage'
     players_per_group = None
     num_rounds = 1
-        # Quality and Sustainability ranges
+    # Quality and Sustainability ranges
     Q1      = 5
     Q_step  = 2
     S1      = 0
@@ -19,6 +19,8 @@ class Constants(BaseConstants):
     S2_3    = 1
     S3      = 4
     S_step  = 2
+    # Prolific Link
+    ProlificLink = "https://www.google.com"
 
 
 class Subsession(BaseSubsession):
@@ -86,11 +88,11 @@ class EndPage(Page):
         start   = part.startTime
         end     = time.time()
         # Save relevant variables
+        player.ProlificID       = part.label
         player.TotalTime        = end - start
         player.SelectedTrial    = int(part.SelectedTrial)
         player.Bonus            = part.Bonus
         player.TreeAmount       = part.TreeAmount
-        player.ProlificID       = part.label
         player.validQ           = part.validQuestionnaire
         player.iFSChanges       = part.iFullscreenChanges
         player.iOutFocus        = part.iOutFocus

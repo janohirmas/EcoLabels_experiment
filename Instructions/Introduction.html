@@ -1,51 +1,21 @@
+{% extends "global/SliderTemplate.html" %}
 
-<!-- INTRODUCTION PAGE -->
-
-<!-- LINK TO STYLESHEET-->
-<link rel="stylesheet" href="{% static 'global/styling10.css' %}">
-
-<!-- Set viewport -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<!-- oTree template -->
-{% load otree static %}
-{% block content %}
-
-
-    <!-- Slide container -->
-    <div class="flex-container">
-
-        <!-- Title -->
-        <h1> Introduction </h1>
-
-        <!-- Intro text -->
-        <div class="slide-item">
-            <p> Welcome! </p>
-            <ul>
-                <li>You are participating in a study funded by: <img class="UvA-logo" src="{% static UvA_logo %}" /> </li>
-                <li>
-                    Your decisions and information provided will be recorded <b>anonymously</b> (No one can know
-                    it was you).
-                </li>
-                <li>Your data will <u>only</u> be used for <b>academic research</b>. </li>
-                <li>You can choose at any point during the experiment to stop your participation and your data will not be recorded.</li>
-                <li>
-                    If you choose to participate, you will have to make <u> multiple decisions</u> that can lead to <b>additional payments and donations to charity</b>. 
-                </li>
-                <li>The study will last about <b>{{ Constants.AvgDur }} minutes</b>.</li>
-            </ul>
-            <p>
-                 
-               
-                
-            </p>
-        </div>
-        <!-- Next button -->
-        <button class="button intro-button">Next</button>
-    </div>
-
-</body>
-
-
+{% block app_scripts %}
+    <script>
+        var bConsent = false;
+        // Disable Next button if checkbox not ticked when Next button is clicked-- >
+        document.getElementById("submit").addEventListener("click", (event) => {
+            if ($('#checkBox').is(':not(:checked)')) {
+                document.getElementById("submit").disabled = true;
+            }
+        });
+    </script>
 
 {% endblock %}
+
+
+{% block app_styles %}
+<link rel="stylesheet" href="{% static 'global/css/styling10.css' %}">
+{% endblock %}
+
+

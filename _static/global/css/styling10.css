@@ -1,729 +1,263 @@
-
 /* CSS STYLESHEET FOR ECOLABELS EXPERIMENT */
  
 /* GLOBAL STYLING */
 
-    /* set oTree default margins & padding off, define viewport */
-    .otree-body {
-       height: 100vh;
-       width: 100vw; 
-       margin: 0;
-       padding: 0;
-    }
-
-    .debug-info {
-        display:none;
-    }
-
-    * {
-        box-sizing: border-box
-    }
-
-    /* Set global styling, same for all pages */
-    body {
-       font-family: Helvetica, sans-serif;
-       color: #333;
-       background-color: #f8f6f0;
-       text-align: center;   
-    }
-
-    /* titles */
-    h1 {
-        font-size: 5vh;
-        margin-top: -10vh;
-        text-align: center;
-        padding: 4vh;
-        background-color: rgba(59, 121, 139, 0.678);
-        color: white;
-        width: 80vw;
-    }
-
-    /* Next & submit button */
-    .button {
-        font-family: 'Work Sans', sans-serif;
-        font-size: 3vh;
-        width: 8vw;
-        height: 12vh;
-        background-color: rgb(33, 202, 132);
-        color: #fff;
-        border: 0px;
-        border-radius: 3px;
-        line-height: 12vh;
-        cursor: pointer;
-        text-align: center;
-        text-decoration: none;   
-    }
-
-    .button:hover {
-        background-color: rgb(39, 221, 145);
-        color: #fff;
-    }
-
-    /* Hide button */ 
-    .hideButton {
-        visibility: hidden;
-    }
-
-    /* Input fields */
-    input {
-        border: 1px solid transparent;
-        background-color: #f1f1f1;
-        padding: 10px;
-        font-size: 2.5vh;
-    }
-
-    /* This is for autocomplete dropdown */
-    input[type=text] {
-        background-color: #f1f1f1;
-        width: 100%;
-    }
-
-    /* Checkbox styling for ticked/unticked */ 
-
-    input[type="checkbox"]:required:valid + label { 
-        color: green;
-        
-    }
-
-/* INTRODUCTION & INSTRUCTIONS */
-
-    /* Slide container */
-    .flex-container {
-        display: flex;
-        flex-flow: row wrap;
-        height: 75vh;
-        width: 80vw;
-        padding: 0;
-        margin-top: 10vh;
-        margin-left: 10vw;
-        margin-bottom: 2vh;
-        justify-content: center;
-        align-content: center;
-    }
-
-    /* Hide the slide content by default */
-    .mySlides {  
-        display: none;
-    }
-
-    /* Slides */
-    .slide-item {
-        height: 70vh;
-        width: 80vw;
-        padding-top: 5vh;
-        padding-left: 6vw;
-        padding-right: 15vw;
-        background-color: white;
-        font-size: 2.8vh;
-        line-height: 1.5;
-        margin-bottom: 2vh;
-        text-align: left;
-    }
-
-    .slide-item2 {
-        padding-right: 6vw !important;
-    }
-
-    /* Slide title */
-    .title {
-        font-weight: bold;
-        text-decoration: underline;
-        font-size: 2.8vh;
-        text-align: left;
-        margin-bottom: 2vh;
-    }
-
-    /* UvA logo */
-    .UvA-logo {
-        width: 15vw;
-        margin-left: 2vh;
-    }
-
-    /* OTP logo */
-    .OTP-logo {
-        width: 15vw;
-        margin: 2vh;
-    }
-
-    /* Product Characteristics slide */
-    .symbol {
-        width: 1.5vw;
-        margin: 1px;
-    }
-
-    /* Slides that have content split in two */
-    .double-container {
-        display: flex;
-        flex-direction: row;
-    }
-
-    .text-container {
-        width: 70%;
-    }
-
-    .img-container {
-        padding-left: 5vw;
-        text-align: center;
-        width: 30%;
-    }
-
-    .task-img {
-        width: 17vw;
-        border: 1px solid #333;
-        object-fit: contain;
-    }
-
-    .button-container {
-        flex-basis: 50%;
-        text-align: center;
-    }
-
-    .text-reveal {
-        visibility: hidden;
-    }
-
-    .hover-button {
-        height: 15vh;
-        width: 15vh;
-        margin-bottom: 5vh;
-    }
-
-    .hidden {
-        color:  rgb(200, 200, 200);
-        background-color: rgb(200, 200, 200);
-    }
-  
-    .non-hidden {
-        color: #000;
-        background-color: rgb(200, 200, 200);
-    }
-  
-    .hidden .button-img{
-        display: none;
-    }
-  
-    .non-hidden .button-img{
-        display: inline-flex;
-    }
-
-    .button-outcome {
-        font-size: 1em;
-    }
-
-    /* Container for questions slide */
-    .flex-questions {
-        display: flex;
-        flex-direction: column;
-        height: 70vh;
-        width: 80vw;
-        background-color: white;
-        padding-top: 5vh;
-        padding-left: 5vw;
-        padding-right: 3vw;
-        font-size: 2.8vh;
-        margin-bottom: 2vh;
-    }
-
-    /* Container for individual questions (question, input field, hint) */
-    .flex-questions li {
-        height: 12vh;
-        padding-top: 2vw;
-        list-style: none;
-        display: flex;
-        flex-direction: row;
-        text-align: left;
-        justify-content: space-between;
-        border-bottom:1px solid rgb(233, 232, 232);
-    }
-
-    .flex-questions li:last-child {
-        border-bottom: none;
-        padding-top: 3vh;
-        height: 15vh;
-    }
-
-    /* Only questions */
-    .inst-question {
-        flex-basis: 37vw;
-    }
-
-    /* Only input fields */
-    .answer-field {
-        flex-basis: 20vw;
-        padding-left: 3vw;
-        padding-bottom: 1vh;
-    }    
-
-    /* Dropdown input */ 
-    .dropdown {
-        height: 5vh;
-        width: 9vw;
-    }
-
-    /* Incorrect/hint bar */
-    .hint {
-        visibility: hidden;
-        flex-grow: 1;
-        padding-top: 0.5vh;
-        background-color: rgb(250, 144, 144);
-        border-radius: 2px;
-        color:white;
-        height: 4.5vh;
-        width: 8vw;
-        margin-left: 1vh;
-        text-align: center;
-    }
-
-    /* Submit button Introduction*/
-    .intro-button {
-        display: inline-block;
-        position:absolute;
-        margin: 60vh; 
-    }
-
-    /* Glowing button Instructions */
-    .glow-button {  
-        -webkit-border-radius: 60px; 
-        border-radius: 3px !important ;
-        animation: glowing 2000ms infinite;
-    }
-
-    @keyframes glowing {
-        0% {
-            background-color: rgb(33, 202, 132);
-            box-shadow: 0 0 3px rgb(33, 202, 132);
-        }
-        50% {
-            background-color: rgb(33, 202, 112);
-            box-shadow: 0 0 10px rgb(33, 202, 112);
-        }
-        100% {
-            background-color:rgb(33, 202, 132);
-            box-shadow: 0 0 3px rgb(33, 202, 132);
-        }
+* {
+    box-sizing: border-box;
 }
 
-    /* Next & previous buttons (arrows) */
-    .prev,
-    .next {
-        cursor: pointer;
-        position: absolute;
-        top: 50%;
-        width: auto;
-        margin-top: -5vh;
-        padding: 2vh;
-        color: black;
-        font-size: 8vh;
-        transition: 0.6s ease;
-        border-radius: 0 3px 3px 0;
-        user-select: none;
-        text-decoration: none;
-        text-align: center;
-    }
+.otree-body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
 
-    /* Position the "next button" to the right */
-    .next {
-        right: 3vw;
-    }
+.debug-info {
+    display:none;
+}
 
-    /* Position the "previous button" to the left */
-    .prev {
-        left: 4vw;
-    }
+body {
+    font-family: Helvetica, sans-serif;
+    color: #333;
+    background-color: #f8f6f0;
+    text-align: center;   
+}
 
-    /* On hover, add a black background color with a little bit see-through */
-    .prev:hover,
-    .next:hover {
-        background-color: #bbb;
-        color: black;
-    }
-   
-    .prev-key,
-    .next-key {
-        position: absolute;
-        top: 60%;
-        padding: 2vh;
-        color: black;
-        font-size: 2vh;
-        text-align: center;
-    }
+.button {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 3vh;
+    width: 8vw;
+    height: 12vh;
+    background-color: rgb(33, 202, 132);
+    color: #fff;
+    border: 0px;
+    border-radius: 3px;
+    line-height: 12vh;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;   
+}
 
-    .prev-key {
-        left: 1vw;
-    }
-        
-    .next-key {
-        right: 0.5vw;
-    }
+.button:hover {
+    background-color: rgb(39, 221, 145);
+    color: #fff;
+}
 
-    /* The dots/bullets/indicators */
-    .dot_row {
-        position: absolute;
-        margin-top: 67vh;
-        text-align: center;
-    }
+/*  INPUT FIELDS  */
+input {
+    border: 1px solid transparent;
+    background-color: #f1f1f1;
+    padding: 10px;
+    font-size: 2.5vh;
+}
 
-    .dot {
-        cursor: pointer;
-        height: 2.5vh;
-        width: 2.5vh;
-        margin: 0 2px;
-        background-color: #bbb;
-        border-radius: 50%;
-        display: inline-block;
-        transition: background-color 0.6s ease;
-    }
+input[type=text] {
+    background-color: #f1f1f1;
+    width: 5em;
+    border: solid black 1px;
+    border-radius: 3px;
+}
 
-    .active,
-    .dot:hover {
-        background-color: #717171;
-    }
 
-/* ECOTASK */
-
-    #game-body {
-            background-color: #eee;
-            display: block;
-        }
-
-    #between-button {
-            position: absolute;
-            top: 50vh;
-            left: 50vw;
-            transform: translate(-50%,-50%);
-            font-size: 2.5vh !important;
-            line-height: 4vh !important;
-        }
-
-/* INFOGRAPHICS */
-
-    /* Image slide container */
-    .infograph-container {
-        height: 75vh;
-        width: 80vw;
-        padding: 0;
-        margin-left: 10vw;
-        margin-bottom: 2vh;
-        text-align: center;
-    }
-
-    /* Image sizing */
-    .info-img {
-        height: 70vh;
-        width: 80vw;
-        object-fit:contain;
-    }
-
-    /* Dots */
-    .info-dotrow {
-        position: inline-block;
-        text-align: center;
-        margin: -5vh;
-    }
-
-    /* Next button */
-    .info-button {
-        display: inline-block;  
-        margin: 10vh;
-    }
-
-    /* Next & Previous button location */
-    .prev-info {
-        left: 10vw !important;
-    }
-
-    .next-info {
-        right: 10vw !important;
-    }
-
-/* INFOGRAPHICS NEW */
-    .info-title {
-        font-size: 4vh;
-        font-weight: bold;
-        text-align: left;
-    }
-
-    .img-container-info {
-        width: 60%;
-    }
-
-    .img-info {
-        object-fit: contain;
-        width: 35vw;
-    }
-
-    .text-infographic {
-        width: 40%;
-        font-size: 1em;
-        text-align: justify;
-        color: black;
-    }
-
-    .text-infographic ul {
-        margin: 0;
-        padding: 0;
-        border: 0;   
-        list-style-type: none;    
-    }
-
-    .flex-questions2 li:last-child {
-        padding-top: 8vh !important;
-    }
-
-/* READY */
-    .ready-button {
-        display: inline-block;
-        position:absolute;
-        margin: 30vh; 
-    }
-
-/* QUESTIONNAIRE */
+input[type="checkbox"]:required:valid + label { 
+    color: green;
     
-    /* Questionnaire container */
-    .questionnaire {
-        margin-top: 10vh;
-        text-align: center; 
-        margin-left: 10vw;
-        margin-bottom: 2vh;  
-        width: 80vw;
-        padding-bottom: 3vh;    
-    }
-
-    /* Slide container */
-    .element-container {
-        background-color: white;
-        height: 70vh;
-        width: 80vw;
-    }
-
-    /* Question box */
-    .question {
-        font-size: 3vh;
-        height: 11vh;
-        padding: 3vh;
-        margin-top: 5vh;
-        margin-bottom: 3vh;
-    }
-
-    /* Answer box */
-    .answers {
-        font-size: 2.7vh;
-        margin-bottom: 10vh;
-        text-align: left;
-        display: inline-block;
-        height: 20vh;
-    }
-    .question-slide {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    /* Radio button vertical */ 
-    .QT-radio {
-        display: block;
-        margin-bottom: 2vh;
-        width: 30vw;
-        text-align: left;
-        margin-left: 20vw;
-    }
-
-    /* Radio button horizontal */
-    .QT-label {
-        display: inline-block;
-        width: 12vw;
-        text-align: center;
-    }
-
-    .QT-radioH {
-        display: block;
-        margin: 0 auto;
-    }
-
-    /* Instruction styling */
-    .QT-inst {
-        text-align: center;
-        padding-top: 0;
-        padding-left: 12vw;
-        padding-right: 12vw;
-    }
-
-    /* Next/submit button location */
-    .QT-button {
-        margin-top: 15vh;   
-    }
-
-    /* Text under Next Button */
-    .button-text {
-        font-size: 2vh;
-        -webkit-border-radius: 60px; 
-        border-radius: 10px;
-        text-shadow: rgb(8, 235, 140);
-        animation: glowing 2000ms infinite;
-    }
-
-    @keyframes glowing {
-        0% {
-            text-shadow: 0 0 10px #000;
-        }
-        50% {
-            text-shadow: 0 0 20px #000;
-        }
-        100% {
-            text-shadow: 0 0 10px #000;
-        }
 }
 
-    /* Slide */
-    .slide {
-        position: absolute;
-        height: 50vh;
-        width: 80vw;
-        z-index: 1;
-        opacity: 0;
-        transition: opacity 0.5s;
-    }
+/* CONTAINER DIVS */
 
-    .active-slide {
-        opacity: 1;
-        z-index: 2;
-    }
+.double-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
 
-    /* Container for questions, answers and progress bar */
-    .quiz-container {
-        position: relative;
-        height: 40vh;
-        margin-top: 1vh;
-    }
+.text-container {
+    width: 70%;
+}
 
-    /* Progress bar */
-    .progress-bar {
-        display: inline-block;
-        position: relative;
-        z-index: -1;
-        width: 20vw;
-        opacity: 0.7;
-        text-align: center;
-        -webkit-appearance: none;
-        appearance: none;
-    }
+.img-container {
+    text-align: center;
+    width: 30%;
+}
 
-    /* Autocomplete styling for open questions*/
-    .autocomplete-items {
-        border: 1px solid #d4d4d4;
-        border-bottom: none;
-        border-top: none;
-        z-index: 99;
 
-        /*position the autocomplete items to be the same width as the container:*/
-        top: 100%;
-        left: 0;
-        right: 0;
-    }
+.button-container {
+    flex-basis: 50%;
+    text-align: center;
+}
 
-    .autocomplete-items div {
-        padding: 10px;
-        cursor: pointer;
-        background-color: #fff;
-        border-bottom: 1px solid #d4d4d4;
-    }
 
-    /*when hovering an item:*/
-    .autocomplete-items div:hover {
-        background-color: #e9e9e9;
-    }
+.flex-questions {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    align-items: center;
+    flex-grow: 1;
+}
 
-    /*when navigating through the items using the arrow keys:*/
-    .autocomplete-active {
-        background-color: DodgerBlue !important;
-        color: #ffffff;
-    }
 
-    /* END PAGE */
+/* SPECIFIC ELEMENTS */
 
-    .text-container2 {
-        flex-basis: 50%;
-        text-align: left;
-        padding-left: 4vh;
-        font-size: 3vh;
-    }
+/* INSTRUCTIONS APP */
 
-    .slide-item3 {
-        padding-right: 6vw !important; 
-    }
+/* PAGE - Introduction */ 
 
-    .dropdown2 {
-        width: 12vw;
-    }
+.consent-button {
+    margin-top: 1.5em;
+    justify-self: center;
+}
+/* PAGE - Instructions */ 
 
-    /* FINAL PAGE */
-    .final-text {
-        padding-top: 20vh;
-        font-size: 3vh;
-    }
+.task-img {
+    width: 17vw;
+    border: 1px solid #333;
+    object-fit: contain;
+}
 
-    /* Media query for large screen (stops elements from becoming gigantic)*/
+.text-reveal {
+    visibility: hidden;
+}
 
-    @media only screen and (min-width: 1600px) {
-        h1 {
-            font-size: 46px !important;
-        }
+.hover-button {
+    height: 15vh;
+    width: 15vh;
+    margin-bottom: 5vh;
+}
 
-        input {
-            font-size: 24px !important;
-        }
+.flex-questions ul {
+    width: 100%;
+    align-items: flex-start;
+}
 
-        .button {
-            height: 10vh !important;
-            width: 8vw !important;
-            font-size: 24px !important;
-            line-height: 10vh !important;
-        }
+li {
+    margin-top: 0.5em;
+    /* list-style: none; */
+    text-align: left;
+}
 
-        .title {
-            font-size: 24px !important;
-        }
+.flex-questions li:last-child {
+    border-bottom: none;
+    padding-top: 3vh;
+    height: 15vh;
+}
 
-        .slide-item {
-            font-size: 22px !important;
-            line-height: 2 !important;
-        }
+.inst-question {
+    flex-basis: 37vw;
+}
 
-        .flex-questions {
-            font-size: 24px !important;
-        }
+.answer-field {
+    flex-basis: 20vw;
+    padding-left: 3vw;
+    padding-bottom: 1vh;
+}    
 
-        .dot {
-            height: 24px !important;
-            width: 24px !important;
-        }
+.hint {
+    visibility: hidden;
+    background-color: rgb(250, 144, 144);
+    border-radius: 2px;
+    color:white;
+    height: 4.5vh;
+    width: 100%;
+    margin-left: 1vh;
+    text-align: center;
+}
 
-        .prev, .next {
-            font-size: 6vh !important;
-        }
+.dropdown {
+    width: 15vw;
+    border-width: 1px;
+    border-color: black;
+    font-size: inherit;
+}
 
-        .question {
-            font-size: 26px !important;
-        }
+#submitAnswer {
+    padding: 0 0.5em;
+    width: auto;
+    height: auto;
+}
 
-        .answers {
-            font-size: 24px !important;
-        }
+/* ECO TASK APP */
+/*  PAGE - Practice rounds */
+.practice-info {
+    position: absolute;
+    transform: translate(-50%,-50%);
+    width: 50vw;
+    height: 30vh;
+    top: 50vh;
+    left: 50vw;
+    font-size: 1.5em;
+    line-height: 2em;
+}
 
-        .infograph-container {
-            height: 60vh !important;
-            width: 60vw !important;
-            margin-left: 20vw !important;
-            margin-top: 10vh;
-            margin-bottom: 2vh !important;
-        }
+/*  PAGE - Infographics */
+.img-container-info {
+    flex-grow: 60;
+}
 
-        .info-img {
-            height: 60vh !important;
-            width: 60vw !important;
-        }
+.text-container-info {
+    flex-grow: 40;
+}
 
-        #between-button {
-            font-size: 24px !important;
-            line-height: 4vh !important;
-        }
-    }
+.info-title{
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.img-info {
+    width: 50vw;
+    height: auto;
+}
+
+/* VT functionality */
+.hidden {
+    color:  rgb(200, 200, 200);
+    background-color: rgb(200, 200, 200);
+  }
+  
+  .non-hidden {
+    color: #000;
+    background-color: rgb(200, 200, 200);
+  }
+  
+  .hidden .button-img{
+    display: none;
+  }
+  
+  .non-hidden .button-img{
+    display: inline-flex;
+  }
+
+  .button-outcome {
+    font-size: 1em;
+  }
+
+/*  AUTOCOMPLETE */
+.autocomplete-items {
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+/*when hovering an item:*/
+.autocomplete-items div:hover {
+    background-color: #e9e9e9;
+}
+
+/*when navigating through the items using the arrow keys:*/
+.autocomplete-active {
+    background-color: DodgerBlue !important;
+    color: #ffffff;
+}

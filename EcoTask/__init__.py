@@ -15,9 +15,9 @@ class Constants(BaseConstants):
     name_in_url         = 'Main-Task'
     players_per_group   = None
     # Number of rounds
-    num_rounds          = 2 
+    num_rounds          = 3 
     # Number of Practice Rounds                                    
-    num_prounds         = 0
+    num_prounds         = 1
     # mouseover or click 
     sActivation         = 'mouseover'                             
     # List that can include val,col,row

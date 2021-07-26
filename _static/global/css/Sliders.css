@@ -5,29 +5,8 @@
  
 /* GLOBAL STYLING */
 
-/* set oTree default margins & padding off, define viewport */
-* {
-    box-sizing: border-box;
-}
-
-.otree-body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box
-}
-
 .debug-info {
-    /* position: absolute;
-    top: 110vh; */
     display:none;
-}
-
-/* Set global styling, same for all pages */
-body {
-    font-family: Helvetica, sans-serif;
-    color: #333;
-    background-color: #f8f6f0;
-    text-align: center;   
 }
 
 /* titles */
@@ -75,7 +54,9 @@ input {
 /* This is for autocomplete dropdown */
 input[type=text] {
     background-color: #f1f1f1;
-    width: 100%;
+    width: 5em;
+    border: solid black 1px;
+    border-radius: 3px;
 }
 
 /* Checkbox styling for ticked/unticked */ 
@@ -153,124 +134,7 @@ input[type="checkbox"]:required:valid + label {
     display: flex;
     padding: 1em;
     justify-content: center;
-}
-
-.double-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.text-container {
-    width: 70%;
-}
-
-.img-container {
-    text-align: center;
-    width: 30%;
-}
-
-.task-img {
-    width: 17vw;
-    border: 1px solid #333;
-    object-fit: contain;
-}
-
-.button-container {
-    flex-basis: 50%;
-    text-align: center;
-}
-
-.text-reveal {
-    visibility: hidden;
-}
-
-.hover-button {
-    height: 15vh;
-    width: 15vh;
-    margin-bottom: 5vh;
-}
-
-.hidden {
-    color:  rgb(200, 200, 200);
-    background-color: rgb(200, 200, 200);
-}
-
-.non-hidden {
-    color: #000;
-    background-color: rgb(200, 200, 200);
-}
-
-.hidden .button-img{
-    display: none;
-}
-
-.non-hidden .button-img{
-    display: inline-flex;
-}
-
-.button-outcome {
-    font-size: 1em;
-}
-
-/* Container for questions slide */
-.flex-questions {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    align-items: center;
-}
-
-/* Container for individual questions (question, input field, hint) */
-.flex-questions li {
-    height: 3.5em;
-    padding-top: 0.5em;
-    list-style: none;
-    display: flex;
-    flex-direction: row;
-    text-align: left;
-    justify-content: space-between;
-}
-
-.flex-questions li:last-child {
-    border-bottom: none;
-    padding-top: 3vh;
-    height: 15vh;
-}
-
-/* Only questions */
-.inst-question {
-    flex-basis: 37vw;
-}
-
-/* Only input fields */
-.answer-field {
-    flex-basis: 20vw;
-    padding-left: 3vw;
-    padding-bottom: 1vh;
-}    
-
-
-
-/* Dropdown input */ 
-.dropdown {
-    width: 15vw;
-    border-width: 1px;
-    border-color: black;
-    font-size: inherit;
-}
-
-
-/* Incorrect/hint bar */
-.hint {
-    visibility: hidden;
-    background-color: rgb(250, 144, 144);
-    border-radius: 2px;
-    color:white;
-    height: 4.5vh;
-    width: 100%;
-    margin-left: 1vh;
-    text-align: center;
+    flex-grow: 1;
 }
 
 /* Next & previous buttons (arrows) */
@@ -329,43 +193,4 @@ input[type="checkbox"]:required:valid + label {
 .active,
 .dot:hover {
     background-color: #717171;
-}
-
-
-
-/* Autocomplete styling for open questions*/
-.autocomplete-items {
-    border: 1px solid #d4d4d4;
-    border-bottom: none;
-    border-top: none;
-    z-index: 99;
-
-    /*position the autocomplete items to be the same width as the container:*/
-    top: 100%;
-    left: 0;
-    right: 0;
-}
-
-.autocomplete-items div {
-    padding: 10px;
-    cursor: pointer;
-    background-color: #fff;
-    border-bottom: 1px solid #d4d4d4;
-}
-
-/*when hovering an item:*/
-.autocomplete-items div:hover {
-    background-color: #e9e9e9;
-}
-
-/*when navigating through the items using the arrow keys:*/
-.autocomplete-active {
-    background-color: DodgerBlue !important;
-    color: #ffffff;
-}
-
-#submitAnswer {
-    padding: 0 0.5em;
-    width: auto;
-    height: auto;
 }
