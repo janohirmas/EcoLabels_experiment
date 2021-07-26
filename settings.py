@@ -12,6 +12,17 @@ SESSION_CONFIGS = [
         num_demo_participants= 1,
         app_sequence=['EndPage']
     ),
+    dict(
+    name='session_config',
+    display_name='Ecolabels Config',
+    num_demo_participants=2,
+    app_sequence=['Instructions', 'EcoTask', 'Questionnaire' ,'EndPage'],
+    iTreatment = 1,
+    doc="""
+    Edit the 'iTreatment' to defined Between-subject treatment. 
+    [1: Linear, 2: Concave, 3: Convex]
+    """
+    ),
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
@@ -60,7 +71,7 @@ ROOMS = [
         display_name='Econ 101 class',
         participant_label_file='_rooms/econ101.txt',
     ),
-    dict(name='live_demo', display_name='Room for live demo (no participant labels)'),
+    dict(name='prolific', display_name='Prolific Room (no participant labels)'),
 ]
 
 
