@@ -79,5 +79,7 @@ class Questionnaire(Page):
         valid3 = int(int(player.V3)==2)
         player.participant.validQuestionnaire = valid1 + valid2 + valid3
 
+class First(Page):
+    pass
 
-page_sequence = [Questionnaire]
+page_sequence = [First,Questionnaire]
