@@ -69,7 +69,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    pass
+    sTreesLocation = models.StringField()
 
 # PAGES
 class Introduction(Page):
@@ -91,17 +91,26 @@ class Introduction(Page):
         part.dTimeOutFocus      = 0
 
 class Instructions(Page):
+    form_model = 'player'
+    form_fields = [ 'sTreesLocation' ]
+    
+    
     @staticmethod
     def vars_for_template(player):
         return dict(
             Slides = Constants.Slides,
     )
       
-    @staticmethod
-    def live_method(player: Player, sLoc):
+    def before_next_page(player: Player, timeout_happened):
         part = player.participant
-        part.sTreesLocation = sLoc
-        print(part.sTreesLocation)
+        part.sTreesLocation = player.sTreesLocation
+
+
+    # @staticmethod
+    # def live_method(player: Player, sLoc):
+    #     part = player.participant
+    #     part.sTreesLocation = sLoc
+    #     print(part.sTreesLocation)
 
 
 

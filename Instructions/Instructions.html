@@ -15,15 +15,16 @@
     document.getElementById("reveal").style.visibility = "visible";
   });
 
-  function sendSelect() {
-    TreeLoc = document.getElementById('sTreeLocation');
-    liveSend(TreeLoc.value);
-  }
+  // function sendSelect() {
+  //   TreeLoc = document.getElementById('sTreesLocation');
+  //   liveSend(TreeLoc.value);
+  // }
 
   function ValidateSaveSubmit() {
     validateAnswers();
-    sendSelect();
+    // sendSelect();
   }
+
   function canMove() {
     let bConditions = !(iSlideIndex===3 && !bClickHere);
     return bConditions;

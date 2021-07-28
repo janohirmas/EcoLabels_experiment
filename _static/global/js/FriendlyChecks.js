@@ -86,7 +86,7 @@ function CheckFS() {
   console.log("Checking fullscreen");
   let PopUp = document.getElementById('fs-popup');
   let PopUpText = document.getElementById('fs-popup-text');
-  if (window.innerHeight==screen.height ) {
+  if ( window.fullScreen || window.innerHeight==screen.height ) {
     // Dissappear Screen and Text
     console.log('FullScreen');
     PopUp.style.visibility          = 'hidden';

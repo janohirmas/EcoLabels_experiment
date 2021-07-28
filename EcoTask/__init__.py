@@ -19,7 +19,7 @@ class Constants(BaseConstants):
     iTreatment          = 1 # Treatment [1: Linear, 2: Concave, 3: Convex]  
     ## Attention Setup variables
     sActivation         = 'mouseover'   # mouseover or click                            
-    vTrigger            = "val"   # List that can include val,col,row                                
+    vTrigger            = "row"   # List that can include val,col,row                                
     Attr_order          = "constant"  # random or constant
     iTimeOut            = 0 # Timeout time (in seconds), if no time-out required, leave as 0
     # Checks if you require FullScreen 
