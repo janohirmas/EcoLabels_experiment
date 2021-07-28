@@ -18,6 +18,11 @@ SESSION_CONFIGS = [
         app_sequence=['Instructions']
     ),
     dict(
+        name='Task',
+        num_demo_participants= 1,
+        app_sequence=['EcoTask']
+    ),
+    dict(
     name='session_config',
     display_name='Ecolabels Config',
     num_demo_participants=2,

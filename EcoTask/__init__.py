@@ -13,10 +13,29 @@ Creates Table with Visual Tracing
 
 class Constants(BaseConstants):
     name_in_url         = 'Main-Task'
-    players_per_group   = None
-    num_rounds          = 69   # Number of rounds
+    # Treatment Variables
+    lS1 = [[0,1],[1,2],[0,2]]
+    lS2 = [[0,0],[1,1],[2,2]]
+
+    ## Quality
+    lQc = [[1,0],[2,0],[2,1]]
+    lQs = [[0,1],[0,2],[1,2]]
+    lQe = [[0,0],[1,1],[2,2]]
+
+    ## Prices
+    iP1,iP2,iP3,iP4 = [1,2,3,4]
+
+    lPoe = [[iP2,iP1],[iP3,iP1],[iP3,iP2],[iP4,iP1],[iP4,iP2],[iP4,iP3]]
+    lPse = [[iP1,iP2],[iP1,iP3],[iP2,iP3],[iP1,iP4],[iP2,iP4],[iP3,iP4]]
+    lPeq = [[iP1,iP1],[iP2,iP2],[iP3,iP3],[iP4,iP4]]
+
+    ## Number of trials
+    num_reps            = 1 # number of repetitions per permutation
+    num_repsEq          = 2 # Number of cases with equal sustainability
     num_prounds         = 3 # Number of Practice Rounds  
+    num_rounds          = num_reps*len(lS1)*5+num_repsEq+num_prounds  # Number of rounds
     iTreatment          = 1 # Treatment [1: Linear, 2: Concave, 3: Convex]  
+    players_per_group   = None
     ## Attention Setup variables
     sActivation         = 'mouseover'   # mouseover or click                            
     vTrigger            = "row"   # List that can include val,col,row                                
@@ -62,21 +81,6 @@ class Constants(BaseConstants):
     S3h = 6 
     Currency = 'Pounds'
 
-    # Treatment Variables
-    lS1 = [[0,1],[1,2],[0,2]]
-    lS2 = [[0,0],[1,1],[2,2]]
-
-    ## Quality
-    lQc = [[1,0],[2,0],[2,1]]
-    lQs = [[0,1],[0,2],[1,2]]
-    lQe = [[0,0],[1,1],[2,2]]
-
-    ## Prices
-    iP1,iP2,iP3,iP4 = [1,2,3,4]
-
-    lPoe = [[iP2,iP1],[iP3,iP1],[iP3,iP2],[iP4,iP1],[iP4,iP2],[iP4,iP3]]
-    lPse = [[iP1,iP2],[iP1,iP3],[iP2,iP3],[iP1,iP4],[iP2,iP4],[iP3,iP4]]
-    lPeq = [[iP1,iP1],[iP2,iP2],[iP3,iP3],[iP4,iP4]]
   
     ## Slides Infographics
     SlidePath = 'Infographics/slide'
@@ -195,9 +199,11 @@ def creating_session(subsession):
             player.S2 = lAttr[3]
 
 def createTreatment():
-    #* Sets
-    iSize = 2*5*3+3
+    n = Constants.num_reps
+    n_eq = Constants.num_repsEq
 
+    #* Sets
+    iSize = n*5*3+n_eq
     ## Sustainability
     lS1 = Constants.lS1
     lS2 = Constants.lS2
@@ -220,20 +226,20 @@ def createTreatment():
     lQual       = []
 
     ## Competing Quality and Alternative more expensive
-    lPrices.extend(sample(lPoe,2))
-    lQual.extend(sample(lQc,2))
+    lPrices.extend(sample(lPoe,n))
+    lQual.extend(sample(lQc,n))
     ## Competing Quality and Eco more expensive
-    lPrices.extend(sample(lPse,2))
-    lQual.extend(sample(lQc,2))
+    lPrices.extend(sample(lPse,n))
+    lQual.extend(sample(lQc,n))
     ## Supporting Quality and Eco more expensive
-    lPrices.extend(sample(lPse,2))
-    lQual.extend(sample(lQs,2))
+    lPrices.extend(sample(lPse,n))
+    lQual.extend(sample(lQs,n))
     ## Equal Quality and Eco more expensive
-    lPrices.extend(sample(lPse,2))
-    lQual.extend(sample(lQe,2))
+    lPrices.extend(sample(lPse,n))
+    lQual.extend(sample(lQe,n))
     ## Competing Quality and Equal price
-    lPrices.extend(sample(lPeq,2))
-    lQual.extend(sample(lQc,2))  
+    lPrices.extend(sample(lPeq,n))
+    lQual.extend(sample(lQc,n))  
 
     # Establish order of qualities
     order = sample(['Quality','Sustainability'],2)
@@ -263,11 +269,11 @@ def createTreatment():
             lTreatments[counter]=  join2String(lAttr)
             counter +=1
 
-    # Add the observations with equal prices 
+    # Add the observations with equal Sustainability 
     ## Select which trial do we use:
-    lCombs = random.randint(0,len(lPrices),size=len(lS2))
+    lCombs = random.randint(0,len(lPrices),size=n_eq)
 
-    for sus in range(len(lS2)):       
+    for sus in range(n_eq):       
         # Randomize order
         if random.choice([True,False]):
             q       = lQual[lCombs[sus]].copy()[::-1]
@@ -287,7 +293,7 @@ def createTreatment():
         lTreatments[counter]=  join2String(lAttr)
         counter +=1
     lAttList = ['Price', order[0], order[1]]
-    random.shuffle(lTreatments)
+    #random.shuffle(lTreatments)
     pd.DataFrame(lTreatments).to_csv('treatment.csv')
     return lTreatments,lAttList
 

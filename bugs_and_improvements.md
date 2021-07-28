@@ -2,19 +2,19 @@ THIS TEXT FILE IS FOR KEEPING RECORD OF CURRENT BUGS AND SUGGESTED IMPROVEMENTS
 
 
 # To Do:
-> Add ResizeEvent Listener for questionnaire and sliders
+> Change treatments (less trials)
+    > Check that treatments were constructed properly
+    > Uncomment the randomize
+> Change instructions, decision pages for row reveal
+> Change Sustainability and Quality to points
+> Change name in Heroku for so it doesn't say eco-task
 
 # BUGS 
-
-> Problem in EndPage
 
 
 
 # THINGS TO DISCUSS
 
-- How many rounds? Using the logic I used to build the scenarios
-    - 66 rounds + 4 practice rounds (Best for power, maybe too long)
-    - 54 + 3 (A bit less of power, less variation within participants)
 - The value of the sustainability attribute is very similar to the value of the quality attribute (money-wise).
     - This is the least amount of trees I can use to have convex and concave treatments
 - Should labels be equal in the different contexts? or just similar. 
