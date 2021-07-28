@@ -11,13 +11,13 @@
 
 /* titles */
 h1 {
-    font-size: 5vh;
+    font-size: 2em;
     text-align: center;
     padding: 1em;
     margin: 0;
     background-color: rgba(59, 121, 139, 0.678);
     color: white;
-    width: 100%;
+    flex-grow: 1;
 }
 
 /* Next & submit button */
@@ -98,7 +98,7 @@ input[type="checkbox"]:required:valid + label {
     display: none;
     flex-direction: column;
     justify-content: flex-start;    
-    height: 80vh;
+    height: --var 80vh;
     width: 80vw;
     overflow: hidden;
     background-color: white;

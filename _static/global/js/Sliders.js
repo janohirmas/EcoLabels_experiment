@@ -12,7 +12,10 @@ document.addEventListener("DOMContentLoaded", function() {
 // *********************************************************************
 // * EVENT LISTENERS *
 // *********************************************************************
-
+window.addEventListener('resize', function() {
+    let slides = document.getElementsByClassName("slide-item");
+    adjustElem(slides[iSlideIndex]);                // adjust slide size
+});
 
 // Move slides with left and right arrows
 document.addEventListener('keydown', (event) => {
@@ -65,7 +68,7 @@ function adjustElem(elem) {
     let overflow = checkOverflow(elem);                         // boolean describing if element is overflown
     let iter = 0;                                               // max iteration in case something goes wrong
     // Iterate until there is no overflow
-    while (overflow && iter<30) {
+    while (overflow && iter<90) {
         zoom += -0.01;                                          // reduce zoom in 1%
         zoomChildren(elem,zoom);
         overflow = checkOverflow(elem);
@@ -89,8 +92,14 @@ function zoomChildren(elem,zoom) {
     let children = elem.children;
     if (typeof children !=='undefined') {
         for (let i=0; i<children.length; i++) {
-            children[i].style.scale = zoom;
-            children[i].style.MozTransform = `scale($(zoom))`;
+            if ('zoom' in children[i].style) {
+                children[i].style.zoom = zoom;
+            } else {
+                mgH = children[i].offsetHeight*(zoom-1)/2;
+                mgW = children[i].offsetWidth*(zoom-1)/2;
+                children[i].style.margin = `${mgH}px ${mgW}px`;
+                children[i].style.MozTransform = `scale(${zoom})`;
+            }
         };
     };
 };

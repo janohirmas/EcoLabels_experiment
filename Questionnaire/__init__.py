@@ -38,6 +38,9 @@ class Player(BasePlayer):
     D5 = models.StringField()
     D6 = models.StringField(blank=True)
     D7 = models.StringField(blank=True)
+    D8 = models.StringField()
+    D9 = models.StringField()
+    
 
     # variables for Questionnaire
     QT1 = models.StringField()
@@ -77,7 +80,7 @@ class Player(BasePlayer):
 # PAGES
 class Questionnaire(Page):
     form_model = 'player'
-    form_fields = ['D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'QT1', 'QT2', 'QT3', 'QT7','QT8', 'QT9', 'QT10', 'QT11', 'QT12','QT16', 'QT17', 'QT18','QT19', 'QT20', 'QT21',  'QT25','QT26', 'QT27','V1','V2','V3']
+    form_fields = ['D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8', 'D9', 'QT1', 'QT2', 'QT3', 'QT7','QT8', 'QT9', 'QT10', 'QT11', 'QT12','QT16', 'QT17', 'QT18','QT19', 'QT20', 'QT21',  'QT25','QT26', 'QT27','V1','V2','V3']
     # excluded: 'QT4', 'QT5', 'QT6', 'QT13', 'QT14', 'QT15', 'QT22','QT23', 'QT24',
     @staticmethod
     def js_vars(player: Player):
