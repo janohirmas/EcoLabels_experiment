@@ -11,6 +11,14 @@ class Constants(BaseConstants):
     name_in_url = 'Questionnaire'
     players_per_group = None
     num_rounds = 1
+    ## Path for images
+    imgFile_Quality     = '/static/EcoTask/figures/Infographic_graphs/quality.png'
+    imgFile_QualityCv    = '/static/EcoTask/figures/Infographic_graphs/quality.png'
+    imgFile_QualityCx     = '/static/EcoTask/figures/Infographic_graphs/quality.png'
+    imgFile_Linear      = '/static/EcoTask/figures/Infographic_graphs/sus_linear.png'
+    imgFile_Concave     = '/static/EcoTask/figures/Infographic_graphs/sus_concave.png'
+    imgFile_Convex      = '/static/EcoTask/figures/Infographic_graphs/sus_convex.png' 
+
 
 
 class Subsession(BaseSubsession):
@@ -71,6 +79,17 @@ class Questionnaire(Page):
     form_model = 'player'
     form_fields = ['D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'QT1', 'QT2', 'QT3', 'QT7','QT8', 'QT9', 'QT10', 'QT11', 'QT12','QT16', 'QT17', 'QT18','QT19', 'QT20', 'QT21',  'QT25','QT26', 'QT27','V1','V2','V3']
     # excluded: 'QT4', 'QT5', 'QT6', 'QT13', 'QT14', 'QT15', 'QT22','QT23', 'QT24',
+    @staticmethod
+    def js_vars(player: Player):
+        return dict(
+            Ql = Constants.imgFile_Quality,
+            Qcv = Constants.imgFile_QualityCv,
+            Qcx = Constants.imgFile_QualityCx,
+            Sl = Constants.imgFile_Linear, 
+            Scv = Constants.imgFile_Concave,
+            Scx = Constants.imgFile_Convex,
+        )
+
     @staticmethod
     def before_next_page(player, timeout_happened):
         # Validate questionnaire

@@ -42,12 +42,37 @@ const warningAutocomplete = 'Please select one item from the list';
 const warningEmpty = 'Please do not leave this question unanswered';
 const warningAge = 'Please provide a valid answer (number from 18 to 122)';
 const likertLimits = ['Strongly Disagree','Strongly Agree'];
+const figValues = [1,2,3];
+const figLabels1 = [
+    js_vars.Ql,
+    js_vars.Qcv,
+    js_vars.Qcx,
+];
+const figLabels2 = [
+    js_vars.Sl,
+    js_vars.Scv,
+    js_vars.Scx,
+];
 
 // *********************************************************************
 // Add Your Questions here
 // *********************************************************************
 
 const firstQuestions = [
+    {
+        question: "In the middle of the experiment, you saw two graphs. One for the quality and one for sustainability ratings. Which of these three graphs resembles more to the graph for the <b> Quality rating</b>.",
+        name: "D8",
+        type: "radioFig",
+        values: figValues,
+        labels: figLabels1,
+    },
+    {
+        question: "In the middle of the experiment, you saw two graphs. One for the quality and one for sustainability ratings. Which of these three graphs resembles more to the graph for the <b> Sustainability rating</b>.",
+        name: "D9",
+        type: "radioFig",
+        values: figValues,
+        labels: figLabels2,
+    },
     {
         question: "What is your age?",
         name: "D1",
@@ -343,7 +368,7 @@ QuestionSlide.prototype.printSlide = function() {
     pQuestion.innerHTML = this.Question.question;
     slideQuestion.appendChild(pQuestion);
     // Depending on input type, create inputs accordingly
-    if (this.Question.type==='radio' || this.Question.type==='radioH') {
+    if (this.Question.type==='radio' || this.Question.type==='radioH' || this.Question.type==='radioFig') {
         // 1. Radio or RadioHorizontal
         let div = writeRadio(this.Question);
         slideQuestion.appendChild(div);
@@ -493,6 +518,9 @@ function writeRadio(Question) {
             input = `<label class="QT-${Question.type}">  ${labels[i]}
             <input type="radio" class="answer-${Question.name}" id="answer-${Question.name}-${i}" onclick="nextSlide('${Question.name}', '${values[i]}')"> 
                 </label>`;
+        } else if (Question.type==='radioFig') {
+            input = `<button type="button" class="img-button" onclick="nextSlide('${Question.name}', '${values[i]}')"> 
+                    <img class="mini-graph" src="${labels[i]}"> </button>` ;
         }
         div.innerHTML +=input;
     }
@@ -721,7 +749,7 @@ function checkAnswer(bClean=false) {
             // if no requirement, return true
             return true;
         }
-    } else if (qType === 'scale') {return true};
+    } else if (qType === 'scale' || qType === 'radioFig') {return true}; // These inputs have nothing to be cleared
 }
 
 // *********************************************************************

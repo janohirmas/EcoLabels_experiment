@@ -2,12 +2,12 @@ THIS TEXT FILE IS FOR KEEPING RECORD OF CURRENT BUGS AND SUGGESTED IMPROVEMENTS
 
 
 # To Do:
-> Fix CSS last two pages
-> Check CSS for intro now
+> Add ResizeEvent Listener for questionnaire and sliders
 
 # BUGS 
 
-> Focus variables are not being recorded properly
+> Problem in EndPage
+
 
 
 # THINGS TO DISCUSS

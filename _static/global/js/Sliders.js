@@ -89,7 +89,8 @@ function zoomChildren(elem,zoom) {
     let children = elem.children;
     if (typeof children !=='undefined') {
         for (let i=0; i<children.length; i++) {
-            children[i].style.zoom = zoom;
+            children[i].style.scale = zoom;
+            children[i].style.MozTransform = `scale($(zoom))`;
         };
     };
 };

@@ -8,9 +8,14 @@ SESSION_CONFIGS = [
         app_sequence=['Instructions', 'EcoTask', 'Questionnaire' ,'EndPage']
     ),
     dict(
-        name='Task',
+        name='Questionnaire',
         num_demo_participants= 1,
         app_sequence=['Questionnaire']
+    ),
+    dict(
+        name='Intro',
+        num_demo_participants= 1,
+        app_sequence=['Instructions']
     ),
     dict(
     name='session_config',
