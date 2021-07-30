@@ -17,8 +17,29 @@ summary, time, mark, audio, video {
 }
 
 /* END RESET*/
+/* GLOBAL STYLING */
 
 :root {
+  /* PALETTE */
+  --color1: #EDE7DC;
+  --color2: #BDC3CB;
+  --color3: #CCAFA5;
+  --color4: #DCD2CC;
+  --color5: #C0C0C0;
+  --color6:  #6C6A61;
+  --color7:  #2e4db4;
+  --color8:  #C0C9CC;
+  --color9: #F2F1F0;
+  --color10: #171515;
+  /* USE OF COLORS */
+  --outcome-background-color:  var(--color9);
+  --outcome-background-hidden: var(--color2);
+  --outcome-text-color: var(--color10);
+  --background-dec-btn: var(--color7);
+  --background-action-btn: var(--color6);
+  --background-body: var(--color9);
+  --color-dec-btn: var(--color9);
+  --outcome-font-size:2em;
   --sq-height: 15vh;
   --sq-width: 15vh;
   --row-height: 17vh;
@@ -26,20 +47,17 @@ summary, time, mark, audio, video {
   --action-font-size: 1em;
   --table-side-margin: 25vw;
   --table-top-margin: 5vh;
-  --outcome-background-color: ##fff;
-  --outcome-background-hidden: rgb(150,150,150);
-  --outcome-text-color: #000;
-  --outcome-font-size:2em;
 }
 
 body{
-  background-color: #f8f6f0;
-  color: var(--outcome-text-color);
+  background-color: var(--background-body);
+  color: var(--color3);
   font-size: 1em;
   font-family: Helvetica, sans-serif;
   min-height: 120vh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .debug-info {
@@ -78,7 +96,6 @@ body{
   border: 0;
   padding: 0;
   box-sizing: border-box;
-  color: #000;
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
@@ -98,7 +115,8 @@ body{
 
 .button-action {
   font-size: var(--action-font-size);
-  background-color: rgb(150,150,150); 
+  background-color: var(--background-action-btn);
+  color: var(--color-dec-btn);
 }
 
 .button-outcome {
@@ -108,8 +126,8 @@ body{
 }  
 
 .dec-button{
-  background-color: rgb(33, 202, 132);
-  color: #fff;
+  background-color: var(--background-dec-btn);
+  color: var(--color-dec-btn);
   border: 0px;
   border-radius: 3px;
   font-size: 1.5em !important;
@@ -121,7 +139,6 @@ body{
   line-height: 2em !important;  
   width: 6em;
   transform: translate(-50%,-50%);
-  
 }
 
 .button-img{

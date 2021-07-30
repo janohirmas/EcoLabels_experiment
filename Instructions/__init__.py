@@ -18,8 +18,8 @@ class Constants(BaseConstants):
     star_symbol = 'EcoTask/figures/one_star.png'
     ## Variables that are not fully defined yet
     MaxBonus = int(3)
-    NumTrials = int(66) 
-    AvgDur = "15-25"
+    NumTrials = int(37) 
+    AvgDur = "15-20"
     TreesOrg = "One Tree Planted"
     ## Slides for introduction
     SlidePath = 'Instructions/slide'

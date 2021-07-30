@@ -7,6 +7,9 @@ document.addEventListener("DOMContentLoaded", function() {
     // * Add here anything that needs to be added to the page when the rest of the content is already loaded
     InitializeVT(document.getElementsByClassName('IntroContent')[0]);   // Initialize visual tracing
     ConvertButtons2VT('mousy', sActivation = 'mouseover');              // Mouseover for slide 4
+    let slides = document.getElementsByClassName("slide-item");
+
+    adjustElem(slides[iSlideIndex]);                // adjust slide size   
 });
 
 // *********************************************************************

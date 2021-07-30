@@ -28,9 +28,20 @@ SESSION_CONFIGS = [
     num_demo_participants=2,
     app_sequence=['Instructions', 'EcoTask', 'Questionnaire' ,'EndPage'],
     iTreatment = 1,
+    sActivation ='mouseover', 
+    iTimeOut=0,
+    bRequireFS=True,
+    bCheckFocus=True,
+    vTrigger='val',
     doc="""
-    Edit the 'iTreatment' to defined Between-subject treatment. 
-    [1: Linear, 2: Concave, 3: Convex]
+    Edit the following variables with these options:
+    iTreatment: int, Between-subject treatment.  [1: Linear, 2: Concave, 3: Convex]
+    sActivation: str, type of VT activation. ['mouseover','click']
+    iTimeOut: int, seconds before trial time-out. (0 means no timeout)
+    bRequireFS: bool, require fullscreen.
+    bCheckFocus: bool, require checking if page is active.
+    vTrigger: str, buttons that get activated. ['val','row','col']
+    Attr_order: str, to shuffle attributes.
     """
     ),
 ]
@@ -39,6 +50,8 @@ SESSION_CONFIGS = [
 # in SESSION_CONFIGS, except those that explicitly override it.
 # the session config can be accessed from methods in your apps as self.session.config,
 # e.g. self.session.config['participation_fee']
+
+
 PARTICIPANT_FIELDS = [
     'treatment', 
     'PresOrder',

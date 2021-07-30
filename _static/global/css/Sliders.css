@@ -4,6 +4,28 @@
 /* CSS STYLESHEET FOR ECOLABELS EXPERIMENT */
  
 /* GLOBAL STYLING */
+:root {
+    --background-title : #547478;
+    --color-title: #fff;
+    --background-btn: #776183;
+    --color-btn: #fff;
+    --background-input: #f1f1f1;
+    --color-dot: #bbb;
+    --color-dot-hover: #717171;
+    --color-font: #547478;
+    --background-body: #aba9bf;
+    --background-slide: #cce8e9;
+  }
+
+body {
+    background-color: var(--background-body);
+}
+/* oTree divs */ 
+.otree-body {
+    margin: 0;
+    padding: 0;
+}
+
 
 .debug-info {
     display:none;
@@ -15,36 +37,48 @@ h1 {
     text-align: center;
     padding: 1em;
     margin: 0;
-    background-color: rgba(59, 121, 139, 0.678);
-    color: white;
+    background-color: var(--background-title);
+    color: var(--color-title);
     flex-grow: 1;
 }
 
 /* Next & submit button */
-.button {
-    font-family: 'Work Sans', sans-serif;
-    font-size: 3vh;
-    width: 8vw;
-    height: 12vh;
-    background-color: rgb(33, 202, 132);
-    color: #fff;
-    border: 0px;
-    border-radius: 3px;
-    line-height: 12vh;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;   
+:root {
+    --color1: #EDE7DC;
+    --color2: #BDC3CB;
+    --color3: #CCAFA5;
+    --color4: #DCD2CC;
+    --color5: #C0C0C0;
+    --color6:  #6C6A61;
+    --color7:  #2e4db4;
+    --color7b:  #284196;
+    --color8:  #C0C9CC;
+    --color9: #F2F1F0;
+    --color10: #171515;
+    --background-title : var(--color6);
+    --color-title: var(--color9);
+    --background-btn: var(--color7);
+    --background-btn-hover: var(--color7b);
+    --color-btn: var(--color9);
+    --background-input: var(--color9);
+    --background-input-hover: var(--color1);
+    --color-dot: var(--color5);
+    --color-dot-hover: var(--color6);
+    --color-font: var(--color10);
+    --background-body: var(--color1);
+    --background-slide: var(--color9);
 }
 
+
 .button:hover {
-    background-color: rgb(39, 221, 145);
-    color: #fff;
+    background-color: var(--background-btn);
+    color: var(--color-btn);
 }
 
 /* Input fields */
 input {
     border: 1px solid transparent;
-    background-color: #f1f1f1;
+    background-color: var(--background-input);
     padding: 10px;
     font-size: 2.5vh;
 }
@@ -53,7 +87,7 @@ input {
 
 /* This is for autocomplete dropdown */
 input[type=text] {
-    background-color: #f1f1f1;
+    background-color: var(--background-input);
     width: 5em;
     border: solid black 1px;
     border-radius: 3px;
@@ -62,8 +96,7 @@ input[type=text] {
 /* Checkbox styling for ticked/unticked */ 
 
 input[type="checkbox"]:required:valid + label { 
-    color: green;
-    
+    color:    var(--background-btn);
 }
 
 /* INTRODUCTION & INSTRUCTIONS */
@@ -101,7 +134,8 @@ input[type="checkbox"]:required:valid + label {
     height: --var 80vh;
     width: 80vw;
     overflow: hidden;
-    background-color: white;
+    background-color: var(--background-slide);
+    color: var(--color-font);
     font-size: 1.5em;
     line-height: 1.5;
     margin-bottom: 2vh;
@@ -166,8 +200,8 @@ input[type="checkbox"]:required:valid + label {
 
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover,.next:hover {
-    background-color: #bbb;
-    color: black;
+    background-color: var(--color-dot);
+    color: var(--color-font);
 }
 
 /* The dots/bullets/indicators */
@@ -184,7 +218,7 @@ input[type="checkbox"]:required:valid + label {
     height: 2.5vh;
     width: 2.5vh;
     margin: 0 2px;
-    background-color: #bbb;
+    background-color: var(--color-dot);
     border-radius: 50%;
     display: inline-block;
     transition: background-color 0.6s ease;
@@ -192,5 +226,5 @@ input[type="checkbox"]:required:valid + label {
 
 .active,
 .dot:hover {
-    background-color: #717171;
+    background-color:  var(--color-dot-hover);
 }

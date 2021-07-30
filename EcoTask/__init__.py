@@ -33,21 +33,30 @@ class Constants(BaseConstants):
     num_reps            = 1 # number of repetitions per permutation
     num_repsEq          = 2 # Number of cases with equal sustainability
     num_prounds         = 3 # Number of Practice Rounds  
-    num_rounds          = num_reps*len(lS1)*5+num_repsEq+num_prounds  # Number of rounds
-    iTreatment          = 1 # Treatment [1: Linear, 2: Concave, 3: Convex]  
+    num_rounds          = 2*(num_reps*len(lS1)*5+num_repsEq)+num_prounds # Number of rounds
+    # # ## Modifiable variables
+    # Modifiable variables
+    # lVars = ['iTreatment', 'sActivation', 'iTimeOut','bRequireFS','bCheckFocus','vTrigger','Attr_order']
+    # lDefaults = [1,"'mouseover'",0,True,True,"'val'","'constant'"]
+    # for i in range(len(lVars)):
+    #     try:
+    #         eval(lVars[i])
+    #     except NameError:
+    #         print('{} is not defined. Set to default.'.format(lVars[i]))
+    #         exec("{} = {}".format(lVars[i],lDefaults[i]))
+    #     else:
+    #         print('{} is defined'.format(lVars[i]))
+
+
+
     players_per_group   = None
     ## Attention Setup variables
-    sActivation         = 'mouseover'   # mouseover or click                            
-    vTrigger            = "row"   # List that can include val,col,row                                
-    Attr_order          = "constant"  # random or constant
-    iTimeOut            = 0 # Timeout time (in seconds), if no time-out required, leave as 0
     # Checks if you require FullScreen 
     ## if you want to record number of FS changes add integer form iFullscreenChange
-    bRequireFS          = True                                   
     # Checks if focus changes to other pages
     ## if you want to record the number of times that focus is lost, add integer form iFocusLost
     ## if you want to record the total time that focus is lost, add float form dFocusLostT
-    bCheckFocus         = True                               
+    Attr_order          = 'constant'
     TablePaddingV       = "1vh" # set up padding between rows (top and bottom)                                  
     TablePaddingH       = "0vh" # set up padding between columns (left and right)                                  
     vColnames           = ["Product A", "Product B"]   # Column Names           
@@ -146,13 +155,14 @@ def creating_session(subsession):
     if subsession.round_number == 1:
         for player in subsession.get_players():
             participant = player.participant
+            session = subsession.session
             lTreat, lRownames = createTreatment()
             participant.vRownames = lRownames
             participant.mTreat = lTreat
-            participant.treatment = Constants.iTreatment
+            participant.treatment = session.config['iTreatment']
             participant.PresOrder = random.choice(['Qual', 'Sus'])
             participant.SelectedTrial = random.choice(range(Constants.num_prounds+1,Constants.num_rounds))
-            print(participant.SelectedTrial)
+            print('Trial selected for participant {}: {}'.format(participant.label,participant.SelectedTrial))
     ## SETUP FOR PLAYER ROUNDS
     for player in subsession.get_players():
         ## Load participant and save participant variables in player
@@ -161,8 +171,8 @@ def creating_session(subsession):
         player.PresOrder  = str(participant.PresOrder)
         player.sAttrOrder = participant.vRownames[1]
         ## Round Variables
-        round = player.round_number-Constants.num_prounds
         total_rounds = (Constants.num_rounds-Constants.num_prounds)/2
+        round = player.round_number-Constants.num_prounds
         if round<1: ## These are practice rounds, random trial selected
             player.iBlock = 0
             player.iBlockTrial = random.randint(total_rounds)
@@ -180,7 +190,6 @@ def creating_session(subsession):
             lAttr = participant.mTreat[x].split(',')
         ## Randomize if mouse starts on left or right
         player.bStartLeft = random.choice([True,False])
-        # // print(lAttr)
 
         # Check order of Attributes and save them as player variables
         
@@ -325,6 +334,7 @@ class Decision(Page):
     @staticmethod
     def js_vars(player: Player):
         participant = player.participant
+        session = player.subsession.session
         lE                  = ['img:leaf_1.png','img:leaf_2.png','img:leaf_3.png']
         lQ                  = ['img:star_1.png','img:star_2.png','img:star_3.png']
         lSus    = [lE[int(player.S1)],lE[int(player.S2)]]
@@ -338,21 +348,21 @@ class Decision(Page):
             vOutcomes.extend(lSus)
             vOutcomes.extend(lQual)
         lOutcomes = ','.join(vOutcomes)
-        print(lOutcomes)
+        print('Part: {}, trial: {}'.format(participant.label, player.round_number))
 
 
         return {
             'vOutcomes'         : lOutcomes,
-            'sActivation'       : Constants.sActivation,
-            'vTrigger'          : Constants.vTrigger,
+            'sActivation'       : session.config['sActivation'],
+            'vTrigger'          : session.config['vTrigger'],
             'Attr_order'        : Constants.Attr_order,
             'TablePaddingV'     : Constants.TablePaddingV,
             'TablePaddingH'     : Constants.TablePaddingH,
             'vColnames'         : Constants.vColnames,
             'vRownames'         : vRownames,
-            'bRequireFS'        : Constants.bRequireFS,
-            'bCheckFocus'       : Constants.bCheckFocus,
-            'iTimeOut'          : Constants.iTimeOut,
+            'bRequireFS'        : session.config['bRequireFS'],
+            'bCheckFocus'       : session.config['bCheckFocus'],
+            'iTimeOut'          : session.config['iTimeOut'],
             'sImagePath'        : Constants.sImagePath,
         }
     staticmethod
@@ -377,10 +387,11 @@ class Decision(Page):
 class Between(Page):
     @staticmethod
     def js_vars(player: Player):
+        session = player.subsession.session
         return {
             'StartLeft' : player.bStartLeft,
-            'bRequireFS'        : Constants.bRequireFS,
-            'bCheckFocus'       : Constants.bCheckFocus,
+            'bRequireFS'        : session.config['bRequireFS'],
+            'bCheckFocus'       : session.config['bCheckFocus'],
         }
 
 class Infographics(Page):

@@ -2,7 +2,31 @@
 /* CSS STYLESHEET FOR ECOLABELS EXPERIMENT */
  
 /* GLOBAL STYLING */
-
+:root {
+    --color1: #EDE7DC;
+    --color2: #BDC3CB;
+    --color3: #CCAFA5;
+    --color4: #DCD2CC;
+    --color5: #C0C0C0;
+    --color6:  #6C6A61;
+    --color7:  #2e4db4;
+    --color7b:  #284196;
+    --color8:  #C0C9CC;
+    --color9: #F2F1F0;
+    --color10: #171515;
+    --background-title : var(--color6);
+    --color-title: var(--color9);
+    --background-btn: var(--color7);
+    --background-btn-hover: var(--color7b);
+    --color-btn: var(--color9);
+    --background-input: var(--color9);
+    --background-input-hover: var(--color1);
+    --color-dot: var(--color5);
+    --color-dot-hover: var(--color6);
+    --color-font: var(--color10);
+    --background-body: var(--color1);
+    --background-slide: var(--color9);
+}
     /* set oTree default margins & padding off, define viewport */
     .otree-body {
        height: 100vh;
@@ -23,8 +47,8 @@
     /* Set global styling, same for all pages */
     body {
        font-family: Helvetica, sans-serif;
-       color: #333;
-       background-color: #f8f6f0;
+       color: var(--color-font);
+       background-color: var(--background-body);
        text-align: center;   
        align-items: center;
 
@@ -36,8 +60,8 @@
         margin-top: -10vh;
         text-align: center;
         padding: 4vh;
-        background-color: rgba(59, 121, 139, 0.678);
-        color: white;
+        background-color: var(--background-title);
+        color: var(--color-title);
         width: 80vw;
     }
 
@@ -47,8 +71,8 @@
         font-size: 1.5em;
         width: 8vw;
         align-items: center;
-        background-color: rgb(33, 202, 132);
-        color: #fff;
+        background-color: var(--background-btn);
+        color: var(--color-btn);
         border: 0;
         border-radius: 3px;
         padding: 10px;
@@ -59,28 +83,29 @@
 
 
     .button:hover {
-        background-color: rgb(39, 221, 145);
+        background-color: var(--background-btn);
     }
 
 
     /* Input fields */
     input {
-        border: 1px solid transparent;
-        background-color: #f1f1f1;
+        border: 1px solid;
+        border-radius: 3px;
+        background-color: var(--background-input);
         padding: 10px;
         font-size: 1em;
     }
 
     /* This is for autocomplete dropdown */
     input[type=text] {
-        background-color: #f1f1f1;
+        background-color: var(--background-input);
         width: 100%;
     }
 
     /* Checkbox styling for ticked/unticked */ 
 
     input[type="checkbox"]:required:valid + label { 
-        color: green;
+        background-color: var(--background-btn);
         
     }
 
@@ -98,7 +123,7 @@
 .question-slide {
     height: 70vh;
     width: 80vw;
-    background-color: white;
+    background-color: var(--background-slide);
     transition: 1s;
 }
 
@@ -199,13 +224,13 @@
     height: 3em ;
     width: 3em;
     font-size: 2em;
-    background-color: rgb(33, 202, 132);
-    color: #fff;
+    background-color: var(--background-btn);
+    color: var(--color-btn);
     border: 0;
 }
 
 .ScaleButton:hover {
-    background-color: rgb(39, 221, 145);
+    background-color: var(--background-btn-hover);
 }
 /***********************************/
 
@@ -320,13 +345,13 @@ to {opacity: 1}
     .autocomplete-items div {
         padding: 10px;
         cursor: pointer;
-        background-color: #fff;
+        background-color: var(--background-input);
         border-bottom: 1px solid #d4d4d4;
     }
 
     /*when hovering an item:*/
     .autocomplete-items div:hover {
-        background-color: #e9e9e9;
+        background-color: var(--background-input-hover);
     }
 
     /*when navigating through the items using the arrow keys:*/
@@ -337,69 +362,3 @@ to {opacity: 1}
 
 
 
-    /* Media query for large screen (stops elements from becoming gigantic)*/
-
-    @media only screen and (min-width: 1600px) {
-        h1 {
-            font-size: 46px !important;
-        }
-
-        input {
-            font-size: 24px !important;
-        }
-
-        .button {
-            height: 10vh !important;
-            width: 8vw !important;
-            font-size: 24px !important;
-            line-height: 10vh !important;
-        }
-
-        .title {
-            font-size: 24px !important;
-        }
-
-        .slide-item {
-            font-size: 22px !important;
-            line-height: 2 !important;
-        }
-
-        .flex-questions {
-            font-size: 24px !important;
-        }
-
-        .dot {
-            height: 24px !important;
-            width: 24px !important;
-        }
-
-        .prev, .next {
-            font-size: 6vh !important;
-        }
-
-        .question {
-            font-size: 26px !important;
-        }
-
-        .answers {
-            font-size: 24px !important;
-        }
-
-        .infograph-container {
-            height: 60vh !important;
-            width: 60vw !important;
-            margin-left: 20vw !important;
-            margin-top: 10vh;
-            margin-bottom: 2vh !important;
-        }
-
-        .info-img {
-            height: 60vh !important;
-            width: 60vw !important;
-        }
-
-        #between-button {
-            font-size: 24px !important;
-            line-height: 4vh !important;
-        }
-    }

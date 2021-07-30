@@ -1,26 +1,36 @@
 /* CSS STYLESHEET FOR ECOLABELS EXPERIMENT */
  
 /* GLOBAL STYLING */
+:root {
+    --color1: #EDE7DC;
+    --color2: #BDC3CB;
+    --color3: #CCAFA5;
+    --color4: #DCD2CC;
+    --color5: #C0C0C0;
+    --color6:  #6C6A61;
+    --color7:  #2e4db4;
+    --color7b:  #284196;
+    --color8:  #C0C9CC;
+    --color9: #F2F1F0;
+    --color10: #171515;
+    --background-title : var(--color6);
+    --color-title: var(--color9);
+    --background-btn: var(--color7);
+    --background-btn-hover: var(--color7b);
+    --color-btn: var(--color9);
+    --background-input: var(--color9);
+    --background-input-hover: var(--color1);
+    --color-dot: var(--color5);
+    --color-dot-hover: var(--color6);
+    --color-font: var(--color10);
+    --background-body: var(--color1);
+    --background-slide: var(--color9);
+}
+
+
 
 * {
     box-sizing: border-box;
-}
-
-.otree-body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box
-}
-
-.debug-info {
-    display:none;
-}
-
-body {
-    font-family: Helvetica, sans-serif;
-    color: #333;
-    background-color: #f8f6f0;
-    text-align: center;   
 }
 
 .button {
@@ -28,8 +38,8 @@ body {
     font-size: 3vh;
     width: 8vw;
     height: 12vh;
-    background-color: rgb(33, 202, 132);
-    color: #fff;
+    background-color: var(--background-btn);
+    color: var(--color-btn);
     border: 0px;
     border-radius: 3px;
     line-height: 12vh;
@@ -38,30 +48,9 @@ body {
     text-decoration: none;   
 }
 
-.button:hover {
-    background-color: rgb(39, 221, 145);
-    color: #fff;
-}
 
-/*  INPUT FIELDS  */
-input {
-    border: 1px solid transparent;
-    background-color: #f1f1f1;
-    padding: 10px;
-    font-size: 2.5vh;
-}
-
-input[type=text] {
-    background-color: #f1f1f1;
-    width: 5em;
-    border: solid black 1px;
-    border-radius: 3px;
-}
-
-
-input[type="checkbox"]:required:valid + label { 
-    color: green;
-    
+.debug-info {
+    display: none;
 }
 
 /* CONTAINER DIVS */
@@ -91,7 +80,7 @@ input[type="checkbox"]:required:valid + label {
 .flex-questions {
     display: flex;
     flex-direction: column;
-    background-color: white;
+    background-color: var(--background-slide);
     align-items: center;
     flex-grow: 1;
 }
@@ -103,7 +92,7 @@ input[type="checkbox"]:required:valid + label {
     height: 70vh;
     width: 60vw;
     overflow: hidden;
-    background-color: white;
+    background-color: var(--background-slide);
     font-size: 1.25em;
     line-height: 1.5;
     margin-bottom: 2vh;
@@ -215,6 +204,9 @@ li {
     left: 50vw;
     font-size: 1.5em;
     line-height: 2em;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 /*  PAGE - Infographics */
@@ -252,13 +244,16 @@ li {
 
 /* VT functionality */
 .hidden {
-    color:  rgb(200, 200, 200);
-    background-color: rgb(200, 200, 200);
+    color:  var(--background-btn);
+    background-color: var(--background-btn);
+    border: 0;
+
   }
   
   .non-hidden {
-    color: #000;
-    background-color: rgb(200, 200, 200);
+    color: var(--color-font);
+    background-color: var(--background-slide);
+    border: 0;
   }
   
   .hidden .button-img{
