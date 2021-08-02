@@ -3,36 +3,14 @@ from os import environ
 
 SESSION_CONFIGS = [
     dict(
-        name='EcoLabels',
-        num_demo_participants= 1,
-        app_sequence=['Instructions', 'EcoTask', 'Questionnaire' ,'EndPage']
-    ),
-    dict(
-        name='Questionnaire',
-        num_demo_participants= 1,
-        app_sequence=['Questionnaire']
-    ),
-    dict(
-        name='Intro',
-        num_demo_participants= 1,
-        app_sequence=['Instructions']
-    ),
-    dict(
-        name='Task',
-        num_demo_participants= 1,
-        app_sequence=['EcoTask']
-    ),
-    dict(
     name='session_config',
     display_name='Ecolabels Config',
     num_demo_participants=2,
     app_sequence=['Instructions', 'EcoTask', 'Questionnaire' ,'EndPage'],
     iTreatment = 1,
-    sActivation ='mouseover', 
     iTimeOut=0,
     bRequireFS=True,
     bCheckFocus=True,
-    vTrigger='val',
     doc="""
     Edit the following variables with these options:
     iTreatment: int, Between-subject treatment.  [1: Linear, 2: Concave, 3: Convex]
@@ -43,6 +21,16 @@ SESSION_CONFIGS = [
     vTrigger: str, buttons that get activated. ['val','row','col']
     Attr_order: str, to shuffle attributes.
     """
+    ),
+    dict(
+        name='Questionnaire',
+        num_demo_participants= 1,
+        app_sequence=['Questionnaire']
+    ),
+    dict(
+        name='Intro',
+        num_demo_participants= 1,
+        app_sequence=['Instructions']
     ),
 ]
 
@@ -70,6 +58,7 @@ PARTICIPANT_FIELDS = [
     'iFullscreenChanges',
     'startTime',
     'sTreesLocation',
+    'dPixelRatio',
     ]
 
 

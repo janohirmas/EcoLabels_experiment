@@ -1,0 +1,156 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, table, caption,
+tbody, tfoot, thead, tr, th, td, article, aside,
+canvas, details, embed, figure, figcaption, footer,
+header, hgroup, menu, nav, output, ruby, section,
+summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+* {
+  box-sizing: border-box;
+}
+/* END RESET*/
+
+/* GLOBAL STYLING */
+
+:root {
+  /* PALETTE */
+  --color1:             #EDE7DC;
+  --color2:             #BDC3CB;
+  --color3:             #CCAFA5;
+  --color4:             #DCD2CC;
+  --color5:             #C0C0C0;
+  --color6:             #6C6A61;
+  --color7:             #2e4db4;
+  --color8:             #C0C9CC;
+  --color9:             #F2F1F0;
+  --color10:            #171515;
+  /* USE OF COLORS */
+  --background-body:      var(--color9);
+  --background-outcome:   var(--color5);
+  --background-hidden:    var(--color5);
+  --background-attr:      var(--color6);
+  --background-dec:       var(--color7);
+  --color-dec:            var(--color9);
+  --color-attr:           var(--color9);
+  --color-outcome:        var(--color10);
+  /* DIMENSION VARIABLES */
+  --font-size-outcome:    2em;
+  --font-size-attr:       1.25em;
+  --font-size-dec:        1.5em;
+  --sq-width:             15vh;
+}
+
+body{
+  background-color: var(--background-body);
+  font-size: 1em;
+  font-family: Helvetica, sans-serif;
+  min-height: 100vh;
+  min-width: 50vw;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+
+#game-container {
+  transform: translate(-50%,-50%);
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  width: 60vw;
+  min-width: 45vh ;
+  height: 80vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+.game-btn {
+  width: var(--sq-width);
+  height: var(--sq-width);
+  flex-basis: auto;
+  border: 0;
+  padding: 0;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: default;
+  margin: 1px;
+}
+
+.game-btn:focus {
+  outline: 0;
+}
+
+.btn-attr {
+  background-color: var(--background-attr);
+  color:            var(--color-attr);
+  font-size:        var(--font-size-attr);
+}
+
+.btn-outcome {
+  background-color: var(--background-outcome);
+  color:            var(--color-outcome);
+  font-size:        var(--font-size-outcome);
+}  
+
+.dec-btn{
+  background-color: var(--background-dec);
+  color:            var(--color-dec);
+  font-size:        var(--font-size-dec);
+  border-radius: 3px;
+  margin-top: 15px; 
+}
+
+.btn-hidden{
+  width: 100%;
+  height: 100%;
+  background-color: var(--background-hidden);
+}
+
+#between-button {
+  position: absolute;
+  top: 50vh;
+  line-height: 2em !important;  
+  width: 6em;
+  transform: translate(-50%,-50%);
+}
+
+/* FUNCTIONAL SETTINGS  */
+
+.break {
+  width: 100%;
+  height: 0;
+}
+
+.img-rating {
+  width: 90%;
+  height: auto;
+}
+
+.active {
+  display: block;
+}
+
+.inactive {
+  display: none;
+}
+
+.debug-info {
+  display: none;
+}

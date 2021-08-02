@@ -1,0 +1,28 @@
+{% block app_styles %}
+<link rel="stylesheet" href="{% static 'global/css/styling10.css' %}">
+<link rel="stylesheet" href="{% static 'global/css/FriendlyChecks.css' %}">
+{% endblock %}
+
+{% block app_scripts %}
+    <script src="{% static 'global/js/FriendlyChecks.js' %}"></script> 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const GameBody = document.getElementById('practice-info');
+            InitializeCalibration(GameBody);             // Initialize FS and focus checks
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+
+    <div class="practice-info" id="practice-info">
+            <p class= "practice-text"> 
+                The program is calibrated. <br>
+                Now you can return to your desired Zoom. 
+            </p> 
+            <button class= "button" id="between-button"> Continue </button>
+  
+    </div>
+
+
+{% endblock %}

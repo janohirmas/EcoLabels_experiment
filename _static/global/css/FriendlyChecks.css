@@ -3,7 +3,7 @@
     color           : black;
 }
  
-#fs-popup {
+#cal-popup, #fs-popup {
     background-color    : rgba(255,255,255,0.95);
     height              : 120vh;
     width               : 100vw;

@@ -52,42 +52,17 @@ function InitializeVT(Body,sNameButtonClicks='sButtonClick',sNameTimeClicks='sTi
 //    - sDisplayClass     : string with classes that should be activated.
 //                          If empty, then activates itself
 //  Outputs:
-//    - vVT_Buttons : array with all buttons with Visual-Tracing certain visual tracing class
+//    void
 // ----------------------------------------------------- /
 function ConvertButtons2VT(sButtonClass,sActivation='click', sDisplayClass) {
-  vVT_Buttons = document.getElementsByClassName(sButtonClass);
-  console.log(vVT_Buttons);
-  for (let j=0; j<vVT_Buttons.length; j++) {
-    console.log('Added '+sActivation+' to activate '+sDisplayClass);
-    AddVisualTracer(vVT_Buttons[j],sActivation,sDisplayClass);
+  lVTbtns = document.getElementsByClassName(sButtonClass);
+  for (let j=0; j<lVTbtns.length; j++) {
+    console.log(`${lVTbtns[j].id}:Added ${sActivation} to activate ${sDisplayClass}`);
+    AddVisualTracer(lVTbtns[j],sActivation,sDisplayClass);
   };
-  return vVT_Buttons;
 }
 
-// ----------------------------------------------------- //
-//  Function:       1. Looks at string value and detects form "img:Name"  
-//                  2. In case of image, replaces value for image Tag
-//                  3. Adds cleaned value to button 
-//  Inputs:
-//    - btn      : Target button, where evenlistener will be added 
-//    - sValue   : String, value
-// ----------------------------------------------------- //
-function CheckImage(btn,sValue) {
-  // Check if Image:
-  
-  if (sValue.substring(0, 4)=='img:') {
-    //console.log(btn.id+' is image')
-    let ButtonImage = document.createElement('img');
-    ButtonImage.src = '/static/EcoLabels/'+sValue.substring(4);
-    ButtonImage.className = 'button-img'
-    btn.appendChild(ButtonImage);
-    return 
-  } else {
-    //console.log(btn.id+' is other')
-    btn.innerHTML = sValue;
-  }
-  
-};
+
 // ----------------------------------------------------- //
 //  Function:      1. Checks is string is empty and/or undefined
 //  Inputs:
@@ -109,35 +84,27 @@ function isEmpty(str) {
 // ----------------------------------------------------- //
 
 function AddVisualTracer(btn,sActivation='click',sDisplayClass) { 
-    // add ID as a class
-    btn.classList +=' '+btn.id;
-    // If there is no activation class, use self id. 
-    if (isEmpty(sDisplayClass)) {
-      sDisplayClass = btn.id;
-    }
+
+  btn.classList.add(btn.id);                                       // add ID as a class
+  if (isEmpty(sDisplayClass)) { sDisplayClass = btn.id; }          // If there is no activation class, use self id. 
 
   if (sActivation=='click') {
-    // If click
     btn.addEventListener('click', function() {
-      // Check it's not double click
-      if (btn.id != sPreviousPress) {
-          // Record new time
-          now = new Date().getTime();
-          // display specific content and hide rest
-          HideEverything();
-          DisplayContent(sDisplayClass);
-          // record button pressed  
-          if (sButtonClick.value) {
+      
+      if (btn.id != sPreviousPress) {                              // Check it's not double click
+          now = new Date().getTime();                              // Record new time
+          
+          hideEverything();                                        // display specific content and hide rest
+          displayContent(sDisplayClass);
+            
+          if (sButtonClick.value) {                                // record button pressed
             sButtonClick.value = sButtonClick.value+';'+btn.id;
           } else {
             sButtonClick.value = btn.id;
           };
-          // change previous to new
-          sPreviousPress = btn.id;
-          //console.log(sButtonClick.value);
-        
-        // Check if there was lost of focus
-        if (typeof bCheckFocus !== 'undefined' && bCheckFocus==true && TBlur>=dPreviousTime) {
+        sPreviousPress = btn.id;                                   // change previous to new
+        if (typeof bCheckFocus !== 'undefined' &&                  // Check if there was lost of focus
+        bCheckFocus==true && TBlur>=dPreviousTime) {
           // substract the blurred time
           diff = (now-dPreviousTime)-(TFocus-TBlur);
         } else {
@@ -163,8 +130,8 @@ function AddVisualTracer(btn,sActivation='click',sDisplayClass) {
         // Record new time
         dPreviousTime = new Date().getTime();
         // display specific content and hide rest
-        HideEverything();
-        DisplayContent(sDisplayClass);
+        hideEverything();
+        displayContent(sDisplayClass);
         
         // record button pressed  
         if (sButtonClick.value) {
@@ -183,7 +150,7 @@ function AddVisualTracer(btn,sActivation='click',sDisplayClass) {
       now   = new Date().getTime();
       // Hide the content & Reset previous item
       sPreviousPress = ' ';
-      HideEverything();
+      hideEverything();
       // Check if there is focus checks
       if (typeof bCheckFocus !== 'undefined' && bCheckFocus==true && TBlur>=dPreviousTime) {
         // substract the blurred time
@@ -205,17 +172,32 @@ function AddVisualTracer(btn,sActivation='click',sDisplayClass) {
 
 };
 
+
+
+
+
 // ----------------------------------------------------- //
 //  Function:    Display Contents from a specific class  
 //  Inputs:
-//    - DisplayClass    : String, class combination that will be activated
+//    - sClassName    : (string) classNames of buttons to be displayed
+//    - sButtonClass  : (string) classNames of buttons that can be displayed 
 // ----------------------------------------------------- //
 
-function DisplayContent(DisplayClass) {
-  let x = document.getElementsByClassName(DisplayClass);
-  for(let i = 0; i<x.length; i++) {
-    x[i].classList.remove('hidden');
-    x[i].classList.add('non-hidden');
+function displayContent(sClassName, sButtonClass='btn-outcome') {
+  // Hide everything before
+  hideEverything();
+  // Load relevant buttons
+  let lBtnOutcome = document.getElementsByClassName(`${sClassName} ${sButtonClass}`);
+  // Reveal their content
+  for (let i=0; i<lBtnOutcome.length; i++) {
+      let content = lBtnOutcome[i].getElementsByClassName('btn-content')[0];
+      let hidden  = lBtnOutcome[i].getElementsByClassName('btn-hidden')[0];
+      // hide content
+      content.classList.add('active');
+      content.classList.remove('inactive');
+      // reveal hidden display
+      hidden.classList.add('inactive');
+      hidden.classList.remove('active');
   }
 };
 
@@ -223,11 +205,21 @@ function DisplayContent(DisplayClass) {
 //  Function:     Hide all elements in the table  
 // ----------------------------------------------------- //
 
-function HideEverything() {
-  let x = document.getElementsByClassName("button-outcome");
-  // console.log(x);
-  for(let i = 0; i<x.length; i++) {
-    x[i].classList.remove('non-hidden');
-    x[i].classList.add('hidden');
-  }
+function hideEverything() {
+  // Load Content and Hidden Content divs
+  let lContent = document.getElementsByClassName('btn-content');
+  let lHidden  = document.getElementsByClassName('btn-hidden');
+  // Check that the same amount of content and hidden divs are in the page
+  if (lContent.length!==lHidden.length) {
+      console.log("the number of 'btn-content' and 'btn-hidden' divs must be equal");
+  } else {
+      for (let i=0; i<lContent.length; i++ ) {
+          // hide content
+          lContent[i].classList.add('inactive');
+          lContent[i].classList.remove('active');
+          // reveal hidden display
+          lHidden[i].classList.add('active');
+          lHidden[i].classList.remove('inactive');
+      };
+  };
 };

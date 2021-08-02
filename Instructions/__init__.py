@@ -70,6 +70,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     sTreesLocation = models.StringField()
+    dPixelRatio    = models.FloatField()
 
 # PAGES
 class Introduction(Page):
@@ -90,6 +91,18 @@ class Introduction(Page):
         part.iFullscreenChanges = 0
         part.dTimeOutFocus      = 0
 
+class Calibration(Page):
+    form_model = 'player'
+    form_fields = [ 'dPixelRatio' ]
+
+
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        part = player.participant
+        part.dPixelRatio = player.dPixelRatio
+
+
+
 class Instructions(Page):
     form_model = 'player'
     form_fields = [ 'sTreesLocation' ]
@@ -100,7 +113,7 @@ class Instructions(Page):
         return dict(
             Slides = Constants.Slides,
     )
-      
+    @staticmethod
     def before_next_page(player: Player, timeout_happened):
         part = player.participant
         part.sTreesLocation = player.sTreesLocation
@@ -114,6 +127,6 @@ class Instructions(Page):
 
 
 
-page_sequence = [Introduction, Instructions]
+page_sequence = [Introduction, Calibration, Instructions]
 
 

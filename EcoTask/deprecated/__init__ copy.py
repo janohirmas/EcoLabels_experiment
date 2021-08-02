@@ -13,12 +13,18 @@ Creates Table with Visual Tracing
 
 class Constants(BaseConstants):
     name_in_url         = 'Main-Task'
-    # Sustainability Sets
-    lS1, lS2 = [[0,1],[1,2],[0,2]], [[0,0],[1,1],[2,2]]
-    ## Quality Sets 
-    lQc,lQs, lQe= [[1,0],[2,0],[2,1]], [[0,1],[0,2],[1,2]], [[0,0],[1,1],[2,2]]
-    ## Price Sets
+    # Treatment Variables
+    lS1 = [[0,1],[1,2],[0,2]]
+    lS2 = [[0,0],[1,1],[2,2]]
+
+    ## Quality
+    lQc = [[1,0],[2,0],[2,1]]
+    lQs = [[0,1],[0,2],[1,2]]
+    lQe = [[0,0],[1,1],[2,2]]
+
+    ## Prices
     iP1,iP2,iP3,iP4 = [1,2,3,4]
+
     lPoe = [[iP2,iP1],[iP3,iP1],[iP3,iP2],[iP4,iP1],[iP4,iP2],[iP4,iP3]]
     lPse = [[iP1,iP2],[iP1,iP3],[iP2,iP3],[iP1,iP4],[iP2,iP4],[iP3,iP4]]
     lPeq = [[iP1,iP1],[iP2,iP2],[iP3,iP3],[iP4,iP4]]
@@ -28,6 +34,21 @@ class Constants(BaseConstants):
     num_repsEq          = 2 # Number of cases with equal sustainability
     num_prounds         = 3 # Number of Practice Rounds  
     num_rounds          = 2*(num_reps*len(lS1)*5+num_repsEq)+num_prounds # Number of rounds
+    # # ## Modifiable variables
+    # Modifiable variables
+    # lVars = ['iTreatment', 'sActivation', 'iTimeOut','bRequireFS','bCheckFocus','vTrigger','Attr_order']
+    # lDefaults = [1,"'mouseover'",0,True,True,"'val'","'constant'"]
+    # for i in range(len(lVars)):
+    #     try:
+    #         eval(lVars[i])
+    #     except NameError:
+    #         print('{} is not defined. Set to default.'.format(lVars[i]))
+    #         exec("{} = {}".format(lVars[i],lDefaults[i]))
+    #     else:
+    #         print('{} is defined'.format(lVars[i]))
+
+
+
     players_per_group   = None
     ## Attention Setup variables
     # Checks if you require FullScreen 
@@ -35,36 +56,61 @@ class Constants(BaseConstants):
     # Checks if focus changes to other pages
     ## if you want to record the number of times that focus is lost, add integer form iFocusLost
     ## if you want to record the total time that focus is lost, add float form dFocusLostT
-    sImagePath          = 'EcoTask/figures/'
-    sImagePath_static   = 'EcoTask/figures/'     # Image Path        
+    Attr_order          = 'constant'
+    TablePaddingV       = "1vh" # set up padding between rows (top and bottom)                                  
+    TablePaddingH       = "0vh" # set up padding between columns (left and right)                                  
+    vColnames           = ["Product A", "Product B"]   # Column Names           
+    vRownames           = ["Price","Quality","Sustainability"] # Row Names
+    sImagePath          = '/static/EcoTask/figures/'     # Image Path        
+    # Image files for infographics (instructions, quality, sustainability: linear/concave/convex)
     txtSustainability   = 'EcoTask/text/sustainability.html'
     txtQuality          = 'EcoTask/text/quality.html'
-    imgLeaf_symbol      = sImagePath_static+'one_leaf.png'
-    imgStar_symbol      = sImagePath_static+'one_star.png'
-    sPathQ_l            = sImagePath_static+'Infographic_graphs/qual_lin.png'
-    sPathQ_cv            = sImagePath_static+'Infographic_graphs/qual_concave.png'
-    sPathQ_cv            = sImagePath_static+'Infographic_graphs/qual_convex.png'
-    sPathS_l            = sImagePath_static+'Infographic_graphs/sus_linear.png'
-    sPathS_cv           = sImagePath_static+'Infographic_graphs/sus_concave.png'
-    sPathS_cx           = sImagePath_static+'Infographic_graphs/sus_convex.png' 
+    imgLeaf_symbol      = 'EcoTask/figures/one_leaf.png'
+    imgStar_symbol      = 'EcoTask/figures/one_star.png'
+    imgFile_Quality     = 'EcoTask/figures/Infographic_graphs/quality.png'
+    imgFile_Linear      = 'EcoTask/figures/Infographic_graphs/sus_linear.png'
+    imgFile_Concave     = 'EcoTask/figures/Infographic_graphs/sus_concave.png'
+    imgFile_Convex      = 'EcoTask/figures/Infographic_graphs/sus_convex.png' 
     # Variables for Infographics
-    Q1l,Q1h = 4, 5
-    Q2l,Q2h = 5, 6
-    Q3l,Q3h = 6, 7
-    S1l, S1h = 0, 2
-    S2l_l, S2h_l = 2, 4
-    S2l_cv, S2h_cv = 3, 5
-    S2l_cx, S2h_cx = 1, 3
-    S3l, S3h  = 4,6 
+    Q1l = 4
+    Q1h = 5 
+    Q2l = 5
+    Q2h = 6 
+    Q3l = 6
+    Q3h = 7 
+    S1l = 0
+    S1h = 2 
+    S2l_l = 2
+    S2h_l = 4 
+    S2l_cv = 3
+    S2h_cv = 5 
+    S2l_cx = 1
+    S2h_cx = 3 
+    S3l = 4
+    S3h = 6 
     Currency = 'Pounds'
+
   
     ## Slides Infographics
     SlidePath = 'Infographics/slide'
     Slides = [
-        dict(Title = 'Additional Information', path=SlidePath+'0.html'),
-        dict(Title = 'Additional Information', path=SlidePath+'1.html'),    
-        dict(Title = 'Additional Information', path=SlidePath+'2.html'),
-        dict(Title = 'Everything Clear? Please answer these questions correctly to proceed:', path=SlidePath+'3.html'),
+    dict(
+        Title = 'Additional Information',
+        path=SlidePath+'0.html',
+        ),
+    dict(
+        Title = 'Additional Information',
+        path=SlidePath+'1.html',
+        ),    
+    dict(
+        Title = 'Additional Information',
+        path=SlidePath+'2.html',
+        ),
+    dict(
+        Title = 'Everything Clear? Please answer these questions correctly to proceed:',
+        path=SlidePath+'3.html',
+        ),
+
     ]
 
 class Subsession(BaseSubsession):
@@ -83,6 +129,7 @@ class Player(BasePlayer):
     ## Trial Variables
     iBlock              = models.IntegerField(blank=True)
     iBlockTrial         = models.IntegerField(blank=True)
+    sTableVals          = models.StringField(blank=True)
     iTreatment          = models.IntegerField(blank=True)
     PresOrder           = models.StringField(blank=True)
     sAttrOrder          = models.StringField(blank=True)
@@ -92,12 +139,12 @@ class Player(BasePlayer):
     dFocusLostT         = models.FloatField(blank=True)
     iFullscreenChange   = models.IntegerField(blank=True)
     ## Attributes
-    P0                  = models.StringField(blank=True)
     P1                  = models.StringField(blank=True)
-    Q0                  = models.StringField(blank=True)
+    P2                  = models.StringField(blank=True)
     Q1                  = models.StringField(blank=True)
-    S0                  = models.StringField(blank=True)
+    Q2                  = models.StringField(blank=True)
     S1                  = models.StringField(blank=True)
+    S2                  = models.StringField(blank=True)
 
 
 
@@ -107,21 +154,22 @@ def creating_session(subsession):
     ## SETUP FOR PARTICIPANT
     if subsession.round_number == 1:
         for player in subsession.get_players():
-            p, session = player.participant, subsession.session
-            lTreat, lRownames   = createTreatment()
-            p.vRownames         = lRownames
-            p.mTreat            = lTreat
-            p.treatment         = session.config['iTreatment']
-            p.PresOrder         = random.choice(['Qual', 'Sus'])
-            p.SelectedTrial     = random.choice(range(Constants.num_prounds+1,Constants.num_rounds))
-            print('Trial selected for participant {}: {}'.format(p.label,p.SelectedTrial))
+            participant = player.participant
+            session = subsession.session
+            lTreat, lRownames = createTreatment()
+            participant.vRownames = lRownames
+            participant.mTreat = lTreat
+            participant.treatment = session.config['iTreatment']
+            participant.PresOrder = random.choice(['Qual', 'Sus'])
+            participant.SelectedTrial = random.choice(range(Constants.num_prounds+1,Constants.num_rounds))
+            print('Trial selected for participant {}: {}'.format(participant.label,participant.SelectedTrial))
     ## SETUP FOR PLAYER ROUNDS
     for player in subsession.get_players():
         ## Load participant and save participant variables in player
-        p = player.participant
-        player.iTreatment = int(p.treatment)
-        player.PresOrder =  str(p.PresOrder)
-        player.sAttrOrder = p.vRownames[1]
+        participant = player.participant
+        player.iTreatment = int(participant.treatment)
+        player.PresOrder  = str(participant.PresOrder)
+        player.sAttrOrder = participant.vRownames[1]
         ## Round Variables
         total_rounds = (Constants.num_rounds-Constants.num_prounds)/2
         round = player.round_number-Constants.num_prounds
@@ -129,43 +177,42 @@ def creating_session(subsession):
             player.iBlock = 0
             player.iBlockTrial = random.randint(total_rounds)
             x = int( player.iBlockTrial-1)
-            lAttr = p.mTreat[x].split(',')
+            lAttr = participant.mTreat[x].split(',')
         elif (round<=total_rounds): ## These are the observations of the first block
             player.iBlock = 1
             player.iBlockTrial = int(round)
             x = int(round-1)
-            lAttr = p.mTreat[x].split(',')
+            lAttr = participant.mTreat[x].split(',')
         else: ## These are the observations of the first block
             player.iBlock = 2
             player.iBlockTrial = int(round-total_rounds)
             x = int(round-total_rounds-1)
-            lAttr = p.mTreat[x].split(',')
+            lAttr = participant.mTreat[x].split(',')
         ## Randomize if mouse starts on left or right
         player.bStartLeft = random.choice([True,False])
-        # Check order of Attributes and save them as player variables
-        player.P0   = lAttr[0]
-        player.P1   = lAttr[1]
-        if p.vRownames[1]=='Quality':
-            player.Q0 = lAttr[2]
-            player.Q1 = lAttr[3]
-            player.S0 = lAttr[4]
-            player.S1 = lAttr[5]
-        else:
-            player.Q0 = lAttr[4]
-            player.Q1 = lAttr[5]
-            player.S0 = lAttr[2]
-            player.S1 = lAttr[3]
 
-#* Functions
-def join2String(list, delimiter= ','):
-        return delimiter.join(map(str,list))
+        # Check order of Attributes and save them as player variables
+        
+        player.P1   = lAttr[0]
+        player.P2   = lAttr[1]
+        
+        if participant.vRownames[1]=='Quality':
+            player.Q1 = lAttr[2]
+            player.Q2 = lAttr[3]
+            player.S1 = lAttr[4]
+            player.S2 = lAttr[5]
+        else:
+            player.Q1 = lAttr[4]
+            player.Q2 = lAttr[5]
+            player.S1 = lAttr[2]
+            player.S2 = lAttr[3]
 
 def createTreatment():
     n = Constants.num_reps
     n_eq = Constants.num_repsEq
 
     #* Sets
-    iSize = int((Constants.num_rounds-Constants.num_prounds)/2)
+    iSize = n*5*3+n_eq
     ## Sustainability
     lS1 = Constants.lS1
     lS2 = Constants.lS2
@@ -179,6 +226,9 @@ def createTreatment():
     lPse = Constants.lPse
     lPeq = Constants.lPeq
 
+    #* Functions
+    def join2String(list, delimiter= ','):
+        return delimiter.join(map(str,list))
 
     lTreatments = ["" for x in range(iSize)]
     lPrices     = []
@@ -267,7 +317,7 @@ class PracticeInfo2(Page):
     def is_displayed(player):
         return player.round_number == Constants.num_prounds
 
-class Task(Page):
+class Decision(Page):
     form_model = 'player'
     form_fields = [
         'iDec', 
@@ -282,45 +332,39 @@ class Task(Page):
 
 
     @staticmethod
-    def vars_for_template(player):
-        participant = player.participant
-        print('Part: {}, trial: {}'.format(participant.label, player.round_number))
-        vRownames = participant.vRownames   ## Variable order
-        Q0,Q1 = str(int(player.Q0)+1),str(int(player.Q1)+1)
-        S0,S1 = str(int(player.S0)+1),str(int(player.S1)+1)
-        if vRownames[1]=='Quality':
-            A10 = Constants.sImagePath+'star_'+Q0+'.png'
-            A11 = Constants.sImagePath+'star_'+Q1+'.png'
-            A20 = Constants.sImagePath+'leaf_'+S0+'.png'
-            A21 = Constants.sImagePath+'leaf_'+S1+'.png'
-        else:
-            A10 = Constants.sImagePath+'leaf_'+S0+'.png'
-            A11 = Constants.sImagePath+'leaf_'+S1+'.png'
-            A20 = Constants.sImagePath+'star_'+Q0+'.png'
-            A21 = Constants.sImagePath+'star_'+Q1+'.png'
-
-        return dict(
-            Attr1 = vRownames[1],
-            Attr2 = vRownames[2],
-            P0 = player.P0,
-            P1 = player.P1,
-            A10 = A10,
-            A11 = A11,
-            A20 = A20,
-            A21 = A21,
-        ) 
-
-    @staticmethod
     def js_vars(player: Player):
-        session = player.session
-        p = player.participant
+        participant = player.participant
+        session = player.subsession.session
+        lE                  = ['img:leaf_1.png','img:leaf_2.png','img:leaf_3.png']
+        lQ                  = ['img:star_1.png','img:star_2.png','img:star_3.png']
+        lSus    = [lE[int(player.S1)],lE[int(player.S2)]]
+        lQual   = [lQ[int(player.Q1)],lQ[int(player.Q2)]]
+        vRownames = participant.vRownames
+        vOutcomes = [player.P1,player.P2]
+        if vRownames[1]=='Quality':
+            vOutcomes.extend(lQual)
+            vOutcomes.extend(lSus)
+        else:
+            vOutcomes.extend(lSus)
+            vOutcomes.extend(lQual)
+        lOutcomes = ','.join(vOutcomes)
+        print('Part: {}, trial: {}'.format(participant.label, player.round_number))
+
+
         return {
+            'vOutcomes'         : lOutcomes,
+            'sActivation'       : session.config['sActivation'],
+            'vTrigger'          : session.config['vTrigger'],
+            'Attr_order'        : Constants.Attr_order,
+            'TablePaddingV'     : Constants.TablePaddingV,
+            'TablePaddingH'     : Constants.TablePaddingH,
+            'vColnames'         : Constants.vColnames,
+            'vRownames'         : vRownames,
             'bRequireFS'        : session.config['bRequireFS'],
             'bCheckFocus'       : session.config['bCheckFocus'],
             'iTimeOut'          : session.config['iTimeOut'],
-            'dPixelRatio'       : p.dPixelRatio,
+            'sImagePath'        : Constants.sImagePath,
         }
-
     staticmethod
     def before_next_page(player, timeout_happened):
         participant = player.participant
@@ -344,12 +388,10 @@ class Between(Page):
     @staticmethod
     def js_vars(player: Player):
         session = player.subsession.session
-        p = player.participant
         return {
-            'StartLeft'         : player.bStartLeft,
+            'StartLeft' : player.bStartLeft,
             'bRequireFS'        : session.config['bRequireFS'],
             'bCheckFocus'       : session.config['bCheckFocus'],
-            'dPixelRatio'       : p.dPixelRatio,
         }
 
 class Infographics(Page):
@@ -359,11 +401,17 @@ class Infographics(Page):
         
         # Pick images based on treatment for sustainability info
         if participant.treatment == 1:
-            S2low, S2high, Sgraph = Constants.S2l_l, Constants.S2h_l, Constants.sPathS_l
+            S2low = Constants.S2l_l
+            S2high = Constants.S2h_l
+            Sgraph = Constants.imgFile_Linear
         elif participant.treatment == 2:
-            S2low, S2high, Sgraph = Constants.S2l_cv, Constants.S2h_cv, Constants.sPathS_cv
+            S2low = Constants.S2l_cv
+            S2high = Constants.S2h_cv
+            Sgraph = Constants.imgFile_Concave
         else:
-            S2low, S2high, Sgraph = Constants.S2l_cx, Constants.S2h_cx, Constants.sPathS_cx
+            S2low = Constants.S2l_cx
+            S2high = Constants.S2h_cx
+            Sgraph = Constants.imgFile_Convex
         # Create Dictionary with all necessary info
         dicSustainabilityInfo = {
             'Item' : 'Leaf-rating & trees planted',
@@ -380,10 +428,11 @@ class Infographics(Page):
             'hi1' : Constants.S1h,
             'hi2' : S2high,
             'hi3' : Constants.S3h,
+
         }
         dicQualityInfo = {
             'Item' : 'Star-rating & Bonus Payment',
-            'Graph' : Constants.sPathQ_l,
+            'Graph' : Constants.imgFile_Quality,
             'Title' : 'Quality',
             'p1' : 'star',
             'p2' : 'quality',
@@ -396,34 +445,25 @@ class Infographics(Page):
             'hi1' : Constants.Q1h,
             'hi2' : Constants.Q2h,
             'hi3' : Constants.Q3h,
+
         }
         # Pick images based on treatment for sustainability info
         if participant.PresOrder == 'Qual':
-            dicFirst, dicSecond    = dicQualityInfo, dicSustainabilityInfo
+            dicFirst    = dicQualityInfo
+            dicSecond   = dicSustainabilityInfo
         else:
-            dicFirst, dicSecond  = dicSustainabilityInfo, dicQualityInfo
+            dicFirst   = dicSustainabilityInfo
+            dicSecond    = dicQualityInfo
 
         return dict(
             First = dicFirst,
             Second = dicSecond,
             Slides = Constants.Slides,
         ) 
-
     ## Show only in the middle of the experiment
     @staticmethod
     def is_displayed(player):
         return ((player.iBlock==2) & (player.iBlockTrial==1))
-
-    def js_vars(player: Player):
-        session = player.subsession.session
-        p = player.participant
-        return {
-            'StartLeft'         : player.bStartLeft,
-            'bRequireFS'        : session.config['bRequireFS'],
-            'bCheckFocus'       : session.config['bCheckFocus'],
-            'dPixelRatio'       : p.dPixelRatio,
-        }
-
 
 class Ready(Page):
     @staticmethod
@@ -431,4 +471,4 @@ class Ready(Page):
         return ((player.iBlock==2) & (player.iBlockTrial==1))
         
 
-page_sequence = [PracticeInfo1, Between, Task, Infographics, Ready, PracticeInfo2]
+page_sequence = [PracticeInfo1, Between, Decision, Infographics, Ready, PracticeInfo2]

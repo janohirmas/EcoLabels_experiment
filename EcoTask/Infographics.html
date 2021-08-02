@@ -12,8 +12,19 @@
 
 <script src="{% static 'global/js/FriendlyChecks.js' %}"></script>
 <script>
-    const GameBody = document.getElementById('game-body');
     const lSolutions    =  ['6', '4'];     // Solutions for Check-up questions in the last slide
+    const bRequireFS    = js_vars.bRequireFS;
+    const bCheckFocus   = js_vars.bCheckFocus;
+    const defaultPixel  = js_vars.dPixelRatio;
+    var TBlur           = new Date().getTime();
+    var TFocus          = new Date().getTime();
+
+    // When page is loaded
+    document.addEventListener("DOMContentLoaded", function() {
+        let body = document.getElementById('game-container');
+        InitializeFriendlyChecks(body, bRequireFS,bCheckFocus);             // Initialize FS and focus checks
+    });
+
 </script>
 
 {% endblock %}

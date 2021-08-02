@@ -1,0 +1,80 @@
+{% extends "otree/Page.html" %}
+
+{% block app_scripts %}
+    <script src="{% static 'global/js/VT_functionality.js' %}"></script> 
+    <script src="{% static 'global/js/FriendlyChecks.js' %}"></script> 
+    <script>
+        const bRequireFS    = js_vars.bRequireFS;
+        const bCheckFocus   = js_vars.bCheckFocus;
+        const defaultPixel  = js_vars.dPixelRatio;
+        var TBlur           = new Date().getTime();
+        var TFocus          = new Date().getTime();
+
+        // When page is loaded
+        document.addEventListener("DOMContentLoaded", function() {
+            let body = document.getElementById('game-container');
+            InitializeFriendlyChecks(body, bRequireFS,bCheckFocus);             // Initialize FS and focus checks
+            InitializeVT(body);                                                 // Initialize visual tracing
+            hideEverything();                                                   // Hide Everything at the beginning                     
+            ConvertButtons2VT('r0', sActivation = 'mouseover', 'r0');           // Mouseover for Row0
+            ConvertButtons2VT('r1', sActivation = 'mouseover', 'r1');           // Mouseover for Row1
+            ConvertButtons2VT('r2', sActivation = 'mouseover', 'r2');           // Mouseover for Row2
+        });
+
+    </script>
+{% endblock %}
+
+{% block app_styles %}
+    <link href="{% static 'global/css/FriendlyChecks.css' %}" rel="stylesheet">
+    <link href="{% static 'global/css/VT_functionality.css' %}" rel="stylesheet">
+    <link href="{% static 'EcoTask/css/Task.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+    <div id="game-container">
+        <!-- Colnames -->
+        <div  class="game-btn empty"> </div> 
+        <button type="button" class="game-btn c0 btn-attr" id="C0"> Product 1 </button> 
+        <button type="button" class="game-btn c1 btn-attr" id="C1"> Product 2 </button> 
+        <div class="break"> </div>
+        <!-- Row 0 -->
+        <button type="button" class="game-btn btn-attr r0" id="R0"> Price </button> 
+        <button type="button" class="game-btn btn-outcome r0 c0" id="R0C0"> 
+            <div class="btn-content"> {{ P0 }} </div>
+            <div class="btn-hidden">  </div>
+        </button> 
+        <button type="button" class="game-btn btn-outcome r0 c1" id="R0C1">
+            <div class="btn-content"> {{ P1 }} </div>
+            <div class="btn-hidden">  </div>
+        </button> 
+        <div class="break"> </div>
+        <!-- Row 1 -->
+        <button type="button" class="game-btn btn-attr r1" id="R1"> {{ Attr1 }} </button> 
+        <button type="button" class="game-btn btn-outcome r1 c0" id="R1C0"> 
+            <div class="btn-content"> <img class="img-rating" src="{% static A10 %}" /> </div>
+            <div class="btn-hidden">  </div>
+        </button> 
+        <button type="button" class="game-btn btn-outcome r1 c1" id="R1C1">
+            <div class="btn-content"> <img class="img-rating" src="{% static A11 %}" /> </div>
+            <div class="btn-hidden">  </div>
+        </button> 
+        <div class="break"> </div>
+        <!-- Row 2 -->
+        <button type="button" class="game-btn r2 btn-attr"  id="R2"> {{ Attr2 }} </button> 
+        <button type="button" class="game-btn btn-outcome r2 c0" id="R2C0"> 
+            <div class="btn-content"> <img class="img-rating" src="{% static A20 %}" /> </div>
+            <div class="btn-hidden">  </div>
+        </button> 
+        <button type="button" class="game-btn btn-outcome r2 c1" id="R2C1">
+            <div class="btn-content"> <img class="img-rating" src="{% static A21 %}" /> </div>
+            <div class="btn-hidden">  </div>
+        </button> 
+        <div class="break"> </div>
+        <!-- Decision Buttons -->
+        <div  class="game-btn empty"> </div> 
+        <button class="game-btn dec-btn" name='iDec' value='0'> Product 1 </button> 
+        <button  class="game-btn dec-btn"  name='iDec' value='0'> Product 2 </button> 
+    
+    </div>
+{% endblock %}
