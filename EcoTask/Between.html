@@ -4,6 +4,16 @@
     <script src="{% static 'global/js/FriendlyChecks.js' %}"></script>
     <script>
         const NextButton = document.getElementById('between-button');
+        const bRequireFS    = js_vars.bRequireFS;
+        const bCheckFocus   = js_vars.bCheckFocus;
+        const defaultPixel  = js_vars.dPixelRatio;
+        var TBlur           = new Date().getTime();
+        var TFocus          = new Date().getTime();
+        document.addEventListener("DOMContentLoaded", function() {
+            let body = document.getElementById('game-body');
+            InitializeFriendlyChecks(body, bRequireFS,bCheckFocus);             // Initialize FS and focus checks
+        });
+
         if (js_vars.StartLeft) {
             console.log('Button on the left')
             NextButton.style.left = '10vw'

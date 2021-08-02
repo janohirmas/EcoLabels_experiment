@@ -118,6 +118,16 @@ class Instructions(Page):
         part = player.participant
         part.sTreesLocation = player.sTreesLocation
 
+    @staticmethod
+    def js_vars(player: Player):
+        session = player.session
+        p = player.participant
+        return {
+            'bRequireFS'        : session.config['bRequireFS'],
+            'bCheckFocus'       : session.config['bCheckFocus'],
+            'dPixelRatio'       : p.dPixelRatio,
+        }
+
 
     # @staticmethod
     # def live_method(player: Player, sLoc):

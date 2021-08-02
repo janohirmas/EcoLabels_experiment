@@ -19,7 +19,9 @@
 
 body {
     background-color: var(--background-body);
+    overflow: hidden;
 }
+
 /* oTree divs */ 
 .otree-body {
     margin: 0;
@@ -224,7 +226,7 @@ input[type="checkbox"]:required:valid + label {
     transition: background-color 0.6s ease;
 }
 
-.active,
-.dot:hover {
+.active.dot, .dot:hover {
     background-color:  var(--color-dot-hover);
 }
+

@@ -1,21 +1,87 @@
-.hidden {
-    color:  rgb(200, 200, 200);
-    background-color: rgb(200, 200, 200);
-  }
-  
-  .non-hidden {
-    color: #000;
-    background-color: rgb(200, 200, 200);
-  }
-  
-  .hidden .button-img{
-    display: none;
-  }
-  
-  .non-hidden .button-img{
-    display: inline-flex;
-  }
+:root {
+  /* PALETTE */
+  --color1:             #EDE7DC;
+  --color2:             #BDC3CB;
+  --color3:             #CCAFA5;
+  --color4:             #DCD2CC;
+  --color5:             #C0C0C0;
+  --color6:             #6C6A61;
+  --color7:             #2e4db4;
+  --color8:             #C0C9CC;
+  --color9:             #F2F1F0;
+  --color10:            #171515;
+  /* USE OF COLORS */
+  --background-body:      var(--color9);
+  --background-outcome:   var(--color5);
+  --background-hidden:    var(--color5);
+  --background-attr:      var(--color6);
+  --background-dec:       var(--color7);
+  --color-dec:            var(--color9);
+  --color-attr:           var(--color9);
+  --color-outcome:        var(--color10);
+  /* DIMENSION VARIABLES */
+  --font-size-outcome:    0.75em;
+  --font-size-attr:       1.25em;
+  --font-size-dec:        1.5em;
+  --sq-width:             15vh;
+}
 
-  .button-outcome {
-    font-size: 1em;
-  }
+
+/* FUNCTIONAL SETTINGS  */
+
+.break {
+  width: 100%;
+  height: 0;
+}
+
+.img-rating {
+  width: 90%;
+  height: auto;
+}
+
+.active {
+  display: block;
+}
+
+.inactive {
+  display: none;
+}
+
+.debug-info {
+  display: none;
+}
+
+.game-btn:focus {
+  outline: 0;
+}
+
+
+.btn-outcome {
+  background-color: var(--background-outcome);
+  color:            var(--color-outcome);
+  font-size:        var(--font-size-outcome);
+}  
+
+
+.btn-hidden{
+  width: 100%;
+}
+
+
+.btn-content{
+  width: 100%;
+}
+
+.game-btn {
+  width: var(--sq-width);
+  height: var(--sq-width);
+  flex-basis: auto;
+  border: 0;
+  padding: 0;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: default;
+  margin: 1px;
+}
