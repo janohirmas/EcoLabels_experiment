@@ -49,6 +49,7 @@ summary, time, mark, audio, video {
   --font-size-attr:       1.25em;
   --font-size-dec:        1.5em;
   --sq-width:             15vh;
+  --dec-heigth:           10vh;
 }
 
 body{
@@ -115,6 +116,7 @@ body{
   font-size:        var(--font-size-dec);
   border-radius: 3px;
   margin-top: 15px; 
+  height: var(--dec-heigth);
 }
 
 .btn-hidden{

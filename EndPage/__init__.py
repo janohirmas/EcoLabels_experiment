@@ -46,6 +46,7 @@ class Group(BaseGroup):
 class Player(BasePlayer):
 
     # Selected Trial
+    partID              = models.StringField()
     SelectedTrial       = models.IntegerField()
     Bonus               = models.FloatField()
     TreeAmount          = models.IntegerField()
@@ -102,6 +103,7 @@ class EndPage(Page):
         start   = part.startTime
         end     = time.time()
         # Save relevant variables
+        player.partID           = part.code
         player.ProlificID       = part.label
         player.TotalTime        = end - start
         player.SelectedTrial    = int(part.SelectedTrial)

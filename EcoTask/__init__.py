@@ -114,7 +114,7 @@ def creating_session(subsession):
             p.treatment         = session.config['iTreatment']
             p.PresOrder         = random.choice(['Qual', 'Sus'])
             p.SelectedTrial     = random.choice(range(Constants.num_prounds+1,Constants.num_rounds))
-            print('Trial selected for participant {}: {}'.format(p.label,p.SelectedTrial))
+            print('Trial selected for participant {}: {}'.format(p.code,p.SelectedTrial))
     ## SETUP FOR PLAYER ROUNDS
     for player in subsession.get_players():
         ## Load participant and save participant variables in player
