@@ -9,9 +9,13 @@
     </div>
     <div class="text-container-info"> 
         <p>
-            The products {{ First.p1 }} rating (<img class="symbol" src="{% static First.Symbol %}" />) represents the product's {{ First.p2 }}. 
-        If you purchase a product with higher {{ First.p2 }}, you will obtain a larger {{ First.p3 }}.
-        This graph shows how much the {{ First.p3 }} can be, depending on the {{ First.p1 }} rating. 
+            The products {{ First.p1 }} rating (<img class="symbol" src="{% static First.Symbol %}" />) represents the product's {{ Second.p2 }}. 
+        </p>
+        <p>
+        Higher {{ First.p2 }} <span>&#8594;</span> higher {{ First.p3 }}.
+        </p>
+        <p>
+        This graph shows {{ First.p3 }}, depending on the {{ First.p1 }} rating. 
         </p>
         
         <p> Products with: </p>

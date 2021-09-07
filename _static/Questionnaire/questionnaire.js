@@ -220,7 +220,7 @@ const shuffleQuestions = [
         type: "scale",
     },
     {
-        question: "I am paying attention, so I select '1'.",
+        question: "To show you are paying attention, please select '1'.",
         name: "V2",
         type: "scale",
     },    

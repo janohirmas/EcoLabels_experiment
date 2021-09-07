@@ -37,9 +37,17 @@ function InitializeVT(Body,sNameButtonClicks='sButtonClick',sNameTimeClicks='sTi
   sTimeClick.id    = sNameTimeClicks;
   sTimeClick.value = '';
 
+  // Create hidden input (Time Buttons)
+  var dTime2First   = document.createElement("input");
+  dTime2First.type  = 'hidden';
+  dTime2First.name  = 'dTime2First';
+  dTime2First.id    = 'dTime2First';
+  dTime2First.value = '';
+  
   // Append Inputs
   Body.appendChild(sButtonClick);
   Body.appendChild(sTimeClick);
+  Body.appendChild(dTime2First);
 }
 
 
@@ -97,6 +105,11 @@ function AddVisualTracer(btn,sActivation='click',sDisplayClass) {
           hideEverything();                                        // display specific content and hide rest
           displayContent(sDisplayClass);
             
+          // If it is the first fixation, record time2first
+          if (sPreviousPress =='Start'){
+            dTime2First.value = now - StartTime;
+          };
+          // Save click id
           if (sButtonClick.value) {                                // record button pressed
             sButtonClick.value = sButtonClick.value+';'+btn.id;
           } else {
@@ -125,6 +138,11 @@ function AddVisualTracer(btn,sActivation='click',sDisplayClass) {
   } else if (sActivation=='mouseover') {
     // mouseover
     btn.addEventListener('mouseover', function() {
+      // If it is the first fixation, record time2first
+      if (sPreviousPress =='Start'){
+        now               = new Date().getTime();
+        dTime2First.value = now - StartTime;
+      };
       // Check that new element is pressed
       if (btn.id != sPreviousPress) {
         // Record new time

@@ -153,6 +153,11 @@ li {
     text-align: left;
 }
 
+.slide2-description {
+    font-size: 0.8em;
+    text-align: center;
+    font-weight: bold;
+}
 .flex-questions li:last-child {
     border-bottom: none;
     padding-top: 3vh;

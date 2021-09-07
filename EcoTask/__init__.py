@@ -87,6 +87,8 @@ class Player(BasePlayer):
     PresOrder           = models.StringField(blank=True)
     sAttrOrder          = models.StringField(blank=True)
     bStartLeft          = models.BooleanField(blank=True)
+    dRTbetween          = models.FloatField(blank=True)
+    dTime2First         = models.FloatField(blank=True)
     ## Focus Variables
     iFocusLost          = models.IntegerField(blank=True)
     dFocusLostT         = models.FloatField(blank=True)
@@ -278,6 +280,7 @@ class Task(Page):
         'iFocusLost',
         'dFocusLostT',
         'iFullscreenChange',
+        'dTime2First',
     ]
 
 
@@ -341,6 +344,11 @@ class Task(Page):
                 participant.S = player.S1
         
 class Between(Page):
+    form_model = 'player'
+    form_fields = [
+        'dRTbetween',
+    ]
+    
     @staticmethod
     def js_vars(player: Player):
         session = player.subsession.session
