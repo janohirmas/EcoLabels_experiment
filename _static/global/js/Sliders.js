@@ -1,15 +1,18 @@
 // General variables and constants
 var iSlideIndex     = 0;                    // This variable is to know in which slide you are
+var before          = new Date().getTime();
+var now             = new Date().getTime();
+var inputSlideSeq, inputSlideTim ;
 
 // When page is loaded
 document.addEventListener("DOMContentLoaded", function() {
     showSlides(iSlideIndex);                                            // show first slide
     // * Add here anything that needs to be added to the page when the rest of the content is already loaded
-    InitializeVT(document.getElementsByClassName('IntroContent')[0]);   // Initialize visual tracing
-    ConvertButtons2VT('mousy', sActivation = 'mouseover');              // Mouseover for slide 4
-    let slides = document.getElementsByClassName("slide-item");
-
+    TStart          = new Date().getTime();                             // Start Timer
+    let slides      = document.getElementsByClassName("slide-item");
     adjustElem(slides[iSlideIndex]);                // adjust slide size   
+    inputSlideSeq = document.getElementById('sSlideSequence');
+    inputSlideTim = document.getElementById('sSlideTime');
 });
 
 // *********************************************************************
@@ -152,6 +155,9 @@ function validateAnswers() {
         }
     }
     if (iCorrect === lQuestions.length) {                                               // if all correct, Submit
+        now = new Date().getTime(); 
+        inputSlideSeq.value += iSlideIndex;
+        inputSlideTim.value += now - before;
         document.getElementById('submit').click();
     }
 
@@ -187,7 +193,15 @@ function ArrowText() {
 // *********************************************************************
 
 function plusSlides(n) {
-    if (canMove(iSlideIndex)) { showSlides(iSlideIndex += n)};
+    if (canMove(iSlideIndex)) { 
+
+        now = new Date().getTime(); 
+        let dif = now - before
+        inputSlideTim.value    += `${dif},`
+        before = now;
+        showSlides(iSlideIndex += n)
+        inputSlideSeq.value += `${iSlideIndex},`;
+    };
 }
 
   // *********************************************************************

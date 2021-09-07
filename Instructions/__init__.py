@@ -69,8 +69,10 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    sTreesLocation = models.StringField()
-    dPixelRatio    = models.FloatField()
+    sTreesLocation  = models.StringField()
+    dPixelRatio     = models.FloatField()
+    sSlideSequence  = models.StringField(blank=True)
+    sSlideTime      = models.StringField(blank=True)
 
 # PAGES
 class Introduction(Page):
@@ -105,7 +107,11 @@ class Calibration(Page):
 
 class Instructions(Page):
     form_model = 'player'
-    form_fields = [ 'sTreesLocation' ]
+    form_fields = [ 
+        'sTreesLocation',
+        'sSlideSequence',
+        'sSlideTime',
+        ]
     
     
     @staticmethod

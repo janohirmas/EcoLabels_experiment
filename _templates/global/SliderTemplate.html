@@ -36,10 +36,15 @@
   {% endfor %}
 </div>
 
+<button id="submit" style="display: none;"></button>
+<input type="hidden" id="sSlideSequence" name="sSlideSequence" val="">
+<input type="hidden" id="sSlideTime" name="sSlideTime" val="">
+
 {% endblock %}
 
 {% block scripts %}
   <script src="{% static 'global/js/Sliders.js' %}"></script>
+  
 {% endblock %}
 
 {% block styles %}
