@@ -184,7 +184,7 @@ function CreateCalibrationPopUp() {
   
   // Text content
   PopUpText1.innerHTML             = 'Please set display to Full Screen.';
-  PopUpText3.innerHTML             = 'Please Zoom the screen to 100%.';
+  PopUpText3.innerHTML             = 'Please adjust the zoom of the screen to 100%.';
 
   switch (getOS()) {
     case 'Mac OS' : 
