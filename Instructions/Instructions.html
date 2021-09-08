@@ -26,7 +26,12 @@
     InitializeFriendlyChecks(body, bRequireFS,bCheckFocus);             // Initialize FS and focus checks
     InitializeVT(body);                                                 // Initialize visual tracing
     hideEverything();                                                   // Hide Everything at the beginning                     
-    ConvertButtons2VT('mousy', sActivation = 'mouseover');           // Mouseover for Row0
+    ConvertButtons2VT('mousy', sActivation = 'mouseover');              // Mouseover for Row0
+    let dropdown = document.getElementById('sTreesLocation');
+    dropdown.onclick = () => {
+      let input = document.getElementById('bClickedLocation');
+      input.value = true;
+    };
   });
   // Check if person did mouseover the button in slide 4. 
   document.getElementById("b3").addEventListener("mouseover", (event) => {
@@ -48,6 +53,8 @@
     let bConditions = !(iSlideIndex===3 && !bClickHere);
     return bConditions;
   };
+
+  
 </script>
 
 {% endblock %}

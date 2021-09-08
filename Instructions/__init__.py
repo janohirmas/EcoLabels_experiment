@@ -69,10 +69,11 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    sTreesLocation  = models.StringField()
-    dPixelRatio     = models.FloatField()
-    sSlideSequence  = models.StringField(blank=True)
-    sSlideTime      = models.StringField(blank=True)
+    sTreesLocation      = models.StringField()
+    bClickedLocation    = models.BooleanField()
+    dPixelRatio         = models.FloatField()
+    sSlideSequence      = models.StringField(blank=True)
+    sSlideTime          = models.StringField(blank=True)
 
 # PAGES
 class Introduction(Page):
@@ -109,6 +110,7 @@ class Instructions(Page):
     form_model = 'player'
     form_fields = [ 
         'sTreesLocation',
+        'bClickedLocation',
         'sSlideSequence',
         'sSlideTime',
         ]
