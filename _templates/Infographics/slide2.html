@@ -9,19 +9,23 @@
         <p>
             The products {{ Second.p1 }} rating (<img class="symbol" src="{% static Second.Symbol %}" />) represents the product's {{ Second.p2 }}. 
         </p>
+        <div style="margin-bottom: 1em">
+            10 {{ Second.p2 }} points <span> &#8594; </span> {{ Second.p3 }}. 
+            <div class="help-tip">
+                <p> {{ Second.disclaimer }} </p>
+            </div>
+        </div>
+
         <p>
-        Higher {{ Second.p2 }} <span>&#8594;</span> higher {{ Second.p3 }}.
-        </p>
-        <p>
-        This graph shows {{ Second.p3 }}, depending on the {{ Second.p1 }} rating. 
+        This graph shows the amount of points, depending on the {{ Second.p1 }} rating. 
         </p>
         
         
         <p> Products with: </p>
         <ul>
-            <li>  1 <img class="symbol" src="{% static Second.Symbol %}" /> : between {{ Second.low1 }} and  {{ Second.hi1 }}  {{ Second.p4 }}  </li>
-            <li>  2 <img class="symbol" src="{% static Second.Symbol %}" /> : between {{ Second.low2 }} and  {{ Second.hi2 }}  {{ Second.p4 }}  </li>
-            <li>  3 <img class="symbol" src="{% static Second.Symbol %}" /> : between {{ Second.low3 }} and  {{ Second.hi3 }}  {{ Second.p4 }}  </li>
+            <li>  1 <img class="symbol" src="{% static Second.Symbol %}" /> will grant between {{ Second.low1 }} and  {{ Second.hi1 }} points.  </li>
+            <li>  2 <img class="symbol" src="{% static Second.Symbol %}" /> will grant between {{ Second.low2 }} and  {{ Second.hi2 }} points.  </li>
+            <li>  3 <img class="symbol" src="{% static Second.Symbol %}" /> will grant between {{ Second.low3 }} and  {{ Second.hi3 }} points.  </li>
         </ul>
     </div>
 </div>

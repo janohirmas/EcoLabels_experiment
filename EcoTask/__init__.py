@@ -48,14 +48,14 @@ class Constants(BaseConstants):
     sPathS_cv           = sImagePath_static+'Infographic_graphs/sus_concave.png'
     sPathS_cx           = sImagePath_static+'Infographic_graphs/sus_convex.png' 
     # Variables for Infographics
-    Q1l,Q1h = 4, 5
-    Q2l,Q2h = 5, 6
-    Q3l,Q3h = 6, 7
-    S1l, S1h = 0, 2
-    S2l_l, S2h_l = 2, 4
-    S2l_cv, S2h_cv = 3, 5
-    S2l_cx, S2h_cx = 1, 3
-    S3l, S3h  = 4,6 
+    Q1l,Q1h = 30, 40
+    Q2l,Q2h = 40, 50
+    Q3l,Q3h = 50, 60
+    S1l, S1h = 0, 10
+    S2l_l, S2h_l = 10, 20
+    S2l_cv, S2h_cv = 15, 25
+    S2l_cx, S2h_cx = 5, 15
+    S3l, S3h  = 20, 30 
     Currency = 'Pounds'
   
     ## Slides Infographics
@@ -379,7 +379,7 @@ class Infographics(Page):
             'Title' : 'Sustainability',
             'p1' : 'leaf',
             'p2' : 'sustainability',
-            'p3' : 'amount of planted trees',
+            'p3' : 'One tree planted',
             'p4' : 'trees',
             'Symbol' : Constants.imgLeaf_symbol,
             'low1' : Constants.S1l,
@@ -388,6 +388,7 @@ class Infographics(Page):
             'hi1' : Constants.S1h,
             'hi2' : S2high,
             'hi3' : Constants.S3h,
+            'disclaimer' : "We will sum the points of all participants to calculate how many trees we need to plant and round it up. Let's say you get 0.8 trees and I get 0.5, that means 1.3 trees in total, so we will plant 2! So every point counts! ",
         }
         dicQualityInfo = {
             'Item' : 'Star-rating & Bonus Payment',
@@ -395,7 +396,7 @@ class Infographics(Page):
             'Title' : 'Quality',
             'p1' : 'star',
             'p2' : 'quality',
-            'p3' : 'bonus payment',
+            'p3' : 'One pound (£)',
             'p4' : Constants.Currency,
             'Symbol' : Constants.imgStar_symbol,
             'low1' : Constants.Q1l,
@@ -404,6 +405,7 @@ class Infographics(Page):
             'hi1' : Constants.Q1h,
             'hi2' : Constants.Q2h,
             'hi3' : Constants.Q3h,
+            'disclaimer' : 'You will only get values with no decimals or 50p (4.0 or 4.5 for example)',
         }
         # Pick images based on treatment for sustainability info
         if participant.PresOrder == 'Qual':
@@ -425,11 +427,18 @@ class Infographics(Page):
     def js_vars(player: Player):
         session = player.subsession.session
         p = player.participant
+        # Pick images based on treatment for sustainability info
+        if p.PresOrder == 'Qual':
+            first, second    = Constants.Q3l, Constants.S1h
+        else:
+            first, second  = Constants.S3l, Constants.Q1h
         return {
             'StartLeft'         : player.bStartLeft,
             'bRequireFS'        : session.config['bRequireFS'],
             'bCheckFocus'       : session.config['bCheckFocus'],
             'dPixelRatio'       : p.dPixelRatio,
+            'firstAnswer'       : str(first),
+            'secondAnswer'       : str(second),
         }
 
 

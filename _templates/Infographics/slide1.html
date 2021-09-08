@@ -9,20 +9,23 @@
     </div>
     <div class="text-container-info"> 
         <p>
-            The products {{ First.p1 }} rating (<img class="symbol" src="{% static First.Symbol %}" />) represents the product's {{ Second.p2 }}. 
+            The products {{ First.p1 }} rating (<img class="symbol" src="{% static First.Symbol %}" />) represents the product's {{ First.p2 }} (in points). 
         </p>
+        <div style="margin-bottom: 1em">
+            10 {{ First.p2 }} points <span> &#8594; </span> {{ First.p3 }}. 
+            <div class="help-tip">
+                <p> {{ First.disclaimer }} </p>
+            </div>
+        </div>
         <p>
-        Higher {{ First.p2 }} <span>&#8594;</span> higher {{ First.p3 }}.
-        </p>
-        <p>
-        This graph shows {{ First.p3 }}, depending on the {{ First.p1 }} rating. 
+        This graph shows the amount of points, depending on the {{ First.p1 }} rating. 
         </p>
         
         <p> Products with: </p>
         <ul>
-            <li>  1 <img class="symbol" src="{% static First.Symbol %}" /> will grant between {{ First.low1 }} and  {{ First.hi1 }}  {{ First.p4 }}  </li>
-            <li>  2 <img class="symbol" src="{% static First.Symbol %}" /> will grant between {{ First.low2 }} and  {{ First.hi2 }}  {{ First.p4 }}  </li>
-            <li>  3 <img class="symbol" src="{% static First.Symbol %}" /> will grant between {{ First.low3 }} and  {{ First.hi3 }}  {{ First.p4 }}  </li>
+            <li>  1 <img class="symbol" src="{% static First.Symbol %}" /> will grant between {{ First.low1 }} and  {{ First.hi1 }}  points  </li>
+            <li>  2 <img class="symbol" src="{% static First.Symbol %}" /> will grant between {{ First.low2 }} and  {{ First.hi2 }}  points  </li>
+            <li>  3 <img class="symbol" src="{% static First.Symbol %}" /> will grant between {{ First.low3 }} and  {{ First.hi3 }}  points  </li>
         </ul>
     </div>
 </div>

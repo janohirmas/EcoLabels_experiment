@@ -5,7 +5,7 @@ SESSION_CONFIGS = [
     dict(
     name='session_config',
     display_name='Ecolabels Config',
-    num_demo_participants=2,
+    num_demo_participants=1,
     app_sequence=['Instructions', 'EcoTask', 'Questionnaire' ,'EndPage'],
     iTreatment = 1,
     iTimeOut=0,
