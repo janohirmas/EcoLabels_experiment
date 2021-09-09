@@ -188,7 +188,7 @@ function CreateCalibrationPopUp() {
 
   switch (getOS()) {
     case 'Mac OS' : 
-      PopUpText2.innerHTML             = 'Press ⌘+⇧+F'; 
+      PopUpText2.innerHTML             = 'Press ⌘,⇧,F (command, shift, "F" for Fullscreen Mode)'; 
       PopUpText4.innerHTML             = 'Press ⌥,⌘,= (option, command, equal to zoom-in) <br> ⌥,⌘,- ( option, command, minus to zoom-out) '
       break;
     case 'Windows' :
