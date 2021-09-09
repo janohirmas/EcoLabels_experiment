@@ -121,7 +121,12 @@ def creating_session(subsession):
             lTreat, lRownames   = createTreatment()
             p.vRownames         = lRownames
             p.mTreat            = lTreat
-            p.treatment         = session.config['iTreatment']
+            iTreatment = session.config['iTreatment']
+            if iTreatment == 4:
+                p.treatment     = random.randint(1,4)
+            else:
+                p.treatment     = iTreatment
+                
             p.PresOrder         = random.choice(['Qual', 'Sus'])
             p.SelectedTrial     = random.choice(range(Constants.num_prounds+1,Constants.num_rounds))
             print('Trial selected for participant {}: {}'.format(p.code,p.SelectedTrial))
