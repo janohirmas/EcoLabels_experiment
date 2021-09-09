@@ -72,13 +72,15 @@ class EndPage(Page):
         S = int(participant.S)
         T = int(participant.treatment)
         Q = int(participant.Q)
-        print(type(T))
-        print([S==1,T==2])
+        print('Determining Treatment')
         if (T==1):
+            print('Treatment 1')
             Smin = Constants.S1 + S*Constants.S_step 
         elif (S==1 & T==2):
+            print('Treatment 2')
             Smin = Constants.S2_2 
         elif (S==1 & T==3):
+            print('Treatment 3')
             Smin = Constants.S2_3
         Smax = Smin + Constants.S_step +1
         Svalue = random.randint(Smin,Smax)/10
