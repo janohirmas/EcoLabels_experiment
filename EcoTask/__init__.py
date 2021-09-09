@@ -18,10 +18,18 @@ class Constants(BaseConstants):
     ## Quality Sets 
     lQc,lQs, lQe= [[1,0],[2,0],[2,1]], [[0,1],[0,2],[1,2]], [[0,0],[1,1],[2,2]]
     ## Price Sets
-    iP1,iP2,iP3,iP4 = [1,2,3,4]
-    lPoe = [[iP2,iP1],[iP3,iP1],[iP3,iP2],[iP4,iP1],[iP4,iP2],[iP4,iP3]]
-    lPse = [[iP1,iP2],[iP1,iP3],[iP2,iP3],[iP1,iP4],[iP2,iP4],[iP3,iP4]]
-    lPeq = [[iP1,iP1],[iP2,iP2],[iP3,iP3],[iP4,iP4]]
+    lPrices = [1,1.5,2,2.5,3,3]
+    lPoe, lPse, lPeq = [],[],[]
+
+    for x  in lPrices:
+        for y in lPrices:
+            lPair = [x,y]
+            if x>y:
+                lPoe.append(lPair)
+            elif x<y: 
+                lPse.append(lPair)
+            else:
+                lPeq.append(lPair)
 
     ## Number of trials
     num_reps            = 1 # number of repetitions per permutation

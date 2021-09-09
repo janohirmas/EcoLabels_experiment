@@ -19,42 +19,25 @@
             ConvertButtons2VT('r0', sActivation = 'mouseover', 'r0');           // Mouseover for Row0
             ConvertButtons2VT('r1', sActivation = 'mouseover', 'r1');           // Mouseover for Row1
             ConvertButtons2VT('r2', sActivation = 'mouseover', 'r2');           // Mouseover for Row2
+            resizeButtons();                                                    // Resize the text of all overflown buttons
         });
 
-        function adjustElem(elem) {
-            let zoom = 1;  
-            zoomChildren(elem,zoom);                                    // Set initial zoom as 100%
-            let overflow = checkOverflow(elem);                         // boolean describing if element is overflown
-            let iter = 0;                                               // max iteration in case something goes wrong
-            // Iterate until there is no overflow
-            while (overflow && iter<90) {
-                zoom += -0.01;                                          // reduce zoom in 1%
-                zoomChildren(elem,zoom);
-                overflow = checkOverflow(elem);
-                iter++;
-            };
-            if (iter==30) {console.log('problem resizing element')};   // notify in console if there is no convergence
-        };
-
-        function zoomChildren(elem,zoom) {
-            let children = elem.children;
-            if (typeof children !=='undefined') {
-                for (let i=0; i<children.length; i++) {
-                    if ('zoom' in children[i].style) {
-                        children[i].style.zoom = zoom;
-                    } else {
-                        mgH = children[i].offsetHeight*(zoom-1)/2;
-                        mgW = children[i].offsetWidth*(zoom-1)/2;
-                        children[i].style.margin = `${mgH}px ${mgW}px`;
-                        children[i].style.MozTransform = `scale(${zoom})`;
-                    }
-                };
+        function resizeButtons() {
+            lButtons = document.getElementsByClassName('game-btn');
+            for (let i=0; i<lButtons.length; i++) {
+                adjustText(lButtons[i]);
             };
         };
 
-        function checkOverflow(elem) {
-            let overflow = elem.clientWidth < elem.scrollWidth || elem.clientHeight < elem.scrollHeight;
-            return overflow;
+        function adjustText(elem) {
+            let ratioWidth = elem.clientWidth/elem.scrollWidth;
+            let ratioHeight = elem.clientHeight/elem.scrollHeight;
+            // Set initial scale as 100%
+            if (ratioWidth<1 || ratioHeight<1) {
+                let ratio = Math.floor(100*Math.min(ratioWidth,ratioHeight))-1
+                elem.style.fontSize = `${ratio}%`;
+                console.log(`Resized ${elem.id} to ${ratio}%`);
+            };                                  
         };
     </script>
 {% endblock %}
