@@ -343,9 +343,9 @@ class Task(Page):
         # If this is selected trial, save relevant variables
         if (participant.SelectedTrial==player.round_number):
             if (player.iDec==0):
-                participant.Price = player.P1
-                participant.Q = player.Q1
-                participant.S = player.S1
+                participant.Price = player.P0
+                participant.Q = player.Q0
+                participant.S = player.S0
             else:
                 participant.Price = player.P1
                 participant.Q = player.Q1
@@ -396,7 +396,7 @@ class Infographics(Page):
             'hi1' : Constants.S1h,
             'hi2' : S2high,
             'hi3' : Constants.S3h,
-            'disclaimer' : "We will sum the points of all participants to calculate how many trees we need to plant and round it up. Let's say you get 0.8 trees and I get 0.5, that means 1.3 trees in total, so we will plant 2! So every point counts! ",
+            'disclaimer' : "We will sum the points of all participants to calculate how many trees we need to plant and round it up. Let's say you get 0.8 trees and I get 0.5, that means 1.3 trees in total. Then, we will plant 2 trees! Every point counts! ",
         }
         dicQualityInfo = {
             'Item' : 'Star-rating & Bonus Payment',

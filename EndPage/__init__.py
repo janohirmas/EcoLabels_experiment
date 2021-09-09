@@ -1,5 +1,6 @@
 from otree.api import *
 from numpy import random
+import numpy as np
 import time
 
 
@@ -14,13 +15,13 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
     # Quality and Sustainability ranges
-    Q1      = 5
-    Q_step  = 1
+    Q1      = 30
+    Q_step  = 10
     S1      = 0
-    S2_2    = 3
-    S2_3    = 1
-    S3      = 4
-    S_step  = 2
+    S2_2    = 15
+    S2_3    = 5
+    S3      = 10
+    S_step  = 10
     # Prolific Link
     ProlificLink = "https://www.google.com"
     Slides = [
@@ -73,16 +74,18 @@ class EndPage(Page):
         Q = int(participant.Q)
         print(type(T))
         print([S==1,T==2])
-        if (S==1 & T==1):
-            Svalue = Constants.S1 + S*Constants.S_step + random.randint(0,Constants.S_step)
+        if (T==1):
+            Smin = Constants.S1 + S*Constants.S_step 
         elif (S==1 & T==2):
-            Svalue = Constants.S2_2 + random.randint(0,Constants.S_step)
+            Smin = Constants.S2_2 
         elif (S==1 & T==3):
-            Svalue = Constants.S2_3+ random.randint(0,Constants.S_step) 
-        else:
-            Svalue = Constants.S1 + S*Constants.S_step + random.randint(0,Constants.S_step)
+            Smin = Constants.S2_3
+        Smax = Smin + Constants.S_step +1
+        Svalue = random.randint(Smin,Smax)/10
         ## Determining value of Quality rating
-        Qvalue = Constants.Q1 + Q*Constants.Q_step + random.randint(0,Constants.Q_step)
+        Qmin = Constants.Q1 + Q*Constants.Q_step
+        Qmax = Qmin + Constants.Q_step + 1
+        Qvalue = np.floor(random.randint(Qmin,Qmax)/5)/2
         participant.Bonus = Qvalue - int(participant.Price)
         participant.TreeAmount = Svalue
         
