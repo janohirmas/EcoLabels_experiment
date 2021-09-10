@@ -166,7 +166,14 @@ function CheckFS() {
 //  Function:       1. Create FullScreen Pop-Up Warning
 //                      with id='fs-popup'
 // ----------------------------------------------------- //
-function CreateCalibrationPopUp() {
+function CreateFullScreenPopUp(bReqCalibrate=False) {
+  let isSafari                    = (
+    /constructor/i.test(window.HTMLElement) || 
+    (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] ||
+    (typeof safari !== 'undefined' && window['safari'].pushNotification)));
+  let os = getOS();
+  if (isSafari) {os = 'Safari'   }
+
   // Create Div fullscreen and Button 
   let PopUp                         = document.createElement('div');
   let PopUpText1                    = document.createElement('p');
@@ -186,11 +193,15 @@ function CreateCalibrationPopUp() {
   PopUpText1.innerHTML             = 'Please set display to Full Screen.';
   PopUpText3.innerHTML             = 'Please adjust the zoom of the screen to 100%.';
 
-  switch (getOS()) {
+  switch (os) {
     case 'Mac OS' : 
       PopUpText2.innerHTML             = 'Press ⌘,⇧,F (command, shift, "F" for Fullscreen Mode)'; 
-      PopUpText4.innerHTML             = 'Press ⌥,⌘,= (option, command, equal to zoom-in) <br> ⌥,⌘,- ( option, command, minus to zoom-out) '
+      PopUpText4.innerHTML             = 'Press ⌥,⌘,= (option, command, equal to zoom-in) <br> ⌥,⌘,- ( option, command, minus to zoom-out) ';
       break;
+    case 'Safari':
+      PopUpText2.innerHTML             = 'Please click on top <b> View </b>  and make sure to deactivate <b> Always Show Toolbar in Full Screen </b> <br> Press ⌘,Control,F (command, Control, "F" for Fullscreen Mode)';
+      PopUpText4.innerHTML             = 'Press ⌘,+ (command, plus to zoom-in) <br> ⌘,- ( command, minus to zoom-out) ';
+      break;  
     case 'Windows' :
       PopUpText2.innerHTML             = 'Press F11'; 
       PopUpText4.innerHTML             = 'Press Ctrl,= (Control, equal to zoom-in) <br> Ctrl,-( Control, minus to zoom-out) '
@@ -204,46 +215,14 @@ function CreateCalibrationPopUp() {
 
   PopUp.appendChild(PopUpText1);
   PopUp.appendChild(PopUpText2);
-  PopUp.appendChild(PopUpText3);
-  PopUp.appendChild(PopUpText4);
+  if (bReqCalibrate) {
+    PopUp.appendChild(PopUpText3);
+    PopUp.appendChild(PopUpText4);
+  }
 
   document.body.appendChild(PopUp);
 }
 
-// ----------------------------------------------------- //
-//  Function:       1. Create FullScreen Pop-Up Warning
-//                      with id='fs-popup'
-// ----------------------------------------------------- //
-function CreateFullScreenPopUp() {
-  // Create Div fullscreen and Button 
-  let PopUp                       = document.createElement('div');
-  let PopUpText1                  = document.createElement('p');
-  let PopUpText2                  = document.createElement('p');
-
-
-  // Div Properties
-  PopUp.id                        = 'fs-popup';
-  // Include FullScreen Instructions
-  PopUpText1.className             = 'fs-popup-text';
-  PopUpText1.innerHTML             = 'Please set display to Full Screen.';
-  
-  PopUpText2.className             = 'fs-popup-text';
-  switch (getOS()) {
-    case 'Mac OS' : 
-      PopUpText2.innerHTML             = 'Press ⌘+⇧+F'; 
-      break;
-    case 'Windows' :
-      PopUpText2.innerHTML             = 'Press F11'; 
-      break;
-    case 'Linux' :
-        PopUpText2.innerHTML             = 'Press F11'; 
-        break;
-  };
-
-  PopUp.appendChild(PopUpText1);
-  PopUp.appendChild(PopUpText2);
-  document.body.appendChild(PopUp);
-}
 // ----------------------------------------------------- //
 //  Function:       Determines Operative System:
 //                  Mac OS

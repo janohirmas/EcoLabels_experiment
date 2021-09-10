@@ -90,7 +90,7 @@ class EndPage(Page):
         ## Determining value of Quality rating
         Qmin = Constants.Q1 + Q*Constants.Q_step
         Qmax = Qmin + Constants.Q_step + 1
-        Qvalue = np.floor(random.randint(Qmin,Qmax)/5)/2
+        Qvalue = np.round(random.randint(Qmin,Qmax)/5)/2
         participant.Bonus = Qvalue - float(participant.Price)
         participant.TreeAmount = Svalue
         

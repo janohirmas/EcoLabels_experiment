@@ -418,7 +418,7 @@ class Infographics(Page):
             'hi1' : Constants.Q1h,
             'hi2' : Constants.Q2h,
             'hi3' : Constants.Q3h,
-            'disclaimer' : 'You will only get values with no decimals or 50p (4.0 or 4.5 for example)',
+            'disclaimer' : 'values will be rounded up to the next 50p',
         }
         # Pick images based on treatment for sustainability info
         if participant.PresOrder == 'Qual':
