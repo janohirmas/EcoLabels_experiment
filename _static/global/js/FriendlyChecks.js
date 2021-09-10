@@ -75,8 +75,7 @@ function InitializeCalibration(GameBody) {
   dDefaultPixel.id        = 'dPixelRatio';
   dDefaultPixel.value     = 1;
   GameBody.appendChild(dDefaultPixel);
-  CreateFullScreenPopUp();
-  CreateCalibrationPopUp();
+  CreateFullScreenPopUp(true);
   CalibrateCheck();
   // Event Listener for changing screen size
   window.addEventListener('resize',  () => {
@@ -166,7 +165,7 @@ function CheckFS() {
 //  Function:       1. Create FullScreen Pop-Up Warning
 //                      with id='fs-popup'
 // ----------------------------------------------------- //
-function CreateFullScreenPopUp(bReqCalibrate=False) {
+function CreateFullScreenPopUp(bReqCalibrate=false) {
   let isSafari                    = (
     /constructor/i.test(window.HTMLElement) || 
     (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] ||
@@ -186,7 +185,7 @@ function CreateFullScreenPopUp(bReqCalibrate=False) {
   // Text Properties
   PopUpText1.className              = 'fs-popup-text';
   PopUpText2.className              = 'fs-popup-text';
-  PopUpText3.className             = 'fs-popup-text';
+  PopUpText3.className              = 'fs-popup-text';
   PopUpText4.className              = 'fs-popup-text';
   
   // Text content
