@@ -72,7 +72,7 @@ class EndPage(Page):
         S = int(participant.S)
         T = int(participant.treatment)
         Q = int(participant.Q)
-        print('Determining Treatment')
+        print("Treatment {} Sustainability {}".format(T,S))
         if (T==1):
             print('Treatment 1')
             Smin = Constants.S1 + S*Constants.S_step 
@@ -88,7 +88,7 @@ class EndPage(Page):
         Qmin = Constants.Q1 + Q*Constants.Q_step
         Qmax = Qmin + Constants.Q_step + 1
         Qvalue = np.floor(random.randint(Qmin,Qmax)/5)/2
-        participant.Bonus = Qvalue - int(participant.Price)
+        participant.Bonus = Qvalue - (participant.Price)
         participant.TreeAmount = Svalue
         
         return {
