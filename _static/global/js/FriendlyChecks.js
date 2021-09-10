@@ -181,7 +181,11 @@ function CreateFullScreenPopUp(bReqCalibrate=false) {
   let PopUpText4                    = document.createElement('p');
 
   // Div Properties
-  PopUp.id                        = 'cal-popup';
+  if (bReqCalibrate) {
+    PopUp.id                        = 'cal-popup';
+  } else {
+    PopUp.id                        = 'fs-popup';
+  }
   // Text Properties
   PopUpText1.className              = 'fs-popup-text';
   PopUpText2.className              = 'fs-popup-text';
