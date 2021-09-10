@@ -50,7 +50,7 @@ class Player(BasePlayer):
     partID              = models.StringField()
     SelectedTrial       = models.IntegerField()
     Bonus               = models.FloatField()
-    TreeAmount          = models.IntegerField()
+    TreeAmount          = models.FloatField()
     ProlificID          = models.StringField()
     validQ              = models.IntegerField()
     TotalTime           = models.FloatField()
@@ -73,13 +73,16 @@ class EndPage(Page):
         T = int(participant.treatment)
         Q = int(participant.Q)
         print("Treatment {} Sustainability {}".format(T,S))
+        print(S==1, T==2)
+        print(T==1)
         if (T==1):
             print('Treatment 1')
             Smin = Constants.S1 + S*Constants.S_step 
         elif (S==1 & T==2):
             print('Treatment 2')
             Smin = Constants.S2_2 
-        elif (S==1 & T==3):
+            print(Smin)
+        else:
             print('Treatment 3')
             Smin = Constants.S2_3
         Smax = Smin + Constants.S_step +1
@@ -88,7 +91,7 @@ class EndPage(Page):
         Qmin = Constants.Q1 + Q*Constants.Q_step
         Qmax = Qmin + Constants.Q_step + 1
         Qvalue = np.floor(random.randint(Qmin,Qmax)/5)/2
-        participant.Bonus = Qvalue - (participant.Price)
+        participant.Bonus = Qvalue - float(participant.Price)
         participant.TreeAmount = Svalue
         
         return {
