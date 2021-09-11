@@ -193,21 +193,21 @@ function CreateFullScreenPopUp(bReqCalibrate=false) {
   PopUpText4.className              = 'fs-popup-text';
   
   // Text content
-  PopUpText1.innerHTML             = 'Please set display to Full Screen.';
-  PopUpText3.innerHTML             = 'Please adjust the zoom of the screen to 100%.';
+  PopUpText1.innerHTML              = 'Please set display to Full Screen.';
+  PopUpText3.innerHTML              = 'Please adjust the zoom of the screen to 100%.';
 
   switch (os) {
     case 'Mac OS' : 
-      PopUpText2.innerHTML             = 'Press ⌘,⇧,F (command, shift, "F" for Fullscreen Mode)'; 
-      PopUpText4.innerHTML             = 'Press ⌥,⌘,= (option, command, equal to zoom-in) <br> ⌥,⌘,- ( option, command, minus to zoom-out) ';
+      PopUpText2.innerHTML          = 'Press ⌘,⇧,F (command, shift, "F" for Fullscreen Mode)'; 
+      PopUpText4.innerHTML          = 'Press ⌥,⌘,= (option, command, equal to zoom-in) <br> ⌥,⌘,- ( option, command, minus to zoom-out) ';
       break;
     case 'Safari':
-      PopUpText2.innerHTML             = 'Please click on top <b> View </b>  and make sure to deactivate <b> Always Show Toolbar in Full Screen </b> <br> Press ⌘,Control,F (command, Control, "F" for Fullscreen Mode)';
-      PopUpText4.innerHTML             = 'Press ⌘,+ (command, plus to zoom-in) <br> ⌘,- ( command, minus to zoom-out) ';
+      PopUpText2.innerHTML          = 'Please click on top <b> View </b>  and make sure to deactivate <b> Always Show Toolbar in Full Screen </b> <br> Press ⌘,Control,F (command, Control, "F" for Fullscreen Mode)';
+      PopUpText4.innerHTML          = 'Press ⌘,+ (command, plus to zoom-in) <br> ⌘,- ( command, minus to zoom-out) ';
       break;  
     case 'Windows' :
-      PopUpText2.innerHTML             = 'Press F11'; 
-      PopUpText4.innerHTML             = 'Press Ctrl,= (Control, equal to zoom-in) <br> Ctrl,-( Control, minus to zoom-out) '
+      PopUpText2.innerHTML          = 'Press F11'; 
+      PopUpText4.innerHTML          = 'Press Ctrl,= (Control, equal to zoom-in) <br> Ctrl,-( Control, minus to zoom-out) '
 
       break;
     case 'Linux' :

@@ -9,10 +9,12 @@
         const defaultPixel  = js_vars.dPixelRatio;
         var TBlur           = new Date().getTime();
         var TFocus          = new Date().getTime();
+        let tStart,tNow;
 
         // When page is loaded
         document.addEventListener("DOMContentLoaded", function() {
             let body = document.getElementById('game-container');
+            tStart          = new Date().getTime();
             InitializeFriendlyChecks(body, bRequireFS,bCheckFocus);             // Initialize FS and focus checks
             InitializeVT(body);                                                 // Initialize visual tracing
             hideEverything();                                                   // Hide Everything at the beginning                     
@@ -27,6 +29,16 @@
             for (let i=0; i<lButtons.length; i++) {
                 adjustText(lButtons[i]);
             };
+        };
+
+        function endTurn(iVal) {
+            tNow        = new Date().getTime();
+            EndButton   = document.getElementById('end-btn');
+            InputDec    = document.getElementById('iDec');
+            InputRT     = document.getElementById('dRT');
+            InputRT.value   = tNow - tStart;
+            InputDec.value  = iVal;
+            EndButton.click()
         };
 
         function adjustText(elem) {
@@ -59,11 +71,11 @@
         <!-- Row 0 -->
         <button type="button" class="game-btn btn-attr r0" id="R0"> Price </button> 
         <button type="button" class="game-btn btn-outcome r0 c0" id="R0C0"> 
-            <div class="btn-content"> {{ P0 }} </div>
+            <div class="btn-content"> £{{ P0 }} </div>
             <div class="btn-hidden">  </div>
         </button> 
         <button type="button" class="game-btn btn-outcome r0 c1" id="R0C1">
-            <div class="btn-content"> {{ P1 }} </div>
+            <div class="btn-content"> £{{ P1 }} </div>
             <div class="btn-hidden">  </div>
         </button> 
         <div class="break"> </div>
@@ -91,8 +103,10 @@
         <div class="break"> </div>
         <!-- Decision Buttons -->
         <div  class="game-btn empty"> </div> 
-        <button class="game-btn dec-btn" name='iDec' value='0'> Product 1 </button> 
-        <button  class="game-btn dec-btn"  name='iDec' value='1'> Product 2 </button> 
-    
+        <button type="button" class="game-btn dec-btn" onclick="endTurn(0)"> Product 1 </button> 
+        <button  type="button" class="game-btn dec-btn" onclick="endTurn(1)"> Product 2 </button> 
+        <button  id="end-btn" style="display: none;" > </button> 
+        <input type="hidden" id="iDec" name="iDec">
+        <input type="hidden" id="dRT" name="dRT">
     </div>
 {% endblock %}

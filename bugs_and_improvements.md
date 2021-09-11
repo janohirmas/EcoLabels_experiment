@@ -3,9 +3,8 @@ THIS TEXT FILE IS FOR KEEPING RECORD OF CURRENT BUGS AND SUGGESTED IMPROVEMENTS
 
 # To Do:
 ## Main Task
-- Add resizing of the fonts (use the adjustElem as a base)
+- Fix RT not being recorded!
 ## Infographics
-- Add RT for the infographics (or for each slide)
 
 ## Questionnaire
 
