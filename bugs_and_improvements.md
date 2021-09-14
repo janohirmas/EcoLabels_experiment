@@ -3,7 +3,7 @@ THIS TEXT FILE IS FOR KEEPING RECORD OF CURRENT BUGS AND SUGGESTED IMPROVEMENTS
 
 # To Do:
 ## Main Task
-- Fix RT not being recorded!
+
 ## Infographics
 
 ## Questionnaire
@@ -12,9 +12,16 @@ THIS TEXT FILE IS FOR KEEPING RECORD OF CURRENT BUGS AND SUGGESTED IMPROVEMENTS
  
 
 ## Instructions
+- Be clearer for the payoffs. 
+- Mention that bonus payment goes besides show-up fee. 
+- Add slide numbers
 
-## Questionnaire
+## Calibration
+- Show current zoom
+- restructure screen
 
+## Results
+- Add Star rating and quality rating of your product. 
 
 
 # BUGS 

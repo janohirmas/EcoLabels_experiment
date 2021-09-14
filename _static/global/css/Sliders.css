@@ -144,7 +144,12 @@ input[type="checkbox"]:required:valid + label {
     text-align: left;
 }
 
-
+.page-number {
+    position: absolute;
+    top: 80vh;
+    left: 12vw;
+    transform: translate(-50%,-50%);
+}
 
 
 /* UvA logo */
