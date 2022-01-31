@@ -32,6 +32,15 @@ SESSION_CONFIGS = [
         num_demo_participants= 1,
         app_sequence=['Instructions']
     ),
+    dict(
+        name='Infographics',
+        num_demo_participants= 1,
+        app_sequence=['Infographics'],
+        iTreatment = 1,
+        iTimeOut=0,
+        bRequireFS=True,
+        bCheckFocus=True,
+    ),
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs

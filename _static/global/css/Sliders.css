@@ -4,47 +4,8 @@
 /* CSS STYLESHEET FOR ECOLABELS EXPERIMENT */
  
 /* GLOBAL STYLING */
-:root {
-    --background-title : #547478;
-    --color-title: #fff;
-    --background-btn: #776183;
-    --color-btn: #fff;
-    --background-input: #f1f1f1;
-    --color-dot: #bbb;
-    --color-dot-hover: #717171;
-    --color-font: #547478;
-    --background-body: #aba9bf;
-    --background-slide: #cce8e9;
-  }
-
-body {
-    background-color: var(--background-body);
-    overflow: hidden;
-}
-
-/* oTree divs */ 
-.otree-body {
-    margin: 0;
-    padding: 0;
-}
 
 
-.debug-info {
-    display:none;
-}
-
-/* titles */
-h1 {
-    font-size: 2em;
-    text-align: center;
-    padding: 1em;
-    margin: 0;
-    background-color: var(--background-title);
-    color: var(--color-title);
-    flex-grow: 1;
-}
-
-/* Next & submit button */
 :root {
     --color1: #EDE7DC;
     --color2: #BDC3CB;
@@ -70,6 +31,36 @@ h1 {
     --background-body: var(--color1);
     --background-slide: var(--color9);
 }
+
+body {
+    overflow: hidden;
+    background-color: var(--background-body);
+}
+
+/* oTree divs */ 
+.otree-body {
+    margin: 0;
+    padding: 0;
+}
+
+
+.debug-info {
+    display:none;
+}
+
+/* titles */
+h1 {
+    font-size: 2em;
+    text-align: center;
+    padding: 1em;
+    margin: 0;
+    background-color: var(--background-title);
+    color: var(--color-title);
+    flex-grow: 1;
+}
+
+/* Next & submit button */
+
 
 
 .button:hover {
@@ -102,7 +93,7 @@ input[type="checkbox"]:required:valid + label {
 }
 
 /* INTRODUCTION & INSTRUCTIONS */
-.IntroContent {
+.info-body {
     transform: translate(-50vw,-50vh);
     position: absolute;
     top: 50vh;
@@ -116,6 +107,8 @@ input[type="checkbox"]:required:valid + label {
     align-items: center;
     justify-content: center;
 }
+
+
 
 /* Slide container */
 .mySlides {
@@ -233,5 +226,129 @@ input[type="checkbox"]:required:valid + label {
 
 .active.dot, .dot:hover {
     background-color:  var(--color-dot-hover);
+}
+
+/* Info Template */
+
+/* Info Body */
+.info-body {
+    display: flex;
+    align-items: flex-start;
+}
+/* Info Container */
+.info-content {
+    display: flex;
+    background-color: var(--background-slide);
+    color: var(--color-font);
+    width: 90vw;
+    max-height: 90vh;
+    flex-grow: 1;
+    margin: 5vh 0 0 5vw;
+    flex-direction: column;
+    padding: 5vh 2.5vw;
+    font-size: 1.25em;
+    align-items: center;
+}
+
+/* Buttons */
+.next-btn {
+    background-color: var(--background-btn);
+    color: var(--color-btn);
+    width: 100px;
+    height: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+#info-btn {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    transform: translate(-50%,-50%);
+    align-items: center;
+    position: absolute;
+    color: white;    
+    top: 2.5vh;
+    left: 97.5vw;
+    background-color: lightblue;
+    border: 2px solid white;
+    border-radius: 20px;
+    font-weight: bold;
+    padding: 0;
+}
+
+.info-screen {
+    visibility: hidden;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: -47.5vh;
+    left: -47.5vw;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    background-color: rgba(255, 255, 255,0.8);
+    color: black;
+}
+
+.info-btn:hover .info-screen  {
+    visibility: visible;
+}
+
+
+.upper-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.img-info {
+    width: 1em;
+    height: auto;
+}
+
+/* Additional info */
+.help {
+    width: 40px;
+    margin: 2.5vh 2.5vw;
+  }
+  
+.help #question  {
+    height: 40px;
+    width: 40px;
+    background: #ccc;
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    text-align: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.help .popup {
+    width: 90vw;
+    height: 0;
+    text-align: left;
+    overflow: hidden;
+    position: relative;
+    background: #eee;
+    opacity: 0;
+    transition: 1s;
+    transform: translate(-50%,0);
+    left: -47.5vw;
+    top: -2.5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5vw 5vh;
 }
 

@@ -1,0 +1,47 @@
+{{ extends "otree/Page.html" }}
+{{ load otree static }}
+
+{{ block app_styles }}
+  <link rel="stylesheet" href="{% static 'global/css/Sliders.css' %}">
+
+{{ endblock }}
+
+{{ block app_scripts }}
+  <script src="{% static 'global/js/Information.js' %}"></script>
+{{ endblock }}
+
+{{ block content }}
+
+<div class="info-body" id="info-body">
+  <div class="info-content" id="info-content">
+
+    {% comment %} 
+      Here comes the content. It is added with JS. 
+    {% endcomment %}
+
+    <button id="submit" class="next-btn"> Next </button>
+
+  </div>
+  {% comment %} Additional information button {% endcomment %}
+  {{ if AddInfo.exists }}   
+    <div class="help">
+      {% comment %} Open/Close Info  {% endcomment %}
+      <button type="button" id="question" onclick="openPopUp()"> ? </button>  
+      {% comment %} Info Container {% endcomment %}
+      <div class="popup" id="popup">
+       <div class="popup-content">
+         {{ include AddInfo.content }}
+       </div>
+     </div>
+    </div>
+
+  {{ endif }}
+</div>
+
+
+{{ endblock }}
+
+
+
+
+

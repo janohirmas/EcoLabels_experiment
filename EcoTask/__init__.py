@@ -341,7 +341,7 @@ class Task(Page):
     def before_next_page(player, timeout_happened):
         participant = player.participant
         # Add Focus variables to total if it's not practice trial
-        if (player.round_number < Constants.num_prounds):
+        if (player.round_number > Constants.num_prounds):
             participant.iOutFocus = int(participant.iOutFocus) + player.iFocusLost
             participant.iFullscreenChanges = int(participant.iFullscreenChanges) + player.iFullscreenChange
             participant.dTimeOutFocus = float(participant.dTimeOutFocus) + player.dFocusLostT

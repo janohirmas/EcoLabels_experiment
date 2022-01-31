@@ -1,0 +1,37 @@
+{% extends "global/SliderTemplate.html" %}
+
+{% block app_styles %}
+
+{% endblock %}
+
+{% block app_styles %}
+  <link rel="stylesheet" href="{% static 'global/css/styling10.css' %}">
+{% endblock %}
+
+{% block app_scripts %}
+
+<script src="{% static 'global/js/FriendlyChecks.js' %}"></script>
+<script>
+    const lSolutions    =  [js_vars.firstAnswer , js_vars.secondAnswer];     // Solutions for Check-up questions in the last slide
+    const bRequireFS    = js_vars.bRequireFS;
+    const bCheckFocus   = js_vars.bCheckFocus;
+    const defaultPixel  = js_vars.dPixelRatio;
+    var TBlur           = new Date().getTime();
+    var TFocus          = new Date().getTime();
+
+
+
+
+    // When page is loaded
+    document.addEventListener("DOMContentLoaded", function() {
+        let body = document.getElementById('game-container');
+        InitializeFriendlyChecks(body, bRequireFS,bCheckFocus);             // Initialize FS and focus checks
+    });
+
+</script>
+
+{% endblock %}
+
+
+
+

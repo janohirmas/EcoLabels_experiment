@@ -7,7 +7,7 @@ THIS TEXT FILE IS FOR KEEPING RECORD OF CURRENT BUGS AND SUGGESTED IMPROVEMENTS
 ## Infographics
 
 ## Questionnaire
-
+- add opt-out option 
 - Add a slide between Demographics and Questionnaire
  
 
