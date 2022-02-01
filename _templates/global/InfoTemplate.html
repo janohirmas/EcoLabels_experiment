@@ -2,7 +2,7 @@
 {{ load otree static }}
 
 {{ block app_styles }}
-  <link rel="stylesheet" href="{% static 'global/css/Sliders.css' %}">
+  <link rel="stylesheet" href="{% static 'global/css/Information.css' %}">
 
 {{ endblock }}
 
@@ -19,7 +19,7 @@
       Here comes the content. It is added with JS. 
     {% endcomment %}
 
-    <button id="submit" class="next-btn"> Next </button>
+    <button id="next-btn" class="next-btn" type="button" onclick="submitPage()"> Next </button>
 
   </div>
   {% comment %} Additional information button {% endcomment %}
@@ -37,7 +37,7 @@
 
   {{ endif }}
 </div>
-
+<button class="hidden" id="submit"></button>
 
 {{ endblock }}
 

@@ -1,5 +1,5 @@
 {{ for attr in lAttr }}
-<div class="content-info"  id="content-{% forloop.counter0 %}">
+<div class="content-info"  id="content-{{ forloop.counter0 }}">
     <b>{{ attr.attr }}: </b>
     <ul>
         <li> {{ attr.attr }} is measured in Quality points ({{ attr.conversion }}).  </li>

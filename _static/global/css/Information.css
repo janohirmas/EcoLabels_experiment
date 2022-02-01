@@ -236,20 +236,19 @@ input[type="checkbox"]:required:valid + label {
     align-items: flex-start;
 }
 /* Info Container */
-.IntroContent {
+.info-content {
     display: flex;
+    background-color: var(--background-slide);
     color: var(--color-font);
-    width: 80vw;
-    height: 80vh;
+    width: 90vw;
+    height: 90vh;
     flex-grow: 1;
-    flex-direction: row;
+    margin: 5vh 2.5vw 0 2.5vw;
+    flex-direction: column;
+    padding: 5vh 2.5vw;
     font-size: 1.25em;
     align-items: center;
     justify-content: center;
-    transform: translate(-50%,-50%);
-    position: absolute;
-    top: 50vh;
-    left: 50vw;
 }
 
 /* Buttons */
@@ -315,3 +314,111 @@ input[type="checkbox"]:required:valid + label {
     height: auto;
 }
 
+/* Additional info */
+.justify{
+    width: 60vw;
+    justify-self: center;
+    text-align: justify;
+} 
+
+
+.help {
+    width: 40px;
+    margin: 2.5vh 0;
+  }
+  
+.help #question  {
+    height: 40px;
+    width: 40px;
+    background: #ccc;
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    text-align: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.help .popup {
+    width: 95vw;
+    height: 0;
+    text-align: left;
+    overflow: hidden;
+    position: relative;
+    background: #eee;
+    opacity: 0;
+    transition: 1s;
+    transform: translate(-50%,0);
+    left: -47.5vw;
+    top: -2.5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5vw 5vh;
+}
+
+/* Belief text */
+.question-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 2em;
+
+}
+
+.question-wrapper .column {
+    display: flex;
+    flex-direction: column;
+}
+
+.question-wrapper .column .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 0 0 10px;
+    align-content: space-around;
+    align-items: center;
+}
+
+.row div {
+    width: auto;
+}
+
+.row input {
+    width: 5em;
+    text-align: center;
+}
+
+.row b {
+    text-align: center;
+}
+
+.img-graph {
+    width: 35vw;
+}
+.img-rating {
+    height: 2em;
+    width: auto;
+}
+
+.wide {
+    width: 80vw;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.hint {
+    background-color: rgb(255, 95, 95);
+    border-radius: 10px;
+    height: 1.5em;
+}
+
+#submit { 
+    height: 0;
+    width: 0;
+}

@@ -1,5 +1,5 @@
 // General variables and constants
-var before          = new Date().getTime();
+var TStart          = new Date().getTime();
 var now             = new Date().getTime();
 const ContentBody   = document.getElementById('info-content');
 var Content;
@@ -7,11 +7,13 @@ var Content;
 
 // When page is loaded
 document.addEventListener("DOMContentLoaded", function() {
-    // * Add here anything that needs to be added to the page when the rest of the content is already loaded
+    // TODO Add here anything that needs to be added to the page when the rest of the content is already loaded
     TStart          = new Date().getTime();                             // Start Timer
     Content = document.getElementById('content-block');
     ContentBody.prepend(Content);
     adjustElem(ContentBody);                // adjust slide size
+    // add hidden inputs 
+    addInputs();
 });
 
 // *********************************************************************
@@ -38,6 +40,20 @@ document.addEventListener('keydown', (event) => {
 // * FUNCTIONS *
 // *********************************************************************
 
+function addInputs() {
+    if (typeof js_vars.lInputs !== 'undefined') {
+        lVars = js_vars.lInputs
+        let Body = document.getElementById('info-body');
+        for (let i = 0; i<lVars.length; i++) {
+            let input   = document.createElement('input');
+            input.type  = "hidden";
+            input.id    = lVars[i];
+            input.name  = lVars[i];
+            Body.appendChild(input);
+        }
+    }
+
+}
 
 function closePopUp() {
     let PopUp   = document.getElementById('popup');
@@ -143,26 +159,14 @@ function checkOverflow(elem) {
 // returns:         void
 // *********************************************************************
 
-function validateAnswers() {
+function submitPage() {
 
-    let lHints      = document.getElementsByClassName("hint");                          // make array of hints
-    let lQuestions  = document.getElementsByClassName("ControlQuestions");              // make array of questions
-    let iCorrect    = 0;                                                                // initialize counter for correct answers
-
-    for (i = 0; i < lQuestions.length; i++) {                                           // iterate through answers
-        if (lQuestions[i].value !== lSolutions[i] || lQuestions[i].value === null) {    // incorrect or empty field
-            lHints[i].style.visibility = "visible";                                     // Show Hint
-        } else {
-            iCorrect +=1;                                                               // iCorrect: increase counter
-            lHints[i].style.visibility = "hidden";                                      // Hide Hint
-        }
-    }
-    if (iCorrect === lQuestions.length) {                                               // if all correct, Submit
-        now = new Date().getTime(); 
-        inputSlideSeq.value += iSlideIndex;
-        inputSlideTim.value += now - before;
+    if (typeof validateAnswers === "function") { 
+        validateAnswers();
+    } else {
         document.getElementById('submit').click();
     }
+
 
 }
 

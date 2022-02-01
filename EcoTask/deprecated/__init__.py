@@ -1,4 +1,3 @@
-from email.policy import default
 from otree.api import *
 import numpy as np
 from numpy import random
@@ -6,8 +5,6 @@ from random import SystemRandom, sample
 from random import choices
 import pandas as pd
 import csv
-
-from sqlalchemy import true
 
 doc = """
 Creates Table with Visual Tracing
@@ -38,16 +35,45 @@ class Constants(BaseConstants):
     num_reps            = 1 # number of repetitions per permutation
     num_repsEq          = 2 # Number of cases with equal sustainability
     num_prounds         = 3 # Number of Practice Rounds  
-    num_rounds          = (num_reps*len(lS1)*5+num_repsEq)+num_prounds # Number of rounds
+    num_rounds          = 2*(num_reps*len(lS1)*5+num_repsEq)+num_prounds # Number of rounds
     players_per_group   = None
-    sImagePath          = 'EcoTask/figures/'
-
     ## Attention Setup variables
     # Checks if you require FullScreen 
     ## if you want to record number of FS changes add integer form iFullscreenChange
     # Checks if focus changes to other pages
     ## if you want to record the number of times that focus is lost, add integer form iFocusLost
     ## if you want to record the total time that focus is lost, add float form dFocusLostT
+    # TODO once it works, delete this or make copy to deprecated
+    sImagePath          = 'EcoTask/figures/'
+    # sImagePath_static   = 'EcoTask/figures/'     # Image Path        
+    # txtSustainability   = 'EcoTask/text/sustainability.html'
+    # txtQuality          = 'EcoTask/text/quality.html'
+    # imgLeaf_symbol      = sImagePath_static+'one_leaf.png'
+    # imgStar_symbol      = sImagePath_static+'one_star.png'
+    # sPathQ_l            = sImagePath_static+'Infographic_graphs/qual_lin.png'
+    # sPathQ_cv            = sImagePath_static+'Infographic_graphs/qual_concave.png'
+    # sPathQ_cv            = sImagePath_static+'Infographic_graphs/qual_convex.png'
+    # sPathS_l            = sImagePath_static+'Infographic_graphs/sus_linear.png'
+    # sPathS_cv           = sImagePath_static+'Infographic_graphs/sus_concave.png'
+    # sPathS_cx           = sImagePath_static+'Infographic_graphs/sus_convex.png' 
+    # # Variables for Infographics
+    # Q1l,Q1h = 30, 40
+    # Q2l,Q2h = 40, 50
+    # Q3l,Q3h = 50, 60
+    # S1l, S1h = 0, 10
+    # S2l_l, S2h_l = 10, 20
+    # S2l_cv, S2h_cv = 15, 25
+    # S2l_cx, S2h_cx = 5, 15
+    # S3l, S3h  = 20, 30 
+    # Currency = 'Pounds'  
+    # ## Slides Infographics
+    # SlidePath = 'Infographics/slide'
+    # Slides = [
+    #     dict(Title = 'Additional Information', path=SlidePath+'0.html'),
+    #     dict(Title = 'Additional Information', path=SlidePath+'1.html'),    
+    #     dict(Title = 'Additional Information', path=SlidePath+'2.html'),
+    #     dict(Title = 'Everything Clear? Please answer these questions correctly to proceed:', path=SlidePath+'3.html'),
+    # ]
 
 class Subsession(BaseSubsession):
     pass
@@ -63,10 +89,10 @@ class Player(BasePlayer):
     sButtonClick        = models.StringField(blank=True)
     sTimeClick          = models.StringField(blank=True)
     ## Trial Variables
-    iPracticeRound      = models.BooleanField(initial=0)
-    iBlock              = models.IntegerField(initial=1)
+    iBlock              = models.IntegerField(blank=True)
     iBlockTrial         = models.IntegerField(blank=True)
     iTreatment          = models.IntegerField(blank=True)
+    PresOrder           = models.StringField(blank=True)
     sAttrOrder          = models.StringField(blank=True)
     bStartLeft          = models.BooleanField(blank=True)
     dRTbetween          = models.FloatField(blank=True)
@@ -101,6 +127,7 @@ def creating_session(subsession):
             else:
                 p.treatment     = iTreatment
                 
+            p.PresOrder         = random.choice(['Qual', 'Sus'])
             p.SelectedTrial     = random.choice(range(Constants.num_prounds+1,Constants.num_rounds))
             print('Trial selected for participant {}: {}'.format(p.code,p.SelectedTrial))
     ## SETUP FOR PLAYER ROUNDS
@@ -108,21 +135,26 @@ def creating_session(subsession):
         ## Load participant and save participant variables in player
         p = player.participant
         player.iTreatment = int(p.treatment)
-        player.sAttrOrder = p.sAttrOrder = p.vRownames[1] # Order of presentation of attributes. 1st attribute always price, then Q or S
+        player.PresOrder =  str(p.PresOrder)
+        player.sAttrOrder = p.vRownames[1]
         ## Round Variables
-        total_rounds = Constants.num_rounds-Constants.num_prounds
+        total_rounds = (Constants.num_rounds-Constants.num_prounds)/2
         round = player.round_number-Constants.num_prounds
-
         if round<1: ## These are practice rounds, random trial selected
-            player.iPracticeRound   = 1
-            player.iBlockTrial      = random.randint(total_rounds)
+            player.iBlock = 0
+            player.iBlockTrial = random.randint(total_rounds)
             x = int( player.iBlockTrial-1)
             lAttr = p.mTreat[x].split(',')
-        elif (round<=total_rounds): ## These are the trials of the block
+        elif (round<=total_rounds): ## These are the observations of the first block
+            player.iBlock = 1
             player.iBlockTrial = int(round)
             x = int(round-1)
             lAttr = p.mTreat[x].split(',')
-
+        else: ## These are the observations of the first block
+            player.iBlock = 2
+            player.iBlockTrial = int(round-total_rounds)
+            x = int(round-total_rounds-1)
+            lAttr = p.mTreat[x].split(',')
         ## Randomize if mouse starts on left or right
         player.bStartLeft = random.choice([True,False])
         # Check order of Attributes and save them as player variables
@@ -148,7 +180,7 @@ def createTreatment():
     n_eq = Constants.num_repsEq
 
     #* Sets
-    iSize = int((Constants.num_rounds-Constants.num_prounds))
+    iSize = int((Constants.num_rounds-Constants.num_prounds)/2)
     ## Sustainability
     lS1 = Constants.lS1
     lS2 = Constants.lS2
@@ -207,6 +239,7 @@ def createTreatment():
             else: 
                 lAttr.extend(s)
                 lAttr.extend(q)
+
             lTreatments[counter]=  join2String(lAttr)
             counter +=1
 
@@ -235,9 +268,20 @@ def createTreatment():
         counter +=1
     lAttList = ['Price', order[0], order[1]]
     random.shuffle(lTreatments)
+    # pd.DataFrame(lTreatments).to_csv('treatment.csv')
     return lTreatments,lAttList
 
 # PAGES
+class PracticeInfo1(Page):
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number == 1
+
+class PracticeInfo2(Page):
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number == Constants.num_prounds
+
 class Task(Page):
     form_model = 'player'
     form_fields = [
@@ -311,9 +355,6 @@ class Task(Page):
                 participant.Price = player.P1
                 participant.Q = player.Q1
                 participant.S = player.S1
-       
-
-
         
 class Between(Page):
     form_model = 'player'
@@ -332,13 +373,98 @@ class Between(Page):
             'dPixelRatio'       : p.dPixelRatio,
         }
 
+class Infographics(Page):
+    @staticmethod
+    def vars_for_template(player):
+        participant = player.participant
+        
+        # Pick images based on treatment for sustainability info
+        if participant.treatment == 1:
+            S2low, S2high, Sgraph = Constants.S2l_l, Constants.S2h_l, Constants.sPathS_l
+        elif participant.treatment == 2:
+            S2low, S2high, Sgraph = Constants.S2l_cv, Constants.S2h_cv, Constants.sPathS_cv
+        else:
+            S2low, S2high, Sgraph = Constants.S2l_cx, Constants.S2h_cx, Constants.sPathS_cx
+        # Create Dictionary with all necessary info
+        dicSustainabilityInfo = {
+            'Item' : 'Leaf-rating & trees planted',
+            'Graph' : Sgraph,
+            'Title' : 'Sustainability',
+            'p1' : 'leaf',
+            'p2' : 'sustainability',
+            'p3' : 'One tree planted',
+            'p4' : 'trees',
+            'Symbol' : Constants.imgLeaf_symbol,
+            'low1' : Constants.S1l,
+            'low2' : S2low,
+            'low3' : Constants.S3l,
+            'hi1' : Constants.S1h,
+            'hi2' : S2high,
+            'hi3' : Constants.S3h,
+            'disclaimer' : "We will sum the points of all participants to calculate how many trees we need to plant and round it up. Let's say you get 0.8 trees and I get 0.5, that means 1.3 trees in total. Then, we will plant 2 trees! Every point counts! ",
+        }
+        dicQualityInfo = {
+            'Item' : 'Star-rating & Bonus Payment',
+            'Graph' : Constants.sPathQ_l,
+            'Title' : 'Quality',
+            'p1' : 'star',
+            'p2' : 'quality',
+            'p3' : 'One pound (£)',
+            'p4' : Constants.Currency,
+            'Symbol' : Constants.imgStar_symbol,
+            'low1' : Constants.Q1l,
+            'low2' : Constants.Q2l,
+            'low3' : Constants.Q3l,
+            'hi1' : Constants.Q1h,
+            'hi2' : Constants.Q2h,
+            'hi3' : Constants.Q3h,
+            'disclaimer' : 'values will be rounded up to the next 50p',
+        }
+        # Pick images based on treatment for sustainability info
+        if participant.PresOrder == 'Qual':
+            dicFirst, dicSecond    = dicQualityInfo, dicSustainabilityInfo
+        else:
+            dicFirst, dicSecond  = dicSustainabilityInfo, dicQualityInfo
+
+        return dict(
+            First = dicFirst,
+            Second = dicSecond,
+            Slides = Constants.Slides,
+        ) 
+
+    ## Show only in the middle of the experiment
+    @staticmethod
+    def is_displayed(player):
+        return ((player.iBlock==2) & (player.iBlockTrial==1))
+
+    def js_vars(player: Player):
+        session = player.subsession.session
+        p = player.participant
+        # Pick images based on treatment for sustainability info
+        if p.PresOrder == 'Qual':
+            first, second    = Constants.Q3l, Constants.S1h
+        else:
+            first, second  = Constants.S3l, Constants.Q1h
+        return {
+            'StartLeft'         : player.bStartLeft,
+            'bRequireFS'        : session.config['bRequireFS'],
+            'bCheckFocus'       : session.config['bCheckFocus'],
+            'dPixelRatio'       : p.dPixelRatio,
+            'firstAnswer'       : str(first),
+            'secondAnswer'       : str(second),
+        }
+
+
 class Ready(Page):
 
     @staticmethod
     def vars_for_template(player: Player):
         # Choose text depending round
         if (player.round_number==1):
-            sText = 'Now, you will have '+str(Constants.num_prounds)+' practice rounds. </br> These rounds will not count for your final payment.'
+            if (player.participant.iCurrentBlock==1):
+                sText = 'Now, we will continue with the experiment.'
+            else:
+                sText = 'Now, we will start with the practice rounds.'
         else:
             sText = 'The practice rounds are over. Now, we will continue with the experiment.'
         # Return selected text
@@ -350,7 +476,7 @@ class Ready(Page):
     def is_displayed(player):
         # Displayed on: First round of each block or first round after the trials
         return (
-            (player.round_number==1) or (player.round_number==Constants.num_prounds+1)
+            (player.round_number==1) or ((player.round_number==Constants.num_prounds+1) and (player.participant.iCurrentBlock==1))
         )
         
 

@@ -1,5 +1,6 @@
 from otree.api import *
 from sqlalchemy import true
+from numpy import random
 
 c = Currency
 
@@ -13,11 +14,9 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
     iRandomTreatment = 5 # Number for the treatment variable such that it randomizes between all conditions (which go from 1 to iRandomTreatment-1)
-    sAttrOrder = 'Quality'
+    Bonus = '5p (0.05 pounds)'
     # Image path
-    sImagePath          = 'EcoTask/figures/'
-    txtSustainability   = 'EcoTask/text/sustainability.html'
-    txtQuality          = 'EcoTask/text/quality.html'
+    sImagePath          = 'global/figures/'
     imgLeaf_symbol      = sImagePath+'one_leaf.png'
     imgStar_symbol      = sImagePath+'one_star.png'
     sPathQ_l            = sImagePath+'Infographic_graphs/qual_lin.png'
@@ -46,6 +45,10 @@ class Constants(BaseConstants):
         symbolName = 'stars',
         symbolPath = imgStar_symbol,
         extra = '',
+        symbol1Path = sImagePath+'star_1.png',
+        symbol2Path = sImagePath+'star_2.png',
+        symbol3Path = sImagePath+'star_3.png',
+        graphPath   = sPathQ_l,
     )
     lAttrS = dict(
         attr = 'Sustainability',
@@ -57,7 +60,11 @@ class Constants(BaseConstants):
         symbolName = 'leaves',
         symbolPath = imgLeaf_symbol,
         extra = '<li> The total amount of points donated to the area you selected will be rounded up, so no point will be lost. For example, 102 points will mean 11 trees planted (instead of 10). </li>',
-    )
+        symbol1Path = sImagePath+'leaf_1.png',
+        symbol2Path = sImagePath+'leaf_2.png',
+        symbol3Path = sImagePath+'leaf_3.png',
+        graphPath   = '',
+   )
 
 
 class Subsession(BaseSubsession):
@@ -69,7 +76,39 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    pass
+    sAttrOrder          = models.StringField()
+    dRTbelief           = models.FloatField(blank=true)
+    dRTinfographics     = models.FloatField(blank=true)
+    iTreatment          = models.IntegerField()
+
+
+# FUNCTIONS 
+def creating_session(subsession):
+    ## SETUP FOR PARTICIPANT
+    for player in subsession.get_players():
+        p, session = player.participant, subsession.session
+        iTreatment = session.config['iTreatment']
+        if (iTreatment!=Constants.iRandomTreatment):
+            player.iTreatment = iTreatment
+        else:
+            player.iTreatment = iTreatment = random.randint(1,Constants.iRandomTreatment-1)
+        # Add path to graph to treatment dictionary
+        lAttrS = Constants.lAttrS
+        if (iTreatment==1):
+            lAttrS['graphPath'] = Constants.sPathS_l
+        elif (iTreatment==2):
+            lAttrS['graphPath'] = Constants.sPathS_cv
+        elif (iTreatment==3):
+            lAttrS['graphPath'] = Constants.sPathS_cx
+        print(lAttrS['graphPath'])
+        sAttrOrder = p.sAttrOrder # (Change when ready!!)
+        # sAttrOrder = random.choice(['Quality','Sustainability']) # Delete when ready
+        player.sAttrOrder = p.sAttrOrder # = sAttrOrder # remove last equal when ready
+        if sAttrOrder == 'Quality':
+            p.lAttr  = [Constants.lAttrQ, lAttrS]
+        else:
+            p.lAttr  = [lAttrS, Constants.lAttrQ]
+
 
 
 # PAGES
@@ -77,30 +116,88 @@ class Information(Page):
 
     @staticmethod
     def vars_for_template(player: Player):
-        if Constants.sAttrOrder == 'Quality':
-            lAttr  = [Constants.lAttrQ, Constants.lAttrS]
-        else:
-            lAttr  = [Constants.lAttrS, Constants.lAttrQ]
         return dict(
-            lAttr = lAttr,
-            Info  = dict(
-                path = 'InfoMid/Info.html',
-                other = 'InfoMid/InfoValues.html',
-            ),
+            lAttr = player.participant.lAttr,
             AddInfo = dict(
-                exists  = true,
+                exists  = False,
                 content = 'InfoMid/InfoValues.html',
             )
         )
 
 
-class Belief(WaitPage):
-    pass    
+class Belief(Page):
+    form_model = 'player'
+    form_fields = [
+        'dRTbelief', 
+    ]
+
+
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(
+            lAttr = player.participant.lAttr,
+            AddInfo = dict(
+                exists  = True,
+                content = 'InfoMid/InfoValues.html',
+            )
+        )    
+
+    @staticmethod
+    def js_vars(player: Player):
+        if (player.sAttrOrder=="Quality"):
+            iMin1 = Constants.Q1l
+            iMin2 = Constants.S1l
+            iMax1 = Constants.Q3h
+            iMax2 = Constants.S3h
+        else:
+            iMin2 = Constants.Q1l
+            iMin1 = Constants.S1l
+            iMax2 = Constants.Q3h
+            iMax1 = Constants.S3h
+
+        return dict(
+            iMin1 = iMin1,
+            iMin2 = iMin2,
+            iMax1 = iMax1,
+            iMax2 = iMax2,
+            lInputs = ['dRTbelief'],
+        )
+
 
 class Infographics(Page):
+
+    form_model = 'player'
+    form_fields = [
+        'dRTinfographics', 
+    ]
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(
+            lAttr = player.participant.lAttr,
+            AddInfo = dict(
+                exists  = True,
+                content = 'InfoMid/InfoValues.html',
+            )
+        )    
+
+    @staticmethod
+    def js_vars(player: Player):
+        if (player.sAttrOrder=="Quality"):
+            sA1 = '3'
+            sA2 = '1'
+        else:
+            sA1 = '1'
+            sA2 = '3'
+
+        return dict(
+            sA1= sA1, 
+            sA2 = sA2,
+            lInputs = ['dRTinfographics'],
+        )
+
     @staticmethod
     def is_displayed(player: Player):
-        return (player.participant.treatment != Constants.iRandomTreatment)
+        return (player.iTreatment != int(Constants.iRandomTreatment-1))
 
 
-page_sequence = [Information]
+page_sequence = [Information, Belief, Infographics]

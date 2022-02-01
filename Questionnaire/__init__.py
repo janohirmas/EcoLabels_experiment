@@ -12,12 +12,12 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
     ## Path for images
-    imgFile_Quality     = '/static/EcoTask/figures/Infographic_graphs/qual_lin.png'
-    imgFile_QualityCv    = '/static/EcoTask/figures/Infographic_graphs/qual_concave.png'
-    imgFile_QualityCx     = '/static/EcoTask/figures/Infographic_graphs/qual_convex.png'
-    imgFile_Linear      = '/static/EcoTask/figures/Infographic_graphs/sus_linear.png'
-    imgFile_Concave     = '/static/EcoTask/figures/Infographic_graphs/sus_concave.png'
-    imgFile_Convex      = '/static/EcoTask/figures/Infographic_graphs/sus_convex.png' 
+    imgFile_Quality     = '/static/global/figures/Infographic_graphs/qual_lin.png'
+    imgFile_QualityCv    = '/static/global/figures/Infographic_graphs/qual_concave.png'
+    imgFile_QualityCx     = '/static/global/figures/Infographic_graphs/qual_convex.png'
+    imgFile_Linear      = '/static/global/figures/Infographic_graphs/sus_linear.png'
+    imgFile_Concave     = '/static/global/figures/Infographic_graphs/sus_concave.png'
+    imgFile_Convex      = '/static/global/figures/Infographic_graphs/sus_convex.png' 
 
 
 

@@ -6,8 +6,8 @@ SESSION_CONFIGS = [
     name='session_config',
     display_name='Ecolabels Config',
     num_demo_participants=1,
-    app_sequence=['Instructions', 'EcoTask', 'Questionnaire' ,'EndPage'],
-    iTreatment = 4,
+    app_sequence=['Instructions', 'EcoTask', 'Infographics','Questionnaire' ,'EndPage'],
+    iTreatment = 5,
     iTimeOut=0,
     bRequireFS=True,
     bCheckFocus=True,
@@ -65,9 +65,11 @@ PARTICIPANT_FIELDS = [
     'dTimeOutFocus',
     'iOutFocus',
     'iFullscreenChanges',
+    'iCurrentBlock',
     'startTime',
     'sTreesLocation',
     'dPixelRatio',
+    'lAttr',
     ]
 
 

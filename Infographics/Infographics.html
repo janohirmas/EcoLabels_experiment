@@ -1,8 +1,78 @@
 {{ extends "global/InfoTemplate.html" }}
 
+{{ block scripts }}
+    <script>
+            // let min1 = js_vars.iMin1;
+            // let min2 = js_vars.iMin2;
+            // let max1 = js_vars.iMax1;
+            // let max2 = js_vars.iMax2;
+            // if ((ans1>=min1) & (ans1<=max1) & (ans1%5 == 0)) 
+
+
+        function validateAnswers() {
+            let ans1 = String(document.getElementById('attr-1').value);
+            let ans2 = String(document.getElementById('attr-2').value);
+            let sA1 = js_vars.sA1;
+            let sA2 = js_vars.sA2;
+            let hint1 = document.getElementById('hint-1');
+            let hint2 = document.getElementById('hint-2');
+            let iCorrect = 0;
+            // Check Answers within range and divisible by 5
+            if (ans1==sA1) {
+                hint1.classList.add('hidden');
+                iCorrect +=1;
+            }else {
+                hint1.classList.remove('hidden');
+            }
+            if (ans2==sA2) {
+                hint2.classList.add('hidden');
+                iCorrect +=1;
+            } else {
+                hint2.classList.remove('hidden');
+            }
+            if (iCorrect ==2) {
+                now = new Date().getTime();
+                document.getElementById('dRTinfographics').value = now - TStart;
+                document.getElementById('submit').click();
+            }
+
+        }
+    </script>
+{{ endblock }}
+
 <div class="content-block" id="content-block"> 
     <div class="upper-content"> 
-        <p> Now we will explain a bit about the information behind the labels: </p>
+        <p class="justify wide"> Before we continue, we will show you the real possible values for each attribute and value rating. 
+            For each rating, the values can differ in 10 points. <br>
+            Just to know that everything is clear. A product with 55 quality points and 5 sustainability points, would have which ratings (1,2,3)?
+        </p>
     </div>
-    {{ include Info.other }}
+    <div class="question-wrapper">
+        {{ for attr in lAttr }}
+            <div class="column">
+                <div class="row"> 
+                   <b> {{ attr.attr }} </b> 
+                </div>
+                <div class="row"> 
+                    <img class="img-graph" src="{% static attr.graphPath %}" />   
+                </div>
+            </div>
+        {{ endfor }}
+    </div>
+
+    <div class="question-wrapper">
+        {{ for attr in lAttr }}
+            <div class="column">
+                <div class="row"> 
+                    <div>  {{ attr.attr }} </div>
+                    <input type="text" id="attr-{{ forloop.counter }}"> 
+                </div>
+                <div class="row hidden hint" id="hint-{{ forloop.counter}}"> 
+                    <div> Please check this answer. </div>
+                </div>
+
+            </div>
+        {{ endfor }}
+    </div>
+
 </div>

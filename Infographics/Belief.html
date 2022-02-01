@@ -1,8 +1,80 @@
 {{ extends "global/InfoTemplate.html" }}
 
+{{ block scripts }}
+    <script>
+
+        function validateAnswers() {
+            let vMin = [js_vars.iMin1, js_vars.iMin2 ];
+            let vMax = [js_vars.iMax1, js_vars.iMax2 ];
+            let iCorrect = 0;
+            // Check Answers within range and divisible by 5
+            for (let iAttr=0;iAttr<2;iAttr++) {
+                for (let i=1;i<=3;i++) {
+                    console.log(`val-${iAttr}${i}`);
+                    let ans = parseInt(document.getElementById(`val-${iAttr}${i}`).value);
+                    let hint = document.getElementById(`hint-${iAttr}${i}`);
+                    if ((ans<=vMax[iAttr]) & (ans>=vMin[iAttr]) & (ans%5==0)) {
+                        iCorrect++;
+                        hint.classList.add('hidden');
+                    } else {
+                        hint.classList.remove('hidden');
+                    }
+                }
+            }
+            if (iCorrect ==6) {
+                now = new Date().getTime();
+                document.getElementById('dRTbelief').value = now - TStart;
+                document.getElementById('submit').click();
+            }
+
+        }
+    </script>
+{{ endblock }}
+
+
 <div class="content-block" id="content-block"> 
     <div class="upper-content"> 
-        <p> Now we will explain a bit about the information behind the labels: </p>
+        <p class="justify"> Now we want to know how much do you think each rating is worth in terms of points. 
+            Please select how many points do you think you receive on average for each attribute and value-rating. 
+            Click the button on the right (?) to read the information about the points again. 
+            <br> <br>
+            Please select values in steps of 5 (0,5,10,...) that are within the corresponding ranges of the category. 
+            For each correct value, you will get {{ Constants.Bonus }} as an additional bonus.   
+        </p>
+
     </div>
-    {{ include Info.other }}
+    <div class="question-wrapper">
+        {{ for attr in lAttr }}
+            <div class="column">
+                <div class="row"> 
+                    {{ attr.attr }} ({{ attr.min}} to {{attr.max}})
+                </div>
+                <div class="row"> 
+                    <img class="img-rating" src="{% static attr.symbol1Path %}" />   
+                    <input type="text" class="inputs-{{ forloop.counter0 }}" id="val-{{ forloop.counter0 }}1"> 
+                    
+                </div>
+                <div class="row hidden hint" id="hint-{{ forloop.counter0}}1"> 
+                    <div> Must be within the range and divisible by 5. </div>
+                </div>
+                <div class="row"> 
+                    <img class="img-rating" src="{% static attr.symbol2Path %}" />   
+                    <input type="text" class="inputs-{{ forloop.counter0 }}" id="val-{{ forloop.counter0 }}2"> 
+                    
+                </div>
+                <div class="row hidden hint" id="hint-{{ forloop.counter0}}2"> 
+                    <div> Must be within the range and divisible by 5. </div>
+                </div>
+                <div class="row"> 
+                    <img class="img-rating" src="{% static attr.symbol3Path %}" />   
+                    <input type="text" class="inputs-{{ forloop.counter0 }}" id="val-{{ forloop.counter0 }}3"> 
+                    
+                </div>
+                <div class="row hidden hint" id="hint-{{ forloop.counter0}}3"> 
+                    <div> Must be within the range and divisible by 5. </div>
+                </div>
+            </div>
+        {{ endfor}}
+    </div>
+
 </div>
