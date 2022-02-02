@@ -1,0 +1,56 @@
+{% extends "otree/Page.html" %}
+
+{% block app_scripts %}
+    <script src="{% static 'global/js/FriendlyChecks.js' %}"></script>
+    <script>
+        const NextButton = document.getElementById('between-button');
+        const bRequireFS    = js_vars.bRequireFS;
+        const bCheckFocus   = js_vars.bCheckFocus;
+        const defaultPixel  = js_vars.dPixelRatio;
+        var TBlur           = new Date().getTime();
+        var TFocus          = new Date().getTime();
+        var TStart          = new Date().getTime();
+        var TEnd            = new Date().getTime();
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            let body = document.getElementById('game-body');
+            InitializeFriendlyChecks(body, bRequireFS,bCheckFocus);             // Initialize FS and focus checks
+            var TStart          = new Date().getTime();
+            let Next            = document.getElementById('next-button');
+            let BetweenButton   = document.getElementById('between-button');
+            let Input           = document.getElementById('dRTbetween')
+            BetweenButton.onclick = () => {
+                TEnd            = new Date().getTime();
+                dRTbetween.value = TEnd-TStart;
+                Next.click();
+            };
+        });
+
+        if (js_vars.StartLeft) {
+            console.log('Button on the left')
+            NextButton.style.left = '10vw'
+        } else {
+            console.log('Button on the right')
+            NextButton.style.left = '90vw'
+        };
+    </script>
+{% endblock %}
+
+{% block app_styles %}
+    <link href="{% static 'global/css/FriendlyChecks.css' %}" rel="stylesheet">
+    <link href="{% static 'EcoTask/css/LineReveal.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+
+    <div id="game-body">
+        <button type="button" class= "dec-button" id="between-button"> Press here!</button>
+        <input type="hidden" name="dRTbetween" id="dRTbetween">
+        <button id="next-button" style="display:none"> </button>
+    </div>
+
+{% endblock %}
+
+
+

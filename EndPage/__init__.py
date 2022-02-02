@@ -22,7 +22,8 @@ class Constants(BaseConstants):
     S2_3    = 5
     S3      = 10
     S_step  = 10
-    # Prolific Link
+    # Others
+    dBeliefBonus = 0.1
     ProlificLink = "https://www.google.com"
     Slides = [
         dict(
@@ -58,6 +59,7 @@ class Player(BasePlayer):
     iOutFocus           = models.IntegerField()
     iFSChanges          = models.IntegerField()
     sTreesLocation      = models.StringField()
+    iCorrectBeliefs     = models.IntegerField()
 
 
 # PAGES
@@ -70,7 +72,7 @@ class EndPage(Page):
         participant = player.participant
         ## Determining Value of Sustainability rating
         S = int(participant.S)
-        T = int(participant.treatment)
+        T = int(participant.iTreatment)
         Q = int(participant.Q)
         print("Treatment {} Sustainability {}".format(T,S))
         print(S==1, T==2)
@@ -91,7 +93,8 @@ class EndPage(Page):
         Qmin = Constants.Q1 + Q*Constants.Q_step
         Qmax = Qmin + Constants.Q_step + 1
         Qvalue = np.round(random.randint(Qmin,Qmax)/5)/2
-        participant.Bonus = Qvalue - float(participant.Price)
+        dBeliefBonus = participant.iCorrectBeliefs*Constants.dBeliefBonus
+        participant.Bonus = Qvalue - float(participant.Price) + dBeliefBonus
         participant.TreeAmount = Svalue
         
         return {
@@ -102,6 +105,8 @@ class EndPage(Page):
             'S' : Svalue,
             'Bonus' : participant.Bonus,
             'TreeLocation' : str(participant.sTreesLocation),
+            'iCorrect' : participant.iCorrectBeliefs,
+            'BeliefBonus' : dBeliefBonus,
         }
 
     @staticmethod
@@ -122,6 +127,7 @@ class EndPage(Page):
         player.iOutFocus        = part.iOutFocus
         player.dTimeOutFocus    = part.dTimeOutFocus
         player.sTreesLocation   = part.sTreesLocation
+        player.iCorrectBeliefs  = part.iCorrectBeliefs
 
 class FinalPage(Page):
     pass

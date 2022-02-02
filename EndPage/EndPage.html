@@ -15,12 +15,13 @@
             <p class="title"> The experiment has ended. These are your results: </p>
             <div class="text-container">
                 <ul>
+                    <li> You guessed {{ iCorrect }} correct ratings, which grants you: £{{ BeliefBonus }} </li>
                     <li> The randomly selected trial is: {{ SelectedTrial }} </li>
                     <li> The Price of the product you selected was: £{{ Price }} </li>
                     <li> The value of the product was: £{{ Q }} </li>
-                    <li> You bonus Payment is: £{{ Bonus }} </li>
+                    <li> You total bonus Payment is: £{{ Bonus }} </li>
                     <li> The amount of trees planted will be: {{ S }} </li>
-                    <li> We will plant the {{ S }} trees in {{ TreeLocation }} for you! </li>
+                    <li> This means will plant at least {{ S }} trees in {{ TreeLocation }}! </li>
                 </ul>
             </div>
         </div>

@@ -10,12 +10,12 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
     ## Symbols directory
-    UvA_logo = 'EcoTask/figures/UvA_logo.png'
-    OTP_logo = 'EcoTask/figures/Logo_OneTreePlanted.png'
-    revealed_task = 'EcoTask/figures/revealed_task_img.png'
-    circled_task = 'EcoTask/figures/circled_task_img.png'
-    leaf_symbol = 'EcoTask/figures/one_leaf.png'
-    star_symbol = 'EcoTask/figures/one_star.png'
+    UvA_logo = 'global/figures/UvA_logo.png'
+    OTP_logo = 'global/figures/Logo_OneTreePlanted.png'
+    revealed_task = 'global/figures/revealed_task_img.png'
+    circled_task = 'global/figures/circled_task_img.png'
+    leaf_symbol = 'global/figures/one_leaf.png'
+    star_symbol = 'global/figures/one_star.png'
     ## Variables that are not fully defined yet
     MaxBonus = int(3)
     NumTrials = int(37) 

@@ -107,20 +107,20 @@ const firstQuestions = [
         name: "D7",
         type: "longOpen",
     },
-    {
-        question: "In the middle of the experiment, you saw two graphs. One for the quality and one for sustainability ratings. Which of these three graphs resembles more to the graph for the <b> Quality rating</b>.",
-        name: "D8",
-        type: "radioFig",
-        values: figValues,
-        labels: figLabels1,
-    },
-    {
-        question: "In the middle of the experiment, you saw two graphs. One for the quality and one for sustainability ratings. Which of these three graphs resembles more to the graph for the <b> Sustainability rating</b>.",
-        name: "D9",
-        type: "radioFig",
-        values: figValues,
-        labels: figLabels2,
-    },
+    // {
+    //     question: "In the middle of the experiment, you saw two graphs. One for the quality and one for sustainability ratings. Which of these three graphs resembles more to the graph for the <b> Quality rating</b>.",
+    //     name: "D8",
+    //     type: "radioFig",
+    //     values: figValues,
+    //     labels: figLabels1,
+    // },
+    // {
+    //     question: "In the middle of the experiment, you saw two graphs. One for the quality and one for sustainability ratings. Which of these three graphs resembles more to the graph for the <b> Sustainability rating</b>.",
+    //     name: "D9",
+    //     type: "radioFig",
+    //     values: figValues,
+    //     labels: figLabels2,
+    // },
 ];
 // Add questionnaire questions in different orders
 const shuffleQuestions = [ 

@@ -1,0 +1,84 @@
+{{ extends "global/InfoTemplate.html" }}
+
+{{ block scripts }}
+<script>
+    function selectValue(elem,value) {
+        lOpts = document.getElementsByClassName(`btn-${elem.value}`);
+        for (let i=0; i<lOpts.length;i++) {           
+            lOpts[i].classList.remove('selected');
+        }
+        elem.classList.add('selected');
+
+        id = `graph${elem.value}`;
+        document.getElementById(id).value = value;
+
+    }
+
+    function validateAnswers() {
+        let iSelected  = 0;
+        let lInputs = ["graphQuality", "graphSustainability"];
+        for (i=0;i<lInputs.length;i++) {
+            if (lInputs[i].value !='') {iSelected++};
+        }
+        if (iSelected==2) {
+            now = new Date().getTime();
+            document.getElementById('dRTgraph_end').value = now - TStart;
+            document.getElementById('submit').click();
+        }
+
+    }
+</script>
+{{ endblock }}
+
+{{ block styles }}
+    <style>
+        .img-button {
+            width: min-content;
+            height: min-content;
+            border: none;
+        }
+        .mini-graph {
+            width: 20vw;
+            height: auto;
+        }
+        .selected {
+            border: 2px black solid;
+        }
+
+        #question {
+            visibility: hidden;
+        }
+    </style>
+
+{{ endblock }}
+<div class="content-block" id="content-block"> 
+    <div class="upper-content"> 
+        <p class="justify"> We showed you two graphs in the middle of the experiment. 
+            One for the sustainability ratings and the other for the quality ratings. <br>
+            Please select the graphs that you observed for each attribute. 
+        </p>
+
+    </div>
+    <div class="question-wrapper">
+        <div class="column">
+            {{ for attr in lAttr }}
+            <div class="row"> 
+                <div> Please select the graph that you saw for {{ attr.attr }} </div>
+            </div>
+            <div class="row" id="options-{{ attr.attr }}"> 
+                <button type="button" class="img-button btn-{{ attr.attr }}"  value="{{ attr.attr }}" onclick="selectValue(this,1)"> 
+                    <img class="mini-graph" src="{% static attr.graph1 %}"> 
+                </button>           
+                <button type="button" class="img-button btn-{{ attr.attr }}" value="{{ attr.attr }}" onclick="selectValue(this,2)"> 
+                    <img class="mini-graph" src="{% static attr.graph2 %}"> 
+                </button>
+                <button type="button" class="img-button btn-{{ attr.attr }}" value="{{ attr.attr }}" onclick="selectValue(this,3)"> 
+                    <img class="mini-graph" src="{% static attr.graph3 %}"> 
+                </button>
+            </div>
+            
+            {{ endfor}}
+        </div>
+    </div>
+
+</div>

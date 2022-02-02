@@ -15,33 +15,14 @@ Creates Table with Visual Tracing
 
 
 class Constants(BaseConstants):
-    name_in_url         = 'Main-Task'
-    # Sustainability Sets
-    lS1, lS2 = [[0,1],[1,2],[0,2]], [[0,0],[1,1],[2,2]]
-    ## Quality Sets 
-    lQc,lQs, lQe= [[1,0],[2,0],[2,1]], [[0,1],[0,2],[1,2]], [[0,0],[1,1],[2,2]]
-    ## Price Sets
-    lPrices = [1,1.5,2,2.5,3,3]
-    lPoe, lPse, lPeq = [],[],[]
-
-    for x  in lPrices:
-        for y in lPrices:
-            lPair = [x,y]
-            if x>y:
-                lPoe.append(lPair)
-            elif x<y: 
-                lPse.append(lPair)
-            else:
-                lPeq.append(lPair)
-
+    name_in_url         = 'Main-Task2'
     ## Number of trials
     num_reps            = 1 # number of repetitions per permutation
     num_repsEq          = 2 # Number of cases with equal sustainability
-    num_prounds         = 3 # Number of Practice Rounds  
-    num_rounds          = (num_reps*len(lS1)*5+num_repsEq)+num_prounds # Number of rounds
+    num_prounds         = 0 # Number of Practice Rounds  
+    num_rounds          = (num_reps*3*5+num_repsEq)+num_prounds # Number of rounds
     players_per_group   = None
     sImagePath          = 'EcoTask/figures/'
-
 
 class Subsession(BaseSubsession):
     pass
@@ -58,7 +39,7 @@ class Player(BasePlayer):
     sTimeClick          = models.StringField(blank=True)
     ## Trial Variables
     iPracticeRound      = models.BooleanField(initial=0)
-    iBlock              = models.IntegerField(initial=1)
+    iBlock              = models.IntegerField(initial=2)
     iBlockTrial         = models.IntegerField(blank=True)
     sAttrOrder          = models.StringField(blank=True)
     bStartLeft          = models.BooleanField(blank=True)
@@ -81,15 +62,6 @@ class Player(BasePlayer):
 # FUNCTIONS
 
 def creating_session(subsession):
-    ## SETUP FOR PARTICIPANT
-    if subsession.round_number == 1:
-        for player in subsession.get_players():
-            p, session = player.participant, subsession.session
-            lTreat, lRownames   = createTreatment()
-            p.vRownames         = lRownames
-            p.mTreat            = lTreat               
-            p.SelectedTrial     = random.choice(range(Constants.num_prounds+1,Constants.num_rounds))
-            print('Trial selected for participant {}: {}'.format(p.code,p.SelectedTrial))
     ## SETUP FOR PLAYER ROUNDS
     for player in subsession.get_players():
         ## Load participant and save participant variables in player
@@ -125,101 +97,6 @@ def creating_session(subsession):
             player.S0 = lAttr[2]
             player.S1 = lAttr[3]
 
-#* Functions
-def join2String(list, delimiter= ','):
-        return delimiter.join(map(str,list))
-
-def createTreatment():
-    n = Constants.num_reps
-    n_eq = Constants.num_repsEq
-
-    #* Sets
-    iSize = int((Constants.num_rounds-Constants.num_prounds))
-    ## Sustainability
-    lS1 = Constants.lS1
-    lS2 = Constants.lS2
-    ## Quality
-    lQc = Constants.lQc
-    lQs = Constants.lQs
-    lQe = Constants.lQe
-
-    ## Prices
-    lPoe = Constants.lPoe
-    lPse = Constants.lPse
-    lPeq = Constants.lPeq
-
-
-    lTreatments = ["" for x in range(iSize)]
-    lPrices     = []
-    lQual       = []
-
-    ## Competing Quality and Alternative more expensive
-    lPrices.extend(sample(lPoe,n))
-    lQual.extend(sample(lQc,n))
-    ## Competing Quality and Eco more expensive
-    lPrices.extend(sample(lPse,n))
-    lQual.extend(sample(lQc,n))
-    ## Supporting Quality and Eco more expensive
-    lPrices.extend(sample(lPse,n))
-    lQual.extend(sample(lQs,n))
-    ## Equal Quality and Eco more expensive
-    lPrices.extend(sample(lPse,n))
-    lQual.extend(sample(lQe,n))
-    ## Competing Quality and Equal price
-    lPrices.extend(sample(lPeq,n))
-    lQual.extend(sample(lQc,n))  
-
-    # Establish order of qualities
-    order = sample(['Quality','Sustainability'],2)
-    counter = 0
-    for i in range(len(lPrices)):
-        for sus in range(len(lS1)): 
-
-            # Invert order if in this trial outcomes are flipped
-            if random.choice([True,False]):
-                q       = lQual[i].copy()[::-1]
-                s       = lS1[sus].copy()[::-1]
-                lAttr   = lPrices[i].copy()[::-1]
-            else:
-                q       = lQual[i].copy()
-                s       = lS1[sus].copy()  
-                lAttr   = lPrices[i].copy()
-            # Add attributes depending order
-            if order[0]=='Quality':
-                lAttr.extend(q)
-                lAttr.extend(s)
-            else: 
-                lAttr.extend(s)
-                lAttr.extend(q)
-            lTreatments[counter]=  join2String(lAttr)
-            counter +=1
-
-    # Add the observations with equal Sustainability 
-    ## Select which trial do we use:
-    lCombs = random.randint(0,len(lPrices),size=n_eq)
-
-    for sus in range(n_eq):       
-        # Randomize order
-        if random.choice([True,False]):
-            q       = lQual[lCombs[sus]].copy()[::-1]
-            s       = lS2[sus].copy()[::-1]
-            lAttr   = lPrices[lCombs[sus]].copy()[::-1]
-        else:
-            q       = lQual[lCombs[sus]].copy()
-            s       = lS2[sus].copy()
-            lAttr   = lPrices[lCombs[sus]].copy()
-
-        if order[0]=='Quality':
-                lAttr.extend(q)
-                lAttr.extend(s)
-        else: 
-                lAttr.extend(s)
-                lAttr.extend(q)
-        lTreatments[counter]=  join2String(lAttr)
-        counter +=1
-    lAttList = ['Price', order[0], order[1]]
-    random.shuffle(lTreatments)
-    return lTreatments,lAttList
 
 # PAGES
 class Task(Page):
@@ -320,22 +197,15 @@ class Ready(Page):
 
     @staticmethod
     def vars_for_template(player: Player):
-        # Choose text depending round
-        if (player.round_number==1):
-            sText = 'Now, you will have '+str(Constants.num_prounds)+' practice rounds. </br> These rounds will not count for your final payment.'
-        else:
-            sText = 'The practice rounds are over. Now, we will continue with the experiment.'
         # Return selected text
         return dict(
-            text = sText
+            text = 'Now, we will continue with the experiment.'
         )
 
     @staticmethod
     def is_displayed(player):
         # Displayed on: First round of each block or first round after the trials
-        return (
-            (player.round_number==1) or (player.round_number==Constants.num_prounds+1)
-        )
+        return (player.round_number==1)
         
 
 page_sequence = [Ready, Between, Task]

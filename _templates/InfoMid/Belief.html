@@ -23,7 +23,7 @@
             }
             if (iCorrect ==6) {
                 now = new Date().getTime();
-                document.getElementById('dRTbelief').value = now - TStart;
+                document.getElementById( js_vars.RTvar ).value = now - TStart;
                 document.getElementById('submit').click();
             }
 
@@ -34,12 +34,10 @@
 
 <div class="content-block" id="content-block"> 
     <div class="upper-content"> 
-        <p class="justify"> Now we want to know how much do you think each rating is worth in terms of points. 
-            Please select how many points do you think you receive on average for each attribute and value-rating. 
-            Click the button on the right (?) to read the information about the points again. 
+        <p class="justify"> {{ IntroBelief }}. Please select how many points do you think you receive on average for each attribute and value-rating. Click the button on the right (?) to read the information about the points again.
             <br> <br>
             Please select values in steps of 5 (0,5,10,...) that are within the corresponding ranges of the category. 
-            For each correct value, you will get {{ Constants.Bonus }} as an additional bonus.   
+            {{ BonusText }}   
         </p>
 
     </div>
@@ -51,7 +49,7 @@
                 </div>
                 <div class="row"> 
                     <img class="img-rating" src="{% static attr.symbol1Path %}" />   
-                    <input type="text" class="inputs-{{ forloop.counter0 }}" id="val-{{ forloop.counter0 }}1"> 
+                    <input type="text" class="inputs-{{ forloop.counter0 }}" name="B{{ forloop.counter0 }}1" id="val-{{ forloop.counter0 }}1"> 
                     
                 </div>
                 <div class="row hidden hint" id="hint-{{ forloop.counter0}}1"> 
@@ -59,7 +57,7 @@
                 </div>
                 <div class="row"> 
                     <img class="img-rating" src="{% static attr.symbol2Path %}" />   
-                    <input type="text" class="inputs-{{ forloop.counter0 }}" id="val-{{ forloop.counter0 }}2"> 
+                    <input type="text" class="inputs-{{ forloop.counter0 }}" name="B{{ forloop.counter0 }}2" id="val-{{ forloop.counter0 }}2"> 
                     
                 </div>
                 <div class="row hidden hint" id="hint-{{ forloop.counter0}}2"> 
@@ -67,7 +65,7 @@
                 </div>
                 <div class="row"> 
                     <img class="img-rating" src="{% static attr.symbol3Path %}" />   
-                    <input type="text" class="inputs-{{ forloop.counter0 }}" id="val-{{ forloop.counter0 }}3"> 
+                    <input type="text" class="inputs-{{ forloop.counter0 }}" name="B{{ forloop.counter0 }}3" id="val-{{ forloop.counter0 }}3"> 
                     
                 </div>
                 <div class="row hidden hint" id="hint-{{ forloop.counter0}}3"> 
