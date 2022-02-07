@@ -61,7 +61,13 @@ class Player(BasePlayer):
     sTreesLocation      = models.StringField()
     iCorrectBeliefs     = models.IntegerField()
 
+# FUNCTIONS
 
+def creating_session(subsession):
+    for player in subsession.get_players():
+        p = player.participant
+        p.qRandom = 5*(random.randint(0,3))
+        p.sRandom = 5*(random.randint(0,3))
 # PAGES
 
 
@@ -75,8 +81,6 @@ class EndPage(Page):
         T = int(participant.iTreatment)
         Q = int(participant.Q)
         print("Treatment {} Sustainability {}".format(T,S))
-        print(S==1, T==2)
-        print(T==1)
         if (T==1):
             print('Treatment 1')
             Smin = Constants.S1 + S*Constants.S_step 
@@ -84,18 +88,21 @@ class EndPage(Page):
             print('Treatment 2')
             Smin = Constants.S2_2 
             print(Smin)
-        else:
+        elif (S==1 & T==3):
             print('Treatment 3')
             Smin = Constants.S2_3
-        Smax = Smin + Constants.S_step +1
-        Svalue = random.randint(Smin,Smax)/10
+        else: 
+            print('Treatment 4')
+            Smin = Constants.S1 + S*Constants.S_step 
+
+        Svalue = (Smin + participant.sRandom)/10
         ## Determining value of Quality rating
         Qmin = Constants.Q1 + Q*Constants.Q_step
-        Qmax = Qmin + Constants.Q_step + 1
-        Qvalue = np.round(random.randint(Qmin,Qmax)/5)/2
-        dBeliefBonus = participant.iCorrectBeliefs*Constants.dBeliefBonus
+        Qvalue = (Qmin + participant.qRandom)/10
+        dBeliefBonus = np.round(participant.iCorrectBeliefs*Constants.dBeliefBonus,1)
         participant.Bonus = Qvalue - float(participant.Price) + dBeliefBonus
         participant.TreeAmount = Svalue
+        S_rounded  = int(np.ceil(Svalue))
         
         return {
             'Slides' :  Constants.Slides,
@@ -103,6 +110,7 @@ class EndPage(Page):
             'Price' : participant.Price,
             'Q' : Qvalue,
             'S' : Svalue,
+            'S_rounded': S_rounded,
             'Bonus' : participant.Bonus,
             'TreeLocation' : str(participant.sTreesLocation),
             'iCorrect' : participant.iCorrectBeliefs,

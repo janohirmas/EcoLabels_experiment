@@ -90,7 +90,7 @@ class Belief(Page):
                 exists  = True,
                 content = 'InfoMid/InfoValues.html',
             ),
-            IntroBelief = 'You are almost finished. Before we continue, we would like to ask you again about the ratings.',
+            IntroBelief = 'You are almost finished. Before we continue, we would like to ask you again about the ratings',
             BonusText = '',
         )    
 
@@ -149,6 +149,10 @@ class Shapes(Page):
             sA2 = sA2,
             lInputs = ['dRTgraph_end','graphQuality','graphSustainability'],
         )
+    
+    @staticmethod
+    def is_displayed(player: Player):
+        return (player.participant.iTreatment  != 4)
 
 class First(Page):
     pass

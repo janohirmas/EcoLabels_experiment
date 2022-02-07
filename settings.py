@@ -72,6 +72,8 @@ PARTICIPANT_FIELDS = [
     'sTreesLocation',
     'dPixelRatio',
     'lAttr',
+    'sRandom',
+    'qRandom',
     ]
 
 

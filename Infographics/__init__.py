@@ -97,9 +97,9 @@ def creating_session(subsession):
         p, session = player.participant, subsession.session
         iTreatment = session.config['iTreatment']
         if (iTreatment!=Constants.iRandomTreatment):
-            player.iTreatment = iTreatment = p.iTreatment
+            player.iTreatment = p.iTreatment = iTreatment 
         else:
-            player.iTreatment = iTreatment = p.iTreatment = random.randint(1,Constants.iRandomTreatment-1)
+            player.iTreatment =  p.iTreatment = iTreatment = random.randint(1,Constants.iRandomTreatment)
         print('Treatment for participant: {}'.format(p.iTreatment))
         # Add path to graph to treatment dictionary
         lAttrS = Constants.lAttrS
@@ -152,7 +152,7 @@ class Belief(Page):
                 content = 'InfoMid/InfoValues.html',
             ),
             IntroBelief = 'Now we want to know how much do you think each rating is worth in terms of points',
-            BonusText = 'For each correct value, you will get '+str(Constants.Bonus)+' as an additional bonus.',
+            BonusText = '<u>For each correct value, you will get '+str(Constants.Bonus)+' as an additional bonus.</u>',
         )    
 
     @staticmethod
@@ -186,9 +186,9 @@ class Belief(Page):
             lB = [player.B01,player.B02,player.B03,player.B11,player.B12,player.B13]
         else:
             lB = [player.B11,player.B12,player.B13,player.B01,player.B02,player.B03]
-        # Check if treatment is non-info, then randomize one for payment
+        # Check if treatment is non-info, then use linear
         if (iTreatment==4):
-            iTreatment = random.randint(1,3)
+            iTreatment = 2 
         # Assign 2-leaves value depending on treatment
         if (iTreatment==1):
             S2 = 0.5*(Constants.S2l_l+Constants.S2h_l)

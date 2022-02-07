@@ -92,6 +92,18 @@ input[type="checkbox"]:required:valid + label {
     color:    var(--background-btn);
 }
 
+.checkBox {
+    display: flex;
+    flex-direction: row;
+}
+
+#TC {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px ;
+}
+
+
 /* INTRODUCTION & INSTRUCTIONS */
 .info-body {
     transform: translate(-50vw,-50vh);

@@ -198,11 +198,11 @@ function CreateFullScreenPopUp(bReqCalibrate=false) {
 
   switch (os) {
     case 'Mac OS' : 
-      PopUpText2.innerHTML          = 'Press ⌘,⇧,F (command, shift, "F" for Fullscreen Mode)'; 
+      PopUpText2.innerHTML          = 'In the menu above go to View > Enter Full Screen. <br> Also in View > Unclick "Always show toolbar in Fullscreen".'; 
       PopUpText4.innerHTML          = 'Press ⌥,⌘,= (option, command, equal to zoom-in) <br> ⌥,⌘,- ( option, command, minus to zoom-out) ';
       break;
     case 'Safari':
-      PopUpText2.innerHTML          = 'Please click on top <b> View </b>  and make sure to deactivate <b> Always Show Toolbar in Full Screen </b> <br> Press ⌘,Control,F (command, Control, "F" for Fullscreen Mode)';
+      PopUpText2.innerHTML          = 'In the menu above go to View > Enter Full Screen. <br> Also in View > Unclick "Always show toolbar in Fullscreen".'; 
       PopUpText4.innerHTML          = 'Press ⌘,+ (command, plus to zoom-in) <br> ⌘,- ( command, minus to zoom-out) ';
       break;  
     case 'Windows' :
