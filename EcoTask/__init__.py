@@ -40,7 +40,7 @@ class Constants(BaseConstants):
     num_prounds         = 3 # Number of Practice Rounds  
     num_rounds          = (num_reps*len(lS1)*5+num_repsEq)+num_prounds # Number of rounds
     players_per_group   = None
-    sImagePath          = 'EcoTask/figures/'
+    sImagePath          = 'global/figures/'
 
 
 class Subsession(BaseSubsession):
