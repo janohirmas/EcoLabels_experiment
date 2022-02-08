@@ -107,173 +107,94 @@ const firstQuestions = [
         name: "D7",
         type: "longOpen",
     },
-    // {
-    //     question: "In the middle of the experiment, you saw two graphs. One for the quality and one for sustainability ratings. Which of these three graphs resembles more to the graph for the <b> Quality rating</b>.",
-    //     name: "D8",
-    //     type: "radioFig",
-    //     values: figValues,
-    //     labels: figLabels1,
-    // },
-    // {
-    //     question: "In the middle of the experiment, you saw two graphs. One for the quality and one for sustainability ratings. Which of these three graphs resembles more to the graph for the <b> Sustainability rating</b>.",
-    //     name: "D9",
-    //     type: "radioFig",
-    //     values: figValues,
-    //     labels: figLabels2,
-    // },
+    {
+        question: "For the following questions, please answer each of these questions in terms of the way you generally feel. For each question simply state as honestly and candidly as you can what you are presently experiencing. Please Select '2' to show that you read these instructions.",
+        name: "V1",
+        type: "scale",
+    },
 ];
 // Add questionnaire questions in different orders
 const shuffleQuestions = [ 
     {
-        question: "Reducing water consumption is necessary for sustainable development.",
+        question: "I often feel a sense of oneness with the natural world around me.",
         name: "QT1",
         type: "scale",
     },
     {
-        question: "Preserving the variety of living creatures is necessary for sustainable development (preserving biological diversity).",
+        question: "I think of the natural world as a community to which I belong.",
         name: "QT2",
         type: "scale",
     },
     {
-        question: "For sustainable development, people need to be educated in how to protect themselves against natural disasters.",
+        question: "I recognize and appreciate the intelligence of other living organisms",
         name: "QT3",
         type: "scale",
     },
-    // {
-    //     question: "A culture where conflicts are resolved peacefully through discussion is necessary for sustainable development.",
-    //     name: "QT4",
-    //     type: "scale",
-    // },
-    // {
-    //     question: "Respecting human rights is necessary for sustainable development.",
-    //     name: "QT5",
-    //     type: "scale",
-    // },
     {
-        question: "To receive payment, Select '4'.",
-        name: "V1",
+        question: "I often feel disconnected from nature.",
+        name: "QT4",
         type: "scale",
-    },    
-    // {
-    //     question: "To achieve sustainable development, all the people in the world must have access to good education.",
-    //     name: "QT6",
-    //     type: "scale",
-    // },
+    },
     {
-        question: "Sustainable development requires that companies act responsibly towards their employees, customers and suppliers.",
+        question: "When I think of my life, I imagine myself to be part of a larger cyclical process of living.",
+        name: "QT5",
+        type: "scale",
+    },
+    {
+        question: "I often feel a kinship with animals and plants.",
+        name: "QT6",
+        type: "scale",
+    },
+    {
+        question: "I feel as though I belong to the Earth as equally as it belongs to me.",
         name: "QT7",
         type: "scale",
     },
     {
-        question: "Sustainable development requires a fair distribution of goods and services among people in the world.",
+        question: "I have a deep understanding of how my actions affect the natural world.",
         name: "QT8",
         type: "scale",
     },
     {
-        question: "Wiping out poverty in the world is necessary for sustainable development.",
+        question: "I often feel part of the web of life.",
         name: "QT9",
         type: "scale",
     },
     {
-        question: "I think that using more natural resources than we need does not threaten the health and well‐being of people in the future.",
+        question: "I feel that all inhabitants of Earth, human, and nonhuman, share a common 'life force'.",
         name: "QT10",
         type: "scale",
     },
     {
-        question: "I think that we need stricter laws and regulations to protect the environment.",
+        question: "Like a tree can be part of a forest, I feel embedded within the broader natural world.",
         name: "QT11",
         type: "scale",
     },
     {
-        question: "I think that it is important to take measures against problems which have to do with climate change.",
+        question: "When I think of my place on Earth, I consider myself to be a top member of a hierarchy that exists in nature.",
         name: "QT12",
         type: "scale",
     },
-    // {
-    //     question: "I think that everyone ought to be given the opportunity to acquire the knowledge, values and skills that are necessary to live sustainably.",
-    //     name: "QT13",
-    //     type: "scale",
-    // },
-    // {
-    //     question: "I think that we who are living now should make sure that people in the future enjoy the same quality of life as we do today.",
-    //     name: "QT14",
-    //     type: "scale",
-    // },
-    // {
-    //     question: "I think that women and men throughout the world must be given the same opportunities for education and employment.",
-    //     name: "QT15",
-    //     type: "scale",
-    // },
     {
-        question: "I think that companies have a responsibility to reduce the use of packaging and disposable articles.",
-        name: "QT16",
+        question: "I often feel like I am only a small part of the natural world around me, and that I am no more important than the grass on the ground or the birds in the trees.",
+        name: "QT13",
         type: "scale",
     },
     {
-        question: "I think it is important to reduce poverty.",
-        name: "QT17",
+        question: "My personal welfare is independent of the welfare of the natural world.",
+        name: "QT14",
         type: "scale",
     },
     {
-        question: "I think that companies in rich countries should give employees in poor nations the same conditions as in rich countries.",
-        name: "QT18",
-        type: "scale",
-    },
-    {
-        question: "To show you are paying attention, please select '1'.",
+        question: "To receive payment, Select '4'.",
         name: "V2",
         type: "scale",
     },    
     {
-        question: "I recycle as much as I can.",
-        name: "QT19",
-        type: "scale",
-    },
-    {
-        question: "I always separate food waste before putting out the rubbish when I have the chance.",
-        name: "QT20",
-        type: "scale",
-    },
-    {
-        question: "I have changed my personal lifestyle in order to reduce waste (e.g., throwing away less food or not wasting materials).",
-        name: "QT21",
-        type: "scale",
-    },
-    // {
-    //     question: "When I use a computer or mobile to chat, to text, to play games and so on, I always treat others as respectfully as I would in real life.",
-    //     name: "QT22",
-    //     type: "scale",
-    // },
-    // {
-    //     question: "I support an aid organization or environmental group.",
-    //     name: "QT23",
-    //     type: "scale",
-    // },
-    // {
-    //     question: "I show the same respect to men and women, boys and girls.",
-    //     name: "QT24",
-    //     type: "scale",
-    // },
-    {
-        question: "	I do things which help poor people.",
-        name: "QT25",
-        type: "scale",
-    },
-    {
-        question: "To show you are paying attention, please select '2'.",
+        question: "To show you are paying attention, please select '1'.",
         name: "V3",
         type: "scale",
-    },
-    {
-        question: "I often purchase second‐hand goods over the internet or in a shop",
-        name: "QT26",
-        type: "scale",
-    },
-    {
-        question: "I avoid buying goods from companies with a bad reputation for looking after their employees and the environment.",
-        name: "QT27",
-        type: "scale",
-    },
+    },    
 ];
   
 

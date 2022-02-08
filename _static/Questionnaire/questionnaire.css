@@ -258,7 +258,7 @@ to {opacity: 1}
     /* Question box */
     .question {
         font-size: 3vh;
-        height: 11vh;
+        /* height: 15vh; */
         padding: 3vh;
         margin-top: 5vh;
         margin-bottom: 3vh;
