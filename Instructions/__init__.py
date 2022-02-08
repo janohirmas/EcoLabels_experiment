@@ -21,6 +21,7 @@ class Constants(BaseConstants):
     NumTrials = int(37) 
     AvgDur = "15-20"
     TreesOrg = "One Tree Planted"
+
     ## Slides for introduction
     SlidePath = 'Instructions/slide'
     SlidesIntro = [
@@ -45,6 +46,10 @@ class Constants(BaseConstants):
         dict(
             Title = 'The product characteristics',
             path=SlidePath+'2.html'
+            ),
+        dict(
+            Title = 'Value of Labels',
+            path='InfoMid/InfoValues.html'
             ),
         dict(
             Title = 'Purchasing Platform',
@@ -80,6 +85,7 @@ class Introduction(Page):
 
     @staticmethod
     def vars_for_template(player):
+
         return dict(
             UvA_logo = Constants.UvA_logo,
             Slides = Constants.SlidesIntro,
@@ -120,6 +126,7 @@ class Instructions(Page):
     def vars_for_template(player):
         return dict(
             Slides = Constants.Slides,
+            lAttr = player.participant.lAttr,
     )
     @staticmethod
     def before_next_page(player: Player, timeout_happened):

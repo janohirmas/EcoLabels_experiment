@@ -38,10 +38,10 @@ class Constants(BaseConstants):
     lAttrQ = dict(
         attr = 'Quality',
         attr_lower = 'quality',
-        conversion = '10 points = 1 pound',
+        conversion = '10 points = 0.5 pound',
         min = '30',
         max = '60',
-        explain = 'is worth 3 pounds and the best one is worth 6',
+        explain = 'is worth 3 pounds and the best one is worth 4.5',
         symbolName = 'stars',
         symbolPath = imgStar_symbol,
         extra = '',

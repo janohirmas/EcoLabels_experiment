@@ -97,8 +97,7 @@ class EndPage(Page):
 
         Svalue = (Smin + participant.sRandom)/10
         ## Determining value of Quality rating
-        Qmin = Constants.Q1 + Q*Constants.Q_step
-        Qvalue = (Qmin + participant.qRandom)/10
+        Qvalue = Constants.Q1/10 + (Q*Constants.Q_step + participant.qRandom)/20
         dBeliefBonus = np.round(participant.iCorrectBeliefs*Constants.dBeliefBonus,1)
         participant.Bonus = Qvalue - float(participant.Price) + dBeliefBonus
         participant.TreeAmount = Svalue
