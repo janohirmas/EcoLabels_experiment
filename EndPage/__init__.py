@@ -24,7 +24,7 @@ class Constants(BaseConstants):
     S_step  = 10
     # Others
     dBeliefBonus = 0.1
-    ProlificLink = "https://www.google.com"
+    ProlificLink = "https://app.prolific.co/submissions/complete?cc=1EA38881"
     Slides = [
         dict(
             Title = 'Results',
