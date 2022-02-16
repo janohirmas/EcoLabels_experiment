@@ -16,9 +16,9 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
     # Vars for Belief ranges
-    Q1l,Q1h = 30, 40
-    Q2l,Q2h = 40, 50
-    Q3l,Q3h = 50, 60
+    Q1l,Q1h = 60, 70
+    Q2l,Q2h = 70, 80
+    Q3l,Q3h = 80, 90
     S1l, S1h = 0, 10
     S2l_l, S2h_l = 10, 20
     S2l_cv, S2h_cv = 15, 25

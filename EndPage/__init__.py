@@ -15,7 +15,7 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
     # Quality and Sustainability ranges
-    Q1      = 30
+    Q1      = 60
     Q_step  = 10
     S1      = 0
     S2_2    = 15
@@ -97,7 +97,7 @@ class EndPage(Page):
 
         Svalue = (Smin + participant.sRandom)/10
         ## Determining value of Quality rating
-        Qvalue = Constants.Q1/10 + (Q*Constants.Q_step + participant.qRandom)/20
+        Qvalue =  (Constants.Q1 + Q*Constants.Q_step + participant.qRandom)/20
         dBeliefBonus = np.round(participant.iCorrectBeliefs*Constants.dBeliefBonus,1)
         participant.Bonus = Qvalue - float(participant.Price) + dBeliefBonus
         participant.TreeAmount = Svalue

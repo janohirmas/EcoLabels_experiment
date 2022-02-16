@@ -26,9 +26,9 @@ class Constants(BaseConstants):
     sPathS_cv           = sImagePath+'Infographic_graphs/sus_concave.png'
     sPathS_cx           = sImagePath+'Infographic_graphs/sus_convex.png' 
     # Variables for Infographics
-    Q1l,Q1h = 30, 40
-    Q2l,Q2h = 40, 50
-    Q3l,Q3h = 50, 60
+    Q1l,Q1h = 60, 70
+    Q2l,Q2h = 70, 80
+    Q3l,Q3h = 80, 90
     S1l, S1h = 0, 10
     S2l_l, S2h_l = 10, 20
     S2l_cv, S2h_cv = 15, 25
@@ -39,8 +39,8 @@ class Constants(BaseConstants):
         attr = 'Quality',
         attr_lower = 'quality',
         conversion = '10 points = 0.5 pound',
-        min = '30',
-        max = '60',
+        min = '60',
+        max = '90',
         explain = 'is worth 3 pounds and the best one is worth 4.5',
         symbolName = 'stars',
         symbolPath = imgStar_symbol,
