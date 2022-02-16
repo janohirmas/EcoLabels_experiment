@@ -1,3 +1,4 @@
+from statistics import mode
 from otree.api import *
 import time
 
@@ -79,6 +80,7 @@ class Player(BasePlayer):
     dPixelRatio         = models.FloatField()
     sSlideSequence      = models.StringField(blank=True)
     sSlideTime          = models.StringField(blank=True)
+    sProlific_ID        = models.StringField()
 
 # PAGES
 class Introduction(Page):
@@ -99,6 +101,7 @@ class Introduction(Page):
         part.iOutFocus          = 0
         part.iFullscreenChanges = 0
         part.dTimeOutFocus      = 0
+        player.sProlific_ID     = part.label
 
 class Calibration(Page):
     form_model = 'player'
