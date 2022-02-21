@@ -21,7 +21,7 @@ class Constants(BaseConstants):
     imgStar_symbol      = sImagePath+'one_star.png'
     sPathQ_l            = sImagePath+'Infographic_graphs/qual_lin.png'
     sPathQ_cv           = sImagePath+'Infographic_graphs/qual_concave.png'
-    sPathQ_cv           = sImagePath+'Infographic_graphs/qual_convex.png'
+    sPathQ_cx           = sImagePath+'Infographic_graphs/qual_convex.png'
     sPathS_l            = sImagePath+'Infographic_graphs/sus_linear.png'
     sPathS_cv           = sImagePath+'Infographic_graphs/sus_concave.png'
     sPathS_cx           = sImagePath+'Infographic_graphs/sus_convex.png' 

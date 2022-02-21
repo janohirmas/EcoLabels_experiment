@@ -2,13 +2,13 @@
 <div class="content-info"  id="content-{{ forloop.counter0 }}">
     <b>{{ attr.attr }}: </b>
     <ul>
-        <li> {{ attr.attr }} is measured in Quality points ({{ attr.conversion }}).  </li>
+        <li> {{ attr.attr }} is measured in {{ attr.attr }} points ({{ attr.conversion }}).  </li>
         <li> 
             {{ attr.attr }} points go from {{ attr.min }} to {{ attr.max }}. 
             This means that the worst possible product (in terms of {{attr.attr_lower }}) {{ attr.explain }}. 
         </li>
         <li>
-            If a product has more {{ attr.symbolName }} <img class="img-info" src="{% static attr.symbolPath %}" />, it means that you get more quality points on average
+            If a product has more {{ attr.symbolName }} <img class="img-info" src="{% static attr.symbolPath %}" />, it means that you get more {{ attr.attr }} points on average
         </li>	
         {{ attr.extra }}
     </ul>
