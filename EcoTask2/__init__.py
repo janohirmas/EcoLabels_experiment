@@ -35,8 +35,8 @@ class Player(BasePlayer):
     iDec                = models.IntegerField(blank=True)
     dRT                 = models.FloatField(blank=True)
     ## Attention Variables
-    sButtonClick        = models.StringField(blank=True)
-    sTimeClick          = models.StringField(blank=True)
+    sButtonClick        = models.LongStringField(blank=True)
+    sTimeClick          = models.LongStringField(blank=True)
     ## Trial Variables
     iPracticeRound      = models.BooleanField(initial=0)
     iBlock              = models.IntegerField(initial=2)
