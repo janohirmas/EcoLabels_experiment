@@ -100,6 +100,8 @@ def creating_session(subsession):
 
 # PAGES
 class Task(Page):
+    template_name = 'ecotask/Task.html'
+
     form_model = 'player'
     form_fields = [
         'iDec', 
@@ -177,6 +179,8 @@ class Task(Page):
 
         
 class Between(Page):
+    template_name = 'ecotask/Between.html'
+
     form_model = 'player'
     form_fields = [
         'dRTbetween',
@@ -194,6 +198,7 @@ class Between(Page):
         }
 
 class Ready(Page):
+    template_name = 'ecotask/Ready.html'
 
     @staticmethod
     def vars_for_template(player: Player):

@@ -27,12 +27,12 @@ class Constants(BaseConstants):
     # Paths for images
     sImagePath          = 'global/figures/'
 
-    sPathQ_l            = sImagePath+'Infographic_graphs/qual_lin.png'
-    sPathQ_cv           = sImagePath+'Infographic_graphs/qual_concave.png'
-    sPathQ_cx           = sImagePath+'Infographic_graphs/qual_convex.png'
-    sPathS_l            = sImagePath+'Infographic_graphs/sus_linear.png'
-    sPathS_cv           = sImagePath+'Infographic_graphs/sus_concave.png'
-    sPathS_cx           = sImagePath+'Infographic_graphs/sus_convex.png' 
+    sPathQ_l            = sImagePath+'Infographic_graphs/qual_lin2.png'
+    sPathQ_cv           = sImagePath+'Infographic_graphs/qual_concave2.png'
+    sPathQ_cx           = sImagePath+'Infographic_graphs/qual_convex2.png'
+    sPathS_l            = sImagePath+'Infographic_graphs/sus_linear2.png'
+    sPathS_cv           = sImagePath+'Infographic_graphs/sus_concave2.png'
+    sPathS_cx           = sImagePath+'Infographic_graphs/sus_convex2.png' 
     lS = dict(
         attr = 'Sustainability',
         graph1 = sPathS_cv,
@@ -61,12 +61,12 @@ class Player(BasePlayer):
     dRTbelief_end = models.FloatField()
     dRTgraph_end = models.FloatField()
     # Beliefs
-    B01 = models.IntegerField()
-    B02 = models.IntegerField()
-    B03 = models.IntegerField()
-    B11 = models.IntegerField()
-    B12 = models.IntegerField()
-    B13 = models.IntegerField()
+    B01 = models.FloatField()
+    B02 = models.FloatField()
+    B03 = models.FloatField()
+    B11 = models.FloatField()
+    B12 = models.FloatField()
+    B13 = models.FloatField()
     # Graph choices
     graphQuality = models.IntegerField()
     graphSustainability = models.IntegerField()

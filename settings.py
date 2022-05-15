@@ -5,9 +5,9 @@ SESSION_CONFIGS = [
     dict(
     name='session_config',
     display_name='Ecolabels Config',
-    num_demo_participants=1,
-    app_sequence=['Instructions', 'EcoTask', 'Infographics','EcoTask2','EndBelief','Questionnaire' ,'EndPage'],
-    iTreatment = 5,
+    num_demo_participants=10,
+    app_sequence=['Instructions', 'EcoTask', 'Infographics2','EcoTask2','EndBelief','Questionnaire' ,'EndPage'],
+    iTreatment = 4,
     iTimeOut=0,
     bRequireFS=True,
     bCheckFocus=True,
@@ -33,10 +33,10 @@ SESSION_CONFIGS = [
         app_sequence=['Instructions']
     ),
     dict(
-        name='Infographics',
-        num_demo_participants= 1,
-        app_sequence=['Infographics'],
-        iTreatment = 1,
+        name='Infographics2',
+        num_demo_participants= 10,
+        app_sequence=['Infographics2'],
+        iTreatment = 4,
         iTimeOut=0,
         bRequireFS=True,
         bCheckFocus=True,

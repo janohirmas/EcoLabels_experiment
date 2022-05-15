@@ -15,12 +15,11 @@
 <div class="info-body" id="info-body">
   <div class="info-content" id="info-content">
 
-    {% comment %} 
-      Here comes the content. It is added with JS. 
-    {% endcomment %}
+    {{ block information }}
+    {{ endblock }}
 
     <button id="next-btn" class="next-btn" type="button" onclick="submitPage()"> Next </button>
-
+    <button class="hidden" id="submit"></button>
   </div>
   {% comment %} Additional information button {% endcomment %}
     <div class="help">

@@ -5,7 +5,10 @@ from numpy import random
 c = Currency
 
 doc = """
-Your app description
+TREATMENTS HAVE BEEN MODIFIED:
+1 - LINEAR
+2 - SUSTAINABILITY CONVEX
+3 - QUALITY CONVEX
 """
 
 
@@ -13,18 +16,18 @@ class Constants(BaseConstants):
     name_in_url = 'Infographics'
     players_per_group = None
     num_rounds = 1
-    iRandomTreatment = 5 # Number for the treatment variable such that it randomizes between all conditions (which go from 1 to iRandomTreatment-1)
+    iRandomTreatment = 5 # Number for the treatment variable such that it randomizes between all conditions from Exp1 (which go from 1 to iRandomTreatment-1)
     Bonus = '5p (0.05 pounds)'
     # Image path
     sImagePath          = 'global/figures/'
     imgLeaf_symbol      = sImagePath+'one_leaf.png'
     imgStar_symbol      = sImagePath+'one_star.png'
-    sPathQ_l            = sImagePath+'Infographic_graphs/qual_lin.png'
-    sPathQ_cv           = sImagePath+'Infographic_graphs/qual_concave.png'
-    sPathQ_cx           = sImagePath+'Infographic_graphs/qual_convex.png'
-    sPathS_l            = sImagePath+'Infographic_graphs/sus_linear.png'
-    sPathS_cv           = sImagePath+'Infographic_graphs/sus_concave.png'
-    sPathS_cx           = sImagePath+'Infographic_graphs/sus_convex.png' 
+    sPathQ_l            = sImagePath+'Infographic_graphs/qual_lin2.png'
+    sPathQ_cv           = sImagePath+'Infographic_graphs/qual_concave2.png'
+    sPathQ_cx           = sImagePath+'Infographic_graphs/qual_convex2.png'
+    sPathS_l            = sImagePath+'Infographic_graphs/sus_linear2.png'
+    sPathS_cv           = sImagePath+'Infographic_graphs/sus_concave2.png'
+    sPathS_cx           = sImagePath+'Infographic_graphs/sus_convex2.png' 
     # Variables for Infographics
     Q1l,Q1h = 60, 70
     Q2l,Q2h = 70, 80
@@ -34,6 +37,9 @@ class Constants(BaseConstants):
     S2l_cv, S2h_cv = 15, 25
     S2l_cx, S2h_cx = 5, 15
     S3l, S3h  = 20, 30 
+    BQ1,BQ2,BQ3 = 60,75,90
+    BS1,BS2,BS3 = 0,15,30
+    Scx,Qcx = 2.5,62.5
     Currency = 'Pounds'
     lAttrQ = dict(
         attr = 'Quality',
@@ -99,23 +105,27 @@ def creating_session(subsession):
         if (iTreatment!=Constants.iRandomTreatment):
             player.iTreatment = p.iTreatment = iTreatment 
         else:
-            player.iTreatment =  p.iTreatment = iTreatment = random.randint(1,Constants.iRandomTreatment)
+            # player.iTreatment =  p.iTreatment = iTreatment = random.randint(1,Constants.iRandomTreatment) 
+            # For the follow up we omitted the non information treatment
+            player.iTreatment =  p.iTreatment = iTreatment = random.randint(1,Constants.iRandomTreatment-1)
         print('Treatment for participant: {}'.format(p.iTreatment))
         # Add path to graph to treatment dictionary
         lAttrS = Constants.lAttrS
+        lAttrQ = Constants.lAttrQ
         if (iTreatment==1):
             lAttrS['graphPath'] = Constants.sPathS_l
         elif (iTreatment==2):
-            lAttrS['graphPath'] = Constants.sPathS_cv
-        elif (iTreatment==3):
             lAttrS['graphPath'] = Constants.sPathS_cx
-        sAttrOrder = p.sAttrOrder # (Change when ready!!)
-        # sAttrOrder = random.choice(['Quality','Sustainability']) # Delete when ready
-        player.sAttrOrder = p.sAttrOrder # = sAttrOrder # remove last equal when ready
+        elif (iTreatment==3):
+            # lAttrS['graphPath'] = Constants.sPathS_cx
+            lAttrQ['graphPath'] = Constants.sPathQ_cx
+        #sAttrOrder = p.sAttrOrder # (Change when ready!!)
+        sAttrOrder = random.choice(['Quality','Sustainability']) # Delete when ready
+        player.sAttrOrder = p.sAttrOrder  = sAttrOrder # remove last equal when ready
         if sAttrOrder == 'Quality':
-            p.lAttr  = [Constants.lAttrQ, lAttrS]
+            p.lAttr  = [lAttrQ, lAttrS]
         else:
-            p.lAttr  = [lAttrS, Constants.lAttrQ]
+            p.lAttr  = [lAttrS, lAttrQ]
 
 
 
@@ -190,20 +200,20 @@ class Belief(Page):
         if (iTreatment==4):
             iTreatment = 2 
         # Assign 2-leaves value depending on treatment
-        if (iTreatment==1):
-            S2 = 0.5*(Constants.S2l_l+Constants.S2h_l)
-        elif (iTreatment==2):
-            S2 = 0.5*(Constants.S2l_cv+Constants.S2h_cv)
-        elif (iTreatment==3):
-            S2 = 0.5*(Constants.S2l_cx+Constants.S2h_cx)
-        lVal = [
-            0.5*(Constants.Q1l+Constants.Q1h),
-            0.5*(Constants.Q2l+Constants.Q2h),
-            0.5*(Constants.Q3l+Constants.Q3h),
-            0.5*(Constants.S1l+Constants.S1h),
-            S2,
-            0.5*(Constants.S3l+Constants.S3h)
-        ]
+        Q2,S2 = Constants.BQ2, Constants.BS2
+        if (iTreatment==2):
+            S2 = Constants.Scx
+        elif (iTreatment==3): 
+            Q2 = Constants.Qcx
+        # lVal = [
+        #     0.5*(Constants.Q1l+Constants.Q1h),
+        #     0.5*(Constants.Q2l+Constants.Q2h),
+        #     0.5*(Constants.Q3l+Constants.Q3h),
+        #     0.5*(Constants.S1l+Constants.S1h),
+        #     S2,
+        #     0.5*(Constants.S3l+Constants.S3h)
+        # ]
+        lVal = [Constants.BQ1,Q2,Constants.BQ3,Constants.BS1,S2,Constants.BS2]
         iCorrect = 0
         for i in range(len(lVal)):
             iCorrect += (lVal[i]==lB[i]) 

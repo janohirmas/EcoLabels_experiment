@@ -1,6 +1,12 @@
+{{ extends "global/Page.html" }}
+
 {% block app_scripts %}
-<link rel="stylesheet" href="{% static 'global/css/styling10.css' %}">
+    <script src="{% static 'global/js/Information.js' %}"></script>
 {% endblock %}
+
+{{ block app_styles }}
+    <link rel="stylesheet" href="{% static 'global/css/styling10.css' %}">
+{{ endblock }}
 
 {% block content %}
 
@@ -9,8 +15,8 @@
                 You have reached the middle of the experiment. 
                 Now, we will give you some additional information. 
             </p> 
-            <button class= "button" id="between-button"> Start </button>
-  
+            <button id="next-btn" class="next-btn button" type="button" onclick="submitPage()"> Next </button>
+            <button id="submit" style="display: none;"></button>
     </div>
 
 

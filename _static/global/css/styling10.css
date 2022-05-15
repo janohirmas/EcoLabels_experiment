@@ -179,8 +179,9 @@ li {
     background-color: rgb(250, 144, 144);
     border-radius: 2px;
     color:white;
-    height: 4.5vh;
-    width: 100%;
+    height: auto;
+    width: auto;
+    padding: 10px;
     margin-left: 1vh;
     text-align: center;
 }
@@ -229,7 +230,7 @@ li {
 }
 
 .img-info {
-    width: 50vw;
+    width: 1em;
     height: auto;
 }
 
@@ -366,6 +367,21 @@ li {
     position: absolute;
     top:-40px;
     left:0;
+}
+
+.question-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.question-wrapper select,input {
+    margin-left: 1em;
+}
+
+.question-wrapper label {
+    text-justify: left;
 }
 
 /* CSS animation */
