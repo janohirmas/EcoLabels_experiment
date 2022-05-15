@@ -1,4 +1,4 @@
-from winsound import PlaySound
+
 from otree.api import *
 from numpy import random
 
