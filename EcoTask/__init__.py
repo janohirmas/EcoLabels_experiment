@@ -279,7 +279,7 @@ class Task(Page):
             'dPixelRatio'       : p.dPixelRatio,
         }
 
-    staticmethod
+    @staticmethod
     def before_next_page(player, timeout_happened):
         participant = player.participant
         # Add Focus variables to total if it's not practice trial
