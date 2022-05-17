@@ -196,7 +196,7 @@ const shuffleQuestions = [
         type: "scale",
     },    
     {
-        question: "How do you see yourself: are you generally a person who is willing prepared to behave sustainably, even when this is inconvenient/costly to you?",
+        question: "How do you see yourself: are you generally a person who is prepared to behave sustainably, even when this is inconvenient or costly to you?",
         name: "AF1",
         type: "scale",
         limits:  ['not at all willing','very willing']
