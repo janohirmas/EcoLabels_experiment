@@ -125,7 +125,7 @@ def creating_session(subsession):
             player.S0 = lAttr[2]
             player.S1 = lAttr[3]
 
-#* Functions
+# Functions
 def join2String(list, delimiter= ','):
         return delimiter.join(map(str,list))
 
