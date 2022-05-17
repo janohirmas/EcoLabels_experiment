@@ -97,6 +97,9 @@ class Player(BasePlayer):
     dRTbelief           = models.FloatField(blank=True)
     dRTinfographics     = models.FloatField(blank=True)
     iTreatment          = models.IntegerField()
+    sSlideSequence      = models.StringField(blank=True)
+    sSlideTime          = models.StringField(blank=True)
+
     # Beliefs
     B01 = models.FloatField()
     B02 = models.FloatField()
@@ -108,6 +111,12 @@ class Player(BasePlayer):
 
 # PAGES
 class Infographics(Page):
+    form_model = 'player'
+    form_fields = [ 
+        'sSlideSequence',
+        'sSlideTime',
+        'dRTinfographics',
+        ]
 
     @staticmethod
     def js_vars(player: Player):

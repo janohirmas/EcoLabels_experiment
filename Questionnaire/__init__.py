@@ -76,13 +76,16 @@ class Player(BasePlayer):
     V2 = models.StringField()
     V3 = models.StringField()
 
+    #Ala Armin question
+    AF1 = models.StringField()
+
 
 # PAGES
 class Questionnaire(Page):
     form_model = 'player'
     form_fields = ['D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 
     'QT1', 'QT2', 'QT3', 'QT4', 'QT5', 'QT6', 'QT7','QT8', 'QT9', 'QT10', 'QT11', 'QT12','QT13', 'QT14', 
-    'V1','V2','V3']
+    'V1','V2','V3','AF1']
     @staticmethod
     def js_vars(player: Player):
         return dict(
