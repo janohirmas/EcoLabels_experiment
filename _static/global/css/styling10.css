@@ -36,7 +36,7 @@
 .button {
     font-family: 'Work Sans', sans-serif;
     font-size: 3vh;
-    width: 8vw;
+    width: auto;
     height: 12vh;
     background-color: var(--background-btn);
     color: var(--color-btn);
@@ -45,7 +45,8 @@
     line-height: 12vh;
     cursor: pointer;
     text-align: center;
-    text-decoration: none;   
+    text-decoration: none; 
+    padding: 0 1em;
 }
 
 

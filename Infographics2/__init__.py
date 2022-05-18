@@ -138,4 +138,4 @@ class Infographics(Page):
             lAttr = player.participant.lAttr
         )
 
-page_sequence = [First, Information, Belief, Infographics ]
+page_sequence = [First, Belief, Infographics ]
